@@ -1,0 +1,8 @@
+{
+  "name": "dsl-generated-dependencies",
+  "dependencies": {
+    "jquery": "latest",
+    "tracking.js": "latest",
+    "miniMAC/magic": "latest"
+  }
+}
