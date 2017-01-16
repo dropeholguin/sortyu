@@ -12,5 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require foundation
 //= require turbolinks
+// Bower packages
+//= require d3/d3
+//= require underscore/underscore
+//
 //= require_tree .
+
+$(function(){ $(document).foundation(); });

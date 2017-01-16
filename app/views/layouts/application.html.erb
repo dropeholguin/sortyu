@@ -1,28 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Sortyu</title>
-    <%= csrf_meta_tags %>
-
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= content_for?(:title) ? yield(:title) : "Sortyu" %></title>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= csrf_meta_tags %>
   </head>
 
   <body>
   	<p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
-    <% if user_signed_in? %>
-      <div>
-        <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
-      </div>
-    <% else %>
-      <div class=""> 
-        <%= link_to "Sign Up", new_user_registration_path, class:"button" %>
-      </div>
-      <div class="">
-        <%= link_to "Log In", new_user_session_path, class:"button" %>
-      </div>
-    <% end %>
   </body>
 </html>
