@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
          
   has_many :photos
+  has_many :likes
 
   def self.find_for_oauth(auth, signed_in_resource = nil)
 
