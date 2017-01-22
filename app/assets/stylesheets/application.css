@@ -12,6 +12,6 @@
  *
  *= require_tree .
  *= require_self
+ *= require social-share-button
  *= require foundation_and_overrides
-
  */
