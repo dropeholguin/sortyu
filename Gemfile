@@ -26,6 +26,7 @@ gem 'paperclip'
 gem 'aws-ses'
 gem 'aws-sdk'
 gem "bower-rails", "~> 0.11.0"
+gem 'wicked'
 
 group :development, :test do
   gem 'byebug', platform: :mri
