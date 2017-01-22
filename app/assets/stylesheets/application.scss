@@ -15,3 +15,9 @@
  *= require foundation_and_overrides
 
  */
+
+@import 'partials/header';
+
+body, .alert, .notice{
+	margin:0;
+}

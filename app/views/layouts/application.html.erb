@@ -13,6 +13,11 @@
   <body>
   	<p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <div class="row expanded collapse">
+      <div class="small-12 columns">
+        <%= render 'layouts/header_log_out' %>
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>
