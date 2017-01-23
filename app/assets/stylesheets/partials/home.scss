@@ -1,0 +1,42 @@
+#home{
+	h6{
+		margin-top:1.5em
+	}
+}
+
+/* Small only */
+@media screen and (max-width: 39.9375em) {
+	#home{
+
+		h6{
+			margin-top:1em;
+		}
+
+		.circle{
+			width:4em;
+			height:4em;
+		}
+
+		#user-name-container{
+			left:-12%;
+		}
+	}
+}
+
+/* Medium only */
+@media screen and (min-width: 40em) and (max-width: 63.9375em) {
+	#home{
+		#user-name-container{
+			left:-12%;
+		}
+	}
+}
+
+/* Large and up */
+@media screen and (min-width: 64em) {
+	#home{
+		#user-name-container{
+			left:-5%;
+		}
+	}
+}
