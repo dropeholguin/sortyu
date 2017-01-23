@@ -15,16 +15,13 @@
     <p class="alert"><%= alert %></p>
     <div class="row expanded collapse">
       <div class="small-12 columns">
-        <%= render 'layouts/header_log_out' %>
+        <% if user_signed_in? %>
+          <%= render 'layouts/header_log_in' %>
+        <% else %>
+          <%= render 'layouts/header_log_out' %>
+        <%end %>
         <%= yield %>
       </div>
     </div>
-    <%= yield %>
-    <% if user_signed_in? %>
-      <%= link_to "Log Out", destroy_user_session_path, method: :delete %>
-    <% else %>
-      <%= link_to "Sign Up", new_user_registration_path, class:"button" %>
-      <%= link_to "Log In", new_user_session_path, class:"button" %>
-    <%end %>
   </body>
 </html>

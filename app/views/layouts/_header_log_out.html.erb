@@ -9,16 +9,8 @@
     <div id="responsive-menu">
       <div class="top-bar-left">
         <ul class="dropdown menu" data-dropdown-menu>
-          <li>
-            <a href="#">One</a>
-            <ul class="menu vertical">
-              <li><a href="#">One</a></li>
-              <li><a href="#">Two</a></li>
-              <li><a href="#">Three</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Two</a></li>
-          <li><a href="#">Three</a></li>
+          <li><%= link_to "Sign Up", new_user_registration_path, class:"button" %></li>
+          <li><%= link_to "Log In", new_user_session_path, class:"button" %></li>
         </ul>
       </div>
     </div>
