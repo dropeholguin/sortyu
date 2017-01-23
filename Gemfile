@@ -29,6 +29,7 @@ gem "bower-rails", "~> 0.11.0"
 gem 'wicked'
 gem 'social-share-button'
 gem 'stripe'
+gem 'aasm'
 
 group :development, :test do
   gem 'byebug', platform: :mri
