@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require foundation
 //= require turbolinks
+//= require social-share-button
 // Bower packages
 //= require_tree .
 

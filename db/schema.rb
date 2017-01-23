@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170116131319) do
+ActiveRecord::Schema.define(version: 20170123154231) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,16 @@ ActiveRecord::Schema.define(version: 20170116131319) do
     t.index ["user_id"], name: "index_identities_on_user_id", using: :btree
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.integer  "order"
+    t.integer  "user_id"
+    t.integer  "section_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["section_id"], name: "index_likes_on_section_id", using: :btree
+    t.index ["user_id"], name: "index_likes_on_user_id", using: :btree
+  end
+
   create_table "photos", force: :cascade do |t|
     t.text     "description"
     t.integer  "user_id"
@@ -33,7 +43,16 @@ ActiveRecord::Schema.define(version: 20170116131319) do
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
+    t.string   "state"
     t.index ["user_id"], name: "index_photos_on_user_id", using: :btree
+  end
+
+  create_table "sections", force: :cascade do |t|
+    t.boolean  "rate_first"
+    t.integer  "photo_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["photo_id"], name: "index_sections_on_photo_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -56,5 +75,8 @@ ActiveRecord::Schema.define(version: 20170116131319) do
   end
 
   add_foreign_key "identities", "users"
+  add_foreign_key "likes", "sections"
+  add_foreign_key "likes", "users"
   add_foreign_key "photos", "users"
+  add_foreign_key "sections", "photos"
 end
