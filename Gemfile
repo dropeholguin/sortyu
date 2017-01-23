@@ -28,6 +28,7 @@ gem 'aws-sdk'
 gem "bower-rails", "~> 0.11.0"
 gem 'wicked'
 gem 'social-share-button'
+gem 'stripe'
 
 group :development, :test do
   gem 'byebug', platform: :mri
