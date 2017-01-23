@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require font-awesome
  *= require foundation_and_overrides
 
  */
@@ -22,9 +23,18 @@
 @import 'modules/mixins';
 @import 'partials/header';
 @import 'partials/home';
+@import 'partials/log_in';
 
 body, .alert, .notice{
 	margin:0;
+}
+
+.actions{
+	margin-bottom:0;
+}
+
+a:visited{
+	color:white;
 }
 
 ///////// MEDIA QUERIES ////////

@@ -51,14 +51,6 @@ class FoundationFormBuilder < ActionView::Helpers::FormBuilder
 	    end
 	end
 
-	def check_box(attribute)
-		content_tag(:div, class: "row") do
-			content_tag(:div, class: "small-10 small-push-1 medium-6 medium-push-3 large-6 text-left") do
-				super(attribute, options)
-			end
-		end
-	end
-
 	def submit(text, options={})
 		options[:class] ||= "button"
 		content_tag(:div, class: "row") do

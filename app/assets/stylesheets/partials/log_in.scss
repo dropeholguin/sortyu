@@ -1,0 +1,48 @@
+#log-in{
+    .horizontal-lines {
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
+        text-align: center;
+    }
+    .horizontal-lines:before, .horizontal-lines:after {
+        position: absolute;
+        top: 51%;
+        overflow: hidden;
+        width: 45%;
+        height: 1px;
+        content: '\a0';
+        background-color: gray;
+    }
+    .horizontal-lines:before {
+        margin-left: -50%;
+        text-align: right;
+    }
+    .horizontal-lines:after{
+        right:0%;
+    }
+
+    h6{
+        font-size:1em;
+    }
+}
+
+
+/* Small only */
+@media screen and (max-width: 39.9375em) {
+    #log-in{
+        .horizontal-lines:after{
+            right:-4%;
+        }
+    }
+}
+
+/* Medium and up */
+@media screen and (min-width: 40em) {
+    #log-in{
+        #remember-me{
+            left:11.5%;
+        }
+    }
+}
+
