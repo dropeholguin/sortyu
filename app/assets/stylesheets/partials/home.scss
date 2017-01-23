@@ -4,6 +4,13 @@
 	}
 }
 
+.box__dragndrop,
+.box__uploading,
+.box__success,
+.box__error {
+  display: none;
+}
+
 /* Small only */
 @media screen and (max-width: 39.9375em) {
 	#home{
