@@ -24,6 +24,7 @@
 @import 'partials/header';
 @import 'partials/home';
 @import 'partials/log_in';
+@import 'partials/profile';
 
 body, .alert, .notice{
 	margin:0;
@@ -34,7 +35,7 @@ body, .alert, .notice{
 }
 
 a:visited{
-	color:white;
+	color:inherit;
 }
 
 ///////// MEDIA QUERIES ////////
