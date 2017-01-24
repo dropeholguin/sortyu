@@ -74,6 +74,13 @@
 		}
 	}
 
+	.button[href="/users/auth/google_oauth2"]{
+		.fa{
+			padding-right: 0.9em;
+   			margin-right: 1.3em;
+		}
+	}
+
 	.horizontal-lines:after{
             right:-4%;
         }
@@ -94,6 +101,20 @@
 			padding-right:2em;
 		}
 	}
+
+	.button[href="/users/auth/google_oauth2"]{
+		.fa{
+			padding-right: 1.7em;
+   			margin-right: 1.2em;
+		}
+	}
+
+	.button[href="/users/auth/instagram"]{
+		.fa{
+			padding-right: 1.7em;
+    		margin-right: -0.5em;
+		}
+	}
 }
 
 /* Large and up */
@@ -108,7 +129,20 @@
 		}
 
 		.fa{
-			padding-right:4em;
+			padding-right:1em;
+		}
+	}
+
+	.button[href="/users/auth/google_oauth2"]{
+		.fa{
+   			margin-left: -1.0em;
+		}
+	}
+
+	.button[href="/users/auth/instagram"]{
+		.fa{
+			padding-right: 1.3em;
+    		margin-left: 0.3em;
 		}
 	}
 }

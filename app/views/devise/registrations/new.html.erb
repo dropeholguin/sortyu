@@ -1,37 +1,62 @@
-<h4>Sign up</h4>
+<div id="log-in" class="upper-space row">
+  <div class="callout small-12 medium-8 medium-push-2 columns">
+    <div class="row">
+      <div class="small-12 text-center columns">
+        <%= link_to user_facebook_omniauth_authorize_path, class:"button" do %>
+          <i class="fa fa-facebook" aria-hidden="true"></i><p><b>Log in</b> with <b>Facebook</b></p>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="small-12 text-center columns">
+        <%= link_to user_google_oauth2_omniauth_authorize_path, class:"button" do %>
+          <i class="fa fa-google" aria-hidden="true"></i><p><b>Log in</b> with <b>Google</b></p>
+        <% end %>
+      </div>
+    <div class="row">
+      <div class="small-12 text-center columns">
+        <%= link_to user_instagram_omniauth_authorize_path, class:"button" do %>
+          <i class="fa fa-instagram" aria-hidden="true"></i><p><b>Log in</b> with <b>Instagram</b></p>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="small-12 text-center columns">
+        <p class="horizontal-lines">Or</p>
+      </div>
+    </div>
+    <%= form_for(resource, builder: FoundationFormBuilder, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= devise_error_messages! %>
+      <div class="under-space row">
+        <div class="small-12 text-center columns">
+          <h4>Create an account</h4>
+        </div>
+      </div>
 
-<%= form_for(resource, builder: FoundationFormBuilder, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+      <div class="field">
+        <%= f.label :first_name %>
+        <%= f.text_field :first_name %>
+      </div>
+      <div class="field">
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name %>
+      </div>
+      <div class="field">
+        <%= f.label :email %>
+        <%= f.email_field :email, autofocus: true %>
+      </div>
+      <div class="field">
+        <%= f.label :password %>
+        <%= f.password_field :password, autocomplete: "off", placeholder:"6 characters minimum" %>
+      </div>
+      <div class="field">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, autocomplete: "off" %>
+      </div>
+      <div class="actions">
+        <%= f.submit "Sign up"%>
+      </div>
 
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name %>
+    <% end %>
   </div>
-
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up"%>
-  </div>
-<% end %>
+</div>
