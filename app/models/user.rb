@@ -46,6 +46,13 @@ class User < ApplicationRecord
       identity.user = user
       identity.save!
     end
+    
+    #Set oauth_token to identity
+    if identity.oauth_token.nil?
+      identity.oauth_token = auth.credentials.token
+      identity.save!
+    end
+
     user
   end
 

@@ -7,7 +7,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
         if @user.persisted?
           sign_in @user, event: :authentication
-          if "#{provider}" == "instagram"
+          if "#{provider}" == "instagram" && @user.sign_in_count == 1
             redirect_to after_signup_path(:instagram_email)
           else
             redirect_to root_path
