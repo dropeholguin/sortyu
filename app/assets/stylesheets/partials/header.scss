@@ -12,6 +12,10 @@ header{
 			}
 		}
 	}
+
+	strong{
+		font-size:1.5em;
+	}
 }
 
 ///////// MEDIA QUERIES ////////
@@ -26,5 +30,14 @@ header{
 				}
 			}
 		}
+	}
+}
+
+/* Medium and up */
+@media screen and (min-width: 40em) {
+	header{
+		.top-bar-title{
+			padding-top:0.7rem;
+	}
 	}
 }

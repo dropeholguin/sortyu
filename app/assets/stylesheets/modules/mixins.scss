@@ -77,7 +77,11 @@
 	.button[href="/users/auth/google_oauth2"]{
 		.fa{
 			padding-right: 0.9em;
-   			margin-right: 1.3em;
+   			margin-right: 2em;
+		}
+
+		p{
+			margin-left:0;
 		}
 	}
 
@@ -105,7 +109,11 @@
 	.button[href="/users/auth/google_oauth2"]{
 		.fa{
 			padding-right: 1.7em;
-   			margin-right: 1.2em;
+    		margin-right: 2.6em;
+		}
+
+		p{
+			margin-left:0;
 		}
 	}
 
@@ -122,10 +130,10 @@
     .button[href="/users/auth/facebook"],
 		.button[href="/users/auth/google_oauth2"],
 			.button[href="/users/auth/instagram"]{
-		width:50%;
+		width:40%;
 
 		p{
-			margin-left:4em;
+			margin-left:2em;
 		}
 
 		.fa{
