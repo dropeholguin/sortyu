@@ -49,4 +49,9 @@ class User < ApplicationRecord
     user
   end
 
+  def facebook(user)
+    identity = Identity.identity_facebook(user.id, "facebook")
+    @facebook ||= Koala::Facebook::API.new(identity.oauth_token)
+  end
+
 end

@@ -30,6 +30,7 @@ gem 'wicked'
 gem 'social-share-button'
 gem 'stripe'
 gem 'aasm'
+gem 'koala'
 
 group :development, :test do
   gem 'byebug', platform: :mri
