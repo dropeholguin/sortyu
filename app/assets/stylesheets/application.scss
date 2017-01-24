@@ -1,0 +1,59 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+<<<<<<< HEAD:app/assets/stylesheets/application.scss
+ *= require font-awesome
+=======
+ *= require social-share-button
+>>>>>>> development:app/assets/stylesheets/application.css
+ *= require foundation_and_overrides
+ */
+
+
+@import 'modules/variables';
+@import 'modules/helpers';
+@import 'modules/mixins';
+@import 'partials/header';
+@import 'partials/home';
+@import 'partials/log_in';
+@import 'partials/profile';
+
+body, .alert, .notice{
+	margin:0;
+}
+
+.actions{
+	margin-bottom:0;
+}
+
+a:visited{
+	color:inherit;
+}
+
+///////// MEDIA QUERIES ////////
+
+/* Small only */
+@media screen and (max-width: 39.9375em) {}
+
+/* Medium and up */
+@media screen and (min-width: 40em) {}
+
+/* Medium only */
+@media screen and (min-width: 40em) and (max-width: 63.9375em) {}
+
+/* Large and up */
+@media screen and (min-width: 64em) {}
+
+/* Large only */
+@media screen and (min-width: 64em) and (max-width: 74.9375em) {}
