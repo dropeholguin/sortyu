@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  #:lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :confirmable
          
   has_many :photos
   has_many :likes
@@ -57,7 +57,7 @@ class User < ApplicationRecord
   end
 
   def facebook(user)
-    identity = Identity.identity_facebook(user.id, "facebook")
+    identity = Identity.identity_facebook(user.id, "facebook").first
     @facebook ||= Koala::Facebook::API.new(identity.oauth_token)
   end
 
