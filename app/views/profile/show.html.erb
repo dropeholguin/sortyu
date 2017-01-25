@@ -4,34 +4,28 @@
 			<%= image_tag("sortyu-collage", class: "circle") %>
 		</div>
 		<div id="user-name-container" class="small-4 small-pull-1 columns">
-			<h6>User.name</h6>
+			<h6><%= current_user.first_name %></h6>
 		</div>
 		<div class="upper-space small-4 medium-2 columns">
-			<%= link_to "Edit Profile", profile_show_path , class:"button tiny" %>
+			<%= link_to "Edit Profile", edit_user_registration_path , class:"button tiny" %>
+			<%= link_to "Upload", new_photo_path, class:"button tiny" %>
 		</div>
 	</div>
 	<div class="row upper-space">
 		<div class="upper-space under-space small-12 medium-8 medium-push-2 columns">
-			<p><b>User.name </b>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
+			<p><b><%= current_user.username %> </b>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
 		</div>
 	</div>
 	<div class="row upper-space">
 		<div class="upper-space small-12 columns text-center">
-			<h6><b>4</b> Images</h6>
+			<h6><b><%= @photos.count() %></b> Images</h6>
 		</div>
 		<div id="photo-container" class="small-12 columns">
-			<div class="small-4 columns">
-				<%= image_tag("sortyu-collage") %>
-			</div>
-			<div class="small-4 columns">
-				<%= image_tag("sortyu-collage") %>
-			</div>
-			<div class="small-4 columns">
-				<%= image_tag("sortyu-collage") %>
-			</div>
-			<div class="small-4 columns" style="float: left">
-				<%= image_tag("sortyu-collage") %>
-			</div>
+			<%= @photos.each() do |photo| %>
+				<div class="small-4 columns">
+					<%= image_tag(photo.file_file_name) %>
+				</div>
+			<% end %>
 		</div>
 	</div>
 </div>
