@@ -4,4 +4,40 @@ header{
 	.menu-icon{
 		color:white;
 	}
+
+	.top-bar-right{
+		ul{
+			li{
+				padding:0 1em;
+			}
+		}
+	}
+
+	strong{
+		font-size:1.5em;
+	}
+}
+
+///////// MEDIA QUERIES ////////
+
+/* Small only */
+@media screen and (max-width: 39.9375em) {
+	header{
+		.top-bar-right{
+			ul{
+				li{
+					padding:0 2.3em;
+				}
+			}
+		}
+	}
+}
+
+/* Medium and up */
+@media screen and (min-width: 40em) {
+	header{
+		.top-bar-title{
+			padding-top:0.7rem;
+	}
+	}
 }

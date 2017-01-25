@@ -12,14 +12,10 @@
  *
  *= require_tree .
  *= require_self
-<<<<<<< HEAD:app/assets/stylesheets/application.scss
  *= require font-awesome
-=======
  *= require social-share-button
->>>>>>> development:app/assets/stylesheets/application.css
  *= require foundation_and_overrides
  */
-
 
 @import 'modules/variables';
 @import 'modules/helpers';
@@ -35,10 +31,6 @@ body, .alert, .notice{
 
 .actions{
 	margin-bottom:0;
-}
-
-a:visited{
-	color:inherit;
 }
 
 ///////// MEDIA QUERIES ////////
