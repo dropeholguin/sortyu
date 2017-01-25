@@ -255,7 +255,7 @@ PLATFORMS
 
 DEPENDENCIES
   aasm
-  aws-sdk
+  aws-sdk (~> 2.3)
   aws-ses
   bower-rails (~> 0.11.0)
   byebug

@@ -24,7 +24,7 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-instagram'
 gem 'paperclip'
 gem 'aws-ses'
-gem 'aws-sdk'
+gem 'aws-sdk', '~> 2.3'
 gem "bower-rails", "~> 0.11.0"
 gem 'wicked'
 gem 'social-share-button'
