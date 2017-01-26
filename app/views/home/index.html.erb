@@ -1,12 +1,15 @@
 <div id="home" class="row">
-	<div class="row upper-space under-pad">
-		<div class="small-4 medium-2 medium-push-1 medium-text-center large-push-2 columns">
-			<%= image_tag("sortyu-collage", class: "circle") %>
+	<% if user_signed_in? %>
+		<div class="row upper-space under-pad">
+			<div class="small-4 medium-2 medium-push-1 medium-text-center large-push-2 columns">
+
+				<%= avatar_profile_link current_user, "medium", class: "circle" %>
+			</div>
+			<div id="user-name-container" class="small-8 small-pull-1 medium-pull-1 columns">
+				<h6><%= current_user.full_name %></h6>
+			</div>
 		</div>
-		<div id="user-name-container" class="small-8 small-pull-1 medium-pull-1 columns">
-			<h6>User.name</h6>
-		</div>
-	</div>
+	<% end %>
 	<div class="row">
 		<div class="small-12 columns text-center">
 			<%= image_tag("sortyu-collage") %>

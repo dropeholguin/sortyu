@@ -1,10 +1,10 @@
 <div id="profile">
 	<div class="row upper-space">
 		<div class="small-4 medium-2 medium-text-center columns">
-			<%= image_tag("sortyu-collage", class: "circle") %>
+			<%= avatar_profile_link current_user, "medium", class: "circle" %>
 		</div>
 		<div id="user-name-container" class="truncate small-4 small-pull-1 medium-2 columns">
-			<h6><%= current_user.first_name %></h6>
+			<h6><%= current_user.full_name %></h6>
 		</div>
 		<div class="upper-space small-4 medium-6 medium-pull-1 end text-center columns">
 			<div class="show-for-medium small-4 large-3 columns">
@@ -17,7 +17,7 @@
 	</div>
 	<div class="row upper-space">
 		<div class="under-space small-12 medium-8 medium-push-2 columns">
-			<p><b><%= current_user.username %> </b>sisas no</p>
+			<p><b><%= current_user.username %> </b></p>
 		</div>
 	</div>
 	<div class="hide-for-medium small-4 small-push-4 text-center columns">
