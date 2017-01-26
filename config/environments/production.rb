@@ -81,6 +81,19 @@ Rails.application.configure do
     config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
 
+  config.action_mailer.perform_deliveries = true
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: "ses-smtp-user.20170125-170541",
+    port: 587,
+    user_name: ENV["SES_SMTP_USERNAME"], #Your SMTP user
+    password: ENV["SES_SMTP_PASSWORD"], #Your SMTP password
+    authentication: :plain,
+    enable_starttls_auto: true,
+    openssl_verify_mode: 'none'
+  }
+
   config.paperclip_defaults = {
     storage: :s3,
     s3_credentials: {
@@ -90,7 +103,7 @@ Rails.application.configure do
       s3_region: ENV['AWS_REGION']
     }
   }
-
+  config.action_mailer.delivery_method = :ses
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 end
