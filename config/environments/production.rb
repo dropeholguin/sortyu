@@ -70,7 +70,7 @@ Rails.application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
-  config.action_mailer.default_url_options = { host: 'sortyu-staging.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: ENV['MAILER_URL'] }
   # Use a different logger for distributed setups.
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
