@@ -1,0 +1,73 @@
+#photo-form{
+	h4{
+		margin-bottom:1.5em;
+	}
+}
+
+.button.facebook,
+	.button.google,
+		.button.instagram{
+			background-color:white;
+			margin-bottom:0;
+				margin-top:1em;
+}
+
+.button.facebook{
+	color:#3B5998;
+}
+
+.button.google{
+	color:#db4437;
+}
+
+.button.instagram{
+	color:#c70297;
+}
+
+.button.facebook:hover,
+	.button.instagram:hover,
+		.button.google:hover{
+	color:white;
+}
+
+.button.facebook:hover{
+	background-color:#3B5998;
+}
+
+.button.google:hover{
+	background-color:#db4437;
+}
+
+.button.instagram:hover{
+	background-color:#c70297;
+}
+
+///////// MEDIA QUERIES ////////
+
+/* Small only */
+@media screen and (max-width: 39.9375em) {
+	.button.facebook,
+		.button.google,
+			.button.instagram{
+				width:45%;
+	}
+}
+
+/* Medium only */
+@media screen and (min-width: 40em) and (max-width: 63.9375em) {
+	.button.facebook,
+		.button.google,
+			.button.instagram{
+				width:90%;
+	}
+}
+
+/* Large and up */
+@media screen and (min-width: 64em) {
+	.button.facebook,
+		.button.google,
+			.button.instagram{
+				width:70%;
+	}
+}
+

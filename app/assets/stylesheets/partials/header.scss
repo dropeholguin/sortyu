@@ -23,10 +23,15 @@ header{
 /* Small only */
 @media screen and (max-width: 39.9375em) {
 	header{
-		.top-bar-right{
+		.top-bar-right, .top-bar-left{
 			ul{
 				li{
-					padding:0 2.3em;
+					padding:0.5em 1.5em;
+					width:12em;
+
+					.button{
+						width:100%;
+					}
 				}
 			}
 		}

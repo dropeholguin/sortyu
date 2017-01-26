@@ -9,6 +9,11 @@
 		background-color:white;
 	}
 
+	.button:hover{
+		color:white;
+		background-color:black;
+	}
+
 	p{
 		margin:0;
 		font-size:0.9em;
@@ -45,6 +50,10 @@
 			margin-top:1.5em;
 			left:-4%;
 		}
+
+		.button{
+			width:85%;
+		}
 	}
 }
 
@@ -54,6 +63,10 @@
 		#user-name-container{
 			margin-top:1.5em;
 			left:-4%;
+		}
+
+		.button{
+			width:75%;
 		}
 	}
 }

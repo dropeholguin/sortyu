@@ -1,9 +1,21 @@
-<div class="row upper-space ">
-	<div class="small-12 text-center columns">
+<div id="photo-form" class="row upper-space">
+	<div class="callout small-12 medium-8 medium-push-2 text-center columns">
 		<h4>Upload Image</h4>
+		<%= render 'form', photo: @photo %>
+		<div id="file-upload" class="callout row">
+			<div class="small-12 text-center columns">
+				<h5>Import from social media</h5>
+			</div>
+			<div class="small-12 medium-4 columns">
+				<%= link_to "Facebook", root_path, class:"button facebook" %>
+			</div>
+			<div class="small-12 medium-4 columns">
+				<%= link_to "Google", root_path, class:"button google" %>
+			</div>
+			<div class="small-12 medium-4 columns">
+				<%= link_to "Instagram", root_path, class:"button instagram" %>
+			</div>
+		</div>
 	</div>
 </div>
-
-<%= render 'form', photo: @photo %>
-
 <%= link_to 'Back', photos_path %>
