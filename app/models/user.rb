@@ -29,10 +29,11 @@ class User < ApplicationRecord
 	        	first_name: auth.extra.raw_info.full_name.split(" ")[0], 
 	          last_name: auth.extra.raw_info.full_name.split(" ")[1],
             username: auth.extra.raw_info.username,
-            avatar: process_url(auth.info.profile_picture),
+            avatar: auth.info.profile_picture,
 	          email: auth.extra.raw_info.username + "@instagram.com",
 	          password: Devise.friendly_token[0,20]
 	        )
+          user.skip_confirmation!
 	        user.save!
       	else
           if identity.provider == 'facebook'
@@ -46,6 +47,7 @@ class User < ApplicationRecord
 	          email: auth.info.email,
 	          password: Devise.friendly_token[0,20]
 	        )
+          user.skip_confirmation!
 	        user.save!
 	      end
       end
