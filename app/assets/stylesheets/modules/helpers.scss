@@ -1,3 +1,9 @@
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .circle{
 	border-radius: 50%;
 	height: 5em;

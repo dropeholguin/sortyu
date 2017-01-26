@@ -3,27 +3,34 @@
 		<div class="small-4 medium-2 medium-text-center columns">
 			<%= image_tag("sortyu-collage", class: "circle") %>
 		</div>
-		<div id="user-name-container" class="small-4 small-pull-1 columns">
+		<div id="user-name-container" class="truncate small-4 small-pull-1 medium-2 columns">
 			<h6><%= current_user.first_name %></h6>
 		</div>
-		<div class="upper-space small-4 medium-2 columns">
-			<%= link_to "Edit Profile", edit_user_registration_path , class:"button tiny" %>
-			<%= link_to "Upload", new_photo_path, class:"button tiny" %>
+		<div class="upper-space small-4 medium-6 medium-pull-1 end text-center columns">
+			<div class="show-for-medium small-4 large-3 columns">
+				<%= link_to "Upload", new_photo_path, class:"button small" %>
+			</div>
+			<div class="small-4 large-3 end columns">
+				<%= link_to "Edit", edit_user_registration_path , class:"button small" %>
+			</div>
 		</div>
 	</div>
 	<div class="row upper-space">
-		<div class="upper-space under-space small-12 medium-8 medium-push-2 columns">
-			<p><b><%= current_user.username %> </b>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
+		<div class="under-space small-12 medium-8 medium-push-2 columns">
+			<p><b><%= current_user.username %> </b>sisas no</p>
 		</div>
+	</div>
+	<div class="hide-for-medium small-4 small-push-4 text-center columns">
+		<%= link_to "Upload", new_photo_path, class:"button small" %>
 	</div>
 	<div class="row upper-space">
 		<div class="upper-space small-12 columns text-center">
 			<h6><b><%= @photos.count() %></b> Images</h6>
 		</div>
 		<div id="photo-container" class="small-12 columns">
-			<%= @photos.each() do |photo| %>
-				<div class="small-4 columns">
-					<%= image_tag(photo.file_file_name) %>
+			<% @photos.each() do |photo| %>
+				<div class="small-4 float-left columns">
+					<%= image_tag(photo.file.url(:medium)) %>
 				</div>
 			<% end %>
 		</div>
