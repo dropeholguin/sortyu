@@ -72,6 +72,10 @@ class User < ApplicationRecord
     @facebook ||= Koala::Facebook::API.new(identity.oauth_token)
   end
 
+  def instagram(user)
+    identity = Identity.identity_instagram(user.id, "instagram").first
+  end
+
   def full_name
     [first_name, last_name].join(' ')
   end

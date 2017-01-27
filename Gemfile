@@ -31,6 +31,7 @@ gem 'social-share-button'
 gem 'stripe'
 gem 'aasm'
 gem 'koala'
+gem 'instagram_api'
 
 group :development, :test do
   gem 'byebug', platform: :mri

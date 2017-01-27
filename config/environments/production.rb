@@ -85,7 +85,7 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: "ses-smtp-user.20170125-170541",
+    address: "email-smtp.us-west-2.amazonaws.com",
     port: 587,
     user_name: ENV["SES_SMTP_USERNAME"], #Your SMTP user
     password: ENV["SES_SMTP_PASSWORD"], #Your SMTP password
@@ -96,12 +96,12 @@ Rails.application.configure do
 
   config.paperclip_defaults = {
     storage: :s3,
+    s3_region: ENV['AWS_REGION'],
     s3_credentials: {
-      bucket: ENV['S3_BUCKET_NAME'],
       access_key_id: ENV['AWS_ACCESS_KEY_ID'],
-      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
-      s3_region: ENV['AWS_REGION']
-    }
+      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
+    },
+    bucket: ENV['S3_BUCKET_NAME']
   }
   config.action_mailer.delivery_method = :ses
   # Do not dump schema after migrations.
