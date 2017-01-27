@@ -81,8 +81,6 @@ Rails.application.configure do
     config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
 
-  config.action_mailer.perform_deliveries = true
-
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address: "email-smtp.us-west-2.amazonaws.com",
