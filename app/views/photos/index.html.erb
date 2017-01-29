@@ -6,7 +6,7 @@
   <thead>
     <tr>
       <th>Description</th>
-      <th>User</th>
+      <th></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,7 +15,7 @@
     <% @photos.each do |photo| %>
       <tr>
         <td><%= photo.description %></td>
-        <td><%= link_to 'Show', photo %></td>
+        <td><%= image_tag(photo.file.url(:medium)) %></td>
       </tr>
     <% end %>
   </tbody>

@@ -5,7 +5,10 @@ class PhotosController < ApplicationController
   # GET /photos
   # GET /photos.json
   def index
-    @photos = Photo.all
+    @photos = []
+    Photo.where("user_id != ? AND seen = ?", current_user, false).find_in_batches do |photos|
+      photos.each { |photo| @photos << photo }
+    end
   end
 
   # GET /photos/1
