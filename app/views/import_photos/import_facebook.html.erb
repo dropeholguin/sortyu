@@ -1,18 +1,14 @@
-<h1>Photos Facebook</h1>
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th></th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @photos.each do |photo| %>
-      <tr>
-        <td><%= image_tag(photo["picture"]) %></td>
-      </tr>
+<div id="gallery-import">
+  <div class="upper-space under-space row">
+    <div class="small-12 text-center columns">
+      <h4>Facebook Photo Import</h4>
+    </div>
+  </div>
+  <div id="photo-container" class="upper-pad under-pad row">
+   <% @photos.each do |photo| %>
+    <div class="upper-space small-4 text-center end columns">
+      <%= image_tag(photo["picture"]) %>
+    </div>
     <% end %>
-  </tbody>
-</table>
+  </div>
+</div>

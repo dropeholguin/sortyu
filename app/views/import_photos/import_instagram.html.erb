@@ -1,18 +1,14 @@
-<h1>Photos Instagram</h1>
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th></th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<div id="gallery-import">
+  <div class="upper-space under-space row">
+    <div class="small-12 text-center columns">
+      <h4>Instagram Photo Import</h4>
+    </div>
+  </div>
+  <div id="photo-container" class="upper-pad under-pad row">
     <% (0..@max_num).each do |i| %>
-    	<tr>
-        <td><%= image_tag(@results["data"][i]["images"]["standard_resolution"]["url"]) %></td>
-      </tr>
-		<% end %>
-  </tbody>
-</table>
+    <div class="upper-space small-4 text-center end columns">
+      <%= image_tag(@results["data"][i]["images"]["standard_resolution"]["url"]) %>
+    </div>
+    <% end %>
+  </div>
+</div>
