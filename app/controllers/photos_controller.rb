@@ -5,10 +5,8 @@ class PhotosController < ApplicationController
   # GET /photos
   # GET /photos.json
   def index
-    @photos = []
-    Photo.where("user_id != ? AND seen = ?", current_user, false).find_in_batches do |photos|
-      photos.each { |photo| @photos << photo }
-    end
+    @user = current_user
+    @photos = Photo.photos_sorting(@user.id).limit(2)
   end
 
   # GET /photos/1

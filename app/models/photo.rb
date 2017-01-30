@@ -9,6 +9,7 @@ class Photo < ApplicationRecord
   validates_attachment_content_type :file, content_type: /\Aimage\/.*\z/
 
   scope :photos, -> (user_id) { where(user_id: user_id) }
+  scope :photos_sorting, -> (user_id) { where("user_id != ? AND seen = ?", user_id, false) }
 
   aasm column: "state" do
 		state :free, initial: true
