@@ -11,15 +11,19 @@
   </head>
 
   <body>
-  	<p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <div class="row expanded collapse">
+      <div class="small-12 columns text-center">
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+      </div>
+    </div>
     <div class="row expanded collapse">
       <div class="small-12 columns">
         <% if user_signed_in? %>
           <%= render 'layouts/header_log_in' %>
         <% else %>
           <%= render 'layouts/header_log_out' %>
-        <%end %>
+        <% end %>
         <%= yield %>
       </div>
     </div>
