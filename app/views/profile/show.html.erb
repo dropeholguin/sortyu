@@ -31,6 +31,7 @@
 			<% @photos.each() do |photo| %>
 				<div class="small-4 float-left columns">
 					<%= image_tag(photo.file.url(:medium)) %>
+					<%= social_share_button_tag(photo.description, url: "https://sortyu-staging.herokuapp.com/", image: photo.file.url(:medium)) %>
 				</div>
 			<% end %>
 		</div>
