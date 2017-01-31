@@ -7,7 +7,11 @@ Rails.application.routes.draw do
 	post "/photos/create_import_facebook", to: 'photos#create_import_facebook', as: :create_import_facebook
 	post "users/lock/:id", to: 'user_locks#lock_access', as: :lock_access
 
-  resources :photos
+  resources :photos do
+  	member do
+      patch :shared_times
+    end
+	end
 	root to: "home#index"
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: "users/registrations" }
   resources :after_signup

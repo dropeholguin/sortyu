@@ -1,5 +1,5 @@
 class PhotosController < ApplicationController
-  before_action :set_photo, only: [:show, :edit, :update, :destroy]
+  before_action :set_photo, only: [:show, :edit, :update, :destroy, :shared_times]
   before_filter :authenticate_user!, except: [:show, :index]
 
   # GET /photos
@@ -31,6 +31,12 @@ class PhotosController < ApplicationController
     respond_to do |format|
         format.html { redirect_to profile_show_path, notice: 'Photo was successfully created.' }
     end
+  end
+
+  def shared_times
+    count = @photo.shared_times
+    @photo.update_attributes(shared_times: (count + 1))
+    redirect_to profile_show_path
   end
 
   # GET /photos/1

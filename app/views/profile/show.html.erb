@@ -24,14 +24,15 @@
 		<%= link_to "Upload", new_photo_path, class:"button small" %>
 	</div>
 	<div class="row upper-space">
-		<div class="upper-space small-12 columns text-center">
+		<div class="upper-space small-12 columns text-center" id="photos-count" data-photos-size="<%= @photos.count %>">
 			<h6><b><%= @photos.count() %></b> Images</h6>
 		</div>
 		<div id="photo-container" class="small-12 columns">
 			<% @photos.each() do |photo| %>
 				<div class="small-4 float-left columns">
 					<%= image_tag(photo.file.url(:medium)) %>
-					<%= social_share_button_tag(photo.description, :'data-source' => photo.file.url(:medium), :'data-type' => 'photo') %>
+
+					<div data-photo="<%= photo.id %>" id="photo-i" > <%= social_share_button_tag(photo.description, :url => "http://myapp.com" ,:'data-source' => photo.file.url(:medium), :'data-type' => 'photo') %></div>
 				</div>
 			<% end %>
 		</div>
