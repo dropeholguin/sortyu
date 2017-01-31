@@ -6,6 +6,9 @@ Rails.application.routes.draw do
 	post "/photos/create_import_instagram", to: 'photos#create_import_instagram', as: :create_import_instagram
 	post "/photos/create_import_facebook", to: 'photos#create_import_facebook', as: :create_import_facebook
 	post "users/lock/:id", to: 'user_locks#lock_access', as: :lock_access
+	get 'photos/load_photo_to_sort', as: 'load_new_photo_to_sort'
+	get 'photos/reaload_photos_queue'
+	patch 'photos/update_photo_to_sorted_state'
 
   resources :photos
 	root to: "home#index"

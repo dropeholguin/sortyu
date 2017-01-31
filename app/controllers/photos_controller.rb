@@ -2,12 +2,38 @@ class PhotosController < ApplicationController
   before_action :set_photo, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!, except: [:show, :index]
 
-  # GET /photos
-  # GET /photos.json
-  def index
-    @user = current_user
-    @photos = Photo.paginate(page: params[:page], per_page: 1).photos_sorting(@user.id)
-  end
+    # GET /photos
+    # GET /photos.json
+    def index
+        @user = current_user
+        #@photos = Photo.paginate(page: params[:page], per_page: 1).photos_sorting(@user.id)
+    end
+
+    def load_photo_to_sort
+        respond_to do |format|
+            @photo = Photo.find(params[:photo_id])
+            if @photo.seen?
+                format.html { redirect_to path, error: "You can't sort already seen images." }
+            else
+                format.js
+            end
+        end
+    end
+
+    def reaload_photos_queue
+        if cookies[:photos_queue].empty?
+            cookies[:photos_queue] = { value: Photo.photos_sorting(current_user.id).limit(5).pluck(:id), expires: 1.day }
+            head status: :ok
+        else
+            head status: 500
+        end
+    end
+
+    def update_photo_to_sorted_state
+        @photo = Photo.find(params[:photo_id])
+        @photo.update_attribute 'seen', true
+        head status: :ok
+    end
 
   def create_import_instagram
     if params[:photos]
@@ -88,10 +114,10 @@ class PhotosController < ApplicationController
     end
   end
 
-  private
+    private
     # Use callbacks to share common setup or constraints between actions.
     def set_photo
-      @photo = Photo.find(params[:id])
+        @photo = Photo.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
