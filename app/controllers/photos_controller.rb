@@ -5,14 +5,31 @@ class PhotosController < ApplicationController
   # GET /photos
   # GET /photos.json
   def index
-    @photos = []
-    Photo.where("user_id != ? AND seen = ?", current_user, false).find_in_batches do |photos|
-      photos.each { |photo| @photos << photo }
+    @user = current_user
+    @photos = Photo.paginate(page: params[:page], per_page: 1).photos_sorting(@user.id)
+  end
 
-    @photos1 = Photo.where("user_id != ? AND seen = ?", current_user, false).paginate(page: params[:page], per_page: 1)
-    if @photos1.seen == true
-      redirect_to root_path
+  def create_import_instagram
+    if params[:photos]
+      params[:photos].each { |image_url|
+        @photo = Photo.new(file: URI.parse(image_url), user_id: current_user.id)        
+        @photo.save
+      }
     end
+    respond_to do |format|
+        format.html { redirect_to profile_show_path, notice: 'Photo was successfully created.' }
+    end
+  end
+
+  def create_import_facebook
+    if params[:photos]
+      params[:photos].each { |image_url|
+        @photo = Photo.new(file: URI.parse(image_url), user_id: current_user.id)        
+        @photo.save
+      }
+    end
+    respond_to do |format|
+        format.html { redirect_to profile_show_path, notice: 'Photo was successfully created.' }
     end
   end
 
@@ -38,7 +55,7 @@ class PhotosController < ApplicationController
 
     respond_to do |format|
       if @photo.save
-        format.html { redirect_to @photo, notice: 'Photo was successfully created.' }
+        format.html { redirect_to profile_show_path, notice: 'Photo was successfully created.' }
         format.json { render :show, status: :created, location: @photo }
       else
         format.html { render :new }

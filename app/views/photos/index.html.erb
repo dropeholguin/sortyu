@@ -10,7 +10,7 @@
       </div>
     </div>
   <% end %>
-  <% @photos1.each do |photo| %>
+  <% @photos.each do |photo| %>
   <div class="row">
     <div class="small-12 columns text-center">
       <%= image_tag(photo.file.url(:medium)) %>
@@ -24,7 +24,7 @@
   <% end %>
   <div class="row">
     <div class="small-12 columns text-center">
-      <%= will_paginate @photos1,:page_links=>false, :next_label=> "Next" %>
+      <%= will_paginate @photos,:page_links=>false, :next_label=> "Next" %>
     </div>
   </div>
   <div class="row under-space">

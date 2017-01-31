@@ -8,7 +8,9 @@
    <% @photos.each do |photo| %>
     <div class="upper-space small-4 text-center end columns">
       <%= image_tag(photo["picture"]) %>
+      <%= check_box_tag :photo_facebook, photo["picture"] %>
     </div>
     <% end %>
+    <%= button_tag "Import Photos", class: "button" , id: "import_facebook" %>
   </div>
 </div>
