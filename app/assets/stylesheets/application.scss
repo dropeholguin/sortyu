@@ -57,6 +57,8 @@ a[href^="/users/lock/"]{
 
 a[href ^= "/users/lock/"]:hover{
 	color:red;
+	background-color:white;
+	text-decoration:underline;
 }
 
 ///////// MEDIA QUERIES ////////
