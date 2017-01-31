@@ -11,7 +11,7 @@ class AfterSignupController < ApplicationController
   def update
     @user = current_user
     @user.update_attributes(user_params)
-    
+    @user.skip_confirmation!
     render_wizard @user
   end
   
