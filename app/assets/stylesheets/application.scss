@@ -51,13 +51,16 @@ body, .alert, .notice{
 	}
 }
 
+a:hover{
+	background-color:transparent;
+}
+
 a[href^="/users/lock/"]{
 	color:red;
 }
 
 a[href ^= "/users/lock/"]:hover{
 	color:red;
-	background-color:white;
 	text-decoration:underline;
 }
 
