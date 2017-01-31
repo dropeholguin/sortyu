@@ -1,26 +1,35 @@
-<p id="notice"><%= notice %></p>
+<div id="home" class="row">
+  <% if user_signed_in? %>
+    <div class="row upper-space under-pad">
+      <div class="small-4 medium-2 medium-push-1 medium-text-center large-push-2 columns">
 
-<h1>Photos</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Description</th>
-      <th></th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @photos.each do |photo| %>
-      <tr>
-        <td><%= photo.description %></td>
-        <td><%= image_tag(photo.file.url(:medium)) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Photo', new_photo_path %>
+        <%= avatar_profile_link current_user, "medium", class: "circle" %>
+      </div>
+      <div id="user-name-container" class="small-8 small-pull-1 medium-pull-1 columns">
+        <h6><%= current_user.full_name %></h6>
+      </div>
+    </div>
+  <% end %>
+  <% @photos.each do |photo| %>
+  <div class="row">
+    <div class="small-12 columns text-center">
+      <%= image_tag(photo.file.url(:medium)) %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-12 medium-10 medium-push-1 large-8 large-push-2 text-center columns">
+      <p><%= photo.description %></p>
+    </div>
+  </div>
+  <% end %>
+  <div class="row">
+    <div class="small-12 columns text-center">
+      <%= will_paginate @photos,:page_links=>false, :next_label=> "Next" %>
+    </div>
+  </div>
+  <div class="row under-space">
+    <div class="small-12 columns text-center">
+      <%= button_tag("Report", class: "button alert") %>
+    </div>
+  </div>
+</div>

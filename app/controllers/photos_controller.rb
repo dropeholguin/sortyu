@@ -6,7 +6,7 @@ class PhotosController < ApplicationController
   # GET /photos.json
   def index
     @user = current_user
-    @photos = Photo.photos_sorting(@user.id).limit(2)
+    @photos = Photo.paginate(page: params[:page], per_page: 1).photos_sorting(@user.id)
   end
 
   def create_import_instagram
