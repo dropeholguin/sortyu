@@ -9,6 +9,30 @@ class PhotosController < ApplicationController
     @photos = Photo.photos_sorting(@user.id).limit(2)
   end
 
+  def create_import_instagram
+    if params[:photos]
+      params[:photos].each { |image_url|
+        @photo = Photo.new(file: URI.parse(image_url), user_id: current_user.id)        
+        @photo.save
+      }
+    end
+    respond_to do |format|
+        format.html { redirect_to profile_show_path, notice: 'Photo was successfully created.' }
+    end
+  end
+
+  def create_import_facebook
+    if params[:photos]
+      params[:photos].each { |image_url|
+        @photo = Photo.new(file: URI.parse(image_url), user_id: current_user.id)        
+        @photo.save
+      }
+    end
+    respond_to do |format|
+        format.html { redirect_to profile_show_path, notice: 'Photo was successfully created.' }
+    end
+  end
+
   # GET /photos/1
   # GET /photos/1.json
   def show
@@ -31,7 +55,7 @@ class PhotosController < ApplicationController
 
     respond_to do |format|
       if @photo.save
-        format.html { redirect_to @photo, notice: 'Photo was successfully created.' }
+        format.html { redirect_to profile_show_path, notice: 'Photo was successfully created.' }
         format.json { render :show, status: :created, location: @photo }
       else
         format.html { render :new }

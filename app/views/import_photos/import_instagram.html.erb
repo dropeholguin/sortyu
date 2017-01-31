@@ -8,7 +8,10 @@
     <% (0..@max_num).each do |i| %>
     <div class="upper-space small-4 text-center end columns">
       <%= image_tag(@results["data"][i]["images"]["standard_resolution"]["url"]) %>
+      <%= check_box_tag :photo_instagram, @results['data'][i]['images']['standard_resolution']['url'] %>
     </div>
     <% end %>
   </div>
+  <%= button_tag "Import Photos", class: "button" , id: "import_instagram" %>
 </div>
+
