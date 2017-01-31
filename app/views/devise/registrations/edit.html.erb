@@ -46,6 +46,10 @@
         <%= f.password_field :password_confirmation, autocomplete: "off" %>
       </div>
 
+      <div class="field">
+        <%= link_to "Lock account", lock_access_path(resource), method: :post, class: 'button' %>
+      </div>
+
       <div class="actions">
         <%= f.submit "Update", class: "button" %>
       </div>

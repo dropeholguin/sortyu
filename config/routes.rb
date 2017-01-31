@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 	get 'import_instagram/photos/', to: 'import_photos#import_instagram', as: 'import_instagram'
 	post "/photos/create_import_instagram", to: 'photos#create_import_instagram', as: :create_import_instagram
 	post "/photos/create_import_facebook", to: 'photos#create_import_facebook', as: :create_import_facebook
+	post "users/lock/:id", to: 'user_locks#lock_access', as: :lock_access
 
   resources :photos
 	root to: "home#index"
