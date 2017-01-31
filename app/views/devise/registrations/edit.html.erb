@@ -45,9 +45,13 @@
         <%= f.label :password_confirmation %>
         <%= f.password_field :password_confirmation, autocomplete: "off" %>
       </div>
-
       <div class="actions">
         <%= f.submit "Update", class: "button" %>
+      </div>
+      <div class="upper-space row field">
+        <div class="upper-space small-12 text-center columns">
+          <%= link_to "Deactivate Account", lock_access_path(resource), method: :post %>
+        </div>
       </div>
     <% end %>
   </div>

@@ -7,7 +7,7 @@
   <div id="photo-container" class="upper-pad under-pad row">
     <% (0..@max_num).each do |i| %>
       <div class="upper-space small-4 text-center end columns">
-        <%= image_tag(@results["data"][i]["images"]["standard_resolution"]["url"], class:"yes", id:"photo-#{i}") %>
+        <%= image_tag(@results["data"][i]["images"]["standard_resolution"]["url"], id: "photo-#{i}") %>
         <%= check_box_tag :photo_instagram, @results['data'][i]['images']['standard_resolution']['url'] %>
       </div>
     <% end %>

@@ -51,6 +51,14 @@ body, .alert, .notice{
 	}
 }
 
+a[href^="/users/lock/"]{
+	color:red;
+}
+
+a[href ^= "/users/lock/"]:hover{
+	color:red;
+}
+
 ///////// MEDIA QUERIES ////////
 
 /* Small only */
