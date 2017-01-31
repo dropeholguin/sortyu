@@ -8,6 +8,11 @@ class PhotosController < ApplicationController
     @photos = []
     Photo.where("user_id != ? AND seen = ?", current_user, false).find_in_batches do |photos|
       photos.each { |photo| @photos << photo }
+
+    @photos1 = Photo.where("user_id != ? AND seen = ?", current_user, false).paginate(page: params[:page], per_page: 1)
+    if @photos1.seen == true
+      redirect_to root_path
+    end
     end
   end
 

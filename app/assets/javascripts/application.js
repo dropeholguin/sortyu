@@ -18,8 +18,18 @@
 // Bower packages
 //= require_tree .
 
-$(function(){ $(document).foundation(); });
+$(function(){ 
+	$(document).foundation(); 
+});
 
 $(document).on("turbolinks:load", function() { 
 	$(document).foundation();
+});
+
+$(document).on("turbolinks:load", function() {
+var $next = $('.next_page'); 
+var $previous = $('.previous_page');
+$('.pagination').removeClass('pagination');
+$previous.remove();
+$next.addClass('button');
 });
