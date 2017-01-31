@@ -27,9 +27,25 @@ $(document).on("turbolinks:load", function() {
 });
 
 $(document).on("turbolinks:load", function() {
-var $next = $('.next_page'); 
-var $previous = $('.previous_page');
-$('.pagination').removeClass('pagination');
-$previous.remove();
-$next.addClass('button');
+	var $next = $('.next_page'); 
+	var $previous = $('.previous_page');
+	$('.pagination').removeClass('pagination');
+	$previous.remove();
+	$next.addClass('button');
+});
+
+$(document).on("turbolinks:load", function() {
+	$('#gallery-import img').click(function(){
+		if ($(this).attr('class') == 'highlight') {
+			$(this).removeClass("highlight");
+			$checkbox.prop('checked', true);
+		}
+		else{
+			$(this).attr('class','highlight');
+			$checkbox.prop('checked', false);
+		}
+
+		var $imgSrc = $(this).attr('src');
+		var $checkbox = $('input[value="$imgSrc"]');
+	});
 });
