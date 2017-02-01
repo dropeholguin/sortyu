@@ -32,7 +32,7 @@
 				<div class="small-4 float-left columns">
 					<%= image_tag(photo.file.url(:medium)) %>
 
-					<div data-photo="<%= photo.id %>" id="photo-i" > <%= social_share_button_tag(photo.description, :url => "http://myapp.com" ,:'data-source' => photo.file.url(:medium), :'data-type' => 'photo') %></div>
+					<div data-photo="<%= photo.id %>" id="photo-i" > <%= social_share_button_tag(photo.description,:'data-source' => photo.file.url(:medium), :'data-type' => 'photo') %></div>
 				</div>
 			<% end %>
 		</div>
