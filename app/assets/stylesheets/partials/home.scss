@@ -1,19 +1,12 @@
-#home{
+#sorting-principal{
 	h6{
 		margin-top:1.5em
 	}
 }
 
-.box__dragndrop,
-.box__uploading,
-.box__success,
-.box__error {
-  display: none;
-}
-
 /* Small only */
 @media screen and (max-width: 39.9375em) {
-	#home{
+	#sorting-principal{
 
 		h6{
 			margin-top:1em;
@@ -32,7 +25,7 @@
 
 /* Medium only */
 @media screen and (min-width: 40em) and (max-width: 63.9375em) {
-	#home{
+	#sorting-principal{
 		#user-name-container{
 			left:-12%;
 		}
@@ -41,7 +34,7 @@
 
 /* Large and up */
 @media screen and (min-width: 64em) {
-	#home{
+	#sorting-principal{
 		#user-name-container{
 			left:-5%;
 		}
