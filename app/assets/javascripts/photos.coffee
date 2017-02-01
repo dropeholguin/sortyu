@@ -5,8 +5,6 @@ loadPhotoToSort = ->
 	if $('#sorting-principal').length > 0
 		photoIds = readCookie('photos_queue').split("-")
 		if photoIds.length > 0 and photoIds[0] != ""
-			console.log "photo ids"
-			console.log photoIds
 			photoToSortId = photoIds.splice(0, 1)
 			deleteCookie('photos_queue')
 			createCookie('photos_queue', photoIds.join("-"), 1)
@@ -49,7 +47,6 @@ updatePhotoToSortedState = ->
 $(document).on 'turbolinks:load', ->
 	loadPhotoToSort()
 	$('#next-sort').on 'click', (event) ->
-		console.log("hello click next-sort")
 		loadPhotoToSort()
 		updatePhotoToSortedState()
 

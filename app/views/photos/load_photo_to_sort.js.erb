@@ -1,5 +1,9 @@
 $('#sorting-principal #photo-container img').remove();
 $('#sorting-principal #photo-description p').remove();
+$('#sorting-principal #user-photo-container img').remove();
+$('#sorting-principal #user-name-container h6').remove();
 $('#sorting-principal #photo-container').append('<%= image_tag(@photo.file.url(:medium)) %>');
 $('#sorting-principal #photo-description').append('<p><%= @photo.description %></p>');
+$('#sorting-principal #user-photo-container').append('<%= image_tag(@photo.user.avatar.url(:medium), class:"circle") %>');
+$('#sorting-principal #user-name-container').append('<h6><%= @photo.user.username %></h6>');
 $('#sorting-principal button').data("photo_id", <%= @photo.id %>);

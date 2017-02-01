@@ -23,16 +23,12 @@ class PhotosController < ApplicationController
     def reaload_photos_queue
         if cookies[:photos_queue].empty?
             photo_ids_array = Photo.photos_sorting(current_user.id).limit(5).pluck(:id)
-            puts "PHOT IDS ARRAY!!!"
-            puts photo_ids_array
             if photo_ids_array.empty?
                 flash[:error] = "You already saw all images."
                 flash.keep(:notice)
                 render js: "window.location = #{root_path.to_json}"
             else
                 photo_array_string = photo_ids_array.join("-")
-                puts "PHOTO ARRAY STRING"
-                puts photo_array_string
                 cookies[:photos_queue] = { value: photo_array_string, expires: 23.hours.from_now }
                 head :ok
             end
