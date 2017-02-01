@@ -4,9 +4,12 @@ class ApplicationController < ActionController::Base
 
 	def set_photos_array
 		if user_signed_in?
-			if cookies[:photos_queue].empty?
-				cookies[:photos_queue] = { value: Photo.photos_sorting(current_user.id).limit(5).pluck(:id), expires: 1.day }
+			if cookies[:photos_queue].nil?
+				cookies[:photos_queue] = ""
 			end
+			# if cookies[:photos_queue].empty?
+			# 	cookies[:photos_queue] = { value: Photo.photos_sorting(current_user.id).limit(5).pluck(:id), expires: 1.day }
+			# end
 		end
 	end
 

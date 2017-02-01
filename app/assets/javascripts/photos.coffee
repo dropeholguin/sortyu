@@ -3,35 +3,39 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 loadPhotoToSort = ->
 	if $('#sorting-principal').length > 0
-		photoIds = readCookie('photos_queue')
-		if photoIds.length > 0
+		photoIds = readCookie('photos_queue').split("-")
+		if photoIds.length > 0 and photoIds[0] != ""
+			console.log "photo ids"
+			console.log photoIds
 			photoToSortId = photoIds.splice(0, 1)
-			
-			$.ajax 'load_photo_to_sort',
+			deleteCookie('photos_queue')
+			createCookie('photos_queue', photoIds.join("-"), 1)
+			$.ajax 'photos/load_photo_to_sort',
 			type: 'GET',
 			dataType: 'script',
 			data: {
-				photo_id: photoToSortId
+				photo_id: photoToSortId[0]
 			},
 			error: (jqXHR, textStatus, errorThrown) ->
 				console.log("AJAX Error: #{textStatus}")
 			success: (data, textStatus, jqXHR) ->
 				console.log("Sorting photo_id sent correctly!")
 		else
-			$.ajax 'reaload_photos_queue',
+			$.ajax 'photos/reaload_photos_queue',
 			type: 'GET',
 			dataType: 'script',
 			data: {},
 			error: (jqXHR, textStatus, errorThrown) ->
-				console.log("AJAX Error: #{textStatus}")
+				console.log "AJAX Error: #{textStatus}"
 			success: (data, textStatus, jqXHR) ->
-				console.log("Photos queue reloaded successfully!")
-				loadPhotoToSort()
+				console.log "Photos queue reloaded successfully!"
+				if readCookie('photos_queue').length > 0
+					loadPhotoToSort()
 
 updatePhotoToSortedState = ->
-	photoId = $('#next-sort').data('photo-id')
+	photoId = $('#next-sort').data('photo_id')
 	#Here you also need to save sorting data
-	$.ajax 'update_photo_to_sorted_state',
+	$.ajax 'photos/update_photo_to_sorted_state',
 	type: 'PATCH',
 	dataType: 'script',
 	data: {
@@ -42,9 +46,10 @@ updatePhotoToSortedState = ->
 	success: (data, textStatus, jqXHR) ->
 		console.log("Photo updated successfully!")
 
-$(document).ready loadPhotoToSort
-$(document).on 'turbolinks:load', loadPhotoToSort
-$('#next-sort').on 'click', (event) ->
+$(document).on 'turbolinks:load', ->
 	loadPhotoToSort()
-	updatePhotoToSortedState()
+	$('#next-sort').on 'click', (event) ->
+		console.log("hello click next-sort")
+		loadPhotoToSort()
+		updatePhotoToSortedState()
 

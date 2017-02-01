@@ -1,0 +1,5 @@
+$('#sorting-principal #photo-container img').remove();
+$('#sorting-principal #photo-description p').remove();
+$('#sorting-principal #photo-container').append('<%= image_tag(@photo.file.url(:medium)) %>');
+$('#sorting-principal #photo-description').append('<p><%= @photo.description %></p>');
+$('#sorting-principal button').data("photo_id", <%= @photo.id %>);

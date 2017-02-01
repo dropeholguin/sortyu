@@ -13,7 +13,7 @@ class PhotosController < ApplicationController
         respond_to do |format|
             @photo = Photo.find(params[:photo_id])
             if @photo.seen?
-                format.html { redirect_to path, error: "You can't sort already seen images." }
+                format.html { redirect_to root_path, error: "You can't sort already seen images." }
             else
                 format.js
             end
@@ -22,17 +22,29 @@ class PhotosController < ApplicationController
 
     def reaload_photos_queue
         if cookies[:photos_queue].empty?
-            cookies[:photos_queue] = { value: Photo.photos_sorting(current_user.id).limit(5).pluck(:id), expires: 1.day }
-            head status: :ok
+            photo_ids_array = Photo.photos_sorting(current_user.id).limit(5).pluck(:id)
+            puts "PHOT IDS ARRAY!!!"
+            puts photo_ids_array
+            if photo_ids_array.empty?
+                flash[:error] = "You already saw all images."
+                flash.keep(:notice)
+                render js: "window.location = #{root_path.to_json}"
+            else
+                photo_array_string = photo_ids_array.join("-")
+                puts "PHOTO ARRAY STRING"
+                puts photo_array_string
+                cookies[:photos_queue] = { value: photo_array_string, expires: 23.hours.from_now }
+                head :ok
+            end
         else
-            head status: 500
+            head 500
         end
     end
 
     def update_photo_to_sorted_state
         @photo = Photo.find(params[:photo_id])
         @photo.update_attribute 'seen', true
-        head status: :ok
+        head :ok
     end
 
   def create_import_instagram
