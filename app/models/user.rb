@@ -7,6 +7,12 @@ class User < ApplicationRecord
   has_many :photos
   has_many :likes
 
+  has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+
+  has_many :following, through: :active_relationships, source: :followed
+  has_many :followers, through: :passive_relationships, source: :follower
+
   has_attached_file :avatar , styles: { medium: "700x700#", thumb: "100x100#" }
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
@@ -88,6 +94,18 @@ class User < ApplicationRecord
     avatar_url = URI.parse(uri)
     avatar_url.scheme = 'https'
     avatar_url.to_s
+  end
+
+  def following?(user)
+    following.include?(user)
+  end
+
+  def follow(user)
+    active_relationships.create!(followed_id: user.id)
+  end
+
+  def unfollow(user)
+    active_relationships.find_by(followed_id: user.id).destroy
   end
 
 end

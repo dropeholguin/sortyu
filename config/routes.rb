@@ -19,4 +19,6 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: "users/registrations" }
   resources :after_signup
   resources :charges
+
+  resources :relationships, only: [:create, :destroy]
 end
