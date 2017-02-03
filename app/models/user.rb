@@ -36,7 +36,7 @@ class User < ApplicationRecord
 	        	first_name: auth.extra.raw_info.full_name.split(" ")[0], 
 	          last_name: auth.extra.raw_info.full_name.split(" ")[1],
             username: auth.extra.raw_info.username,
-            avatar: auth.info.profile_picture,
+            avatar: auth.extra.raw_info.profile_picture,
 	          email: auth.extra.raw_info.username + "@instagram.com",
 	          password: Devise.friendly_token[0,20]
 	        )
@@ -45,6 +45,8 @@ class User < ApplicationRecord
       	else
           if identity.provider == 'facebook'
             image = process_url(auth.info.image + '?type=large')
+          else
+            image = auth.info.image
           end
 	        user = User.new(
 	        	first_name: auth.extra.raw_info.name.split(" ")[0], 
@@ -81,6 +83,10 @@ class User < ApplicationRecord
 
   def instagram(user)
     identity = Identity.identity_instagram(user.id, "instagram").first
+  end
+
+  def google(user)
+    identity = Identity.identity_google(user.id, "google_oauth2").first
   end
 
   def full_name
