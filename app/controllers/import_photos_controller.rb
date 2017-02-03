@@ -2,8 +2,12 @@ class ImportPhotosController < ApplicationController
 	before_filter :authenticate_user!
 
 	def import_facebook
+		@photos = []
 		@user = current_user
-		@photos = @user.facebook(@user).get_connections("me","photos?fields=picture,name")
+		photos = @user.facebook(@user).get_connections("me","photos", fields: ["picture, name"])
+		photos.each do |photo|
+			@photos << @user.facebook(@user).get_picture(photo["id"], type: :normal)
+		end
 	end
 
 	def import_instagram
