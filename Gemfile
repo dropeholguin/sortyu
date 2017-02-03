@@ -33,6 +33,7 @@ gem 'aasm'
 gem 'koala'
 gem 'instagram_api'
 gem 'will_paginate', '~> 3.1', '>= 3.1.5'
+gem 'acts_as_votable'
 
 group :development, :test do
   gem 'byebug', platform: :mri

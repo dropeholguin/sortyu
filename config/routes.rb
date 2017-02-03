@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   resources :photos do
   	member do
       patch :shared_times
+    	put "like", to: "photos#like"
+      put "unlike", to: "photos#unlike"
     end
 	end
 	root to: "home#index"
