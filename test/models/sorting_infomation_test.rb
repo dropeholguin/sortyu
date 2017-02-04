@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class SortingDatumTest < ActiveSupport::TestCase
+class SortingInfomationTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
