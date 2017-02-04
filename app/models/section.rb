@@ -1,4 +1,4 @@
 class Section < ApplicationRecord
 	belongs_to :photo
-	has_many :likes
+	has_many :sortings
 end

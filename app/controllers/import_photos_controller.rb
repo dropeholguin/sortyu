@@ -19,6 +19,5 @@ class ImportPhotosController < ApplicationController
 
 	def import_google
 		@user = current_user
-		person = GooglePlus::Person.get(@user.google(@user).uid, access_token: @user.google(@user).oauth_token)
 	end
 end
