@@ -15,7 +15,10 @@
 //= require foundation
 //= require turbolinks
 //= require social-share-button
-// Bower packages
+//= require tracking.js/build/tracking
+//= require tracking.js/build/data/face
+//= require tracking.js/build/data/eye
+//= require tracking.js/build/data/mouth
 //= require_tree .
 
 var createCookie = function(name, value, days) {

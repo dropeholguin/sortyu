@@ -64,6 +64,11 @@ a[href ^= "/users/lock/"]:hover{
 	text-decoration:underline;
 }
 
+.rect {
+   border: 2px solid #a64ceb ;
+   position: absolute;
+ }
+
 ///////// MEDIA QUERIES ////////
 
 /* Small only */
