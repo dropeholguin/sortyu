@@ -18,6 +18,8 @@ loadPhotoToSort = ->
 				console.log("AJAX Error: #{textStatus}")
 			success: (data, textStatus, jqXHR) ->
 				console.log("Sorting photo_id sent correctly!")
+			complete: (jqXHR, textStatus) ->
+				setTimeout("window.LocalTracker.performTracking()", 1000)
 		else
 			$.ajax 'photos/reaload_photos_queue',
 			type: 'GET',
