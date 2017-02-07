@@ -2,6 +2,7 @@ window.LocalTracker ?= {}
 
 window.LocalTracker.performTracking = ->
 	if $('#sorting-principal').length > 0
+		number = 0
 		$img = $('#trackme')
 		tracker = new tracking.ObjectTracker(['face'])
 		tracker.setStepSize(1.7)
@@ -11,11 +12,6 @@ window.LocalTracker.performTracking = ->
 			for rect in event.data
 				plotRectangle(rect.x, rect.y, rect.width, rect.height)
 			resetRect()
-
-			# If True, removes all "rect-clicked" classes
-			#if performRectReset
-			#	for rect in event.data
-
 
 		plotRectangle = (x, y, w, h) ->
 			$rect = $('<div></div>')
@@ -30,14 +26,16 @@ window.LocalTracker.performTracking = ->
 
 		updateRect = (rect) ->
 			rect.click ->
-				if rect.hasClass('rect-clicked')
+				number = number + 1
+				if rect.hasClass("rect-clicked")
 					resetRect()
 				else
-					rect.addClass('rect-clicked')
+					rect.addClass("rect-clicked")
+					rect.attr("id","#{number}")
 
 
 		resetRect = ->
-			$(".rect-clicked").each (index, element) ->
+			$(".rect-clicked").each ->
 				$(element).removeClass('rect-clicked')
 				
 

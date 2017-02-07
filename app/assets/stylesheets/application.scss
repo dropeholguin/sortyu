@@ -69,6 +69,11 @@ a[href ^= "/users/lock/"]:hover{
    position: absolute;
  }
 
+ .rect-clicked{
+ 	background-color:#4286f4;
+ 	opacity:0.4;
+ }
+
 ///////// MEDIA QUERIES ////////
 
 /* Small only */
