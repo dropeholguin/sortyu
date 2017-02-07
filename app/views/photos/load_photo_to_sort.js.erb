@@ -4,13 +4,17 @@ if ($('#sorting-principal #photo-container img').length >0) {
 if ($('#sorting-principal #photo-description p').length > 0) {
 	$('#sorting-principal #photo-description p').remove();
 }
+	$('.rect').remove();
 	$('#sorting-principal #user-photo-container img').remove();
 if ($('#sorting-principal #user-name-container h6').length > 0) {
 	$('#sorting-principal #user-name-container h6').remove();
 }
+
+$('#sorting-principal #like-container .button').remove();
 $('#sorting-principal #photo-description').append("<p> <%= @photo.description %> </p>");
 $('#sorting-principal #user-photo-container').append('<%= image_tag(@photo.user.avatar.url(:medium), class:"circle") %>');
 $('#sorting-principal #user-name-container').append('<h6><%= @photo.user.username %></h6>');
 $('#sorting-principal #photo-container').append('<%= image_tag(@photo.file.url(:medium),id:"trackme") %>');
+$('#sorting-principal #like-container').append('<%= link_to "Like", like_photo_path(@photo), class:"button disabled", method: :put %>');
 $('#sorting-principal button').data("photo_id", <%= @photo.id %>);
 console.log("http request responded");
