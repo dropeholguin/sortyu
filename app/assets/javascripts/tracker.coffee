@@ -35,7 +35,9 @@ window.LocalTracker.performTracking = ->
 
 
 		resetRect = ->
-			$(".rect-clicked").each ->
+			$(".rect-clicked").each (index, element) ->
+				number = 0
+				$(element).removeAttr("id")
 				$(element).removeClass('rect-clicked')
 				
 
