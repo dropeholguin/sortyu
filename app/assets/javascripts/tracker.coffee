@@ -1,4 +1,4 @@
-window.LocalTracker ?= {}
+window.LocalTracker ?= {}	
 
 window.LocalTracker.performTracking = ->
 	if $('#sorting-principal').length > 0
@@ -8,10 +8,14 @@ window.LocalTracker.performTracking = ->
 		tracking.track('#trackme', tracker)
 		
 		tracker.on 'track', (event) ->
-			console.log('inside the tracker')
 			for rect in event.data
-				console.log rect
 				plotRectangle(rect.x, rect.y, rect.width, rect.height)
+			resetRect()
+
+			# If True, removes all "rect-clicked" classes
+			#if performRectReset
+			#	for rect in event.data
+
 
 		plotRectangle = (x, y, w, h) ->
 			$rect = $('<div></div>')
@@ -19,9 +23,21 @@ window.LocalTracker.performTracking = ->
 			$rect.addClass('rect')
 			$rect.css("width", "#{w}px")
 			$rect.css("height", "#{h}px")
-			console.log('this was executed correctly')
 			imgOffset = $img.offset()
-			console.log imgOffset
 			$rect.css("left","#{(imgOffset.left + x)}px")
 			$rect.css("top","#{(imgOffset.top + y)}px")
-			
+			updateRect($rect)
+
+		updateRect = (rect) ->
+			rect.click ->
+				if rect.hasClass('rect-clicked')
+					resetRect()
+				else
+					rect.addClass('rect-clicked')
+
+
+		resetRect = ->
+			$(".rect-clicked").each (index, element) ->
+				$(element).removeClass('rect-clicked')
+				
+
