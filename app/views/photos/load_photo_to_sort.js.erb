@@ -14,7 +14,14 @@ $('#sorting-principal #like-container .button').remove();
 $('#sorting-principal #photo-description').append("<p> <%= @photo.description %> </p>");
 $('#sorting-principal #user-photo-container').append('<%= image_tag(@photo.user.avatar.url(:medium), class:"circle") %>');
 $('#sorting-principal #user-name-container').append('<h6><%= @photo.user.username %></h6>');
-$('#sorting-principal #photo-container').append('<%= image_tag(@photo.file.url(:medium),id:"trackme", crossorigin: "anonymous") %>');
+$('#sorting-principal #photo-container').append('<span id="source-url" class="hidden"><%= @photo.file.url(:medium) %></span><img id="trackme">');
 $('#sorting-principal #like-container').append('<%= link_to like_photo_path(@photo), class:"button like", method: :put do %><span class="fa fa-thumbs-o-up"></span><span id="show-like"><%= @photo.get_upvotes.size%></span><% end %>');
 $('#sorting-principal button').data("photo_id", <%= @photo.id %>);
+
+$imageToSort = $('#trackme');
+$(imageToSort).attr('crossOrigin', 'anonymous');
+$(imageToSort).attr("src", $("#source-url").text());
+$(imageToSort).one('load', function() {
+ 	console.log(Image processed correctly);
+});
 console.log("http request responded");
