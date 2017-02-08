@@ -22,6 +22,6 @@ $imageToSort = $('#trackme');
 $(imageToSort).attr('crossOrigin', 'anonymous');
 $(imageToSort).attr("src", $("#source-url").text());
 $(imageToSort).one('load', function() {
- 	console.log(Image processed correctly);
+ 	console.log("Image processed correctly");
 });
 console.log("http request responded");
