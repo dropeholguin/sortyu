@@ -4,7 +4,6 @@ window.LocalTracker.performTracking = ->
 	if $('#sorting-principal').length > 0
 		number = 0
 		$img = $('#trackme')
-		$img.crossOrigin = null
 		tracker = new tracking.ObjectTracker(['face'])
 		tracker.setStepSize(1.7)
 		tracking.track('#trackme', tracker)

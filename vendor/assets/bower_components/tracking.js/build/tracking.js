@@ -462,7 +462,6 @@
   tracking.Canvas.loadImage = function(canvas, src, x, y, width, height, opt_callback) {
     var instance = this;
     var img = new window.Image();
-    img.crossOrigin = '*';
     img.onload = function() {
       var context = canvas.getContext('2d');
       canvas.width = width;
@@ -473,6 +472,7 @@
       }
       img = null;
     };
+    img.crossOrigin = 'anonymous';
     img.src = src;
   };
 }());
