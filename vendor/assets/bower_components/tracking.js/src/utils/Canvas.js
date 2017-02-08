@@ -31,7 +31,7 @@
       }
       img = null;
     };
-    img.crossOrigin = '*';
+    img.crossOrigin = 'anonymous';
     img.src = src;
   };
 }());
