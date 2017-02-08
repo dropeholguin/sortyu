@@ -1,8 +1,10 @@
 #sorting-principal{
-	h6{
-		margin-top:1.5em
+	#user-name-container{
+		h6{
+			display:inline-flex;
+		}
 	}
-}
+}	
 
 /* Small only */
 @media screen and (max-width: 39.9375em) {
@@ -37,6 +39,15 @@
 	#sorting-principal{
 		#user-name-container{
 			left:-5%;
+			h6{
+				margin-top:1.2em;
+				float:left;
+			}
+
+			.follow{
+				margin-left:1.5em;
+				margin-top:0.5em;
+			}
 		}
 	}
 }
