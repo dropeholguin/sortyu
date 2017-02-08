@@ -18,7 +18,7 @@ $('#sorting-principal #photo-container').append('<span id="source-url" class="hi
 $('#sorting-principal #like-container').append('<%= link_to like_photo_path(@photo), class:"button like", method: :put do %><span class="fa fa-thumbs-o-up"></span><span id="show-like"><%= @photo.get_upvotes.size%></span><% end %>');
 $('#sorting-principal button').data("photo_id", <%= @photo.id %>);
 
-$imageToSort = $('#trackme');
+imageToSort = document.getElementById('trackme');
 $(imageToSort).attr('crossOrigin', 'anonymous');
 $(imageToSort).attr("src", $("#source-url").text());
 $(imageToSort).one('load', function() {
