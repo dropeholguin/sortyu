@@ -1,14 +1,18 @@
 if ($('#sorting-principal #photo-container img').length >0) {
 	$('#sorting-principal #photo-container img').remove();
+	$('#source-url').remove();
 }
 if ($('#sorting-principal #photo-description p').length > 0) {
 	$('#sorting-principal #photo-description p').remove();
 }
-	$('.rect').remove();
-	$('#sorting-principal #user-photo-container img').remove();
 if ($('#sorting-principal #user-name-container h6').length > 0) {
 	$('#sorting-principal #user-name-container h6').remove();
 }
+
+//Removing Sorting face recognition frames.
+$('.rect').remove();
+
+$('#sorting-principal #user-photo-container img').remove();
 
 $('#sorting-principal #like-container .button').remove();
 $('#sorting-principal #photo-description').append("<p> <%= @photo.description %> </p>");
