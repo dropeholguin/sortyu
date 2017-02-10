@@ -35,6 +35,7 @@ gem 'instagram_api'
 gem 'will_paginate', '~> 3.1', '>= 3.1.5'
 gem 'acts_as_votable'
 gem 'picasa'
+gem 'activeadmin', github: 'activeadmin'
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -48,4 +49,3 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
