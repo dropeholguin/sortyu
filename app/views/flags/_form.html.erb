@@ -1,0 +1,10 @@
+<%= form_tag flags_path do |f| %>
+  <div class="field space">
+    <%= label_tag "Reason:" %>
+    <%= text_area_tag :reason, "" %>
+    <%= hidden_field_tag :photo_id, photo_id %>
+  </div>
+  <div class="actions text-center">
+    <%= submit_tag "Send", class: "button" %>
+  </div>
+<% end %>

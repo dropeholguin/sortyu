@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+  
 	get 'profile/show/', to: 'profile#show', as: 'profile_show'
 	get 'import_facebook/photos/', to: 'import_photos#import_facebook', as: 'import_facebook'
 	get 'import_instagram/photos/', to: 'import_photos#import_instagram', as: 'import_instagram'
@@ -27,4 +28,6 @@ Rails.application.routes.draw do
   resources :charges
 
   resources :relationships, only: [:create, :destroy]
+  resources :flags, only: [:create]
+
 end
