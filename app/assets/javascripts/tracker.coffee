@@ -1,6 +1,7 @@
 window.LocalTracker ?= {}	
 
 window.LocalTracker.performTracking = ->
+	#Creates the tracker if finds the id
 	if $('#sorting-principal').length > 0
 		number = 0
 		$img = $('#trackme')
@@ -13,6 +14,7 @@ window.LocalTracker.performTracking = ->
 				plotRectangle(rect.x, rect.y, rect.width, rect.height)
 			resetRect()
 
+		#Draws a rectangle
 		plotRectangle = (x, y, w, h) ->
 			$rect = $('<div></div>')
 			$('#photo-container').append($rect)
@@ -24,6 +26,8 @@ window.LocalTracker.performTracking = ->
 			$rect.css("top","#{(imgOffset.top + y)}px")
 			updateRect($rect)
 
+
+		#Adds on click event to each rectangle
 		updateRect = (rect) ->
 			rect.click ->
 				number = number + 1
@@ -33,11 +37,17 @@ window.LocalTracker.performTracking = ->
 					rect.addClass("rect-clicked")
 					rect.attr("id","#{number}")
 
-
+		#If a clicked rectangle gets click, resets all rectangles
 		resetRect = ->
 			$(".rect-clicked").each (index, element) ->
 				number = 0
 				$(element).removeAttr("id")
 				$(element).removeClass('rect-clicked')
-				
 
+		# 
+		countRectangles = ->
+				if $(".rect-clicked").length == $(".rect").length
+					return true
+				else
+					return false
+				
