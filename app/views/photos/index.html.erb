@@ -27,7 +27,13 @@
     </div>
     <div class="row under-space">
         <div class="small-12 columns text-center">
-            <%= button_tag("Report", class: "button alert") %>
+            <i data-open="flag-overlay" aria-hidden="true"><%= button_tag("Report", class: "button alert") %></i>
         </div>
+    </div>
+
+    <div class="reveal" id="flag-overlay" data-reveal>
+        <button class="close-button" data-close aria-label="Close modal" type="button">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
 </div>

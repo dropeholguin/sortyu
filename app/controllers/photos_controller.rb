@@ -6,6 +6,10 @@ class PhotosController < ApplicationController
   # GET /photos.json
   def index
       @user = current_user
+      respond_to do |format|
+        format.html
+        format.js
+      end
       #@photos = Photo.paginate(page: params[:page], per_page: 1).photos_sorting(@user.id)
   end
 
