@@ -2,7 +2,6 @@
 	<div class="callout small-12 medium-8 medium-push-2 text-center columns">
 		<h4>Editing Photo</h4>
 		<%= render 'form', photo: @photo %>
-		<%= link_to 'Show', @photo %> |
-		<%= link_to 'Back', photos_path %>
+		<%= link_to 'Back', profile_show_path, class: "button" %>
 	</div>
 </div>

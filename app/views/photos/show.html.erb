@@ -1,9 +1,9 @@
-<p id="notice"><%= notice %></p>
-
+<div>
+	<%= image_tag(@photo.file.url(:medium)) %>
+</div>
 <p>
   <strong>Description:</strong>
   <%= @photo.description %>
 </p>
 
-<%= link_to 'Edit', edit_photo_path(@photo) %> |
-<%= link_to 'Back', photos_path %>
+<%= link_to 'Back', profile_show_path, class: "button" %>
