@@ -11,6 +11,7 @@ window.LocalTracker.performTracking = ->
 		tracker.on 'track', (event) ->
 			for rect in event.data
 				plotRectangle(rect.x, rect.y, rect.width, rect.height)
+			createSection(event.data.length)
 			resetRect()
 
 		plotRectangle = (x, y, w, h) ->
@@ -22,6 +23,7 @@ window.LocalTracker.performTracking = ->
 			imgOffset = $img.offset()
 			$rect.css("left","#{(imgOffset.left + x)}px")
 			$rect.css("top","#{(imgOffset.top + y)}px")
+
 			updateRect($rect)
 
 		updateRect = (rect) ->
@@ -39,5 +41,18 @@ window.LocalTracker.performTracking = ->
 				number = 0
 				$(element).removeAttr("id")
 				$(element).removeClass('rect-clicked')
+
+		createSection = (rectangles) ->
+			photoId = $('#next-sort').data('photo_id')
+			$.ajax 'photos/create_sections',
+			type: 'POST',
+			dataType: 'script',
+			data: {
+				photo_id: photoId, rectangles: rectangles
+			},
+			error: (jqXHR, textStatus, errorThrown) ->
+				console.log("AJAX Error: #{textStatus}")
+			success: (data, textStatus, jqXHR) ->
+				console.log("Photo updated successfully!")
 				
 
