@@ -50,7 +50,7 @@ $(document).on 'turbolinks:load', ->
 	loadPhotoToSort()
 	if $('#next-sort').length > 0
 		$('body').on 'click', ->
-			$('#next-sort').click()
+			console.log "clicked anywhere"
 			
 	$('#next-sort').on 'click', (event) ->
 		loadPhotoToSort()
