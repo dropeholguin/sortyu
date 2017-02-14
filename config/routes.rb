@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+  
 	get 'profile/show/', to: 'profile#show', as: 'profile_show'
 	get 'profile/other_user_show/:id', to: 'profile#other_user_show', as: 'profile_other_user_show'
 	get 'import_facebook/photos/', to: 'import_photos#import_facebook', as: 'import_facebook'
@@ -12,12 +15,13 @@ Rails.application.routes.draw do
 	get 'photos/load_photo_to_sort', as: 'load_new_photo_to_sort'
 	get 'photos/reaload_photos_queue'
 	patch 'photos/update_photo_to_sorted_state'
+  post 'photos/create_sections'
 
   resources :photos do
   	member do
       patch :shared_times
-    	put "like", to: "photos#like"
-      put "unlike", to: "photos#unlike"
+    	get "like", to: "photos#like"
+      get "unlike", to: "photos#unlike"
     end
 	end
 	root to: "home#index"
@@ -26,4 +30,6 @@ Rails.application.routes.draw do
   resources :charges
 
   resources :relationships, only: [:create, :destroy]
+  resources :flags, only: [:create]
+
 end
