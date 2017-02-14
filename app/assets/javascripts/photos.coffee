@@ -48,6 +48,10 @@ updatePhotoToSortedState = ->
 
 $(document).on 'turbolinks:load', ->
 	loadPhotoToSort()
+	if $('#next-sort').length > 0
+		$('body').on 'click', ->
+			$('#next-sort').click()
+			
 	$('#next-sort').on 'click', (event) ->
 		loadPhotoToSort()
 		updatePhotoToSortedState()

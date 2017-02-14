@@ -27,7 +27,7 @@ window.LocalTracker.performTracking = ->
 			updateRect($rect)
 
 
-		#Adds on click event to each rectangle
+		#Adds on click event to each rectangle to reset all rectangles
 		updateRect = (rect) ->
 			rect.click ->
 				number = number + 1
@@ -44,7 +44,7 @@ window.LocalTracker.performTracking = ->
 				$(element).removeAttr("id")
 				$(element).removeClass('rect-clicked')
 
-		# 
+		#checks if all rectangles are clicked
 		countRectangles = ->
 				if $(".rect-clicked").length == $(".rect").length
 					return true
