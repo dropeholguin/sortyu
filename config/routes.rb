@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 	patch 'photos/update_photo_to_sorted_state'
   post 'photos/create_sections'
   post 'photos/create_sortings'
+  post 'photos/info_sorting'
 
   resources :photos do
   	member do

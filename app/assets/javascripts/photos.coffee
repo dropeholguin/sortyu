@@ -62,6 +62,19 @@ createSortings = ->
 	success: (data, textStatus, jqXHR) ->
 		console.log("Photo updated successfully!")
 
+showInfo = ->
+	photoId = $('#next-sort').data('photo_id')
+	$.ajax 'photos/info_sorting',
+	type: 'POST',
+	dataType: 'script',
+	data: {
+		photo_id: photoId
+	},
+	error: (jqXHR, textStatus, errorThrown) ->
+		console.log("AJAX Error: #{textStatus}")
+	success: (data, textStatus, jqXHR) ->
+		console.log("Photo updated successfully!")
+
 $(document).on 'turbolinks:load', ->
 	loadPhotoToSort()
 	if $('#next-sort').length > 0
@@ -72,4 +85,5 @@ $(document).on 'turbolinks:load', ->
 		loadPhotoToSort()
 		updatePhotoToSortedState()
 		createSortings()
+		showInfo()
 

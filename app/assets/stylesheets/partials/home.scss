@@ -22,22 +22,22 @@
 			border-bottom:1px solid gray;
 		}
 
-		.row:nth-child(2),.row:nth-child(3),.row:nth-child(4){
+		#rank,#frequent,#average{
 			border-radius:5px;
 			margin-bottom:0.5em;
 			background-color:#4286F4;
 			color:white;
 		}
 
-		.row:nth-child(2){
+		#rank{
 			padding-left:1em;
 		}
 
-		.row:nth-child(3){
+		#frequent{
 			text-align:center;	
 		}
 
-		.row:nth-child(4){
+		#average{
 			padding-right:1em;
 			text-align:right;
 		}
