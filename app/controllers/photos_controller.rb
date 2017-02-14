@@ -69,7 +69,7 @@ class PhotosController < ApplicationController
     photo = Photo.find(params[:photo_id])
     if params[:sortings]
       params[:sortings].each_with_index do |sort, index|
-        section = Section.find_by(index: index)
+        section = photo.sections.detect {|sect| sect.index == index }
         @sorting = Sorting.new(order: sort, user_id: current_user.id, section_id: section.id)
         @sorting.save
       end
@@ -88,6 +88,24 @@ class PhotosController < ApplicationController
       end
     end
     head :ok
+  end
+
+  def info_sorting
+    @photo = Photo.find(params[:photo_id])
+    @photo.sections.each do |section|
+      orders = []
+      section.sortings.each do |sorting|
+        orders << sorting.order
+      end
+      mode = section.calculate_mode(orders)
+      average = section.calculate_average(orders)
+      if section.sorting_information.nil?
+        @sorting_info = SortingInformation.new(most_frequent: mode, average: average, section_id: section.id)        
+        @sorting_info.save
+      else
+        section.sorting_information.update_attributes(most_frequent: mode, average: average)
+      end
+    end
   end
 
   def create_import_instagram
@@ -122,7 +140,7 @@ class PhotosController < ApplicationController
 
   # GET /photos/1
   # GET /photos/1.json
-  def show
+  def show    
   end
 
   # GET /photos/new
