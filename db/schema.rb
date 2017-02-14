@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170213140329) do
+ActiveRecord::Schema.define(version: 20170214045304) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,6 +114,16 @@ ActiveRecord::Schema.define(version: 20170213140329) do
     t.index ["photo_id"], name: "index_sections_on_photo_id", using: :btree
   end
 
+  create_table "seens", force: :cascade do |t|
+    t.boolean  "seen",       default: false
+    t.integer  "user_id"
+    t.integer  "photo_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["photo_id"], name: "index_seens_on_photo_id", using: :btree
+    t.index ["user_id"], name: "index_seens_on_user_id", using: :btree
+  end
+
   create_table "sorting_informations", force: :cascade do |t|
     t.integer  "most_frequent"
     t.float    "average"
@@ -186,6 +196,8 @@ ActiveRecord::Schema.define(version: 20170213140329) do
   add_foreign_key "identities", "users"
   add_foreign_key "photos", "users"
   add_foreign_key "sections", "photos"
+  add_foreign_key "seens", "photos"
+  add_foreign_key "seens", "users"
   add_foreign_key "sorting_informations", "sections"
   add_foreign_key "sortings", "sections"
   add_foreign_key "sortings", "users"

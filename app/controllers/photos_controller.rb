@@ -1,6 +1,6 @@
 class PhotosController < ApplicationController
   before_action :set_photo, only: [:show, :edit, :update, :destroy, :shared_times, :like, :unlike]
-  before_filter :authenticate_user!, except: [:show, :index]
+  before_filter :authenticate_user!
 
   # GET /photos
   # GET /photos.json
@@ -26,7 +26,24 @@ class PhotosController < ApplicationController
 
   def reaload_photos_queue
       if cookies[:photos_queue].empty?
-          photo_ids_array = Photo.photos_sorting(current_user.id).limit(5).pluck(:id)
+          photos = Photo.photos_sorting(current_user.id)
+          photos_ids = []
+          photos.each do |photo|
+            if photo.seens.present?
+              state = false
+              photo.seens.each do |seen|
+                if seen.user_id == current_user.id
+                  state = true
+                end
+              end
+              if state == false
+                photos_ids << photo
+              end
+            elsif photo.seens.empty?
+              photos_ids << photo
+            end
+          end
+          photo_ids_array = photos_ids.pluck(:id)
           if photo_ids_array.empty?
               flash[:error] = "You already saw all images."
               flash.keep(:notice)
@@ -43,7 +60,8 @@ class PhotosController < ApplicationController
 
   def update_photo_to_sorted_state
       @photo = Photo.find(params[:photo_id])
-      @photo.update_attribute 'seen', true
+      @seen = Seen.new(seen: true, user_id: current_user.id, photo_id: @photo.id)
+      @seen.save
       head :ok
   end
 

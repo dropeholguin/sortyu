@@ -46,7 +46,7 @@ class User < ApplicationRecord
           if identity.provider == 'facebook'
             image = process_url(auth.info.image + '?type=large')
           else
-            image = auth.info.image
+            image = auth.extra.raw_info.picture
           end
 	        user = User.new(
 	        	first_name: auth.extra.raw_info.name.split(" ")[0], 
