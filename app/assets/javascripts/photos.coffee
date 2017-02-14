@@ -64,6 +64,10 @@ createSortings = ->
 
 $(document).on 'turbolinks:load', ->
 	loadPhotoToSort()
+	if $('#next-sort').length > 0
+		$('body').on 'click', ->
+			console.log "clicked anywhere"
+			
 	$('#next-sort').on 'click', (event) ->
 		loadPhotoToSort()
 		updatePhotoToSortedState()
