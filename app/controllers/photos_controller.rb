@@ -47,6 +47,18 @@ class PhotosController < ApplicationController
       head :ok
   end
 
+  def create_sortings
+    photo = Photo.find(params[:photo_id])
+    if params[:sortings]
+      params[:sortings].each_with_index do |sort, index|
+        section = Section.find_by(index: index)
+        @sorting = Sorting.new(order: sort, user_id: current_user.id, section_id: section.id)
+        @sorting.save
+      end
+    end
+    head :ok
+  end
+
   def create_sections
     max_rectangles = params[:rectangles].to_i - 1
     @photo = Photo.find(params[:photo_id])

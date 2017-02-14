@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 	get 'photos/reaload_photos_queue'
 	patch 'photos/update_photo_to_sorted_state'
   post 'photos/create_sections'
+  post 'photos/create_sortings'
 
   resources :photos do
   	member do

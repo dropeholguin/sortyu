@@ -46,9 +46,26 @@ updatePhotoToSortedState = ->
 	success: (data, textStatus, jqXHR) ->
 		console.log("Photo updated successfully!")
 
+createSortings = ->
+	sortings = []
+	$(".rect-clicked").each (index, element) ->
+		sortings.push element.id
+	photoId = $('#next-sort').data('photo_id')
+	$.ajax 'photos/create_sortings',
+	type: 'POST',
+	dataType: 'script',
+	data: {
+		photo_id: photoId, sortings: sortings
+	},
+	error: (jqXHR, textStatus, errorThrown) ->
+		console.log("AJAX Error: #{textStatus}")
+	success: (data, textStatus, jqXHR) ->
+		console.log("Photo updated successfully!")
+
 $(document).on 'turbolinks:load', ->
 	loadPhotoToSort()
 	$('#next-sort').on 'click', (event) ->
 		loadPhotoToSort()
 		updatePhotoToSortedState()
+		createSortings()
 
