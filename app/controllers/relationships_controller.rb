@@ -4,12 +4,18 @@ class RelationshipsController < ApplicationController
 
 	def create
 		current_user.follow(@user)
-		redirect_to :back
+		respond_to do |format|
+	    format.html { redirect_to(:back) }
+	    format.js {render action: "follow_button" }
+  	end
 	end
 
 	def destroy
 		current_user.unfollow(@user)
-		redirect_to :back
+		respond_to do |format|
+	    format.html { redirect_to(:back) }
+	    format.js {render action: "follow_button" }
+  	end
 	end
 
 	private
