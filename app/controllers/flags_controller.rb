@@ -9,7 +9,7 @@ class FlagsController < ApplicationController
 
     respond_to do |format|
       if @photo.user != current_user
-        if @flag.save
+        if verify_recaptcha(model: @flag) && @flag.save
           format.html { redirect_to root_path, notice: 'flag was successfully created.' }
           format.json { render :show, status: :created, location: @flag}
         else

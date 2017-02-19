@@ -36,6 +36,7 @@ gem 'will_paginate', '~> 3.1', '>= 3.1.5'
 gem 'acts_as_votable'
 gem 'picasa'
 gem 'activeadmin', github: 'activeadmin'
+gem "recaptcha", require: "recaptcha/rails"
 
 group :development, :test do
   gem 'byebug', platform: :mri
