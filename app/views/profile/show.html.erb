@@ -35,6 +35,7 @@
 					<div data-photo="<%= photo.id %>" id="photo-i" > <%= social_share_button_tag(photo.description,:'data-source' => photo.file.url(:medium), :'data-type' => 'photo') %></div>
 					<%= link_to 'Show', photo, class: "button" %>
           <%= link_to 'Edit', edit_photo_path(photo), class: "button" %>
+          <%= link_to 'Destroy', photo, method: :delete, data: { confirm: 'Are you sure?' }, class: "button" %>
 				</div>
 			<% end %>
 		</div>
