@@ -29,12 +29,13 @@
 		</div>
 		<div id="photo-container" class="small-12 columns">
 			<% @photos.each() do |photo| %>
-				<div class="small-4 float-left columns">
-					<%= image_tag(photo.file.url(:medium)) %>
-
-					<div data-photo="<%= photo.id %>" id="photo-i" > <%= social_share_button_tag(photo.description,:'data-source' => photo.file.url(:medium), :'data-type' => 'photo') %></div>
-					<%= link_to 'Show', photo, class: "button" %>
-          <%= link_to 'Edit', edit_photo_path(photo), class: "button" %>
+				<div class="under-space small-4 float-left columns">
+					<%= link_to photo do %>
+						<%= image_tag(photo.file.url(:medium)) %>
+					<% end %>
+					<div data-photo="<%= photo.id %>" id="photo-i" class="under-space">
+						<%= social_share_button_tag(photo.description,:'data-source' => photo.file.url(:medium), :'data-type' => 'photo') %>
+					</div>
 				</div>
 			<% end %>
 		</div>
