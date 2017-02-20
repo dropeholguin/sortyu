@@ -117,9 +117,9 @@ ActiveRecord::Schema.define(version: 20170214045304) do
   create_table "seens", force: :cascade do |t|
     t.boolean  "seen",       default: false
     t.integer  "user_id"
+    t.integer  "photo_id"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
-    t.integer  "photo_id"
     t.index ["photo_id"], name: "index_seens_on_photo_id", using: :btree
     t.index ["user_id"], name: "index_seens_on_user_id", using: :btree
   end
@@ -136,9 +136,9 @@ ActiveRecord::Schema.define(version: 20170214045304) do
   create_table "sortings", force: :cascade do |t|
     t.integer  "order"
     t.integer  "user_id"
+    t.integer  "section_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "section_id"
     t.index ["section_id"], name: "index_sortings_on_section_id", using: :btree
     t.index ["user_id"], name: "index_sortings_on_user_id", using: :btree
   end
@@ -195,7 +195,10 @@ ActiveRecord::Schema.define(version: 20170214045304) do
   add_foreign_key "flags", "users"
   add_foreign_key "identities", "users"
   add_foreign_key "photos", "users"
+  add_foreign_key "sections", "photos"
+  add_foreign_key "seens", "photos"
   add_foreign_key "seens", "users"
   add_foreign_key "sorting_informations", "sections"
+  add_foreign_key "sortings", "sections"
   add_foreign_key "sortings", "users"
 end

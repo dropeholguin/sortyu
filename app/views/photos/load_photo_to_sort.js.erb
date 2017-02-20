@@ -20,10 +20,10 @@ $('.rect').remove();
 //Removes image of user who uploaded to queue
 $('#sorting-principal #user-photo-container img').remove();
 
-//Remove photo stadistic
-$('#sorting-principal .photo-stadistic').remove();
+// //Remove photo stadistic
+// $('#sorting-principal .photo-stadistic').remove();
 
-$('#sorting-principal #photo-stadistic-container').append('<% @photo.sections.each do |section| %><div class="end photo-stadistic callout small-12 large-3 columns"><div class="row text-center stadistic-title columns"><h5><%= section.index + 1 %></h5></div><div id="rank" class="row"><h6><b>Your Rank:</b> 2</h6></div><div id="frequent" class="row"><h6><b>Most Frequent: </b><%= section.sorting_information.most_frequent %></h6></div><div id="average" class="row"><h6><b>Average: </b><%= section.sorting_information.average %></h6></div></div><% end %>');
+// $('#sorting-principal #photo-stadistic-container').append('<% @photo.sections.each do |section| %><div class="end photo-stadistic callout small-12 large-3 columns"><div class="row text-center stadistic-title columns"><h5><%= section.index + 1 %></h5></div><div id="rank" class="row"><h6><b>Your Rank:</b> 2</h6></div><div id="frequent" class="row"><h6><b>Most Frequent: </b><%= section.sorting_information.most_frequent %></h6></div><div id="average" class="row"><h6><b>Average: </b><%= section.sorting_information.average %></h6></div></div><% end %>');
 
 //Removes the Follow button from user who uploaded to queue
 $('#sorting-principal #user-name-container .button').remove();
