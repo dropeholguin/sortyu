@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   post 'photos/create_sections'
   post 'photos/create_sortings'
   post 'photos/info_sorting'
+  patch "users/create_role/:id", to: 'users#create_reviewer_role', as: :create_reviewer_role
+  patch "users/remove_role/:id", to: 'users#remove_reviewer_role', as: :remove_reviewer_role
 
   resources :photos do
   	member do

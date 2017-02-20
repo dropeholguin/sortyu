@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  rolify
   acts_as_voter
   # Include default devise modules. Others available are:
   #:timeoutable and :omniauthable

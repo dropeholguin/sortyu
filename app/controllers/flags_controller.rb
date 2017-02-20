@@ -1,5 +1,6 @@
 class FlagsController < ApplicationController
 	before_action :authenticate_user!
+  load_and_authorize_resource
 
   def create
     @photo = Photo.find(params[:photo_id])
@@ -21,5 +22,4 @@ class FlagsController < ApplicationController
       end
     end
   end
-  
 end
