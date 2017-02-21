@@ -46,7 +46,6 @@ function appendSortingElements(){
 
 	//Appends the image to be sorted
 	$('#sorting-principal #photo-container').append('<span id="source-url" class="hidden"><%= @photo.file.url(:medium) %></span><img id="trackme">');
-	$('#sorting-principal #photo-container').addClass('magictime swashIn');
 
 	//Appends the button to like image to be sorted
 	$('#sorting-principal #like-container').append('<%= link_to like_photo_path(@photo), class:"button like", method: :get, remote: true, id: "like_photo" do %><span class="fa fa-thumbs-o-up"></span><span id="show-like-<%= @photo.id %>"><%= @photo.get_upvotes.size %></span><% end %>');
