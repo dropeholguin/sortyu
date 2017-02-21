@@ -19,6 +19,14 @@ class User < ApplicationRecord
   has_attached_file :avatar , styles: { medium: "700x700#", thumb: "100x100#" }
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
+  def active_for_authentication?
+    super and self.is_active?
+  end
+
+  def inactive_message
+    "You are not allowed to log in."
+  end 
+
   def self.find_for_facebook_oauth(auth)
 
     user = User.joins(:identities).where("identities.provider = ? AND identities.uid = ?", auth.provider, auth.uid).first    
