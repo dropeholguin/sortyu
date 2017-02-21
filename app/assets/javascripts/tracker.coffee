@@ -36,15 +36,17 @@ window.LocalTracker.performTracking = ->
 				if rect.hasClass("rect-clicked")
 					resetRect()
 				else
-					rect.addClass("rect-clicked")
+					rect.addClass("magictime puffIn rect-clicked")
 					rect.attr("id","#{number}")
+					rect.append("<span>#{number}</span>")
 
 		#If a clicked rectangle gets click, resets all rectangles
 		resetRect = ->
 			$(".rect-clicked").each (index, element) ->
 				number = 0
 				$(element).removeAttr("id")
-				$(element).removeClass('rect-clicked')
+				$(element).removeClass('magictime puffIn rect-clicked')
+				$('.rect span').remove()
 
 		# Method to create a section in the database for a trackerJs rectangle
 		createSection = (rectangles) ->

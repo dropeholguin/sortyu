@@ -3,13 +3,23 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .rect {
-	border: 2px solid #a64ceb ;
+	border: 2px solid #22bb5b;
 	position: absolute;
+
+	span{
+		color:white;
+		font-weight:600;
+		font-size:1.5em;
+
+	}
 }
 
 .rect-clicked{
-	background-color:#4286f4;
-	opacity:0.4;
+	border:thin solid black;
+	border-radius:5px;
+	background-color:#22bb5b;
+	padding-top:0.6em;
+	opacity:0.5;
 }
 
 .button.like{
