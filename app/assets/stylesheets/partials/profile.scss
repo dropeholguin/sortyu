@@ -23,10 +23,6 @@
 		border-top:thin solid gray;
 		padding-top:1em;
 		padding-bottom:1em;
-
-		img{
-			margin-bottom:1em;
-		}
 	}
 }
 
@@ -41,6 +37,12 @@
 		#user-name-container{
 			left:-14%;
 		}
+
+		#photo-container{
+			img{
+				margin-bottom:0.5em;
+			}
+		}
 	}
 }
 /* Medium only */
@@ -54,6 +56,13 @@
 		.button{
 			width:85%;
 		}
+
+		#photo-container{
+			img{
+				margin-bottom:1em;
+			}
+		}
+
 	}
 }
 
@@ -67,6 +76,12 @@
 
 		.button{
 			width:75%;
+		}
+
+		#photo-container{
+			img{
+				margin-bottom:1em;
+			}
 		}
 	}
 }

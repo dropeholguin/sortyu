@@ -29,13 +29,18 @@
 		</div>
 		<div id="photo-container" class="small-12 columns">
 			<% @photos.each() do |photo| %>
-				<div class="small-4 float-left columns">
-					<%= image_tag(photo.file.url(:medium)) %>
-
-					<div data-photo="<%= photo.id %>" id="photo-i" > <%= social_share_button_tag(photo.description,:'data-source' => photo.file.url(:medium), :'data-type' => 'photo') %></div>
-					<%= link_to 'Show', photo, class: "button" %>
-          <%= link_to 'Edit', edit_photo_path(photo), class: "button" %>
-          <%= link_to 'Destroy', photo, method: :delete, data: { confirm: 'Are you sure?' }, class: "button" %>
+				<div class="under-space small-4 float-left columns">
+					<%= link_to photo do %>
+						<%= image_tag(photo.file.url(:medium)) %>
+					<% end %>
+				 	<div data-photo="<%= photo.id %>" id="photo-i" class="row collapse under-space">
+         		<div class="small-12 medium-3 large-2 columns">
+              	<p>Share: </p> 
+              </div>
+              <div class="small-12 medium-9 large-10 columns">
+                 <%= social_share_button_tag(photo.description,:'data-source' => photo.file.url(:medium), :'data-type' => 'photo') %>
+             	</div>
+          </div>
 				</div>
 			<% end %>
 		</div>
