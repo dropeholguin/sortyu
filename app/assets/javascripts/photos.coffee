@@ -77,19 +77,17 @@ showInfo = ->
 
 $(document).on 'turbolinks:load', ->
 	loadPhotoToSort()
-			
-	if $('.photo-stadistic').length == 0
-		console.log "Its going to load stadistics"
-		$('#next-sort').on 'click', (event) ->
-			createSortings()
-			showInfo()
-			showPhotoStadistics()
-			$('#next-sort').unbind()
-	else
-		console.log "Its going to load another photo"
-		$('#next-sort').on 'click', (event) ->
-			loadPhotoToSort()
-			updatePhotoToSortedState()
-			removePhotoStadistics()
-			$('#next-sort').unbind()
+	if $('#sorting-principal').length > 0
+		if $('.photo-stadistic').length == 0
+			console.log "Its going to load stadistics"
+			$('#next-sort').on 'click', (event) ->
+				createSortings()
+				showInfo()
+				showPhotoStadistics()
+		else
+			console.log "Its going to load another photo"
+			$('#next-sort').on 'click', (event) ->
+				loadPhotoToSort()
+				updatePhotoToSortedState()
+				removePhotoStadistics()
 

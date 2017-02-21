@@ -22,10 +22,15 @@
 
 .circle{
 	border-radius: 50%;
+	border:thin solid black;
 	height: 5em;
 	width: 5em;
 }
 
 .highlight{
 	border:thick solid #4286f4;
+}
+
+img{
+	border:thin solid black;
 }

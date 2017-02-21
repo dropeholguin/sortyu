@@ -2,7 +2,7 @@ class ChargesController < ApplicationController
 	before_filter :authenticate_user!
 
 	def new
-		
+		@photo = Photo.find(params[:photo_id])
 	end
 
 	def create

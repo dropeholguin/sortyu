@@ -1,22 +1,28 @@
 <%= form_tag charges_path do %>
-  <article>
-    <% if flash[:error].present? %>
-      <div id="error_explanation">
-        <p><%= flash[:error] %></p>
-      </div>
-    <% end %>
-    <label class="amount">
-      <span>Amount: $20.00</span>
-    </label>
-  </article>
-
-  <script
+    <article>
+        <% if flash[:error].present? %>
+            <div id="error_explanation">
+                <p><%= flash[:error] %></p>
+            </div>
+        <% end %>
+        <div class="row">
+            <div class="upper-space small-12 columns">
+                <%= image_tag(@photo.file.url(:medium)) %>
+            </div>
+        </div>
+        <div class="row">
+            <div class="upper-space under-space small-12 columns">
+                <span><strong>Amount:</strong> $20.00</span>
+            </div>
+        </div>
+    </article>
+    <script
     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
     data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
     data-amount="2000"
     data-name="Demo Site"
     data-description="2 widgets"
     data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-    data-locale="auto">
-  </script>
+    data-locale="auto" >
+    </script>
 <% end %>
