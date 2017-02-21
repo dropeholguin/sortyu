@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .rect {
-	border: 2px solid #22bb5b;
+	border: 2px solid #3399ff;
 	position: absolute;
 
 	span{
@@ -12,25 +12,33 @@
 		font-size:1.5em;
 
 	}
+
+	span:hover{
+		cursor:pointer;
+	}
+}
+
+.rect:hover{
+	cursor:pointer;
 }
 
 .rect-clicked{
 	border:thin solid black;
 	border-radius:5px;
-	background-color:#22bb5b;
+	background-color:#3399ff;
 	padding-top:0.6em;
 	opacity:0.5;
 }
 
 .button.like{
-	background-color:green;
+	background-color:#3399ff;
 	.fa-thumbs-o-up{
 		margin-right:0.8em;
 	}
 
 	#show-like{
 		padding: 0.2em 0.4em;
-		background-color:#006600;
+		background-color:#3399ff;
 	}
 }
 
