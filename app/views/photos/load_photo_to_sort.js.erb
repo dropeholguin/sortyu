@@ -41,7 +41,7 @@ function appendSortingElements(){
 	$('#sorting-principal #user-name-container').append('<%= link_to profile_other_user_show_path(@photo.user_id) do %> <h6><%= @photo.user.username %></h6> <% end %>');
 
 	//Appends the button to Follow the user who uploaded to queue
-	$('#sorting-principal #user-name-container').append('<%= link_to "Follow", relationships_path(:user_id => @photo.user_id), class:"button follow", method: :post %>');
+	$('#sorting-principal #user-name-container').append('<%= link_to "Follow", relationships_path(:user_id => @photo.user_id), class:"button hollow follow", method: :post %>');
 	$('#sorting-principal #user-name-container').addClass('magictime puffIn');
 
 	//Appends the image to be sorted
@@ -53,6 +53,14 @@ function appendSortingElements(){
 	//Apends the flag overlay
 	$('#flag-overlay').append("<%= escape_javascript(render partial: 'flags_form', locals: { photo_id: @photo.id } ) %>"); 
 
+}
+
+function showPhotoStadistics(){
+	$('#sorting-principal #photo-stadistic-container').append('<% @photo.sections.each do |section| %><div class="end photo-stadistic callout small-12 large-3 columns"><div class="row text-center stadistic-title columns"><h5><%= section.index + 1 %></h5></div><div id="rank" class="row"><h6><b>Your Rank:</b> <%= section.sorting_information.section_id %></h6></div><div id="frequent" class="row"><h6><b>Most Frequent: </b><%= section.sorting_information.most_frequent %></h6></div><div id="average" class="row"><h6><b>Average: </b><%= section.sorting_information.average %></h6></div></div><% end %>');
+}
+
+function removePhotoStadistics(){
+	$('#sorting-principal .photo-stadistic').remove();
 }
 
 $(document).on("turbolinks:load", function() { 
