@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  rolify
   acts_as_voter
   # Include default devise modules. Others available are:
   #:timeoutable and :omniauthable
@@ -7,6 +8,7 @@ class User < ApplicationRecord
          
   has_many :photos
   has_many :sortings
+  has_many :identities
 
   has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
@@ -17,62 +19,80 @@ class User < ApplicationRecord
   has_attached_file :avatar , styles: { medium: "700x700#", thumb: "100x100#" }
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
-  def self.find_for_oauth(auth, signed_in_resource = nil)
+  def active_for_authentication?
+    super and self.is_active?
+  end
 
-    # Get the identity and user if they exist
-    identity = Identity.find_for_oauth(auth)
-    user = signed_in_resource ? signed_in_resource : identity.user
+  def inactive_message
+    "You are not allowed to log in."
+  end 
 
-    # Create the user if needed
-    if user.nil?
-      email_is_verified = auth.info.email && (auth.info.verified || auth.info.verified_email)
-      email = auth.info.email if email_is_verified
-      user = User.where(email: email).first if email
+  def self.find_for_facebook_oauth(auth)
 
-      # Create the user if it's a new registration
-      if user.nil?
-      	if identity.provider == "instagram"
-      		user = User.new(
-	        	first_name: auth.extra.raw_info.full_name.split(" ")[0], 
-	          last_name: auth.extra.raw_info.full_name.split(" ")[1],
-            username: auth.extra.raw_info.username,
-            avatar: auth.extra.raw_info.profile_picture,
-	          email: auth.extra.raw_info.username + "@instagram.com",
-	          password: Devise.friendly_token[0,20]
-	        )
-          user.skip_confirmation!
-	        user.save!
-      	else
-          if identity.provider == 'facebook'
-            image = process_url(auth.info.image + '?type=large')
-          else
-            image = auth.extra.raw_info.picture
-          end
-	        user = User.new(
-	        	first_name: auth.extra.raw_info.name.split(" ")[0], 
-	          last_name: auth.extra.raw_info.name.split(" ")[1],
-            username: auth.extra.raw_info.nickname,
-            avatar: image,
-	          email: auth.info.email,
-	          password: Devise.friendly_token[0,20]
-	        )
-          user.skip_confirmation!
-	        user.save!
-	      end
-      end
-    end
-    # Associate the identity with the user if needed
-    if identity.user != user
-      identity.user = user
-      identity.save!
-    end
+    user = User.joins(:identities).where("identities.provider = ? AND identities.uid = ?", auth.provider, auth.uid).first    
     
-    #Set oauth_token to identity
-    if identity.oauth_token.nil?
-      identity.oauth_token = auth.credentials.token
-      identity.save!
-    end
+    # The User was found in our database    
+    return user if user    
+    # Check if the User is already registered without Facebook      
+    user = User.where(email: auth.info.email).first 
 
+    return user if user
+    image = process_url(auth.info.image + '?type=large')
+    user = User.create(
+      first_name: auth.extra.raw_info.name.split(" ")[0], 
+      last_name: auth.extra.raw_info.name.split(" ")[1],
+      username:  auth.extra.raw_info.username,
+      email: auth.info.email,
+      avatar: image,
+      password: Devise.friendly_token[0,20])
+
+    Identity.create_with_omniauth_facebook(auth, user.id)
+    user.skip_confirmation!
+    user
+  end
+
+  def self.find_for_instagram_oauth(auth)
+
+    user = User.joins(:identities).where("identities.provider = ? AND identities.uid = ?", auth.provider, auth.uid).first    
+    
+    # The User was found in our database    
+    return user if user    
+    # Check if the User is already registered without Facebook      
+    user = User.where(email: auth.extra.raw_info.username + "@instagram.com").first 
+
+    return user if user
+    user = User.create(
+      first_name: auth.extra.raw_info.full_name.split(" ")[0], 
+      last_name: auth.extra.raw_info.full_name.split(" ")[1],
+      username:  auth.extra.raw_info.username,
+      email: auth.extra.raw_info.username + "@instagram.com",
+      avatar: auth.extra.raw_info.profile_picture,
+      password: Devise.friendly_token[0,20])
+
+    Identity.create_with_omniauth_instagram(auth, user.id)
+    user.skip_confirmation!
+    user
+  end
+
+  def self.find_for_google_oauth(auth)
+
+    user = User.joins(:identities).where("identities.provider = ? AND identities.uid = ?", auth.provider, auth.uid).first    
+    
+    # The User was found in our database    
+    return user if user    
+    # Check if the User is already registered without Facebook      
+    user = User.where(email: auth.info.email).first 
+
+    return user if user
+    user = User.create(
+      first_name: auth.info.first_name, 
+      last_name: auth.info.last_name,
+      username:  auth.info.first_name.gsub(/\s+/, ""),
+      email: auth.info.email,
+      password: Devise.friendly_token[0,20])
+
+    Identity.create_with_omniauth_google(auth, user.id)
+    user.skip_confirmation!
     user
   end
 
@@ -87,6 +107,18 @@ class User < ApplicationRecord
 
   def google(user)
     identity = Identity.identity_google(user.id, "google_oauth2").first
+  end
+
+  def self.connect_to_instagram(user, auth)
+    Identity.create_with_omniauth_instagram(auth, user.id)
+  end
+
+  def self.connect_to_facebook(user, auth)
+    Identity.create_with_omniauth_facebook(auth, user.id)
+  end
+
+  def self.connect_to_google(user, auth)
+    Identity.create_with_omniauth_google(auth, user.id)
   end
 
   def full_name

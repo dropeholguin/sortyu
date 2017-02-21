@@ -3,6 +3,7 @@
     <%= label_tag "Reason:" %>
     <%= text_area_tag :reason, "" %>
     <%= hidden_field_tag :photo_id, photo_id %>
+    <%= recaptcha_tags %>
   </div>
   <div class="actions text-center">
     <%= submit_tag "Send", class: "button" %>

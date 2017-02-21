@@ -1,0 +1,4 @@
+$('#follow_user').bind('ajax:success', function(){
+   $(this).closest('#follow_user').hide();
+   $(this).closest('#follow-container').html('<%= link_to "Unfollow", relationship_path(user.id), remote: true, class:"button follow", id: "unfollow_user", method: :delete %>');
+});

@@ -9,6 +9,18 @@ class Identity < ApplicationRecord
 
   
   def self.find_for_oauth(auth)
-    find_or_create_by(uid: auth.uid, provider: auth.provider)
+    find_by(uid: auth.uid, provider: auth.provider)
+  end
+
+  def self.create_with_omniauth_facebook(auth, user_id)
+    create(user_id: user_id, uid: auth.uid, provider: auth.provider, oauth_token: auth.credentials.token)
+  end
+
+  def self.create_with_omniauth_instagram(auth, user_id)
+    create(user_id: user_id, uid: auth.uid, provider: auth.provider, oauth_token: auth.credentials.token)
+  end
+
+  def self.create_with_omniauth_google(auth, user_id)
+    create(user_id: user_id, uid: auth.uid, provider: auth.provider, oauth_token: auth.credentials.token)
   end
 end

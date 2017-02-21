@@ -8,7 +8,13 @@
 		</div>
 		<div class="upper-space small-4 medium-6 medium-pull-1 end text-center columns">
 			<div class="show-for-medium small-4 large-3 columns">
-			<%= link_to "Follow", relationships_path(:user_id => @user.id), class:"button follow", method: :post %>
+				<% if user_signed_in?%>
+          <% if current_user.following?(@user) %>
+              <%= link_to "Unfollow", relationship_path(@user.id), class:"button unfollow", method: :delete %>
+          <% else %>
+              <%= link_to "Follow", relationships_path(id: @user.id), class:"button follow", method: :post %>
+          <% end %>
+      	<% end %>
 			</div>
 		</div>
 	</div>

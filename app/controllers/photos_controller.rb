@@ -26,7 +26,7 @@ class PhotosController < ApplicationController
 
   def reaload_photos_queue
       if cookies[:photos_queue].empty?
-          photos = Photo.photos_sorting(current_user.id)
+          photos = Photo.photos_sorting(current_user.id).order(state: :desc)
           photos_ids = []
           photos.each do |photo|
             if photo.seens.present?
@@ -124,7 +124,7 @@ class PhotosController < ApplicationController
     cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
 
     respond_to do |format|
-        format.html { redirect_to edit_path(first_photo_id), notice: 'Photo was successfully created.' }
+      format.html { redirect_to edit_photo_path(first_photo_id), notice: 'Photo was successfully created.' }
     end
   end
 
@@ -132,18 +132,19 @@ class PhotosController < ApplicationController
     photos = []
     if params[:photos]
       params[:photos].each { |image_url|
-        @photo = Photo.new(file: URI.parse(image_url), user_id: current_user.id)        
+        @photo = Photo.new(file: URI.parse(image_url), user_id: current_user.id)
         @photo.save
         photos << @photo
       }
     end
 
     photo_ids_array = photos.pluck(:id)
+    first_photo_id = photo_ids_array.shift
     photo_array_string = photo_ids_array.join("-")
     cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
 
     respond_to do |format|
-        format.html { redirect_to profile_show_path, notice: 'Photo was successfully created.' }
+      format.html { redirect_to edit_photo_path(first_photo_id), notice: 'Photo was successfully created.' }
     end
   end
 
@@ -189,8 +190,16 @@ class PhotosController < ApplicationController
   def update
     respond_to do |format|
       if @photo.update(photo_params)
-        format.html { redirect_to @photo, notice: 'Photo was successfully updated.' }
-        format.json { render :show, status: :ok, location: @photo }
+        if !cookies[:import_queue].empty?
+          photo_ids_array = cookies[:import_queue].split("-")
+          photo_id = photo_ids_array.shift
+          photo_array_string = photo_ids_array.join("-")
+          cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
+
+          format.html { redirect_to edit_photo_path(photo_id.to_i), notice: 'Photo was successfully updated.' }
+        else
+          format.html { redirect_to profile_show_path, notice: 'Photo was successfully updated.' }
+        end
       else
         format.html { render :edit }
         format.json { render json: @photo.errors, status: :unprocessable_entity }
