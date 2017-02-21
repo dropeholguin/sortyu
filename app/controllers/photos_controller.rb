@@ -109,24 +109,39 @@ class PhotosController < ApplicationController
   end
 
   def create_import_instagram
+    photos = []
     if params[:photos]
       params[:photos].each { |image_url|
         @photo = Photo.new(file: URI.parse(image_url), user_id: current_user.id)        
         @photo.save
+        photos << @photo
       }
     end
+
+    photo_ids_array = photos.pluck(:id)
+    first_photo_id = photo_ids_array.shift
+    photo_array_string = photo_ids_array.join("-")
+    cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
+
     respond_to do |format|
-        format.html { redirect_to profile_show_path, notice: 'Photo was successfully created.' }
+        format.html { redirect_to edit_path(first_photo_id), notice: 'Photo was successfully created.' }
     end
   end
 
   def create_import_facebook
+    photos = []
     if params[:photos]
       params[:photos].each { |image_url|
         @photo = Photo.new(file: URI.parse(image_url), user_id: current_user.id)
         @photo.save
+        photos << @photo
       }
     end
+
+    photo_ids_array = photos.pluck(:id)
+    photo_array_string = photo_ids_array.join("-")
+    cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
+
     respond_to do |format|
         format.html { redirect_to profile_show_path, notice: 'Photo was successfully created.' }
     end
