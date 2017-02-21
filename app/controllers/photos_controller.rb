@@ -26,7 +26,7 @@ class PhotosController < ApplicationController
 
   def reaload_photos_queue
       if cookies[:photos_queue].empty?
-          photos = Photo.photos_sorting(current_user.id)
+          photos = Photo.photos_sorting(current_user.id).order(state: :desc)
           photos_ids = []
           photos.each do |photo|
             if photo.seens.present?
@@ -123,7 +123,7 @@ class PhotosController < ApplicationController
   def create_import_facebook
     if params[:photos]
       params[:photos].each { |image_url|
-        @photo = Photo.new(file: URI.parse(image_url), user_id: current_user.id)        
+        @photo = Photo.new(file: URI.parse(image_url), user_id: current_user.id)
         @photo.save
       }
     end
