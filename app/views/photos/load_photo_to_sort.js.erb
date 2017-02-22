@@ -47,10 +47,10 @@ function appendSortingElements(){
 	//Appends the button to Follow the user who uploaded to queue
 	<% if user_signed_in? %>
 		<% if current_user.following?(@photo.user) %>
-			$('#sorting-principal #follow-container').append('<%= link_to "Unfollow", relationship_path(@photo.user_id), remote: true, class: "button follow", id: "unfollow_user", method: :delete %>');
+			$('#sorting-principal #user-name-container').append('<%= link_to "Unfollow", relationship_path(@photo.user_id), remote: true, class: "button follow", id: "unfollow_user", method: :delete %>');
 			$('#sorting-principal #user-name-container').addClass('magictime puffIn');
 		<% else %>
-			$('#sorting-principal #follow-container').append('<%= link_to "Follow", relationships_path(id: @photo.user_id), remote: true, class:"button follow", id: "follow_user", method: :post %>');
+			$('#sorting-principal #user-name-container').append('<%= link_to "Follow", relationships_path(id: @photo.user_id), remote: true, class:"button follow", id: "follow_user", method: :post %>');
 			$('#sorting-principal #user-name-container').addClass('magictime puffIn');
 		<% end %>
 	<% end %>
