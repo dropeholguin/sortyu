@@ -1,23 +1,25 @@
-<%= form_for(photo, builder: FoundationFormBuilder, html: { multipart: true }) do |f| %>
-  <% if photo.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(photo.errors.count, "error") %> prohibited this photo from being saved:</h2>
+<div id="report-form">
+  <%= form_for(photo, builder: FoundationFormBuilder, html: { multipart: true }) do |f| %>
+    <% if photo.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(photo.errors.count, "error") %> prohibited this photo from being saved:</h2>
 
-      <ul>
-      <% photo.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% photo.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="field">
+      <%= f.file_field :file, class: "button" %>
+    </div>
+    <div class="field">
+      <%= f.label :description %>
+      <%= f.text_area :description %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Save" %>
     </div>
   <% end %>
-  <div class="field">
-    <%= f.file_field :file, class: "button" %>
-  </div>
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-  </div>
-  <div class="actions">
-    <%= f.submit "Save" %>
-  </div>
-<% end %>
+</div>

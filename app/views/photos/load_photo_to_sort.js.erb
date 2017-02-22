@@ -64,6 +64,8 @@ function appendSortingElements(){
 		$('#sorting-principal #like-container').addClass('magictime swashIn');
 	<% end %>
 
+	$('#report-form').remove();
+
 	//Apends the flag overlay
 	$('#flag-overlay').append("<%= escape_javascript(render partial: 'flags_form', locals: { photo_id: @photo.id } ) %>"); 
 
