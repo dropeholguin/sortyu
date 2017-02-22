@@ -20,6 +20,16 @@
   text-overflow: ellipsis;
 }
 
+.delete{
+	color:red;
+	background-color:white;
+}
+
+.delete:hover{
+	background-color:red;
+	color:white;
+}
+
 .circle{
 	border-radius: 50%;
 	border:thin solid black;

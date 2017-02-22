@@ -76,16 +76,16 @@ showInfo = ->
 		console.log("Photo updated successfully!")
 
 $(document).on 'turbolinks:load', ->
-    loadPhotoToSort()
-    if $('#sorting-principal').length > 0
-        if $('.photo-stadistic').length == 0
-            $('#next-sort').on 'click', (event) ->
-                createSortings()
-                showInfo()
-                showPhotoStadistics()
-                $('#next-sort').unbind()
-                $('#next-sort').on 'click', (event) ->
-                    updatePhotoToSortedState()
-                    removePhotoStadistics()
-                    loadPhotoToSort()
+	if $('#sorting-principal').length > 0
+		loadPhotoToSort()
+		if $('.photo-stadistic').length == 0
+			$('#next-sort').on 'click', (event) ->
+				createSortings()
+				showInfo()
+				showPhotoStadistics()
+				$('#next-sort').unbind()
+				$('#next-sort').on 'click', (event) ->
+					updatePhotoToSortedState()
+					removePhotoStadistics()
+					loadPhotoToSort()
 
