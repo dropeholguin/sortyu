@@ -106,6 +106,7 @@ class PhotosController < ApplicationController
         section.sorting_information.update_attributes(most_frequent: mode, average: average)
       end
     end
+    head :ok
   end
 
   def create_import_instagram
