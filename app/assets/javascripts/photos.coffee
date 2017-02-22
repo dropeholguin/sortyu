@@ -60,7 +60,7 @@ createSortings = ->
 	error: (jqXHR, textStatus, errorThrown) ->
 		console.log("AJAX Error: #{textStatus}")
 	success: (data, textStatus, jqXHR) ->
-		console.log("Photo updated successfully!")
+		console.log("Create sorting successfully!")
 
 showInfo = ->
 	photoId = $('#next-sort').data('photo_id')
@@ -73,21 +73,19 @@ showInfo = ->
 	error: (jqXHR, textStatus, errorThrown) ->
 		console.log("AJAX Error: #{textStatus}")
 	success: (data, textStatus, jqXHR) ->
-		console.log("Photo updated successfully!")
+		console.log("Show info successfully!")
 
 $(document).on 'turbolinks:load', ->
-	loadPhotoToSort()
 	if $('#sorting-principal').length > 0
+		loadPhotoToSort()
 		if $('.photo-stadistic').length == 0
-			console.log "Its going to load stadistics"
 			$('#next-sort').on 'click', (event) ->
 				createSortings()
 				showInfo()
 				showPhotoStadistics()
-		else
-			console.log "Its going to load another photo"
-			$('#next-sort').on 'click', (event) ->
-				loadPhotoToSort()
-				updatePhotoToSortedState()
-				removePhotoStadistics()
+				$('#next-sort').unbind()
+				$('#next-sort').on 'click', (event) ->
+					updatePhotoToSortedState()
+					removePhotoStadistics()
+					loadPhotoToSort()
 

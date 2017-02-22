@@ -65,8 +65,8 @@ window.LocalTracker.performTracking = ->
 
 		#checks if all rectangles are clicked
 		countRectangles = ->
-				if $(".rect-clicked").length == $(".rect").length
-					return true
-				else
-					return false
+			if $(".rect-clicked").length == $(".rect").length
+				return true
+			else
+				return false
 				
