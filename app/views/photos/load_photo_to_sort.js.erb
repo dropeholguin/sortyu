@@ -1,7 +1,9 @@
 function removeSortingElements(){
+	console.log("Removing sorting elements");
 	//Removes sorted image
 	if ($('#sorting-principal #photo-container img').length >0) {
 		$('#sorting-principal #photo-container img').remove();
+		console.log("Removing image source-url"+$('#source-url').text());
 		$('#source-url').remove();
 	}
 
@@ -31,7 +33,7 @@ function removeSortingElements(){
 }
 
 function appendSortingElements(){
-
+	console.log("Appending sorting elements");
 	//Appends the description of the queue phote
 	$('#sorting-principal #photo-description').append("<p> <%= @photo.description %> </p>");
 
@@ -41,8 +43,15 @@ function appendSortingElements(){
 	//Appends image from user who uploaded to queue
 	$('#sorting-principal #user-name-container').append('<%= link_to profile_other_user_show_path(@photo.user_id) do %> <h6><%= @photo.user.username %></h6> <% end %>');
 
-	//Appends the image to be sorted
+	//Appends the image source-url to be sorted
 	$('#sorting-principal #photo-container').append('<span id="source-url" class="hidden"><%= @photo.file.url(:medium) %></span><img id="trackme">');
+	//This adds support for async load from Amazon S3 on production/staging
+	imageToSort = document.getElementById('trackme');
+	$(imageToSort).attr('crossOrigin', 'anonymous');
+	console.log($("#source-url").text());
+	$(imageToSort).attr("src", $("#source-url").text());
+	$(imageToSort).one('load', function() {
+	});
 
 	//Appends the button to Follow the user who uploaded to queue
 	<% if user_signed_in? %>
@@ -54,8 +63,6 @@ function appendSortingElements(){
 			$('#sorting-principal #user-name-container').addClass('magictime puffIn');
 		<% end %>
 	<% end %>
-	//Appends the image to be sorted
-	$('#sorting-principal #photo-container').append('<span id="source-url" class="hidden"><%= @photo.file.url(:medium) %></span><img id="trackme">');
 
 	//Appends the button to like image to be sorted
 	<% if current_user.liked? @photo %>
@@ -68,7 +75,9 @@ function appendSortingElements(){
 
 	//Apends the flag overlay
 	$('#flag-overlay').append("<%= escape_javascript(render partial: 'flags_form', locals: { photo_id: @photo.id } ) %>"); 
-
+	
+	//Sets phot id on data attribute
+	$('#sorting-principal #next-sort').data("photo_id", <%= @photo.id %>);
 }
 
 function showPhotoStadistics(){
@@ -78,21 +87,3 @@ function showPhotoStadistics(){
 function removePhotoStadistics(){
 	$('#sorting-principal .photo-stadistic').remove();
 }
-
-$(document).on("turbolinks:load", function() { 
-	removeSortingElements();
-	appendSortingElements();
-});
-
-removeSortingElements();
-appendSortingElements();
-
-//Sends data from the photo
-$('#sorting-principal button').data("photo_id", <%= @photo.id %>);
-
-//This anables images to be shown at heroku
-imageToSort = document.getElementById('trackme');
-$(imageToSort).attr('crossOrigin', 'anonymous');
-$(imageToSort).attr("src", $("#source-url").text());
-$(imageToSort).one('load', function() {
-});

@@ -17,8 +17,9 @@ loadPhotoToSort = ->
 			error: (jqXHR, textStatus, errorThrown) ->
 				console.log("AJAX Error: #{textStatus}")
 			success: (data, textStatus, jqXHR) ->
-				console.log("Sorting photo_id sent correctly!")
+				console.log("Sorting photo_id sent correctly! -> #{photoToSortId[0]}")
 			complete: (jqXHR, textStatus) ->
+				appendSortingElements()
 				setTimeout("window.LocalTracker.performTracking()", 1000)
 		else
 			$.ajax 'photos/reaload_photos_queue',
@@ -80,12 +81,15 @@ $(document).on 'turbolinks:load', ->
 		loadPhotoToSort()
 		if $('.photo-stadistic').length == 0
 			$('#next-sort').on 'click', (event) ->
+				console.log 'Click first time "next"'
 				createSortings()
 				showInfo()
 				showPhotoStadistics()
 				$('#next-sort').unbind()
 				$('#next-sort').on 'click', (event) ->
+					console.log 'Click second time "next"'
 					updatePhotoToSortedState()
 					removePhotoStadistics()
+					removeSortingElements()
 					loadPhotoToSort()
 

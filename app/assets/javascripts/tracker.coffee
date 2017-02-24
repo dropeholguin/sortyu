@@ -60,7 +60,7 @@ window.LocalTracker.performTracking = ->
 			error: (jqXHR, textStatus, errorThrown) ->
 				console.log("AJAX Error: #{textStatus}")
 			success: (data, textStatus, jqXHR) ->
-				console.log("Photo updated successfully!")
+				console.log("Photo sections created successfully!")
 				
 
 		#checks if all rectangles are clicked
