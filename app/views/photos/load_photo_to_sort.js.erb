@@ -72,7 +72,6 @@ function appendSortingElements(){
 }
 
 function showPhotoStadistics(){
-	console.log("HELLO WORLD!!!!");
 	$('#sorting-principal #photo-stadistic-container').append('<% if !@photo.sections.empty? %><% @photo.sections.each do |section| %><div class="end photo-stadistic callout small-12 large-3 columns"><div class="row text-center stadistic-title columns"><h5><%= section.index + 1 %></h5></div><div id="rank" class="row"><h6><b>Your Rank:</b> <% if !section.sorting_information.nil? %><%= section.sorting_information.section_id %><% end %></h6></div><div id="frequent" class="row"><h6><b>Most Frequent: </b><% if !section.sorting_information.nil? %><%= section.sorting_information.most_frequent %><% end %></h6></div><div id="average" class="row"><h6><b>Average: </b><% if !section.sorting_information.nil? %><%= section.sorting_information.average %><% end %></h6></div></div><% end %><% end %>');
 }
 
