@@ -24,6 +24,10 @@ class PhotosController < ApplicationController
         end
     end
 
+    def load_sorting_stats
+        format.js
+    end
+
 
     def reaload_photos_queue
         if cookies[:photos_queue].empty?
