@@ -126,7 +126,7 @@ $(document).on 'turbolinks:load', ->
 				createSortings()
 				computeSortingStats()
 				updatePhotoToSortedState()
-				setTimeout("window.photoStats.show()", 1000)
+				setTimeout("window.photoStats.show()", 2000)
 			else
 				console.log "Don't do anything yet, not all sections clicked."
 
