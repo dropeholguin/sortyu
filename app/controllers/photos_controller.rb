@@ -25,7 +25,10 @@ class PhotosController < ApplicationController
     end
 
     def load_sorting_stats
-        format.js
+        respond_to do |format|
+            @photo = Photo.find(params[:photo_id])
+            format.js
+        end
     end
 
 

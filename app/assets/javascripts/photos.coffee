@@ -63,7 +63,7 @@ createSortings = ->
 	success: (data, textStatus, jqXHR) ->
 		console.log("Create sorting successfully!")
 
-showInfo = ->
+computeSortingStats = ->
 	photoId = $('#next-sort').data('photo_id')
 	$.ajax 'photos/info_sorting',
 	type: 'POST',
@@ -74,22 +74,62 @@ showInfo = ->
 	error: (jqXHR, textStatus, errorThrown) ->
 		console.log("AJAX Error: #{textStatus}")
 	success: (data, textStatus, jqXHR) ->
-		console.log("Show info successfully!")
+		console.log("Sorting stats computed successfully!")
+
+showPhotoStadistics = ->
+	photoId = $('#next-sort').data('photo_id')
+	$.ajax 'photos/load_sorting_stats',
+	type: 'GET',
+	dataType: 'script',
+	data: {
+		photo_id: photoId
+	},
+	error: (jqXHR, textStatus, errorThrown) ->
+		console.log("AJAX Error: #{textStatus}")
+	success: (data, textStatus, jqXHR) ->
+		console.log("Stadistics shown successfully!")
+
+finishSorting = ->
+	if areAllSectionsClicked()
+		updatePhotoToSortedState()
+		removePhotoStadistics()
+		removeSortingElements()
+		loadPhotoToSort()
+	else if not startedSorting()
+		removeSortingElements()
+		loadPhotoToSort()
+	else
+		alert("Finish your sorting!")
+
+#checks if all rectangles are clicked
+areAllSectionsClicked = ->
+	if $(".rect-clicked").length == $(".rect").length
+		return true
+	else
+		return false
+
+#checks if the user started sorting
+startedSorting = ->
+	if $(".rect-clicked").length > 0
+		return true
+	else
+		return false
 
 $(document).on 'turbolinks:load', ->
 	if $('#sorting-principal').length > 0
 		loadPhotoToSort()
-		if $('.photo-stadistic').length == 0
-			$('#next-sort').on 'click', (event) ->
-				console.log 'Click first time "next"'
+		$(document).on 'click', '.rect', (event) ->
+			if areAllSectionsClicked()
+				console.log 'All sections are clicked -> Proceed!'
 				createSortings()
-				showInfo()
+				computeSortingStats()
 				showPhotoStadistics()
-				$('#next-sort').unbind()
-				$('#next-sort').on 'click', (event) ->
-					console.log 'Click second time "next"'
-					updatePhotoToSortedState()
-					removePhotoStadistics()
-					removeSortingElements()
-					loadPhotoToSort()
+			else
+				console.log "Don't do anything yet, not all sections clicked."
 
+		$('#next-sort').on 'click', (event) ->
+			finishSorting()
+			
+		$('#photo-container').on 'click', (event) ->
+			if areAllSectionsClicked() and $('.photo-stadistic').length > 0
+				finishSorting()

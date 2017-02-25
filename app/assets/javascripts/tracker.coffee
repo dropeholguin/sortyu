@@ -42,11 +42,12 @@ window.LocalTracker.performTracking = ->
 
 		#If a clicked rectangle gets click, resets all rectangles
 		resetRect = ->
-			$(".rect-clicked").each (index, element) ->
-				number = 0
-				$(element).removeAttr("id")
-				$(element).removeClass('magictime puffIn rect-clicked')
-				$('.rect span').remove()
+			if not isSortingDone()
+				$(".rect-clicked").each (index, element) ->
+					number = 0
+					$(element).removeAttr("id")
+					$(element).removeClass('magictime puffIn rect-clicked')
+					$('.rect span').remove()
 
 		# Method to create a section in the database for a trackerJs rectangle
 		createSection = (rectangles) ->
@@ -61,10 +62,9 @@ window.LocalTracker.performTracking = ->
 				console.log("AJAX Error: #{textStatus}")
 			success: (data, textStatus, jqXHR) ->
 				console.log("Photo sections created successfully!")
-				
 
 		#checks if all rectangles are clicked
-		countRectangles = ->
+		isSortingDone = ->
 			if $(".rect-clicked").length == $(".rect").length
 				return true
 			else
