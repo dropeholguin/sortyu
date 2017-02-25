@@ -1,6 +1,22 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
+
+window.photoStats ?= {}
+
+window.photoStats.show = ->
+	photoId = $('#next-sort').data('photo_id')
+	$.ajax 'photos/load_sorting_stats',
+	type: 'GET',
+	dataType: 'script',
+	data: {
+		photo_id: photoId
+	},
+	error: (jqXHR, textStatus, errorThrown) ->
+		console.log("AJAX Error: #{textStatus}")
+	success: (data, textStatus, jqXHR) ->
+		console.log("Stadistics shown successfully!")
+
 loadPhotoToSort = ->
 	if $('#sorting-principal').length > 0
 		photoIds = readCookie('photos_queue').split("-")
@@ -76,22 +92,8 @@ computeSortingStats = ->
 	success: (data, textStatus, jqXHR) ->
 		console.log("Sorting stats computed successfully!")
 
-showPhotoStadistics = ->
-	photoId = $('#next-sort').data('photo_id')
-	$.ajax 'photos/load_sorting_stats',
-	type: 'GET',
-	dataType: 'script',
-	data: {
-		photo_id: photoId
-	},
-	error: (jqXHR, textStatus, errorThrown) ->
-		console.log("AJAX Error: #{textStatus}")
-	success: (data, textStatus, jqXHR) ->
-		console.log("Stadistics shown successfully!")
-
 finishSorting = ->
 	if areAllSectionsClicked()
-		updatePhotoToSortedState()
 		removePhotoStadistics()
 		removeSortingElements()
 		loadPhotoToSort()
@@ -123,7 +125,8 @@ $(document).on 'turbolinks:load', ->
 				console.log 'All sections are clicked -> Proceed!'
 				createSortings()
 				computeSortingStats()
-				showPhotoStadistics()
+				updatePhotoToSortedState()
+				setTimeout("window.photoStats.show()", 1000)
 			else
 				console.log "Don't do anything yet, not all sections clicked."
 
