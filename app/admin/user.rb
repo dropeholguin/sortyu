@@ -1,5 +1,20 @@
 ActiveAdmin.register User do
 
+show do
+  attributes_table do
+    row :first_name
+    row :last_name
+    row :username
+    row :email
+    row :avatar do |user|
+      avatar_profile_link user, "thumb"
+    end
+    row :is_active
+    row :created_at
+  end
+  active_admin_comments
+end
+
 index do
 	selectable_column
 	id_column
