@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   post 'photos/create_sections'
   post 'photos/create_sortings'
   post 'photos/info_sorting'
+  get 'photos/load_sorting_stats'
   patch "users/create_role/:id", to: 'users#create_reviewer_role', as: :create_reviewer_role
   patch "users/remove_role/:id", to: 'users#remove_reviewer_role', as: :remove_reviewer_role
   patch "users/suspend_account/:id", to: 'users#suspend_account', as: :suspend_account
