@@ -34,13 +34,13 @@
 						<%= image_tag(photo.file.url(:medium)) %>
 					<% end %>
 				 	<div data-photo="<%= photo.id %>" id="photo-i" class="row collapse under-space">
-         		<div class="small-12 medium-3 large-2 columns">
-              	<p>Share: </p> 
-              </div>
-              <div class="small-12 medium-9 large-10 columns">
-                 <%= social_share_button_tag(photo.description,:'data-source' => photo.file.url(:medium), :'data-type' => 'photo') %>
-             	</div>
-          </div>
+         				<div class="small-12 medium-3 large-2 columns">
+              				<p>Share: </p> 
+              			</div>
+              			<div class="small-12 medium-9 large-10 columns">
+                 			<%= social_share_button_tag(photo.description,:'data-source' => photo.file.url(:medium), :'data-type' => 'photo') %>
+             			</div>
+          			</div>
 				</div>
 			<% end %>
 		</div>
