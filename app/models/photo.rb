@@ -10,7 +10,7 @@ class Photo < ApplicationRecord
   has_attached_file :file, styles: { medium: "300x300>", thumb: "100x100>" }
   validates_attachment_content_type :file, content_type: /\Aimage\/.*\z/
 
-  MAXIMUM_PICTURES = 10
+  MAXIMUM_PICTURES = 11
 
   validate on: :create do
     if user.photos.size >= MAXIMUM_PICTURES

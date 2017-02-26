@@ -21,6 +21,7 @@ index do
       link_to 'Active Account', active_account_path(user), method: :patch, class: 'button'
 		end
   end
+  actions
 end
 
 filter :first_name

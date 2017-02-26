@@ -38,7 +38,7 @@ function appendSortingElements(){
 	$('#sorting-principal #photo-description').append("<p> <%= @photo.description %> </p>");
 
 	//Appends image of user who uploaded to queue
-	$('#sorting-principal #user-photo-container').append('<%= link_to profile_other_user_show_path(@photo.user_id) do %> <%= image_tag(@photo.user.avatar.url(:medium), class:"circle") %> <% end %>');
+	$('#sorting-principal #user-photo-container').append('<%= link_to profile_other_user_show_path(@photo.user_id) do %> <%= avatar_profile_link @photo.user, "medium", class:"circle" %> <% end %>');
 
 	//Appends image from user who uploaded to queue
 	$('#sorting-principal #user-name-container').append('<%= link_to profile_other_user_show_path(@photo.user_id) do %> <h6><%= @photo.user.username %></h6> <% end %>');

@@ -9,6 +9,7 @@ index do
 	selectable_column
 	column :reason
 	column "Create Date", :created_at
+	actions
 end
 
 filter :created_at
