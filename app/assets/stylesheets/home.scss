@@ -1,3 +1,99 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#sorting-principal{
+
+	#user-name-container{
+		h6{
+			display:inline-flex;
+		}
+	}
+
+	.photo-stadistic{
+
+		.stadistic-title{
+	    	margin-bottom: 1em;
+	    	position:relative;
+		}
+
+		.stadistic-title:before{
+			content : "";
+			position: absolute;
+			left    : 0%;
+			bottom  : 0;
+			width   : 100%;  /* or 100px */
+			border-bottom:1px solid gray;
+		}
+
+		#rank,#frequent,#average{
+			border-radius:5px;
+			margin-bottom:0.5em;
+			background-color:#4286F4;
+			color:white;
+		}
+
+		#rank{
+			padding-left:1em;
+		}
+
+		#frequent{
+			text-align:center;	
+		}
+
+		#average{
+			padding-right:1em;
+			text-align:right;
+		}
+
+		h6{
+			margin-bottom:0;
+		}
+	}
+}	
+
+/* Small only */
+@media screen and (max-width: 39.9375em) {
+	#sorting-principal{
+
+		h6{
+			margin-top:1em;
+		}
+
+		.circle{
+			width:4em;
+			height:4em;
+		}
+
+		#user-name-container{
+			left:-12%;
+		}
+	}
+}
+
+/* Medium only */
+@media screen and (min-width: 40em) and (max-width: 63.9375em) {
+	#sorting-principal{
+		#user-name-container{
+			left:-12%;
+		}
+	}
+}
+
+/* Large and up */
+@media screen and (min-width: 64em) {
+	#sorting-principal{
+		#user-name-container{
+			left:-5%;
+			h6{
+				margin-top:1.2em;
+				float:left;
+			}
+
+			.follow{
+				margin-left:1.5em;
+				margin-top:0.5em;
+			}
+		}
+	}
+}
