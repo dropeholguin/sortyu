@@ -133,7 +133,11 @@ class PhotosController < ApplicationController
         cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
 
         respond_to do |format|
-            format.html { redirect_to edit_photo_path(first_photo_id), notice: 'Photo was successfully created.' }
+            if first_photo_id.present?
+                format.html { redirect_to edit_photo_path(first_photo_id), notice: 'Photo was successfully created.' }
+            else
+                format.html { redirect_to profile_show_path, alert: 'You have reached the amount of free images' }
+            end  
         end
     end
 
@@ -153,7 +157,11 @@ class PhotosController < ApplicationController
         cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
 
         respond_to do |format|
-            format.html { redirect_to edit_photo_path(first_photo_id), notice: 'Photo was successfully created.' }
+            if first_photo_id.present?
+                format.html { redirect_to edit_photo_path(first_photo_id), notice: 'Photo was successfully created.' }
+            else
+                format.html { redirect_to profile_show_path, alert: 'You have reached the amount of free images' }
+            end
         end
     end
 
@@ -204,8 +212,11 @@ class PhotosController < ApplicationController
                     photo_id = photo_ids_array.shift
                     photo_array_string = photo_ids_array.join("-")
                     cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
-
-                    format.html { redirect_to edit_photo_path(photo_id.to_i), notice: 'Photo was successfully updated.' }
+                    if photo_id.present?
+                        format.html { redirect_to edit_photo_path(photo_id.to_i), notice: 'Photo was successfully updated.' }
+                    else
+                        format.html { redirect_to profile_show_path, alert: 'You have reached the amount of free images' }
+                    end
                 else
                     format.html { redirect_to profile_show_path, notice: 'Photo was successfully updated.' }
                 end
