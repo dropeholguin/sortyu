@@ -130,7 +130,7 @@
     .button[href="/users/auth/facebook"],
 		.button[href="/users/auth/google_oauth2"],
 			.button[href="/users/auth/instagram"]{
-		width:45%;
+		width:37%;
 
 		p{
 			margin-left:2em;
@@ -152,5 +152,14 @@
 			padding-right: 1.3em;
     		margin-left: 0.3em;
 		}
+	}
+}
+
+/* Large only */
+@media screen and (min-width: 64em) and (max-width: 74.9375em) {
+	.button[href="/users/auth/facebook"],
+			.button[href="/users/auth/google_oauth2"],
+				.button[href="/users/auth/instagram"]{
+					width:40%;
 	}
 }
