@@ -10,6 +10,7 @@ class FlagsController < ApplicationController
     respond_to do |format|
       if @photo.user != current_user
         if @flag.save && verify_recaptcha(model: @flag)
+          @photo.update_attributes(count_flags: @photo.count_flags + 1)
           format.html { redirect_to root_path, notice: 'flag was successfully created.' }
           format.json { render :show, status: :created, location: @flag}
         else
