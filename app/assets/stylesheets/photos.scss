@@ -7,10 +7,16 @@
 	position: absolute;
 
 	span{
-		color:white;
-		font-weight:600;
-		font-size:1.5em;
-
+		background-color: #3399ff;
+	    padding: 0.5em;
+	    padding-top: 0;
+	    padding-bottom: 0;
+	    color: white;
+	    font-weight: 600;
+	    font-size: 1em;
+	    position: absolute;
+	    top: -50%;
+	    left: 22%;
 	}
 
 	span:hover{
@@ -23,10 +29,8 @@
 }
 
 .rect-clicked{
-	border:thin solid black;
+	border:thin solid #3399ff;
 	border-radius:5px;
-	background-color:#3399ff;
-	padding-top:0.6em;
 	opacity:0.5;
 }
 

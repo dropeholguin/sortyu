@@ -5,6 +5,35 @@ header{
 		color:white;
 	}
 
+	.dropdown{
+		.fa-ellipsis-h{
+			color:white;
+			font-size:3em;
+			padding-left:0.5em;
+			padding-right:0.5em;
+		}
+
+		.fa-ellipsis-h:hover{
+			cursor:pointer;
+			background-color:darken(#4286f4, 10%);
+		}
+	}
+
+	#menu{
+		.dropdown-pane{
+			border:thin solid gray;
+		}
+
+		span{
+			color:black;
+			font-size:0.8em;
+		}
+	}
+
+	.fa{
+		color:blue;
+	}	
+
 	.top-bar-right{
 		ul{
 			li{
