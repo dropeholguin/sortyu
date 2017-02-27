@@ -34,9 +34,12 @@ class PhotosController < ApplicationController
 
     def reaload_photos_queue
         if cookies[:photos_queue].empty?
+            photos_queue = []
             photos = Photo.photos_sorting(current_user.id).order(state: :desc)
+            photos.each { |photo| photos_queue << photo if photo.flags.size <= 5 }
+            
             photos_ids = []
-            photos.each do |photo|
+            photos_queue.each do |photo|
                 if photo.seens.present?
                     state = false
                     photo.seens.each do |seen|
