@@ -6,14 +6,14 @@ header{
 	}
 
 	.dropdown{
-		.fa-ellipsis-h{
+		.fa-bars{
 			color:white;
 			font-size:3em;
 			padding-left:0.5em;
 			padding-right:0.5em;
 		}
 
-		.fa-ellipsis-h:hover{
+		.fa-bars:hover{
 			cursor:pointer;
 			background-color:darken(#4286f4, 10%);
 		}
