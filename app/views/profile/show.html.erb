@@ -3,15 +3,13 @@
 		<div class="small-4 medium-2 medium-text-center columns">
 			<%= avatar_profile_link current_user, "medium", class: "circle" %>
 		</div>
-		<div id="user-name-container" class="truncate small-4 small-pull-1 medium-2 columns">
+		<div id="user-name-container" class="truncate small-8 small-pull-1 medium-4 large-3 columns">
 			<h6><%= current_user.full_name %></h6>
 		</div>
 		<div class="upper-space small-4 medium-6 medium-pull-1 end text-center columns">
-			<div class="show-for-medium small-4 large-3 columns">
-				<%= link_to "Upload", new_photo_path, class:"button small" %>
-			</div>
-			<div class="small-4 large-3 end columns">
+			<div class="show-for-medium medium-6 columns">
 				<%= link_to "Edit", edit_user_registration_path , class:"button small" %>
+				<%= link_to "Upload", new_photo_path, class:"button small" %>
 			</div>
 		</div>
 	</div>
@@ -20,7 +18,8 @@
 			<p><b><%= current_user.username %> </b><%= current_user.about_you %></p>
 		</div>
 	</div>
-	<div class="hide-for-medium small-4 small-push-4 text-center columns">
+	<div class="hide-for-medium small-12 text-center columns">
+		<%= link_to "Edit", edit_user_registration_path , class:"button small" %>
 		<%= link_to "Upload", new_photo_path, class:"button small" %>
 	</div>
 	<div class="row upper-space">
@@ -28,19 +27,37 @@
 			<h6><b><%= @photos.count() %></b> Images</h6>
 		</div>
 		<div id="photo-container" class="small-12 columns">
+			<% if @photos.count() >= 10 %>
+				<div class="reveal tiny" id="imagesWarning" data-reveal>
+				  <h3>Limit Reached</h3>
+				  <p class="lead">You can upload up to 10 free images</p>
+				  <h3>Enjoy uploading images?</h3>
+				  <p><b><i>Get benefits for paid images:</i></b></p>
+				  <ul>
+				  	<li>Unlimited uploads</li>
+				  	<li>Be at the top of the sorting queue</li>
+				  </ul>
+				  <button class="close-button" data-close aria-label="Close modal" type="button">
+				    <span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				<div class="target">
+					<p><a data-open="imagesWarning">Click me for a modal</a></p>
+				</div>
+			<% end %>
 			<% @photos.each() do |photo| %>
 				<div class="under-space small-4 float-left columns">
 					<%= link_to photo do %>
 						<%= image_tag(photo.file.url(:medium)) %>
 					<% end %>
 				 	<div data-photo="<%= photo.id %>" id="photo-i" class="row collapse under-space">
-         		<div class="small-12 medium-3 large-2 columns">
-              	<p>Share: </p> 
-              </div>
-              <div class="small-12 medium-9 large-10 columns">
-                 <%= social_share_button_tag(photo.description,:'data-source' => photo.file.url(:medium), :'data-type' => 'photo') %>
-             	</div>
-          </div>
+         				<div class="small-12 medium-3 large-2 columns">
+              				<p>Share: </p> 
+              			</div>
+              			<div class="small-12 medium-9 large-10 columns">
+                 			<%= social_share_button_tag(photo.description,:'data-source' => photo.file.url(:medium), :'data-type' => 'photo') %>
+             			</div>
+          			</div>
 				</div>
 			<% end %>
 		</div>

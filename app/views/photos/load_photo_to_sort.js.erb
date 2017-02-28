@@ -66,10 +66,10 @@ function appendSortingElements(){
 
 	//Appends the button to like image to be sorted
 	<% if current_user.liked? @photo %>
-		$('#sorting-principal #like-container').append('<%= link_to unlike_photo_path(@photo), class:"button like", method: :get, remote: true, id: "unlike_photo" do %><span class="fa fa-thumbs-o-down"></span><span id="show-unlike-<%= @photo.id %>"><%= @photo.get_upvotes.size %></span><% end %>');
+		$('#sorting-principal #like-container').append('<%= link_to unlike_photo_path(@photo), class:"button like", method: :get, remote: true, id: "unlike_photo" do %><span class="fa fa-thumbs-o-up"></span><span id="show-unlike-<%= @photo.id %>"><%= @photo.get_upvotes.size %></span><% end %>');
 		$('#sorting-principal #like-container').addClass('magictime swashIn');
 	<% else %>
-	 	$('#sorting-principal #like-container').append('<%= link_to like_photo_path(@photo), class:"button like", method: :get, remote: true, id: "like_photo" do %><span class="fa fa-thumbs-o-up"></span><span id="show-like-<%= @photo.id %>"><%= @photo.get_upvotes.size %></span><% end %>');
+	 	$('#sorting-principal #like-container').append('<%= link_to like_photo_path(@photo), class:"button like hollow", method: :get, remote: true, id: "like_photo" do %><span class="fa fa-thumbs-o-up"></span><span id="show-like-<%= @photo.id %>"><%= @photo.get_upvotes.size %></span><% end %>');
 		$('#sorting-principal #like-container').addClass('magictime swashIn');
 	<% end %>
 
