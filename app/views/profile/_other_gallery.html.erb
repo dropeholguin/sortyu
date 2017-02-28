@@ -1,22 +1,4 @@
 <div id="photo-container" class="small-12 columns">
-	<% if @photos.count() >= 10 %>
-		<div class="reveal tiny" id="imagesWarning" data-reveal>
-		  <h3>Limit Reached</h3>
-		  <p class="lead">You can upload up to 10 free images</p>
-		  <h3>Enjoy uploading images?</h3>
-		  <p><b><i>Get benefits for paid images:</i></b></p>
-		  <ul>
-		  	<li>Unlimited uploads</li>
-		  	<li>Be at the top of the sorting queue</li>
-		  </ul>
-		  <button class="close-button" data-close aria-label="Close modal" type="button">
-		    <span aria-hidden="true">&times;</span>
-		  </button>
-		</div>
-		<div class="target">
-			<p><a data-open="imagesWarning" id="openModal">Click me for a modal</a></p>
-		</div>
-	<% end %>
 	<% @photos.each() do |photo| %>
 		<div class="under-space small-4 float-left columns">
 			<%= link_to photo do %>
