@@ -1,12 +1,13 @@
 <% if @user.followers.count > 0 %>
-	<% @user.followers.each do |follower| %>
-		<ul>
+	<ul>
+		<% @user.followers.each do |follower| %>
 			<li>
-			<%= link_to profile_other_user_show_path(@photo.user_id) do %>
-				<%= follower.username %></li>
-			<% end %>
-		</ul>
-	<% end %>
+				<%= link_to profile_other_user_show_path(follower.id) do %>
+					<%= follower.username %>
+				<% end %>
+			</li>
+		<% end %>
+	</ul>
 <% else %>
 	<h4>No one is currently following you</h4>
 <% end %>
