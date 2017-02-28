@@ -1,7 +1,10 @@
 <% if @user.followers.count > 0 %>
 	<% @user.followers.each do |follower| %>
 		<ul>
-			<li><%= follower.username %></li>
+			<li>
+			<%= link_to profile_other_user_show_path(@photo.user_id) do %>
+				<%= follower.username %></li>
+			<% end %>
 		</ul>
 	<% end %>
 <% else %>
