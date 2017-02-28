@@ -44,6 +44,7 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    active_admin_theme (1.0.3)
     activejob (5.0.1)
       activesupport (= 5.0.1)
       globalid (>= 0.3.6)
@@ -326,6 +327,7 @@ PLATFORMS
 
 DEPENDENCIES
   aasm
+  active_admin_theme
   activeadmin!
   acts_as_votable
   aws-sdk (~> 2.3)

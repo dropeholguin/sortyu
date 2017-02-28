@@ -41,6 +41,8 @@ gem 'activeadmin', github: 'activeadmin'
 gem "recaptcha", require: "recaptcha/rails"
 gem 'cancancan'
 gem 'rolify'
+gem 'active_admin_theme'
+
 
 group :development, :test do
   gem 'byebug', platform: :mri
