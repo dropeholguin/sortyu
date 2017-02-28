@@ -44,19 +44,16 @@ body, .alert, .notice{
 	color:white
 }
 
-.pagination{
-	a{
-		display:inline;
-	}
+a{
+	color:black;
 }
 
 a:hover{
+	color:black;
 	background-color:transparent;
+	text-decoration:underline;
 }
 
-.hidden{
-	display: none;
-}
 
 ///////// MEDIA QUERIES ////////
 
