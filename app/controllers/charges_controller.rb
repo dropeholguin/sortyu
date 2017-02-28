@@ -7,7 +7,7 @@ class ChargesController < ApplicationController
 
 	def create
 	  # Amount in cents
-	  @amount = 500
+	  @amount =  Price.last.value_cents
 	  @photo = Photo.find(params[:photo_id])
 
 	  customer = Stripe::Customer.create(
