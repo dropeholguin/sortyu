@@ -1,0 +1,9 @@
+<% if current_user.followers.count > 0 %>
+	<% current_user.followers.each do |follower| %>
+		<ul>
+			<li><%= follower.username %></li>
+		</ul>
+	<% end %>
+<% else %>
+	<h4>No one is currently following you</h4>
+<% end %>
