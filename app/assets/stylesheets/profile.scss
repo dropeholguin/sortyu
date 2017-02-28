@@ -1,3 +1,90 @@
 // Place all the styles related to the profile controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.reveal-overlay{
+	#imagesWarning{
+		ul{
+			padding-left:2em;
+		}
+	}
+}
+#profile{
+
+	#user-name-container{
+		margin-top:1em;
+	}
+
+	.button{
+		color:black;
+		background-color:white;
+	}
+
+	.button:hover{
+		color:white;
+		background-color:black;
+	}
+
+	p{
+		margin:0;
+		font-size:0.9em;
+	}
+
+	#photo-container{
+		border-top:thin solid gray;
+		padding-top:1em;
+		padding-bottom:1em;
+	}
+}
+
+/* Small only */
+@media screen and (max-width: 39.9375em) {
+	#profile{
+		.circle{
+			width:4em;
+			height:4em;
+		}
+
+		#user-name-container{
+			left:-14%;
+		}
+
+		#photo-container{
+			img{
+				margin-bottom:0.5em;
+			}
+		}
+	}
+}
+/* Medium only */
+@media screen and (min-width: 40em) and (max-width: 63.9375em) {
+	#profile{
+		#user-name-container{
+			margin-top:1.5em;
+			left:-4%;
+		}
+
+		#photo-container{
+			img{
+				margin-bottom:1em;
+			}
+		}
+
+	}
+}
+
+/* Large and up */
+@media screen and (min-width: 64em) {
+	#profile{
+		#user-name-container{
+			margin-top:1.5em;
+			left:-4%;
+		}
+
+		#photo-container{
+			img{
+				margin-bottom:1em;
+			}
+		}
+	}
+}
