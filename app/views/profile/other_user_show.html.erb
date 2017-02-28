@@ -20,7 +20,7 @@
 	</div>
 	<div class="row upper-space">
 		<div class="under-space small-12 medium-8 medium-push-2 columns">
-			<p><b><%= @user.username %> </b><%= current_user.about_you %></p>
+			<p><b><%= @user.username %> </b><% if !@user.about_you.nil? and @user.about_you.length > 0 %><%= @user.about_you %><% else %>No Description<% end %></p>
 		</div>
 	</div>
 	<div class="row">
