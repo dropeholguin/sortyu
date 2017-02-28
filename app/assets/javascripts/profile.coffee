@@ -3,8 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 showImagesWarning= ->
-	reveal = $('#profile .target a')
-	reveal.click()
+	$('#openModal').trigger("click")
 
 $(document).on 'turbolinks:load', ->
 	showImagesWarning()

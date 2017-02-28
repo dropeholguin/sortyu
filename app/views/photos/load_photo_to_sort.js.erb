@@ -23,6 +23,7 @@ function removeSortingElements(){
 	//Removes image of user who uploaded to queue
 	$('#sorting-principal #user-photo-container img').remove();
 
+
 	//Removes the Follow button from user who uploaded to queue
 	$('#sorting-principal #user-name-container .button').remove();
 
@@ -57,20 +58,16 @@ function appendSortingElements(){
 	<% if user_signed_in? %>
 		<% if current_user.following?(@photo.user) %>
 			$('#sorting-principal #follow-container').append('<%= link_to "Unfollow", relationship_path(@photo.user_id), remote: true, class: "button follow", id: "unfollow_user", method: :delete %>');
-			$('#sorting-principal #user-name-container').addClass('magictime puffIn');
 		<% else %>
 			$('#sorting-principal #follow-container').append('<%= link_to "Follow", relationships_path(id: @photo.user_id), remote: true, class:"button follow", id: "follow_user", method: :post %>');
-			$('#sorting-principal #user-name-container').addClass('magictime puffIn');
 		<% end %>
 	<% end %>
 
 	//Appends the button to like image to be sorted
 	<% if current_user.liked? @photo %>
 		$('#sorting-principal #like-container').append('<%= link_to unlike_photo_path(@photo), class:"button like", method: :get, remote: true, id: "unlike_photo" do %><span class="fa fa-thumbs-o-up"></span><span id="show-unlike-<%= @photo.id %>"><%= @photo.get_upvotes.size %></span><% end %>');
-		$('#sorting-principal #like-container').addClass('magictime swashIn');
 	<% else %>
 	 	$('#sorting-principal #like-container').append('<%= link_to like_photo_path(@photo), class:"button like hollow", method: :get, remote: true, id: "like_photo" do %><span class="fa fa-thumbs-o-up"></span><span id="show-like-<%= @photo.id %>"><%= @photo.get_upvotes.size %></span><% end %>');
-		$('#sorting-principal #like-container').addClass('magictime swashIn');
 	<% end %>
 
 	//Apends the flag overlay

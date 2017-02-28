@@ -3,6 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 window.photoStats ?= {}
+window.sortingEffects ?= {}
 
 window.photoStats.show = ->
 	photoId = $('#next-sort').data('photo_id')
@@ -18,6 +19,10 @@ window.photoStats.show = ->
 		console.log("Stadistics shown successfully!")
 		$('#next-sort').show()
 		$('#loading_text').hide()
+
+window.sortingEffects.load = ->
+	loadPhotoToSort()
+
 
 loadPhotoToSort = ->
 	if $('#sorting-principal').length > 0

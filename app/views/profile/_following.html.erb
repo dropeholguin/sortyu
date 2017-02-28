@@ -1,0 +1,13 @@
+<% if current_user.following.count > 0 %>
+	<ul>
+		<% current_user.following.each do |following| %>
+			<li>
+				<%= link_to profile_other_user_show_path(following.id) do %>
+					<%= following.username %>
+				<% end %>
+			</li>
+		<% end %>
+	</ul>
+<% else %>
+	<h4>You're not following anyone yet</h4>
+<% end %>
