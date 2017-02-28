@@ -22,6 +22,8 @@
 		<%= link_to "Edit", edit_user_registration_path , class:"button small" %>
 		<%= link_to "Upload", new_photo_path, class:"button small" %>
 	</div>
+	<%= link_to "Following", following_path(id: current_user.id) , class:"button small" %>
+  <%= link_to "Followers", followers_path(id: current_user.id) , class:"button small" %>
 	<div class="row upper-space">
 		<div class="upper-space small-12 columns text-center" id="photos-count" data-photos-size="<%= @photos.count %>">
 			<h6><b><%= @photos.count() %></b> Images</h6>

@@ -3,9 +3,9 @@ class Photo < ApplicationRecord
   acts_as_votable
   
   belongs_to :user
-  has_many :sections
-  has_many :flags
-  has_many :seens
+  has_many :sections, dependent: :destroy
+  has_many :flags, dependent: :destroy
+  has_many :seens, dependent: :destroy
 
   has_attached_file :file, styles: { medium: "300x300>", thumb: "100x100>" }
   validates_attachment_content_type :file, content_type: /\Aimage\/.*\z/

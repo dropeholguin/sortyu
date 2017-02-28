@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   patch "users/remove_role/:id", to: 'users#remove_reviewer_role', as: :remove_reviewer_role
   patch "users/suspend_account/:id", to: 'users#suspend_account', as: :suspend_account
   patch "users/active_account/:id", to: 'users#active_account', as: :active_account
+  get :followers, to: "relationships#followers"
+  get :following, to: "relationships#following"
 
   resources :photos do
   	member do
