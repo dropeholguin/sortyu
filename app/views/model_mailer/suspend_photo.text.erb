@@ -1,0 +1,5 @@
+Welcome to example.com, <%= @photo.user.full_name %>
+===============================================
+Your photo was suspended
+<%= link_to 'Create Justification', new_justification_url(photo_id: @photo.id) %>
+Thanks for joining and have a great day!

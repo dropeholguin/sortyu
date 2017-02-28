@@ -1,6 +1,6 @@
 class PhotosController < ApplicationController
     before_action :set_photo, only: [:show, :edit, :update, :destroy, :shared_times, :like, :unlike]
-    before_filter :authenticate_user!
+    before_filter :authenticate_user!, except: [:suspend, :approve]
 
     # GET /photos
     # GET /photos.json
@@ -236,6 +236,26 @@ class PhotosController < ApplicationController
         @photo.destroy
         respond_to do |format|
             format.html { redirect_to profile_show_path, notice: 'Photo was successfully destroyed.' }
+            format.json { head :no_content }
+        end
+    end
+
+    def suspend
+        @photo = Photo.find(params[:id])
+        @photo.update_attributes(suspended: true)
+        respond_to do |format|
+            ModelMailer.suspend_photo(@photo).deliver
+            format.html { redirect_to admin_root_path, notice: 'Photo was Suspended.' }
+            format.json { head :no_content }
+        end
+    end
+
+    def approve
+        @photo = Photo.find(params[:id])
+        @photo.update_attributes(suspended: false)
+        respond_to do |format|
+            ModelMailer.approve_photo(@photo).deliver
+            format.html { redirect_to admin_root_path, notice: 'Photo was Approved.' }
             format.json { head :no_content }
         end
     end

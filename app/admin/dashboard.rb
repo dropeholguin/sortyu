@@ -31,6 +31,22 @@ ActiveAdmin.register_page "Dashboard" do
                 end
             end
         end
+        column do
+            panel "Recent Justifications" do
+                ul do
+                    table_for Justification.order("created_at desc") do
+                        column "Photo" do |justification|
+                            image_tag justification.photo.file.url(:thumb)
+                        end
+                        column "Title" do |justification|
+                            link_to justification.title, admin_justification_path(justification)
+                        end
+                        column :body
+                        column "Create Date", :created_at
+                    end
+                end
+            end
+        end
     end
     # Here is an example of a simple dashboard with columns and panels.
     #

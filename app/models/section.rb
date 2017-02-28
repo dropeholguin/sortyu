@@ -1,7 +1,7 @@
 class Section < ApplicationRecord
 	belongs_to :photo
-	has_many :sortings
-	has_one :sorting_information
+	has_many :sortings, dependent: :destroy
+	has_one :sorting_information, dependent: :destroy
 
 	scope :photo_sections, -> (photo_id) { where("photo_id = ?", photo_id) }
 

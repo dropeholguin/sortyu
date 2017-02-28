@@ -1,0 +1,29 @@
+<%= form_for(@justification, builder: FoundationFormBuilder) do |f| %>
+  <% if @justification.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@justification.errors.count, "error") %> prohibited this justification from being saved:</h2>
+
+      <ul>
+      <% @justification.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+  </div>
+
+  <%= hidden_field_tag :photo_id, params[:photo_id] %>
+
+  <div class="actions">
+    <%= f.submit "Save"%>
+  </div>
+<% end %>

@@ -25,7 +25,9 @@ Rails.application.routes.draw do
   patch "users/active_account/:id", to: 'users#active_account', as: :active_account
   get :followers, to: "relationships#followers"
   get :following, to: "relationships#following"
-
+  patch "photos/suspend_photo/:id", to: 'photos#suspend', as: :suspend
+  patch "photos/approve_photo/:id", to: 'photos#approve', as: :approve
+  
   resources :photos do
   	member do
       patch :shared_times
@@ -40,5 +42,6 @@ Rails.application.routes.draw do
 
   resources :relationships, only: [:create, :destroy]
   resources :flags, only: [:create]
+  resources :justifications, only: [:create, :destroy, :new]
 
 end
