@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170228211446) do
+ActiveRecord::Schema.define(version: 20170228231318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -156,9 +156,9 @@ ActiveRecord::Schema.define(version: 20170228211446) do
   create_table "sorting_informations", force: :cascade do |t|
     t.integer  "most_frequent"
     t.float    "average"
-    t.integer  "section_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "section_id"
     t.index ["section_id"], name: "index_sorting_informations_on_section_id", using: :btree
   end
 
@@ -232,7 +232,6 @@ ActiveRecord::Schema.define(version: 20170228211446) do
   add_foreign_key "identities", "users"
   add_foreign_key "photos", "users"
   add_foreign_key "seens", "users"
-  add_foreign_key "sorting_informations", "sections"
   add_foreign_key "sortings", "sections"
   add_foreign_key "sortings", "users"
 end
