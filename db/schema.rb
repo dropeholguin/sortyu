@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170228141421) do
+ActiveRecord::Schema.define(version: 20170228211446) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,6 +106,12 @@ ActiveRecord::Schema.define(version: 20170228141421) do
     t.index ["cached_weighted_score"], name: "index_photos_on_cached_weighted_score", using: :btree
     t.index ["cached_weighted_total"], name: "index_photos_on_cached_weighted_total", using: :btree
     t.index ["user_id"], name: "index_photos_on_user_id", using: :btree
+  end
+
+  create_table "prices", force: :cascade do |t|
+    t.integer  "value_cents"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "relationships", force: :cascade do |t|
