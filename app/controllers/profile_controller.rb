@@ -1,5 +1,6 @@
 class ProfileController < ApplicationController
-
+	before_filter :authenticate_user!
+	
 	def show
 		@photos = Photo.photos(current_user).order('created_at desc')
 	end

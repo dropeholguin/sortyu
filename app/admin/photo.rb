@@ -1,5 +1,21 @@
 ActiveAdmin.register Photo do
 
+controller do
+  def destroy
+    @photo = Photo.find(params[:id])
+    ModelMailer.remove_photo(@photo).deliver
+    destroy!{ admin_photos_path }
+  end
+end
+
+action_item only: :show  do
+  if photo.suspended == false
+    link_to 'Suspend Photo', suspend_path(photo), method: :patch, class: 'button'
+  else
+    link_to 'Approve Photo', approve_path(photo), method: :patch, class: 'button'
+  end
+end
+
 show do
   attributes_table do
     row :description
@@ -7,6 +23,7 @@ show do
     row :file do |photo|
       image_tag photo.file.url(:thumb)
     end
+    row :suspended
     row :state
     row :created_at
   end

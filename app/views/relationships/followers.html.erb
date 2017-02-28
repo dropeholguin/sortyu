@@ -1,0 +1,6 @@
+<h1>followers</h1>
+<div class="under-space small-12 medium-6 medium-push-2 end columns">
+  <% @followers.each do |follower| %>
+      <%= avatar_profile_link follower, "medium", class: "circle" %>
+  <% end %>
+</div>

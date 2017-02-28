@@ -17,6 +17,8 @@ window.photoStats.show = ->
 		console.log("AJAX Error: #{textStatus}")
 	success: (data, textStatus, jqXHR) ->
 		console.log("Stadistics shown successfully!")
+		$('#next-sort').show()
+		$('#loading_text').hide()
 
 window.sortingEffects.load = ->
 	loadPhotoToSort()
@@ -67,6 +69,7 @@ updatePhotoToSortedState = ->
 		console.log("AJAX Error: #{textStatus}")
 	success: (data, textStatus, jqXHR) ->
 		console.log("Photo updated successfully!")
+		setTimeout("window.photoStats.show()", 2000)
 
 createSortings = ->
 	sortings = []
@@ -83,6 +86,7 @@ createSortings = ->
 		console.log("AJAX Error: #{textStatus}")
 	success: (data, textStatus, jqXHR) ->
 		console.log("Create sorting successfully!")
+		computeSortingStats()
 
 computeSortingStats = ->
 	photoId = $('#next-sort').data('photo_id')
@@ -96,6 +100,7 @@ computeSortingStats = ->
 		console.log("AJAX Error: #{textStatus}")
 	success: (data, textStatus, jqXHR) ->
 		console.log("Sorting stats computed successfully!")
+		updatePhotoToSortedState()
 
 finishSorting = ->
 	if areAllSectionsClicked()
@@ -125,13 +130,13 @@ startedSorting = ->
 $(document).on 'turbolinks:load', ->
 	if $('#sorting-principal').length > 0
 		loadPhotoToSort()
+
 		$(document).on 'click', '.rect', (event) ->
 			if areAllSectionsClicked()
 				console.log 'All sections are clicked -> Proceed!'
+				$('#next-sort').hide()
+				$('#photo-stadistic-container').html('<h3 id="loading_text">Loading...</h3>')
 				createSortings()
-				computeSortingStats()
-				updatePhotoToSortedState()
-				setTimeout("window.photoStats.show()", 2000)
 			else
 				console.log "Don't do anything yet, not all sections clicked."
 

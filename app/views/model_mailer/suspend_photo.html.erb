@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Welcome to Sortyu, <%= @photo.user.full_name %></h1>
+    <p>
+      Your photo was suspended
+    </p>
+    <%= link_to 'Create Justification', new_justification_url(photo_id: @photo.id) %>
+    <p>Thanks for joining and have a great day!</p>
+  </body>
+</html>

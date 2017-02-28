@@ -1,0 +1,1 @@
+json.array! @justifications, partial: 'justifications/justification', as: :justification
