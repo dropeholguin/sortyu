@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170221052003) do
+ActiveRecord::Schema.define(version: 20170228211446) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,17 @@ ActiveRecord::Schema.define(version: 20170221052003) do
     t.index ["user_id"], name: "index_identities_on_user_id", using: :btree
   end
 
+  create_table "justifications", force: :cascade do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "user_id"
+    t.integer  "photo_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["photo_id"], name: "index_justifications_on_photo_id", using: :btree
+    t.index ["user_id"], name: "index_justifications_on_user_id", using: :btree
+  end
+
   create_table "photos", force: :cascade do |t|
     t.text     "description"
     t.integer  "user_id"
@@ -85,6 +96,8 @@ ActiveRecord::Schema.define(version: 20170221052003) do
     t.integer  "cached_weighted_score",   default: 0
     t.integer  "cached_weighted_total",   default: 0
     t.float    "cached_weighted_average", default: 0.0
+    t.integer  "count_flags",             default: 0
+    t.boolean  "suspended",               default: false
     t.index ["cached_votes_down"], name: "index_photos_on_cached_votes_down", using: :btree
     t.index ["cached_votes_score"], name: "index_photos_on_cached_votes_score", using: :btree
     t.index ["cached_votes_total"], name: "index_photos_on_cached_votes_total", using: :btree
@@ -93,6 +106,12 @@ ActiveRecord::Schema.define(version: 20170221052003) do
     t.index ["cached_weighted_score"], name: "index_photos_on_cached_weighted_score", using: :btree
     t.index ["cached_weighted_total"], name: "index_photos_on_cached_weighted_total", using: :btree
     t.index ["user_id"], name: "index_photos_on_user_id", using: :btree
+  end
+
+  create_table "prices", force: :cascade do |t|
+    t.integer  "value_cents"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -127,9 +146,9 @@ ActiveRecord::Schema.define(version: 20170221052003) do
   create_table "seens", force: :cascade do |t|
     t.boolean  "seen",       default: false
     t.integer  "user_id"
-    t.integer  "photo_id"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.integer  "photo_id"
     t.index ["photo_id"], name: "index_seens_on_photo_id", using: :btree
     t.index ["user_id"], name: "index_seens_on_user_id", using: :btree
   end
@@ -212,8 +231,6 @@ ActiveRecord::Schema.define(version: 20170221052003) do
   add_foreign_key "flags", "users"
   add_foreign_key "identities", "users"
   add_foreign_key "photos", "users"
-  add_foreign_key "sections", "photos"
-  add_foreign_key "seens", "photos"
   add_foreign_key "seens", "users"
   add_foreign_key "sorting_informations", "sections"
   add_foreign_key "sortings", "sections"

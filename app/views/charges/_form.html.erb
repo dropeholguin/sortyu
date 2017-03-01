@@ -12,16 +12,17 @@
         </div>
         <div class="row">
             <div class="upper-space under-space small-12 columns">
-                <span><strong>Amount:</strong> $20.00</span>
+                <span><strong>Amount:</strong> <%= humanized_money_with_symbol Price.last.value %></span>
             </div>
         </div>
     </article>
+    <%= hidden_field_tag :photo_id, @photo.id %>
     <script
     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
     data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-    data-amount="2000"
-    data-name="Demo Site"
-    data-description="2 widgets"
+    data-amount="<%= Price.last.value_cents %>"
+    data-name="Sortyu"
+    data-description="Photo"
     data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
     data-locale="auto" >
     </script>

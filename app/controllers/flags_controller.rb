@@ -1,6 +1,5 @@
 class FlagsController < ApplicationController
 	before_action :authenticate_user!
-  load_and_authorize_resource
 
   def create
     @photo = Photo.find(params[:photo_id])
@@ -10,11 +9,12 @@ class FlagsController < ApplicationController
 
     respond_to do |format|
       if @photo.user != current_user
-        if verify_recaptcha(model: @flag) && @flag.save
+        if @flag.save && verify_recaptcha(model: @flag)
+          @photo.update_attributes(count_flags: @photo.count_flags + 1)
           format.html { redirect_to root_path, notice: 'flag was successfully created.' }
           format.json { render :show, status: :created, location: @flag}
         else
-          format.html { render :new }
+          format.html { redirect_to root_path, alert: 'Verify Recaptcha' }
           format.json { render json: @flag.errors, status: :unprocessable_entity }
         end
       else

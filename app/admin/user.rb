@@ -1,5 +1,28 @@
 ActiveAdmin.register User do
 
+action_item only: :show  do
+  if user.is_active?
+    link_to 'Suspend Account', suspend_account_path(user), method: :patch, class: 'button'
+  else
+    link_to 'Active Account', active_account_path(user), method: :patch, class: 'button'
+  end
+end
+
+show do
+  attributes_table do
+    row :first_name
+    row :last_name
+    row :username
+    row :email
+    row :avatar do |user|
+      avatar_profile_link user, "thumb"
+    end
+    row :is_active
+    row :created_at
+  end
+  active_admin_comments
+end
+
 index do
 	selectable_column
 	id_column
@@ -21,6 +44,7 @@ index do
       link_to 'Active Account', active_account_path(user), method: :patch, class: 'button'
 		end
   end
+  actions
 end
 
 filter :first_name

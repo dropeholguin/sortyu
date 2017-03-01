@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.3.1'
+
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
@@ -39,6 +41,9 @@ gem 'activeadmin', github: 'activeadmin'
 gem "recaptcha", require: "recaptcha/rails"
 gem 'cancancan'
 gem 'rolify'
+gem 'active_admin_theme'
+gem 'money-rails'
+
 
 group :development, :test do
   gem 'byebug', platform: :mri
