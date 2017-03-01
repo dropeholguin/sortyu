@@ -208,6 +208,7 @@ class PhotosController < ApplicationController
     # PATCH/PUT /photos/1
     # PATCH/PUT /photos/1.json
     def update
+        @user = current_user
         respond_to do |format|
             if @photo.update(photo_params)
                 if !cookies[:import_queue].empty?
@@ -217,7 +218,7 @@ class PhotosController < ApplicationController
                     cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
                     if photo_id.present?
                         format.html { redirect_to edit_photo_path(photo_id.to_i), notice: 'Photo was successfully updated.' }
-                    else
+                    elsif @user.photos.size >= 10
                         format.html { redirect_to profile_show_path, alert: 'You have reached the amount of free images' }
                     end
                 else
