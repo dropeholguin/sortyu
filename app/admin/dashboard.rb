@@ -19,9 +19,9 @@ ActiveAdmin.register_page "Dashboard" do
             end
         end
         column do
-            panel "Photos with more than 5 flags" do
+            panel "Photos with more than 2 flags" do
                 ul do
-                    table_for Photo.where("count_flags > ? ", 5).each do
+                    table_for Photo.where("count_flags > ? ", 2).each do
                         column "Photo" do |photo|
                             link_to(image_tag(photo.file.url(:thumb)), admin_photo_path(photo))
                         end
