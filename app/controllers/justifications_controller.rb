@@ -2,6 +2,7 @@ class JustificationsController < ApplicationController
 	before_filter :authenticate_user!
 
   def new
+    @flags = Photo.find(params[:photo_id]).flags
     @justification = Justification.new
   end
 
