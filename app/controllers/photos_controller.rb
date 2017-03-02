@@ -218,11 +218,11 @@ class PhotosController < ApplicationController
                     cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
                     if photo_id.present?
                         format.html { redirect_to edit_photo_path(photo_id.to_i), notice: 'Photo was successfully updated.' }
-                    elsif @user.photos.size >= 10
-                        format.html { redirect_to profile_show_path, alert: 'You have reached the amount of free images' }
                     end
+                elsif @user.photos.size <= 10
+                    format.html { redirect_to profile_show_path, alert: 'You have reached the amount of free images' }
                 else
-                    format.html { redirect_to profile_show_path, notice: 'Photo was successfully updated.' }
+                    format.html { redirect_to profile_show_path, notice: 'Photo was successfully updated 2.' }
                 end
             else
                 format.html { render :edit }
