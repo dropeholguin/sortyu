@@ -22,7 +22,7 @@ class Photo < ApplicationRecord
 
   scope :photos, -> (user_id) { where(user_id: user_id) }
   scope :photos_sorting, -> (user_id) { where("user_id != ? AND count_flags <= ? ", user_id, MAXIMUM_FLAGS) }
-  scope :get_photos_paid, -> { where(state: "paid") }
+  scope :get_photos_paid, -> { where("state = ? AND count_of_sorts < ? ", "paid", 200) }
 
   aasm column: "state" do
 		state :free, initial: true
