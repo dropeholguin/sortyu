@@ -1,3 +1,12 @@
+<% set_meta_tags title: 'Sortyu image',
+				description: @photo.description, 
+				og: {
+					site_name: 'Sortyu',
+					type:     'website',
+					title:    'Sort images, choose what you like the most of an image',
+					url:      "#{request.original_url}",
+					image:    "#{@photo.file.url(:medium)}",
+				} %>
 <div class="upper-space row">
 	<div class="small-10 small-push-1 text-center columns">
 		<%= image_tag(@photo.file.url(:medium)) %>
@@ -7,6 +16,14 @@
   			<b>Description:</b>
   			<%= @photo.description %>
 		</p>
+	</div>
+</div>
+<div class="row collapse under-space">
+	<div class="small-12 medium-3 large-2 columns">
+		<p>Share: </p> 
+	</div>
+	<div class="small-12 medium-9 large-10 columns">
+		<%= social_share_button_tag(@photo.description, url: photo_path(@photo)) %>
 	</div>
 </div>
 <div class="row">

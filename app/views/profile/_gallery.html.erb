@@ -27,7 +27,7 @@
       				<p>Share: </p> 
       			</div>
       			<div class="small-12 medium-9 large-10 columns">
-         			<%= social_share_button_tag(photo.description, url: "https://sortyu-staging.herokuapp.com/", image: photo.file.url(:medium), desc: "Sortyu") %>
+         			<%= social_share_button_tag(photo.description, url: photo_path(photo)) %>
      			</div>
   			</div>
 		</div>
