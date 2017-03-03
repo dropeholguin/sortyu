@@ -1,3 +1,4 @@
 asset 'jquery'
 asset 'tracking.js'
 asset 'miniMAC/magic'
+asset 'interactjs'

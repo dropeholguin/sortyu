@@ -19,6 +19,7 @@
 //= require tracking.js/build/data/face
 //= require tracking.js/build/data/eye
 //= require tracking.js/build/data/mouth
+//= require interactjs/dist/interact.min
 //= require_tree .
 
 var createCookie = function(name, value, days) {
