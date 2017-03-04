@@ -29,7 +29,6 @@ gem "aws-ses", "~> 0.6.0", require: 'aws/ses'
 gem 'aws-sdk', '~> 2.3'
 gem "bower-rails", "~> 0.11.0"
 gem 'wicked'
-gem 'social-share-button'
 gem 'stripe'
 gem 'aasm'
 gem 'koala'

@@ -4,6 +4,7 @@
     "jquery": "latest",
     "tracking.js": "latest",
     "miniMAC/magic": "latest",
-    "interactjs": "latest"
+    "interactjs": "latest",
+    "sharer.js": "latest"
   }
 }
