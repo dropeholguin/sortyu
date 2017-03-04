@@ -237,6 +237,7 @@ class PhotosController < ApplicationController
     # DELETE /photos/1.json
     def destroy
         @photo.destroy
+        cookies.delete(:photos_queue)
         respond_to do |format|
             format.html { redirect_to profile_show_path, notice: 'Photo was successfully destroyed.' }
             format.json { head :no_content }
