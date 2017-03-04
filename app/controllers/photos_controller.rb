@@ -176,7 +176,8 @@ class PhotosController < ApplicationController
 
     # GET /photos/1
     # GET /photos/1.json
-    def show    
+    def show
+        @width, @height = @photo.dimensions 
     end
 
     # GET /photos/new

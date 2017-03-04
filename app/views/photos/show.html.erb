@@ -2,10 +2,14 @@
 				description: @photo.description, 
 				og: {
 					site_name: 'Sortyu',
-					type:     'website',
-					title:    'Sort images, choose what you like the most of an image',
-					url:      "#{photo_url(@photo)}",
-					image:    "#{@photo.file.url(:medium)}",
+					type:      'website',
+					title:     'Sort images, choose what you like the most of an image',
+					url:       "#{photo_url(@photo)}",
+					image:     [{
+									_: "#{@photo.file.url(:medium)}",
+    								width: @width,
+    								height: @height,
+					}]
 				} %>
 <div class="upper-space row">
 	<div class="small-10 small-push-1 text-center columns">
@@ -23,7 +27,8 @@
 		<p>Share: </p> 
 	</div>
 	<div class="small-12 medium-9 large-10 columns">
-		<%= social_share_button_tag("Choose which sections you like the most of an image on Sortyu", :url => "#{photo_url(@photo)}", :image => "#{@photo.file.url(:medium)}", desc: @photo.description, via: "sortyu") %>
+		<button class="sharer button" data-sharer="facebook" data-url="<%= photo_url(@photo) %>">Facebook</button>
+		<button class="sharer button" data-sharer="twitter" data-title="Checkout Sortyu!" data-url="<%= photo_url(@photo) %>">Twitter</button>
 	</div>
 </div>
 <div class="row">
