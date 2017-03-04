@@ -10,8 +10,8 @@ class Photo < ApplicationRecord
 
     has_attached_file :file, styles: { medium: "300x300>", thumb: "100x100>" }
     validates_attachment_content_type :file, content_type: /\Aimage\/.*\z/
-    before_save :extract_dimensions
     serialize :dimensions
+    before_save :extract_dimensions
 
     MAXIMUM_PHOTOS = 10
     MAXIMUM_FLAGS = 2

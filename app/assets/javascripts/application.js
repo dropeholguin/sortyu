@@ -18,7 +18,7 @@
 //= require tracking.js/build/data/face
 //= require tracking.js/build/data/eye
 //= require tracking.js/build/data/mouth
-//= require interactjs/dist/interact.min
+//= require interactjs
 //= require sharer.js/sharer
 //= require_tree .
 
