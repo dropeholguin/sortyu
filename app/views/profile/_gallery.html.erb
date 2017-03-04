@@ -27,7 +27,7 @@
       				<p>Share: </p> 
       			</div>
       			<div class="small-12 medium-9 large-10 columns">
-         			<%= social_share_button_tag(photo.description, url: photo_path(photo)) %>
+         			<%= social_share_button_tag("Choose which sections you like the most of an image on Sortyu", :url => "#{photo_url(photo)}", :image => "#{photo.file.url(:medium)}", desc: photo.description, via: "sortyu") %>
      			</div>
   			</div>
 		</div>
