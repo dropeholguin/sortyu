@@ -1,6 +1,5 @@
 <div id="photo-container" class="small-12 columns">
-	<% if @photos.count() >= 10 %>
-		<div class="reveal tiny" id="imagesWarning" data-reveal>
+		<!-- <div class="reveal tiny" id="imagesWarning" data-reveal>
 		  <h3>Limit Reached</h3>
 		  <p class="lead">You can upload up to 10 free images</p>
 		  <h3>Enjoy uploading images?</h3>
@@ -15,8 +14,7 @@
 		</div>
 		<div class="target hidden">
 			<p><a data-open="imagesWarning" id="openModal">Click me for a modal</a></p>
-		</div>
-	<% end %>
+		</div> -->
 	<% @photos.each() do |photo| %>
 		<div class="under-space small-4 float-left columns">
 			<%= link_to photo do %>
@@ -27,8 +25,7 @@
       				<p>Share: </p> 
       			</div>
       			<div class="small-12 medium-9 large-10 columns">
-         			<button class="sharer button" data-sharer="facebook" data-url="<%= photo_url(photo) %>">Facebook</button>
-         			<button class="sharer button" data-sharer="twitter" data-title="Checkout Sortyu!" data-url="<%= photo_url(photo) %>">Twitter</button>
+         			<%= render_shareable static_link: true, buttons: ['twitter', 'facebook'] %>
      			</div>
   			</div>
 		</div>

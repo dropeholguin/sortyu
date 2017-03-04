@@ -1,10 +1,10 @@
 <% set_meta_tags title: 'Sortyu image',
 				description: @photo.description, 
 				og: {
-					site_name: 'Sortyu',
-					type:      'website',
 					title:     'Sort images, choose what you like the most of an image',
+					type:      'website',
 					url:       "#{photo_url(@photo)}",
+					site_name: 'Sortyu',
 					image:     [{
 									_: "#{@photo.file.url(:medium)}",
     								width: @width,
@@ -27,8 +27,7 @@
 		<p>Share: </p> 
 	</div>
 	<div class="small-12 medium-9 large-10 columns">
-		<button class="sharer button" data-sharer="facebook" data-url="<%= photo_url(@photo) %>">Facebook</button>
-		<button class="sharer button" data-sharer="twitter" data-title="Checkout Sortyu!" data-url="<%= photo_url(@photo) %>">Twitter</button>
+		<%= render_shareable static_link: true, buttons: ['twitter', 'facebook'] %>
 	</div>
 </div>
 <div class="row">

@@ -17,6 +17,14 @@ GIT
       sass-rails
       sprockets (< 4.1)
 
+GIT
+  remote: https://github.com/simon0191/shareable.git
+  revision: fe5f7454b66ea09513005c7d24a7e7aa6cc70731
+  specs:
+    shareable (1.1.4)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -370,6 +378,7 @@ DEPENDENCIES
   recaptcha
   rolify
   sass-rails (~> 5.0)
+  shareable!
   spring
   spring-watcher-listen (~> 2.0.0)
   stripe

@@ -43,6 +43,7 @@ gem 'rolify'
 gem 'active_admin_theme'
 gem 'money-rails'
 gem 'meta-tags'
+gem 'shareable', git: "https://github.com/simon0191/shareable.git"
 
 
 group :development, :test do
