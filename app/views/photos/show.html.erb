@@ -1,3 +1,16 @@
+<% set_meta_tags title: 'Sortyu image',
+				description: @photo.description, 
+				og: {
+					title:     'Sort images, choose what you like the most of an image',
+					type:      'website',
+					url:       "#{photo_url(@photo)}",
+					site_name: 'Sortyu',
+					image:     [{
+									_: "#{@photo.file.url(:medium)}",
+    								width: @width,
+    								height: @height,
+					}]
+				} %>
 <div class="upper-space row">
 	<div class="small-10 small-push-1 text-center columns">
 		<%= image_tag(@photo.file.url(:medium)) %>
@@ -7,6 +20,14 @@
   			<b>Description:</b>
   			<%= @photo.description %>
 		</p>
+	</div>
+</div>
+<div class="row collapse under-space">
+	<div class="small-12 medium-3 large-2 columns">
+		<p>Share: </p> 
+	</div>
+	<div class="small-12 medium-9 large-10 columns">
+		<%= render_shareable static_link: true, buttons: ['twitter', 'facebook'] %>
 	</div>
 </div>
 <div class="row">

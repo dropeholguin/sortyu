@@ -29,7 +29,6 @@ gem "aws-ses", "~> 0.6.0", require: 'aws/ses'
 gem 'aws-sdk', '~> 2.3'
 gem "bower-rails", "~> 0.11.0"
 gem 'wicked'
-gem 'social-share-button'
 gem 'stripe'
 gem 'aasm'
 gem 'koala'
@@ -43,6 +42,8 @@ gem 'cancancan'
 gem 'rolify'
 gem 'active_admin_theme'
 gem 'money-rails'
+gem 'meta-tags'
+gem 'shareable', git: "https://github.com/simon0191/shareable.git"
 
 
 group :development, :test do

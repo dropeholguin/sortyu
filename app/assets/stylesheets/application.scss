@@ -13,7 +13,6 @@
  *= require_tree .
  *= require_self
  *= require font-awesome
- *= require social-share-button
  *= require magic
  *= require foundation_and_overrides
  */
@@ -21,6 +20,7 @@
 @import 'modules/variables';
 @import 'modules/helpers';
 @import 'modules/mixins';
+@import 'modules/socials';
 @import 'partials/header';
 @import 'partials/log_in';
 @import 'partials/file_upload';

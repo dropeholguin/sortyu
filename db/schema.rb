@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170303050121) do
+ActiveRecord::Schema.define(version: 20170304004335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,25 +80,26 @@ ActiveRecord::Schema.define(version: 20170303050121) do
   create_table "photos", force: :cascade do |t|
     t.text     "description"
     t.integer  "user_id"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
     t.string   "file_file_name"
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
     t.string   "state"
-    t.boolean  "seen",                    default: false
-    t.integer  "shared_times",            default: 0
-    t.integer  "cached_votes_total",      default: 0
-    t.integer  "cached_votes_score",      default: 0
-    t.integer  "cached_votes_up",         default: 0
-    t.integer  "cached_votes_down",       default: 0
-    t.integer  "cached_weighted_score",   default: 0
-    t.integer  "cached_weighted_total",   default: 0
-    t.float    "cached_weighted_average", default: 0.0
-    t.integer  "count_flags",             default: 0
-    t.boolean  "suspended",               default: false
-    t.integer  "count_of_sorts",          default: 0
+    t.boolean  "seen",                               default: false
+    t.integer  "shared_times",                       default: 0
+    t.integer  "cached_votes_total",                 default: 0
+    t.integer  "cached_votes_score",                 default: 0
+    t.integer  "cached_votes_up",                    default: 0
+    t.integer  "cached_votes_down",                  default: 0
+    t.integer  "cached_weighted_score",              default: 0
+    t.integer  "cached_weighted_total",              default: 0
+    t.float    "cached_weighted_average",            default: 0.0
+    t.integer  "count_flags",                        default: 0
+    t.boolean  "suspended",                          default: false
+    t.integer  "count_of_sorts",                     default: 0
+    t.string   "dimensions",              limit: 30
     t.index ["cached_votes_down"], name: "index_photos_on_cached_votes_down", using: :btree
     t.index ["cached_votes_score"], name: "index_photos_on_cached_votes_score", using: :btree
     t.index ["cached_votes_total"], name: "index_photos_on_cached_votes_total", using: :btree
