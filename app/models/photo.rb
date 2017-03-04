@@ -10,6 +10,8 @@ class Photo < ApplicationRecord
 
   has_attached_file :file, styles: { medium: "300x300>", thumb: "100x100>" }
   validates_attachment_content_type :file, content_type: /\Aimage\/.*\z/
+  before_save :extract_dimensions
+  serialize :dimensions
 
   MAXIMUM_PHOTOS = 10
   MAXIMUM_FLAGS = 2
@@ -32,4 +34,15 @@ class Photo < ApplicationRecord
     	transitions from: :free, to: :paid
     end
 	end
+
+  # Retrieves dimensions for image assets
+  # @note Do this after resize operations to account for auto-orientation.
+  def extract_dimensions
+    return unless image?
+    tempfile = upload.queued_for_write[:original]
+    unless tempfile.nil?
+      geometry = Paperclip::Geometry.from_file(tempfile)
+      self.dimensions = [geometry.width.to_i, geometry.height.to_i]
+    end
+  end
 end
