@@ -8,7 +8,14 @@
     <p>
       Your photo was suspended
     </p>
+    <p>
+      Flag Comments: 
+        <% @photo.flags.each do |flag| %>
+          <tr>
+            <td>- <%= flag.reason %></td>
+          </tr>
+        <% end %>
+    </p>
     <%= link_to 'Create Justification', new_justification_url(photo_id: @photo.id) %>
-    <p>Thanks for joining and have a great day!</p>
   </body>
 </html>

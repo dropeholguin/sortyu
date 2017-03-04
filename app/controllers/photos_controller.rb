@@ -34,12 +34,10 @@ class PhotosController < ApplicationController
 
     def reaload_photos_queue
         if cookies[:photos_queue].empty?
-            photos_queue = []
             photos = Photo.photos_sorting(current_user.id).order(state: :desc)
-            photos.each { |photo| photos_queue << photo if photo.flags.size <= 5 }
             
             photos_ids = []
-            photos_queue.each do |photo|
+            photos.each do |photo|
                 if photo.seens.present?
                     state = false
                     photo.seens.each do |seen|
@@ -121,49 +119,51 @@ class PhotosController < ApplicationController
     end
 
     def create_import_instagram
+        @user = current_user
         photos = []
-        if params[:photos]
-            params[:photos].each { |image_url|
-                @photo = Photo.new(file: URI.parse(image_url), user_id: current_user.id)        
-                @photo.save
-                photos << @photo
-            }
-        end
-
-        photo_ids_array = photos.pluck(:id)
-        first_photo_id = photo_ids_array.shift
-        photo_array_string = photo_ids_array.join("-")
-        cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
-
-        respond_to do |format|
-            if first_photo_id.present?
-                format.html { redirect_to edit_photo_path(first_photo_id), notice: 'Photo was successfully created.' }
-            else
+        respond_to do |format| 
+            if @user.photos.size >= 10
                 format.html { redirect_to profile_show_path, alert: 'You have reached the amount of free images' }
-            end  
+            else
+                params[:photos].each { |image_url|
+                    if @user.photos.size < 10
+                        @photo = Photo.new(file: URI.parse(image_url), user_id: current_user.id)        
+                        @photo.save
+                        photos << @photo
+                    end
+                }
+            
+                photo_ids_array = photos.pluck(:id)
+                first_photo_id = photo_ids_array.shift
+                photo_array_string = photo_ids_array.join("-")
+                cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
+
+                format.html { redirect_to edit_photo_path(first_photo_id), notice: 'Photo was successfully created.' }  
+            end
         end
     end
 
     def create_import_facebook
+        @user = current_user
         photos = []
-        if params[:photos]
-            params[:photos].each { |image_url|
-                @photo = Photo.new(file: URI.parse(image_url), user_id: current_user.id)
-                @photo.save
-                photos << @photo
-            }
-        end
-
-        photo_ids_array = photos.pluck(:id)
-        first_photo_id = photo_ids_array.shift
-        photo_array_string = photo_ids_array.join("-")
-        cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
-
-        respond_to do |format|
-            if first_photo_id.present?
-                format.html { redirect_to edit_photo_path(first_photo_id), notice: 'Photo was successfully created.' }
-            else
+        respond_to do |format| 
+            if @user.photos.size >= 10
                 format.html { redirect_to profile_show_path, alert: 'You have reached the amount of free images' }
+            else
+                params[:photos].each { |image_url|
+                    if @user.photos.size < 10
+                        @photo = Photo.new(file: URI.parse(image_url), user_id: current_user.id)        
+                        @photo.save
+                        photos << @photo
+                    end
+                }
+            
+                photo_ids_array = photos.pluck(:id)
+                first_photo_id = photo_ids_array.shift
+                photo_array_string = photo_ids_array.join("-")
+                cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
+
+                format.html { redirect_to edit_photo_path(first_photo_id), notice: 'Photo was successfully created.' }  
             end
         end
     end
@@ -192,7 +192,8 @@ class PhotosController < ApplicationController
     # POST /photos.json
     def create
         @user = current_user
-        @photo = @user.photos.new(photo_params)
+        @photo = Photo.new(photo_params)
+        @photo.user = @user
 
         respond_to do |format|
             if @photo.save
@@ -216,13 +217,13 @@ class PhotosController < ApplicationController
                     photo_id = photo_ids_array.shift
                     photo_array_string = photo_ids_array.join("-")
                     cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
-                    if photo_id.present?
-                        format.html { redirect_to edit_photo_path(photo_id.to_i), notice: 'Photo was successfully updated.' }
-                    elsif @user.photos.size >= 10
-                        format.html { redirect_to profile_show_path, alert: 'You have reached the amount of free images' }
-                    end
+
+                    format.html { redirect_to edit_photo_path(photo_id.to_i), notice: 'Photo was successfully updated.' }
+
+                elsif @user.photos.size >= 10
+                    format.html { redirect_to profile_show_path, alert: 'You have reached the amount of free images' }
                 else
-                    format.html { redirect_to profile_show_path, notice: 'Photo was successfully updated.' }
+                    format.html { redirect_to profile_show_path, notice: 'Photo was successfully updated' }
                 end
             else
                 format.html { render :edit }

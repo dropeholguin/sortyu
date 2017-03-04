@@ -43,6 +43,7 @@ gem 'cancancan'
 gem 'rolify'
 gem 'active_admin_theme'
 gem 'money-rails'
+gem 'meta-tags'
 
 
 group :development, :test do

@@ -3,6 +3,7 @@
   "dependencies": {
     "jquery": "latest",
     "tracking.js": "latest",
-    "miniMAC/magic": "latest"
+    "miniMAC/magic": "latest",
+    "interactjs": "latest"
   }
 }
