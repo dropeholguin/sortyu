@@ -6,15 +6,19 @@ header{
 		color:blue;
 	}
 
-	strong{
-		font-size:1.5em;
+	#logo-container{
+		margin-top:0.7em;
 
-		a{
-			color:white;
-		}
+		strong{
+			font-size:1.5em;
 
-		a:hover{
-			color:white;
+			a{
+				color:white;
+			}
+
+			a:hover{
+				color:white;
+			}
 		}
 	}
 }
