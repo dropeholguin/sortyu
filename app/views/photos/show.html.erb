@@ -22,12 +22,13 @@
 		</p>
 	</div>
 </div>
-<div class="row collapse under-space">
-	<div class="small-12 medium-3 large-2 columns">
+<div class="share-container row collapse under-space">
+	<div class="small-4 small-push-2 medium-3 medium-push-3 large-1 large-push-4 text-center columns">
 		<p>Share: </p> 
 	</div>
-	<div class="small-12 medium-9 large-10 columns">
-		<%= render_shareable static_link: true, buttons: ['twitter', 'facebook'] %>
+	<div class="small-8 medium-4 medium-push-1 large-2 large-push-4 text-center end columns">
+		<%= facebook_button :turbolinks => true %>
+		<%= twitter_button :turbolinks => true %>
 	</div>
 </div>
 <div class="row">
@@ -38,7 +39,7 @@
 <div class="row">
 	<div class="upper-space small-12 text-center columns">
 		<%= link_to 'Back', profile_show_path, class: "hollow button" %>
-		<%= link_to 'Edit', edit_photo_path(@photo), class: "button" %>
+		<%= link_to 'Edit', edit_photo_path(@photo), class: "hollow button" %>
 		<%= link_to 'Delete', @photo, method: :delete, data: { confirm: 'Are you sure?' }, class: "button delete" %>
 	</div>
 </div>
