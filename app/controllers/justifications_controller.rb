@@ -14,7 +14,7 @@ class JustificationsController < ApplicationController
 
     respond_to do |format|
       if @justification.save
-        format.html { redirect_to root_path, notice: 'Successfully created.' }
+        format.html { redirect_to root_path, notice: 'Successfully Sent.' }
         format.json { render :show, status: :created, location: @product }
       else
         format.html { render :new }
