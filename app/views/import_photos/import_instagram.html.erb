@@ -4,6 +4,11 @@
       <h4>Instagram Photo Import</h4>
     </div>
   </div>
+  <div class="row">
+    <div class="small-12 text-center columns">
+      <%= button_tag "Import Selected Photos", class: "button" , id: "import_instagram" %>
+    </div>
+  </div>
   <div id="photo-container" class="upper-pad under-pad row">
     <% (0..@max_num).each do |i| %>
       <div class="upper-space small-4 text-center end columns">
