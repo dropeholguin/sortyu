@@ -1,20 +1,24 @@
-<h1>New Justification</h1>
-
-<h3>Flags</h3>
-<table>
-  <thead>
-    <tr>
-      <th>Reason</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @flags.each do |flag| %>
-      <tr>
-        <td><%= flag.reason %></td>   
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+<div class="row">
+    <div class="upper-space small-12 text-center columns">
+        <h4>Your photo has been <b>suspended</b></h4>
+    </div>
+</div>
+<div class="row">
+    <div class="upper-space small-12 medium-8 medium-push-2 columns">
+        <table>
+            <thead>
+                <tr>
+                    <th style="background-color: #4286F4; color:white;">Reasons users reported this photo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @flags.each do |flag| %>
+                    <tr>
+                        <td><%= flag.reason %></td>   
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>
 <%= render 'form', justification: @justification %>
