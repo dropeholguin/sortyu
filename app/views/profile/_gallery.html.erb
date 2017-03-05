@@ -16,7 +16,7 @@
 			<p><a data-open="imagesWarning" id="openModal">Click me for a modal</a></p>
 		</div> -->
 	<% @photos.each() do |photo| %>
-		<div class="under-space small-4 float-left columns">
+		<div class="under-space small-6 medium-4 float-left columns">
 			<%= link_to photo do %>
 				<%= image_tag(photo.file.url(:medium)) %>
 			<% end %>
@@ -25,7 +25,8 @@
       				<p>Share: </p> 
       			</div>
       			<div class="small-12 medium-9 large-10 columns">
-         			<%= render_shareable static_link: true, buttons: ['twitter', 'facebook'] %>
+         			<%= facebook_button :turbolinks => true %>
+         			<%= twitter_button :turbolinks => true%>
      			</div>
   			</div>
 		</div>

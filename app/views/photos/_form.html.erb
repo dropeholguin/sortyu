@@ -1,23 +1,33 @@
 <%= form_for(photo, builder: FoundationFormBuilder, html: { multipart: true }) do |f| %>
-  <% if photo.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(photo.errors.count, "error") %> prohibited this photo from being saved:</h2>
+	<% if photo.errors.any? %>
+			<div id="error_explanation">
+				<h2><%= pluralize(photo.errors.count, "error") %> prohibited this photo from being saved:</h2>
 
-      <ul>
-      <% photo.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <div class="field">
-    <%= f.file_field :file, class: "button" %>
-  </div>
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-  </div>
-  <div class="actions">
-    <%= f.submit "Save" %>
-  </div>
+				<ul>
+					<% photo.errors.full_messages.each do |message| %>
+						<li><%= message %></li>
+					<% end %>
+				</ul>
+			</div>
+	<% end %>
+	<div class="field">
+		<%= f.file_field :file, class: "button" %>
+	</div>
+	<div class="field">
+		<%= f.label :description %>
+		<%= f.text_area :description %>
+	</div>
+	<div class="row">
+	    <div class="callout soft-warning small-12 medium-8 medium-push-2 text-center columns">
+	    	<p>
+	    	Users have a limit of <b>10 FREE</b> images<br><br>
+	    	Get benefits for paid images:<br>
+		  	Unlimited uploads.<br>
+		  	Be at the top of the sorting queue.
+	    	</p>
+	    </div>
+	</div>
+	<div class="actions">
+		<%= f.submit "Save" %>
+	</div>
 <% end %>
