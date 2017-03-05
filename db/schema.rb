@@ -98,8 +98,8 @@ ActiveRecord::Schema.define(version: 20170304004335) do
     t.float    "cached_weighted_average",            default: 0.0
     t.integer  "count_flags",                        default: 0
     t.boolean  "suspended",                          default: false
-    t.integer  "count_of_sorts",                     default: 0
     t.string   "dimensions",              limit: 30
+    t.integer  "count_of_sorts",                     default: 0
     t.index ["cached_votes_down"], name: "index_photos_on_cached_votes_down", using: :btree
     t.index ["cached_votes_score"], name: "index_photos_on_cached_votes_score", using: :btree
     t.index ["cached_votes_total"], name: "index_photos_on_cached_votes_total", using: :btree
