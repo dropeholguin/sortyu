@@ -1,56 +1,29 @@
 header{
-	color:white;
-
-	.menu-icon{
-		color:white;
-	}
-
-	.dropdown{
-		.fa-bars{
-			color:white;
-			font-size:3em;
-			padding-left:0.5em;
-			padding-right:0.5em;
-		}
-
-		.fa-bars:hover{
-			cursor:pointer;
-			background-color:darken(#4286f4, 10%);
-		}
-	}
-
-	#menu{
-		.dropdown-pane{
-			border:thin solid gray;
-		}
-
-		span{
-			color:black;
-			font-size:0.8em;
-		}
-	}
+	background-color:#4286F4;
+	padding:1em;
 
 	.fa{
 		color:blue;
-	}	
-
-	.top-bar-right{
-		ul{
-			li{
-				padding:0 1em;
-			}
-		}
 	}
 
-	strong{
-		font-size:1.5em;
+	#upload-button{
+		margin-bottom:0;
+		margin-right:2em;
+	}
 
-		a{
-			color:white;
-		}
+	#logo-container{
+		margin-top:0.7em;
 
-		a:hover{
-			color:white;
+		strong{
+			font-size:1.5em;
+
+			a{
+				color:white;
+			}
+
+			a:hover{
+				color:white;
+			}
 		}
 	}
 }
@@ -60,17 +33,10 @@ header{
 /* Small only */
 @media screen and (max-width: 39.9375em) {
 	header{
-		.top-bar-right, .top-bar-left{
-			ul{
-				li{
-					padding:0.5em 1.5em;
-					width:12em;
-
-					.button{
-						width:100%;
-					}
-				}
-			}
+		#upload-button{
+			margin-top:0.2em;
+			margin-right:1em;
+			font-size:1em;
 		}
 	}
 }
@@ -78,8 +44,8 @@ header{
 /* Medium and up */
 @media screen and (min-width: 40em) {
 	header{
-		.top-bar-title{
-			padding-top:0.7rem;
-	}
+		#upload-button{
+			font-size:1.1em;
+		}
 	}
 }

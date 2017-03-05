@@ -38,9 +38,6 @@ ActiveAdmin.register_page "Dashboard", namespace: :admin do
                         column "Photo" do |justification|
                             image_tag justification.photo.file.url(:thumb)
                         end
-                        column "Title" do |justification|
-                            link_to justification.title, admin_justification_path(justification)
-                        end
                         column :body
                         column "Create Date", :created_at
                     end

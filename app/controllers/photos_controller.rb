@@ -69,7 +69,7 @@ class PhotosController < ApplicationController
 
     def update_photo_to_sorted_state
         @photo = Photo.find(params[:photo_id])
-        @photo.update_attributes(count_sorts: @photo.count_sorts + 1)
+        @photo.update_attributes(count_of_sorts: @photo.count_of_sorts + 1)
         @seen = Seen.new(seen: true, user_id: current_user.id, photo_id: @photo.id)
         @seen.save
         head :ok

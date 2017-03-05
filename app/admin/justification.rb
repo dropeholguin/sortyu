@@ -2,7 +2,6 @@ ActiveAdmin.register Justification do
 
 show do
   attributes_table do
-    row :title
     row :body
     row :photo do |justification|
       link_to(image_tag(justification.photo.file.url(:thumb)), admin_photo_path(justification.photo))
@@ -14,8 +13,7 @@ end
 
 index do
 	selectable_column
-	column :title
-	column :body
+	column "Justification", :body
 	column "Photo" do |justification|
   	link_to(image_tag(justification.photo.file.url(:thumb)), admin_photo_path(justification.photo))
 	end
@@ -24,5 +22,4 @@ index do
 end
 
 filter :created_at
-filter :title
 end

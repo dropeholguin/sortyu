@@ -26,7 +26,7 @@ class JustificationsController < ApplicationController
   private
 
     def justification_params
-      params.require(:justification).permit(:title, :body, :user, :photo)
+      params.require(:justification).permit(:body, :user, :photo)
     end
 end
 

@@ -10,14 +10,19 @@ ActiveAdmin.register_page "Dashboard", namespace: :admin_reviewer do
 	                        column "Photo" do |justification|
 	                            image_tag justification.photo.file.url(:thumb)
 	                        end
-	                        column :title
-	                        column :body
+	                        column "Flags" do |justification|
+	                            table_for Flag.where(photo: justification.photo) do
+	                    			column :reason
+	                    		end
+	                        end
+	                        column "Justification", :body
 	                        column "Create Date", :created_at
-	                    end
-
-	                    table_for Flag.order("created_at desc") do
-	                    	column :reason
-	                    end
+	  	                    column " " do |justification|
+	                            if justification.photo.suspended == true
+							    	link_to 'Approve Photo', approve_path(justification.photo), method: :patch, class: 'button'
+							  	end
+	                        end 
+	                    end    
 	                end
 	            end
 	        end
