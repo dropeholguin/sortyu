@@ -16,6 +16,9 @@ class PhotosController < ApplicationController
     def load_photo_to_sort
         respond_to do |format|
             @photo = Photo.find(params[:photo_id])
+            if @photo.nil?
+                format.html { redirect_to root_path, erro: "No more photos to sort"}
+            end
             if @photo.seen?
                 format.html { redirect_to root_path, error: "You can't sort already seen images." }
             else
@@ -54,9 +57,8 @@ class PhotosController < ApplicationController
             end
             photo_ids_array = photos_ids.pluck(:id)
             if photo_ids_array.empty?
-                flash[:error] = "You already saw all images."
-                flash.keep(:notice)
                 render js: "window.location = #{root_path.to_json}"
+                flash[:notice] = "You have sorted all images. Please try again later."
             else
                 photo_array_string = photo_ids_array.join("-")
                 cookies[:photos_queue] = { value: photo_array_string, expires: 23.hours.from_now }
