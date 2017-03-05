@@ -54,7 +54,6 @@ ActiveAdmin.setup do |config|
   #
   # This setting changes the method which Active Admin calls
   # within the application controller.
-  config.authentication_method = :authenticate_admin_user!
 
   # == User Authorization
   #
@@ -86,7 +85,6 @@ ActiveAdmin.setup do |config|
   #
   # This setting changes the method which Active Admin calls
   # (within the application controller) to return the currently logged in user.
-  config.current_user_method = :current_admin_user
 
   # == Logging Out
   #
@@ -98,7 +96,6 @@ ActiveAdmin.setup do |config|
   # will call the method to return the path.
   #
   # Default:
-  config.logout_link_path = :destroy_admin_user_session_path
 
   # This setting changes the http method used when rendering the
   # link. For example :get, :delete, :put, etc..
@@ -214,7 +211,26 @@ ActiveAdmin.setup do |config|
   #       admin.add_logout_button_to_menu menu
   #     end
   #   end
-  #
+  config.load_paths = [File.expand_path('app/admin', Rails.root), File.expand_path('app/admin_reviewer', Rails.root)]
+
+
+  config.namespace :admin do |admin|
+    admin.authentication_method = :authenticate_admin_user!
+    admin.current_user_method = :current_admin_user
+    admin.logout_link_path = :destroy_admin_user_session_path
+  end
+
+  config.namespace :reviewer do |reviewer|
+    reviewer.authentication_method = :authenticate_admin_reviewer!
+    reviewer.current_user_method = :current_admin_reviewer
+    reviewer.logout_link_path = :destroy_admin_reviewer_session_path
+    reviewer.build_menu :utility_navigation do |menu|
+      menu.add label: "ActiveAdmin.info", url: "http://www.activeadmin.info",
+                                          html_options: { target: :blank }
+      reviewer.add_current_user_to_menu  menu
+      reviewer.add_logout_button_to_menu menu
+    end
+  end
   # If you wanted to add a static menu item to the default menu provided:
   #
   #   config.namespace :admin do |admin|
