@@ -6,6 +6,11 @@ header{
 		color:blue;
 	}
 
+	#upload-button{
+		margin-bottom:0;
+		margin-right:2em;
+	}
+
 	#logo-container{
 		margin-top:0.7em;
 
@@ -28,12 +33,19 @@ header{
 /* Small only */
 @media screen and (max-width: 39.9375em) {
 	header{
+		#upload-button{
+			margin-top:0.2em;
+			margin-right:1em;
+			font-size:1em;
+		}
 	}
 }
 
 /* Medium and up */
 @media screen and (min-width: 40em) {
 	header{
-		
+		#upload-button{
+			font-size:1.1em;
+		}
 	}
 }
