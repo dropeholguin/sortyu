@@ -1,29 +1,31 @@
 <%= form_for(@justification, builder: FoundationFormBuilder) do |f| %>
-  <% if @justification.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@justification.errors.count, "error") %> prohibited this justification from being saved:</h2>
-
-      <ul>
-      <% @justification.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <% if @justification.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@justification.errors.count, "error") %> prohibited this justification from being saved:</h2>
+            <ul>
+                <% @justification.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+    <div class="row">
+        <div class="under-space upper-space callout small-12 medium-8 medium-push-2 columns">
+            <div class="row under-space text-center">
+                <h6>Here you may explain why your photo should be taken back to Sortyu</h6>
+            </div>
+            <div class="upper-space field">
+                <%= f.label :title %>
+                <%= f.text_field :title %>
+            </div>
+            <div class="field">
+                <%= f.label :body, "Explanation" %>
+                <%= f.text_area :body, style:"height:10em;" %>
+            </div>
+            <%= hidden_field_tag :photo_id, params[:photo_id] %>
+        </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= f.label :body %>
-    <%= f.text_area :body %>
-  </div>
-
-  <%= hidden_field_tag :photo_id, params[:photo_id] %>
-
-  <div class="actions">
+    <div class="upper-space actions">
     <%= f.submit "Save"%>
-  </div>
+    </div>
 <% end %>

@@ -52,8 +52,14 @@
 img{
 	border:thin solid black;
 }
-#error_explanation{
+#error_explanation, .field_with_errors{
 	width:100%;
+}
+
+.field_with_errors{
+	[type='password'],[type='email']{
+		margin-bottom:0;
+	}
 }
 
 .soft-warning{
