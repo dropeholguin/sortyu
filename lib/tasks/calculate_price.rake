@@ -14,7 +14,7 @@ namespace :calculate do
         g = average_sorts_per_eighteen_hours
     end
 
-    h = count_photos_paid / g
+    h = (count_photos_paid * 200) - (count_photos_paid.count_of_sorts) / g
     price = 2 * h
 
     if price < 2

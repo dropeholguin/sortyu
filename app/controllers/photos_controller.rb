@@ -69,6 +69,7 @@ class PhotosController < ApplicationController
 
     def update_photo_to_sorted_state
         @photo = Photo.find(params[:photo_id])
+        @photo.update_attributes(count_of_sorts: @photo.count_of_sorts + 1)
         @seen = Seen.new(seen: true, user_id: current_user.id, photo_id: @photo.id)
         @seen.save
         head :ok
@@ -237,6 +238,7 @@ class PhotosController < ApplicationController
     # DELETE /photos/1.json
     def destroy
         @photo.destroy
+        cookies.delete(:photos_queue)
         respond_to do |format|
             format.html { redirect_to profile_show_path, notice: 'Photo was successfully destroyed.' }
             format.json { head :no_content }
