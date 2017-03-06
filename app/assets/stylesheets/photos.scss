@@ -72,6 +72,16 @@
 	}
 }
 
+
+.rect-draw{
+	border: 2px solid #3399ff;
+	position: absolute;
+}
+
+#canvas {
+    border: 10px solid black;
+}
+
 /* Small only */
 @media screen and (max-width: 39.9375em) {
 	#sorting-principal{
