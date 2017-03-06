@@ -1,67 +1,89 @@
 // Place all the styles related to the photos controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#sorting-principal{
+	.rect {
+		border: 2px solid #3399ff;
+		position: absolute;
 
-.rect {
-	border: 2px solid #3399ff;
-	position: absolute;
-
-	span{
-		background-color: #3399ff;
-	    padding: 0.5em;
-	    padding-top: 0;
-	    padding-bottom: 0;
-	    color: white;
-	    font-weight: 600;
-	    font-size: 1em;
-	    float:right;
-	    border-top-right-radius:5px;
-	}
-
-	span:hover{
-		cursor:pointer;
-	}
-}
-
-.rect:hover{
-	cursor:pointer;
-}
-
-.rect-clicked{
-	border:thin solid #3399ff;
-	border-radius:5px;
-	opacity:0.5;
-}
-
-.share-container{
-	margin-bottom:3em !important;
-
-	p{
-		margin:0;
-	}
-}
-
-.button.like{
-
-	.fa-thumbs-o-up{
-		margin-right:0.8em;
-	}
-
-	#show-like{
-		padding: 0.2em 0.4em;
-		background-color:#3399ff;
-	}
-}
-
-#user-name-container{
-	a{
-		h6{
-			color:black;
-
+		span{
+			background-color: #3399ff;
+		    padding: 0.5em;
+		    padding-top: 0;
+		    padding-bottom: 0;
+		    color: white;
+		    font-weight: 600;
+		    font-size: 1em;
+		    float:right;
+		    border-top-right-radius:5px;
 		}
 
-		h6:hover{
-			text-decoration:underline;
+		span:hover{
+			cursor:pointer;
+		}
+	}
+
+	.rect:hover{
+		cursor:pointer;
+	}
+
+	.rect-clicked{
+		border:thin solid #3399ff;
+		border-radius:5px;
+		opacity:0.5;
+	}
+
+	.share-container{
+		margin-bottom:3em !important;
+
+		p{
+			margin:0;
+		}
+	}
+	#follow-container{
+		.button.follow{
+			margin-left:1em;
+		}
+	}	
+
+	.button.like{
+
+		.fa-thumbs-o-up{
+			margin-right:0.8em;
+		}
+
+		#show-like{
+			padding: 0.2em 0.4em;
+			background-color:#3399ff;
+		}
+	}
+
+	#user-name-container{
+		a{
+			h6{
+				color:black;
+
+			}
+
+			h6:hover{
+				text-decoration:underline;
+			}
+		}
+	}
+}
+
+/* Small only */
+@media screen and (max-width: 39.9375em) {
+	#sorting-principal{
+		#follow-container{
+
+			h6{
+				font-size:0.9em;
+			}
+			.button.follow{
+				margin-bottom:0;
+				font-size:0.8em;
+			}
 		}
 	}
 }
