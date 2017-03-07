@@ -1,9 +1,7 @@
 function removeSortingElements(){
-	console.log("Removing sorting elements");
 	//Removes sorted image
 	if ($('#sorting-principal #photo-container img').length >0) {
 		$('#sorting-principal #photo-container img').remove();
-		console.log("Removing image source-url"+$('#source-url').text());
 		$('#source-url').remove();
 	}
 
@@ -78,13 +76,12 @@ function appendSortingElements(){
 }
 
 function showPhotoStadistics(){
-	console.log("HELLO WORLD!!!!");
 	<% if !Sorting.user_sortings(current_user.id , @photo.id).empty? %>
-	console.log("<%= Sorting.user_sortings(current_user.id , @photo.id) %>");
 	$('#sorting-principal #photo-stadistic-container').append('<% if !@photo.sections.empty? %><% @photo.sections.each do |section| %><div class="end photo-stadistic callout small-12 large-3 columns"><div class="row text-center stadistic-title columns"><h5>Your rank: <%= Sorting.user_sortings(current_user.id , @photo.id).find_by(section_id: section.id).order %></h5></div><div id="rank" class="row"><h6><b>Your Rank:</b> <% if !section.sorting_information.nil? %><%= section.sorting_information.section_id %><% end %></h6></div><div id="frequent" class="row"><h6><b>Most Frequent: </b><% if !section.sorting_information.nil? %><%= section.sorting_information.most_frequent %><% end %></h6></div><div id="average" class="row"><h6><b>Average: </b><% if !section.sorting_information.nil? %><%= section.sorting_information.average %><% end %></h6></div></div><% end %><% end %>');
 	<% end %>
 }
 
 function removePhotoStadistics(){
 	$('#sorting-principal .photo-stadistic').remove();
+	$('#sorting-principal #sorted-count-container').remove()
 }
