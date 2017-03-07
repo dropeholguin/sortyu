@@ -1,6 +1,6 @@
 $(document).on("turbolinks:load", function() {
 
-    //Adds a rectangle on click within the canvas (image)
+    //Adds a section on click within the canvas (image)
     function drawRect(event){
         if($(event.target).closest('#inner-canvas').length) {
             $rect = $('<div class="rect resize-drag"></div>');
@@ -17,13 +17,41 @@ $(document).on("turbolinks:load", function() {
         }
     }
 
-    //Bind the drawing event at the beginning
-    $("#canvas").bind("click", drawRect);
+    //Deletes a section when canvas has "deleting" class
+    function deleteRect(event){
+        if($('#canvas').hasClass('deleting')){
+            $rect = $(event.target);
+            $rect.remove();
+        }
+    }
+
+    //Bind the drawing event at the beginning [DISABLED]
+    //$("#canvas").bind("click", drawRect);
 
     //Binds the drawing event on click again in case it was "unbinded" some where
-    $("#canvas").on("click", function(){
-        $("#canvas").bind("click", drawRect);
+    //Also calls deleteRect() when #canvas is in "deleting" status
+    $("#canvas").on("click", function(event){
+        if($('#canvas').hasClass('drawing')){
+            $("#canvas").bind("click", drawRect);
+        } else if($('#canvas').hasClass('deleting')){
+            $target = $(event.target);
+            if($target.hasClass('rect')){
+                deleteRect(event);
+            }
+        }
     });
+
+    //Drawing and deleting states of canvas switcher
+    $("#eraser").on("click", function(event){
+        event.preventDefault();
+        $("#canvas").removeClass("drawing");
+        $("#canvas").addClass("deleting");
+    });
+    $("#pencil").on("click", function(event){
+        event.preventDefault();
+        $("#canvas").removeClass("deleting");
+        $("#canvas").addClass("drawing");
+    })
 
     function dragMoveListener (event) {
         var target = event.target,
