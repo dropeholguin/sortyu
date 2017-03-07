@@ -2,17 +2,19 @@ $(document).on("turbolinks:load", function() {
 
     //Adds a rectangle on click within the canvas (image)
     function drawRect(event){
-        $rect = $('<div class="rect resize-drag"></div>');
-        $("#inner-canvas").append($rect);
+        if($(event.target).closest('#inner-canvas').length) {
+            $rect = $('<div class="rect resize-drag"></div>');
+            $("#inner-canvas").append($rect);
 
-        $rect.css( {position:"absolute", width: "44px", top: "300px", left: "250px"});
+            $rect.css( {position:"absolute", width: "44px", top: "300px", left: "250px"});
 
-        var container = document.querySelector("#canvas");
+            var container = document.querySelector("#canvas");
 
-        var xPosition = event.clientX - container.getBoundingClientRect().left + ($rect.innerWidth() / 2);
-        var yPosition = event.clientY - container.getBoundingClientRect().top + ($rect.innerWidth() / 2);
+            var xPosition = event.clientX - container.getBoundingClientRect().left + ($rect.innerWidth() / 2);
+            var yPosition = event.clientY - container.getBoundingClientRect().top + ($rect.innerWidth() / 2);
 
-        $rect.css( {position:"absolute", width: "44px", top:yPosition + "px", left: xPosition + "px"});
+            $rect.css( {position:"absolute", width: "44px", top:yPosition + "px", left: xPosition + "px"});
+        }
     }
 
     //Bind the drawing event at the beginning
