@@ -192,6 +192,10 @@ class PhotosController < ApplicationController
     def edit
     end
 
+    def edit_sections
+        @photo = Photo.find(params[:photo_id])
+    end
+
     # POST /photos
     # POST /photos.json
     def create

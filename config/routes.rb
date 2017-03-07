@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   
 	get 'profile/show/', to: 'profile#show', as: 'profile_show'
 	get 'profile/other_user_show/:id', to: 'profile#other_user_show', as: 'profile_other_user_show'
+
 	get 'import_facebook/photos/', to: 'import_photos#import_facebook', as: 'import_facebook'
 	get 'import_instagram/photos/', to: 'import_photos#import_instagram', as: 'import_instagram'
 	get 'import_google/photos/', to: 'import_photos#import_google', as: 'import_google'
@@ -14,6 +15,7 @@ Rails.application.routes.draw do
 	post "users/lock/:id", to: 'user_locks#lock_access', as: :lock_access
 	get 'photos/load_photo_to_sort', as: 'load_new_photo_to_sort'
 	get 'photos/reaload_photos_queue'
+  get 'photo/edit_sections', to:'photos#edit_sections'
 	patch 'photos/update_photo_to_sorted_state'
   post 'photos/create_sections'
   post 'photos/create_sortings'
