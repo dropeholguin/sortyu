@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :affiliates, controllers: { registrations: "users/registrations" }
   devise_for :admin_reviewers, ActiveAdmin::Devise.config
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
