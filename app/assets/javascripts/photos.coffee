@@ -127,6 +127,22 @@ startedSorting = ->
 	else
 		return false
 
+#changes active state in section editor
+changeActiveState = ->
+	if $('#photo-editor').length > 0
+		$('#pencil').on 'click', ->
+			$('#pencil').addClass('active')
+			$('#eraser').removeClass('active')
+
+		$('#eraser').on 'click', ->
+			$('#eraser').addClass('active')
+			$('#pencil').removeClass('active')
+
+$(document).on 'turbolinks:load', ->
+	changeActiveState()
+		
+	
+
 $(document).on 'turbolinks:load', ->
 	if $('#sorting-principal').length > 0
 		loadPhotoToSort()

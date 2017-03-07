@@ -91,6 +91,15 @@
 		padding: 20px;
 		box-sizing: border-box;
 	}
+
+	a{
+		margin-right:1em;
+		margin-left:1em;
+	}
+
+	.active{
+		color:blue;
+	}
 }
 
 /* Small only */
