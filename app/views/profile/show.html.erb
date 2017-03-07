@@ -1,4 +1,4 @@
-<div id="profile">
+<div id="profile-show">
 	<div class="row upper-space">
 		<div class="small-4 medium-2 medium-text-center columns">
 			<%= avatar_profile_link current_user, "medium", class: "circle" %>
@@ -26,23 +26,23 @@
 		<div class="small-12 columns">
 			<ul class="tabs" data-tabs id="example-tabs">
 			  	<li id="photos-count" data-photos-size="<%= @photos.count %>" class="tabs-title is-active">
-			  		<a href="#panel1" aria-selected="true"><b><%= @photos.count() %></b> Images</a>
+			  		<a href="#panel-gallery" aria-selected="true"><b><%= @photos.count() %></b> Images</a>
 			  	</li>
 			 	<li class="tabs-title">
-			 		<a href="#panel2"><%= current_user.followers.count %> Followers</a>
+			 		<a href="#panel-followers"><b><%= current_user.followers.count %></b> Followers</a>
 			 	</li>
 			 	<li class="tabs-title">
-			 		<a href="#panel3"><%= current_user.following.count %> Following</a>
+			 		<a href="#panel-following"><b><%= current_user.following.count %></b> Following</a>
 			 	</li>
 			</ul>
 			<div class="tabs-content small-12 columns" data-tabs-content="example-tabs">
-				<div class="tabs-panel is-active" id="panel1">
+				<div class="tabs-panel is-active" id="panel-gallery">
 					<%= render partial: 'gallery' %>
 				</div>
-				<div class="tabs-panel" id="panel2">
+				<div class="tabs-panel" id="panel-followers">
 					<%= render partial: 'followers' %>
 				</div>
-				<div class="tabs-panel" id="panel3">
+				<div class="tabs-panel" id="panel-following">
 					<%= render partial: 'following' %>
 				</div>
 			</div>

@@ -9,20 +9,10 @@
 		}
 	}
 }
-#profile{
+#profile-show{
 
 	#user-name-container{
 		margin-top:1em;
-	}
-
-	.button{
-		color:black;
-		background-color:white;
-	}
-
-	.button:hover{
-		color:white;
-		background-color:black;
 	}
 
 	p{
@@ -33,7 +23,7 @@
 
 /* Small only */
 @media screen and (max-width: 39.9375em) {
-	#profile{
+	#profile-show{
 		.circle{
 			width:4em;
 			height:4em;
@@ -52,7 +42,7 @@
 }
 /* Medium only */
 @media screen and (min-width: 40em) and (max-width: 63.9375em) {
-	#profile{
+	#profile-show{
 		#user-name-container{
 			margin-top:1.5em;
 			left:-4%;
@@ -69,7 +59,7 @@
 
 /* Large and up */
 @media screen and (min-width: 64em) {
-	#profile{
+	#profile-show{
 		#user-name-container{
 			margin-top:1.5em;
 			left:-4%;

@@ -8,8 +8,9 @@
  				<div class="small-12 medium-3 large-2 columns">
       				<p>Share: </p> 
       			</div>
-      			<div class="small-12 medium-9 large-10 columns">
-         			<%= social_share_button_tag(photo.description,:'data-source' => photo.file.url(:medium), :'data-type' => 'photo') %>
+				<div class="small-12 medium-9 large-10 columns">
+         			<%= facebook_button :turbolinks => true %>
+         			<%= twitter_button :turbolinks => true%>
      			</div>
   			</div>
 		</div>
