@@ -196,6 +196,17 @@ class PhotosController < ApplicationController
         @photo = Photo.find(params[:photo_id])
     end
 
+    def save_sections
+        max_rectangles = params[:rectangle_count].to_i
+        @photo = Photo.find(params[:photo_id])
+        (0..max_rectangles).each do |i|
+            @section = Section.new(photo_id: @photo.id, index: i)        
+            @section.save
+            puts "guadreeeee"
+        end
+        head :ok
+    end
+
     # POST /photos
     # POST /photos.json
     def create

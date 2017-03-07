@@ -138,8 +138,27 @@ changeActiveState = ->
 			$('#eraser').addClass('active')
 			$('#pencil').removeClass('active')
 
+#Count new sections
+countNewSections = ->
+	if $('#photo-editor').length > 0
+		$('#save-sections').on 'click', ->
+			rectangleCount = $('.rect').length - 1
+			photoId = $('#save-sections').data('photo-id')
+			console.log photoId
+			$.ajax '/photos/save_sections',
+			type: 'POST',
+			dataType: 'script',
+			data: {
+				rectangle_count: rectangleCount, photo_id: photoId
+			},
+			error: (jqXHR, textStatus, errorThrown) ->
+				console.log("AJAX Error: #{textStatus}")
+			success: (data, textStatus, jqXHR) ->
+				console.log("Photo edit sections saved successfully!")
+
 $(document).on 'turbolinks:load', ->
 	changeActiveState()
+	countNewSections()
 		
 	
 
