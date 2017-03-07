@@ -10,11 +10,19 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div id="photo-container" class="small-12 columns text-center">
-        <%= image_tag @photo.file.url(:medium) %>
+    <div id="photo-editor" class="callout small-12 medium-10 medium-push-1 large-8 large-push-2 text-center columns">
+        <div class="row">
+            <div id="canvas" class="under-space drawing">
+                <div id="inner-canvas">
+                    <%= image_tag(@photo.file.url(:medium), id:"edit-my-sections")%>
+                </div>
+            </div>
         </div>
-    </div>  
+        <div class="row under-space">
+            <a href="#" id="pencil">Pencil</a>
+            <a href="#" id="eraser">Eraser</a>
+        </div>
+    </div>
     <div class="row">
         <div id="photo-description" class="small-12 medium-10 medium-push-1 large-8 large-push-2 text-center columns">
             <p><%= @photo.description %></p>
