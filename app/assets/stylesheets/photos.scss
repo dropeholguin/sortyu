@@ -78,8 +78,19 @@
 	position: absolute;
 }
 
-#canvas {
-    border: 10px solid black;
+#photo-editor{
+	#canvas {
+	    display: inline-block;
+	    width: 100%;
+	    #inner-canvas{
+	    	display: inline-block;
+	    }
+	}
+	.rect {
+		border: 2px solid #3399ff;
+		padding: 20px;
+		box-sizing: border-box;
+	}
 }
 
 /* Small only */
