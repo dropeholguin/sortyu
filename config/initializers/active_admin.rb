@@ -224,12 +224,6 @@ ActiveAdmin.setup do |config|
     reviewer.authentication_method = :authenticate_admin_reviewer!
     reviewer.current_user_method = :current_admin_reviewer
     reviewer.logout_link_path = :destroy_admin_reviewer_session_path
-    reviewer.build_menu :utility_navigation do |menu|
-      menu.add label: "ActiveAdmin.info", url: "http://www.activeadmin.info",
-                                          html_options: { target: :blank }
-      reviewer.add_current_user_to_menu  menu
-      reviewer.add_logout_button_to_menu menu
-    end
   end
   # If you wanted to add a static menu item to the default menu provided:
   #

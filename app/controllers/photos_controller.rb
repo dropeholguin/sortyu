@@ -17,7 +17,7 @@ class PhotosController < ApplicationController
         respond_to do |format|
             @photo = Photo.find(params[:photo_id])
             if @photo.nil?
-                format.html { redirect_to root_path, erro: "No more photos to sort"}
+                format.html { redirect_to root_path, error: "No more photos to sort"}
             end
             if @photo.seen?
                 format.html { redirect_to root_path, error: "You can't sort already seen images." }
@@ -36,36 +36,42 @@ class PhotosController < ApplicationController
 
 
     def reaload_photos_queue
-        if cookies[:photos_queue].empty?
-            photos = Photo.photos_sorting(current_user.id).order(state: :desc)
-            
-            photos_ids = []
-            photos.each do |photo|
-                if photo.seens.present?
-                    state = false
-                    photo.seens.each do |seen|
-                        if seen.user_id == current_user.id
-                            state = true
-                        end
+        photos = []
+        case params[:sort_by].to_i
+        when 1
+            photos = Photo.photos_sorting(current_user.id).order( 'count_of_sorts DESC' )
+        when 2
+            photos = Photo.photos_sorting(current_user.id).order(cached_votes_up: :desc)
+        when 3
+            photos = Photo.photos_sorting(current_user.id).order( 'state DESC' )
+        else
+          photos = Photo.photos_sorting(current_user.id)
+        end
+        
+        photos_ids = []
+        photos.each do |photo|
+            if photo.seens.present?
+                state = false
+                photo.seens.each do |seen|
+                    if seen.user_id == current_user.id
+                        state = true
                     end
-                    if state == false
-                        photos_ids << photo
-                    end
-                elsif photo.seens.empty?
+                end
+                if state == false
                     photos_ids << photo
                 end
+            elsif photo.seens.empty?
+                photos_ids << photo
             end
-            photo_ids_array = photos_ids.pluck(:id)
-            if photo_ids_array.empty?
-                render js: "window.location = #{root_path.to_json}"
-                flash[:notice] = "You have sorted all images. Please try again later."
-            else
-                photo_array_string = photo_ids_array.join("-")
-                cookies[:photos_queue] = { value: photo_array_string, expires: 23.hours.from_now }
-                head :ok
-            end
+        end
+        photo_ids_array = photos_ids.pluck(:id)
+        if photo_ids_array.empty?
+            render js: "window.location = #{root_path.to_json}"
+            flash[:notice] = "You have sorted all images. Please try again later."
         else
-            head 500
+            photo_array_string = photo_ids_array.join("-")
+            cookies[:photos_queue] = { value: photo_array_string, expires: 23.hours.from_now }
+            head :ok
         end
     end
 
