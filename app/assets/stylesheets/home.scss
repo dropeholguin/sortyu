@@ -10,6 +10,23 @@
 		}
 	}
 
+	#filter-container{
+		background-color:#f2f2f2;
+		ul.dropdown.menu{
+			padding:0.7em;
+			.menu.container{
+				li{
+					padding:1em;
+				}
+				li:hover{
+					cursor:pointer;
+					background-color:#4286f4;
+					color:white;
+				}
+			}
+		}
+	}
+
 	.photo-stadistic{
 
 		.stadistic-title{
