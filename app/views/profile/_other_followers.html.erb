@@ -1,13 +1,16 @@
 <% if @user.followers.count > 0 %>
-	<ul>
-		<% @user.followers.each do |follower| %>
-			<li>
-				<%= link_to profile_other_user_show_path(follower.id) do %>
+	<% @user.followers.each do |follower| %>
+		<div class="follow-container">
+			<%= link_to profile_other_user_show_path(follower.id) do %>
+				<h6>
 					<%= follower.username %>
-				<% end %>
-			</li>
-		<% end %>
-	</ul>
+				</h6>
+				<h6 class="name">
+					<%= follower.first_name %>
+				</h6>
+			<% end %>
+		</div>
+	<% end %>
 <% else %>
 	<h4>No one is currently following <%= @user.full_name %></h4>
 <% end %>
