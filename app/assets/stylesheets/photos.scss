@@ -78,11 +78,11 @@
 	position: absolute;
 }
 
-#photo-editor{
-	#canvas {
+#photo-editor,#photo-container{
+	#canvas, .sorting-canvas {
 	    display: inline-block;
 	    width: 100%;
-	    #inner-canvas{
+	    #inner-canvas, .inner-sorting-canvas{
 	    	display: inline-block;
 	    }
 	}

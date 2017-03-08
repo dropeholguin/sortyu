@@ -192,6 +192,14 @@ class PhotosController < ApplicationController
     def edit
     end
 
+    def load_sections_to_sort
+        @photo = Photo.find(params[:photo_id])
+
+        respond_to do |format|
+            format.json { render json: { sections: @photo.sections }, status: :ok }
+        end
+    end
+
     def edit_sections
         @photo = Photo.find(params[:photo_id])
     end
@@ -199,7 +207,7 @@ class PhotosController < ApplicationController
     def save_sections
         @photo = Photo.find(params[:photo_id])
         params[:sections].each_with_index do |section, i|
-            @section = Section.new(photo_id: @photo.id, index: i.to_i, top: section[1]["top"], left:section[1]["left"], width:section[1]["width"], height: section[1]["height"])        
+            @section = Section.new(photo_id: @photo.id, index: i.to_i, top: section[1]["top"], left:section[1]["left"], width:section[1]["width"], height: section[1]["height"],translateX: section[1]["translateX"], translateY: section[1]["translateY"])        
             @section.save
             puts @section
         end

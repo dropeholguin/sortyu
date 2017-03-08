@@ -43,7 +43,8 @@ loadPhotoToSort = ->
 				console.log("Sorting photo_id sent correctly! -> #{photoToSortId[0]}")
 			complete: (jqXHR, textStatus) ->
 				appendSortingElements()
-				setTimeout("window.LocalTracker.performTracking()", 1000)
+				loadSectionsToSort(photoToSortId[0])
+				#setTimeout("window.LocalTracker.performTracking()", 1000)
 		else
 			$.ajax 'photos/reaload_photos_queue',
 			type: 'GET',
@@ -55,6 +56,21 @@ loadPhotoToSort = ->
 				console.log "Photos queue reloaded successfully!"
 				if readCookie('photos_queue').length > 0
 					loadPhotoToSort()
+
+loadSectionsToSort = (photoId)->
+	$.ajax 'photos/load_sections_to_sort',
+	type: 'GET',
+	dataType: 'json',
+	data: {
+		photo_id: photoId
+	},
+	error: (jqXHR, textStatus, errorThrown) ->
+		console.log("AJAX Error: #{textStatus}")
+	success: (data, textStatus, jqXHR) ->
+		console.log data.sections
+		console.log("Loaded sorting sections")
+		window.LocalPloter.performPlot(data.sections)
+
 
 updatePhotoToSortedState = ->
 	photoId = $('#next-sort').data('photo_id')
@@ -138,8 +154,8 @@ changeActiveState = ->
 			$('#eraser').addClass('active')
 			$('#pencil').removeClass('active')
 
-#Count new sections
-countNewSections = ->
+#Save sections
+saveSections = ->
 	if $('#photo-editor').length > 0
 		$('#save-sections').on 'click', ->
 			sections = []
@@ -147,9 +163,11 @@ countNewSections = ->
 				x = $(element).data('x')
 				y = $(element).data('y')
 				sectionsData = 
-					'top': parseInt(element.style.top,10) + x
-					'left': parseInt(element.style.left,10) + y
+					'top': parseInt(element.style.top,10)
+					'left': parseInt(element.style.left,10)
 					'width': element.style.width
+					'translateX': x
+					'translateY': y
 				if element.style.height == ''
 					sectionsData["height"] = '44'
 				else
@@ -172,10 +190,9 @@ countNewSections = ->
 
 $(document).on 'turbolinks:load', ->
 	changeActiveState()
-	countNewSections()
+	saveSections()
 		
 	
-
 $(document).on 'turbolinks:load', ->
 	if $('#sorting-principal').length > 0
 		loadPhotoToSort()
