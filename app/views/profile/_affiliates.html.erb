@@ -1,5 +1,5 @@
-<% if @user.followers.count > 0 %>
-	<% @user.followers.each do |follower| %>
+<% if current_user.followers.count > 0 %>
+	<% current_user.followers.each do |follower| %>
 		<div class="follow-container">
 			<%= link_to profile_other_user_show_path(follower.id) do %>
 				<h6>
@@ -12,5 +12,5 @@
 		</div>
 	<% end %>
 <% else %>
-	<h4>No one is currently following <%= @user.full_name %></h4>
+	<h4>You don't have affiliate yet</h4>
 <% end %>
