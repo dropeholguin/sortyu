@@ -142,14 +142,28 @@ changeActiveState = ->
 countNewSections = ->
 	if $('#photo-editor').length > 0
 		$('#save-sections').on 'click', ->
-			rectangleCount = $('.rect').length - 1
+			sections = []
+			$(".rect").each (index, element) ->
+				x = $(element).data('x')
+				y = $(element).data('y')
+				sectionsData = 
+					'top': parseInt(element.style.top,10) + x
+					'left': parseInt(element.style.left,10) + y
+					'width': element.style.width
+				if element.style.height == ''
+					sectionsData["height"] = '44'
+				else
+					sectionsData["height"] = parseInt(element.style.height,10)
+
+				sections.push sectionsData
+			
 			photoId = $('#save-sections').data('photo-id')
-			console.log photoId
+			console.log sections
 			$.ajax '/photos/save_sections',
 			type: 'POST',
 			dataType: 'script',
 			data: {
-				rectangle_count: rectangleCount, photo_id: photoId
+				photo_id: photoId, sections: sections
 			},
 			error: (jqXHR, textStatus, errorThrown) ->
 				console.log("AJAX Error: #{textStatus}")

@@ -197,12 +197,11 @@ class PhotosController < ApplicationController
     end
 
     def save_sections
-        max_rectangles = params[:rectangle_count].to_i
         @photo = Photo.find(params[:photo_id])
-        (0..max_rectangles).each do |i|
-            @section = Section.new(photo_id: @photo.id, index: i)        
+        params[:sections].each_with_index do |section, i|
+            @section = Section.new(photo_id: @photo.id, index: i.to_i, top: section[1]["top"], left:section[1]["left"], width:section[1]["width"], height: section[1]["height"])        
             @section.save
-            puts "guadreeeee"
+            puts @section
         end
         head :ok
     end
