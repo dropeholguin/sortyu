@@ -13,6 +13,10 @@ class PhotosController < ApplicationController
         #@photos = Photo.paginate(page: params[:page], per_page: 1).photos_sorting(@user.id)
     end
 
+    def remove_photos
+        @photos = Photo.photos(current_user).order('created_at desc')
+    end
+
     def load_photo_to_sort
         respond_to do |format|
             @photo = Photo.find(params[:photo_id])
