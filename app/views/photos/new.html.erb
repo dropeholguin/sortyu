@@ -13,14 +13,14 @@
 	    		<%= link_to "Facebook", import_facebook_path, class:"button facebook" %>
 	      <% end %>
 			</div>
-			<div class="small-12 medium-4 columns">
+			<!-- <div class="small-12 medium-4 columns">
 				<% if Identity.identity_google(current_user.id, "google_oauth2").empty? %>
-	        <%= link_to "Integrate Google", user_google_oauth2_omniauth_authorize_path, class:"button google" %>
-	      <%else %>
-	      	<%= link_to "Google", import_google_path, class:"button google" %>
-	      <% end %>
-			</div>
-			<div class="small-12 medium-4 columns">
+	        		<%= link_to "Integrate Google", user_google_oauth2_omniauth_authorize_path, class:"button google" %>
+	      		<%else %>
+	      			<%= link_to "Google", import_google_path, class:"button google" %>
+	     		<% end %>
+			</div> -->
+			<div class="small-12 medium-4 columns end">
 				<% if Identity.identity_instagram(current_user.id, "instagram").empty? %>
 	        <%= link_to "Integrate Instagram", user_instagram_omniauth_authorize_path, class:"button instagram" %>
 	      <%else %>
