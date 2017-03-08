@@ -5,7 +5,13 @@ class User < ApplicationRecord
   #:timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :confirmable, :lockable
-         
+  validates :first_name, :last_name, presence: true
+  validates :username, presence: true, uniqueness: true,
+                    format: {
+                             #fix bug whit a username
+                             with: /[a-zA-Z0-9_-]/,
+                             message: 'Must be formatted correctly.'
+                           }
   has_many :photos
   has_many :sortings
   has_many :identities
