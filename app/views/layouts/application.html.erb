@@ -20,7 +20,9 @@
       <div class="small-12 columns">
         <% if user_signed_in? %>
           <%= render 'layouts/header_log_in' %>
-        <% else %>
+        <% elsif affiliate_signed_in? %>
+          <%= render 'layouts/header_log_in_affiliate' %>
+        <% else%>
           <%= render 'layouts/header_log_out' %>
         <% end %>
         <%= yield %>
