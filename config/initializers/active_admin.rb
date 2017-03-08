@@ -211,9 +211,7 @@ ActiveAdmin.setup do |config|
   #       admin.add_logout_button_to_menu menu
   #     end
   #   end
-  config.load_paths = [File.expand_path('app/admin', Rails.root), File.expand_path('app/admin_reviewer', Rails.root)]
-
-
+  
   config.namespace :admin do |admin|
     admin.authentication_method = :authenticate_admin_user!
     admin.current_user_method = :current_admin_user
