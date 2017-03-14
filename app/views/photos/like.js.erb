@@ -1,5 +1,5 @@
 $('#like_photo').bind('ajax:success', function(){
    $(this).parent().parent().find('#show-like-<%= @photo.id %>').html('<%= escape_javascript @photo.votes_for.size.to_s %>');
    $(this).closest('#show-like-<%= @photo.id %>').hide();
-   $(this).closest('#like-container').html('<%= link_to unlike_photo_path(@photo), class:"button like tiny", method: :get, remote: true, id: "unlike_photo" do %><span class="fa fa-thumbs-o-up"></span><span id="show-unlike-<%= @photo.id %>"><%= @photo.get_upvotes.size %></span><% end %>');
+   $(this).closest('#like-container').html('<%= link_to unlike_photo_path(@photo), class:"button like", method: :get, remote: true, id: "unlike_photo" do %><span class="fa fa-thumbs-o-up"></span><span id="show-unlike-<%= @photo.id %>"><%= @photo.get_upvotes.size %></span><% end %>');
 });
