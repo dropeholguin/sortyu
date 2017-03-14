@@ -17,7 +17,7 @@ class PhotosController < ApplicationController
         respond_to do |format|
             @photo = Photo.find(params[:photo_id])
             if @photo.nil?
-                format.html { redirect_to root_path, erro: "No more photos to sort"}
+                format.html { redirect_to root_path, error: "No more photos to sort"}
             end
             if @photo.seen?
                 format.html { redirect_to root_path, error: "You can't sort already seen images." }
