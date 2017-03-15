@@ -141,7 +141,9 @@ class PhotosController < ApplicationController
                 photo_array_string = photo_ids_array.join("-")
                 cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
 
-                format.html { redirect_to edit_photo_path(first_photo_id), notice: 'Photo was successfully created.' }  
+                format.html { 
+                        redirect_to edit_photo_path(first_photo_id), notice: 'Photo was successfully created.'
+                    }  
             end
         end
     end
@@ -202,6 +204,15 @@ class PhotosController < ApplicationController
 
     def edit_sections
         @photo = Photo.find(params[:photo_id])
+
+        if @photo.first_edit == true
+            @photo.first_edit = false
+            puts 'First time seen'
+        else
+            puts 'Not the first time seen'
+        end
+
+
     end
 
     def save_sections
