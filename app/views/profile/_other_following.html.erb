@@ -2,6 +2,7 @@
 	<% @user.following.each do |following| %>
 		<div class="follow-container">
 			<%= link_to profile_other_user_show_path(following.id) do %>
+				<%= avatar_profile_link following, "medium", class:"circle" %>
 				<h6>
 					<%= following.username %>
 				</h6>
