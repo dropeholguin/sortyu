@@ -207,12 +207,13 @@ class PhotosController < ApplicationController
 
         if @photo.first_edit == true
             @photo.first_edit = false
-            puts 'First time seen'
-        else
-            puts 'Not the first time seen'
+            @photo.save   
         end
 
-
+        respond_to do |format|
+            format.js
+            format.html
+        end
     end
 
     def save_sections
