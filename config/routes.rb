@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 	post "users/lock/:id", to: 'user_locks#lock_access', as: :lock_access
 	get 'photos/load_photo_to_sort', as: 'load_new_photo_to_sort'
 	get 'photos/reaload_photos_queue'
+  get 'photos/remove_photos', to: 'photos#remove_photos', as: 'remove_photos'
 	patch 'photos/update_photo_to_sorted_state'
   post 'photos/create_sections'
   post 'photos/create_sortings'
