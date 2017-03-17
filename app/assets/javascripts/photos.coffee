@@ -154,9 +154,31 @@ changeActiveState = ->
 			$('#eraser').addClass('active')
 			$('#pencil').removeClass('active')
 
+getParameterByName = (name, url) ->
+	if !url
+		url = window.location.href
+	name = name.replace(/[\[\]]/g, '\\$&')
+	regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)')
+	results = regex.exec(url)
+	if !results
+		return null
+	if !results[2]
+		return ''
+	decodeURIComponent results[2].replace(/\+/g, ' ')
+
 #Save sections
 saveSections = ->
 	if $('#photo-editor').length > 0
+		parameter = getParameterByName('photo_id', window.location.href)
+		$.ajax '/photos/load_sections_tracker?photo_id='+parseInt(parameter),
+		type: 'GET',
+		dataType: 'json',
+		data: {
+		},
+		error: (jqXHR, textStatus, errorThrown) ->
+			console.log("AJAX Error: #{textStatus}")
+		success: (data, textStatus, jqXHR) ->
+			
 		$('#save-sections').on 'click', ->
 			sections = []
 			$(".rect").each (index, element) ->

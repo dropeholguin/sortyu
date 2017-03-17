@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 	get 'photos/reaload_photos_queue'
   get 'photos/load_sections_to_sort'
   get 'photo/edit_sections', to:'photos#edit_sections'
+  get 'photos/load_sections_tracker'
   post 'photos/save_sections', to: 'photos#save_sections'
 	patch 'photos/update_photo_to_sorted_state'
   post 'photos/create_sections'

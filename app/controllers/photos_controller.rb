@@ -204,20 +204,22 @@ class PhotosController < ApplicationController
 
     def edit_sections
         @photo = Photo.find(params[:photo_id])
+    end
 
-        if @photo.first_edit == true
-            @photo.first_edit = false
-            @photo.save   
-        end
-
+    def load_sections_tracker
+        @photo = Photo.find(params[:photo_id])
+        
         respond_to do |format|
-            format.js
-            format.html
+            format.json { render json: { photo: @photo }, status: :ok}
         end
     end
 
     def save_sections
         @photo = Photo.find(params[:photo_id])
+         if @photo.first_edit == true
+            @photo.first_edit = false
+            @photo.save  
+        end
         params[:sections].each_with_index do |section, i|
             @section = Section.new(photo_id: @photo.id, index: i.to_i, top: section[1]["top"], left:section[1]["left"], width:section[1]["width"], height: section[1]["height"],translateX: section[1]["translateX"], translateY: section[1]["translateY"])        
             @section.save
