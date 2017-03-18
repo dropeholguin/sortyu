@@ -250,7 +250,7 @@ class PhotosController < ApplicationController
             if @photo.update(photo_params)
                 if !cookies[:import_queue].empty?
                     photo_ids_array = cookies[:import_queue].split("-")
-                    photo_id = photo_ids_array.shift
+                    photo_id = photo_ids_array.first
                     # photo_array_string = photo_ids_array.join("-")
                     # cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
                     if @photo.first_edit
