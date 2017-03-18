@@ -12,7 +12,7 @@ window.LocalTracker.performTracking = ->
 		tracker.on 'track', (event) ->
 			for rect in event.data
 				plotRectangle(rect.x, rect.y, rect.width, rect.height)
-			createSection(event.data.length)
+			#createSection(event.data.length)
 			resetRect()
 
 		#Draws a rectangle
@@ -52,7 +52,7 @@ window.LocalTracker.performTracking = ->
 		# Method to create a section in the database for a trackerJs rectangle
 		createSection = (rectangles) ->
 			photoId = $('#next-sort').data('photo_id')
-			$.ajax 'photos/create_sections',
+			$.ajax '/photos/create_sections',
 			type: 'POST',
 			dataType: 'script',
 			data: {
