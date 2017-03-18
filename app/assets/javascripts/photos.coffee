@@ -190,15 +190,15 @@ saveSections = ->
 				if typeof y == 'undefined'
 					y = 0
 				sectionsData = 
-					'top': parseInt(element.style.top,10)
-					'left': parseInt(element.style.left,10)
+					'top': parseFloat(element.style.top)
+					'left': parseFloat(element.style.left)
 					'width': element.style.width
-					'translateX': parseInt(x,10)
-					'translateY': parseInt(y,10)
+					'translateX': x
+					'translateY': y
 				if element.style.height == ''
 					sectionsData["height"] = '44'
 				else
-					sectionsData["height"] = parseInt(element.style.height,10)
+					sectionsData["height"] = parseFloat(element.style.height)
 
 				sections.push sectionsData
 			
