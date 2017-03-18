@@ -217,7 +217,7 @@ class PhotosController < ApplicationController
             @photo.save  
         end
         params[:sections].each_with_index do |section, i|
-            @section = Section.new(photo_id: @photo.id, index: i.to_i, top: section[1]["top"], left:section[1]["left"], width:section[1]["width"], height: section[1]["height"],translateX: section[1]["translateX"], translateY: section[1]["translateY"])        
+            @section = Section.new(photo_id: @photo.id, index: i.to_i, top: section[1]["top"], left:section[1]["left"], width:section[1]["width"], height: section[1]["height"],translateX: section[1]["translateX"].to_i, translateY: section[1]["translateY"].to_i)        
             @section.save
             puts @section
         end
