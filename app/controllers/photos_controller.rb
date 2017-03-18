@@ -251,8 +251,8 @@ class PhotosController < ApplicationController
                 if !cookies[:import_queue].empty?
                     photo_ids_array = cookies[:import_queue].split("-")
                     photo_id = photo_ids_array.shift
-                    photo_array_string = photo_ids_array.join("-")
-                    cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
+                    # photo_array_string = photo_ids_array.join("-")
+                    # cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
                     if @photo.first_edit
                         format.html { redirect_to photo_edit_sections_path(photo_id: photo_id.to_i), notice: 'Photo was successfully updated, now add the sections of your photo.' }
                     else
