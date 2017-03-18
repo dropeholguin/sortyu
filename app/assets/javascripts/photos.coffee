@@ -215,6 +215,15 @@ saveSections = ->
 				console.log("AJAX Error: #{textStatus}")
 			success: (data, textStatus, jqXHR) ->
 				console.log("Photo edit sections saved successfully!")
+				importedPhotoIds = readCookie('import_queue').split("-")
+				if importedPhotoIds.length > 0 and importedPhotoIds[0] != ""
+					photoToEditSectionsId = importedPhotoIds.splice(0, 1)
+					deleteCookie('photos_queue')
+					createCookie('photos_queue', importedPhotoIds.join("-"), 1)
+					window.location = "/photo/edit_sections?photo_id=#{photoToEditSectionsId}"
+				else
+					windo.location = '/profile/show'
+
 
 $(document).on 'turbolinks:load', ->
 	changeActiveState()

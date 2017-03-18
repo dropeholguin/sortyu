@@ -233,7 +233,7 @@ class PhotosController < ApplicationController
 
         respond_to do |format|
             if @photo.save
-                format.html { redirect_to profile_show_path, notice: 'Photo was successfully created.' }
+                format.html { redirect_to photo_edit_sections_path(photo_id: @photo.id), notice: 'Photo was successfully created, now add the sections of your photo.' }
                 format.json { render :show, status: :created, location: @photo }
             else
                 format.html { render :new }
@@ -253,8 +253,11 @@ class PhotosController < ApplicationController
                     photo_id = photo_ids_array.shift
                     photo_array_string = photo_ids_array.join("-")
                     cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
-
-                    format.html { redirect_to edit_photo_path(photo_id.to_i), notice: 'Photo was successfully updated.' }
+                    if @photo.first_edit
+                        format.html { redirect_to photo_edit_sections_path(photo_id: photo_id.to_i), notice: 'Photo was successfully updated, now add the sections of your photo.' }
+                    else
+                        format.html { redirect_to edit_photo_path(photo_id.to_i), notice: 'Photo was successfully updated.' }
+                    end
 
                 elsif @user.photos.size >= 10
                     format.html { redirect_to profile_show_path, alert: 'You have reached the amount of free images' }
