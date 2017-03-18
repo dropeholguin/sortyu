@@ -12,7 +12,7 @@ window.LocalTracker.performTracking = ->
 		tracker.on 'track', (event) ->
 			for rect in event.data
 				plotRectangle(rect.x, rect.y, rect.width, rect.height)
-			createSection(event.data.length)
+			# createSection(event.data.length)
 			resetRect()
 
 		#Draws a rectangle

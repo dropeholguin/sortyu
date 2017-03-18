@@ -185,12 +185,16 @@ saveSections = ->
 			$(".rect").each (index, element) ->
 				x = $(element).data('x')
 				y = $(element).data('y')
+				if typeof x == 'undefined'
+					x = 0
+				if typeof y == 'undefined'
+					y = 0
 				sectionsData = 
 					'top': parseInt(element.style.top,10)
 					'left': parseInt(element.style.left,10)
 					'width': element.style.width
-					'translateX': x
-					'translateY': y
+					'translateX': parseInt(x,10)
+					'translateY': parseInt(y,10)
 				if element.style.height == ''
 					sectionsData["height"] = '44'
 				else
