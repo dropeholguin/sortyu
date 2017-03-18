@@ -26,7 +26,7 @@ window.LocalTracker.performTracking = ->
 			$rect.css("left","#{(imgOffset.left + x)}px")
 			$rect.css("top","#{(imgOffset.top + y)}px")
 
-			updateRect($rect)
+			# updateRect($rect)
 
 
 		#Adds on click event to each rectangle to reset all rectangles
