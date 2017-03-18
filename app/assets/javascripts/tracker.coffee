@@ -17,14 +17,14 @@ window.LocalTracker.performTracking = ->
 
 		#Draws a rectangle
 		plotRectangle = (x, y, w, h) ->
-			$rect = $('<div></div>')
-			$('#photo-editor').append($rect)
+			$rect = $('<div class=""></div>')
+			$('#inner-canvas').append($rect)
 			$rect.addClass('rect resize-drag')
 			$rect.css("width", "#{w}px")
 			$rect.css("height", "#{h}px")
 			imgOffset = $img.offset()
-			$rect.css("left","#{(imgOffset.left + x)}px")
-			$rect.css("top","#{(imgOffset.top + y)}px")
+			$rect.css("left","#{x}px")
+			$rect.css("top","#{y}px")
 
 			# updateRect($rect)
 

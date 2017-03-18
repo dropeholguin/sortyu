@@ -179,6 +179,7 @@ saveSections = ->
 		error: (jqXHR, textStatus, errorThrown) ->
 			console.log("AJAX Error: #{textStatus}")
 		success: (data, textStatus, jqXHR) ->
+			#Running Tracker at load_sections_tracker.js.erb
 			
 		$('#save-sections').on 'click', ->
 			sections = []
