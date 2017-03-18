@@ -1,0 +1,6 @@
+<% if @photo.first_edit %>
+	setTimeout(function(){
+		window.LocalTracker.performTracking();
+	}, 3000);
+	console.log('Once again')
+<% end %>

@@ -2,12 +2,12 @@ window.LocalTracker ?= {}
 
 window.LocalTracker.performTracking = ->
 	#Creates the tracker if finds the id
-	if $('#sorting-principal').length > 0
+	if $('#photo-edit-section').length > 0
 		number = 0
-		$img = $('#trackme')
+		$img = $('#edit-my-sections')
 		tracker = new tracking.ObjectTracker(['face'])
 		tracker.setStepSize(1.7)
-		tracking.track('#trackme', tracker)
+		tracking.track('#edit-my-sections', tracker)
 		
 		tracker.on 'track', (event) ->
 			for rect in event.data
@@ -18,8 +18,8 @@ window.LocalTracker.performTracking = ->
 		#Draws a rectangle
 		plotRectangle = (x, y, w, h) ->
 			$rect = $('<div></div>')
-			$('#photo-container').append($rect)
-			$rect.addClass('rect')
+			$('#photo-editor').append($rect)
+			$rect.addClass('rect resize-drag')
 			$rect.css("width", "#{w}px")
 			$rect.css("height", "#{h}px")
 			imgOffset = $img.offset()

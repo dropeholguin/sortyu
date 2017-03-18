@@ -170,10 +170,11 @@ getParameterByName = (name, url) ->
 saveSections = ->
 	if $('#photo-editor').length > 0
 		parameter = getParameterByName('photo_id', window.location.href)
-		$.ajax '/photos/load_sections_tracker?photo_id='+parseInt(parameter),
+		$.ajax '/photos/load_sections_tracker',
 		type: 'GET',
-		dataType: 'json',
+		dataType: 'script',
 		data: {
+			photo_id: parameter
 		},
 		error: (jqXHR, textStatus, errorThrown) ->
 			console.log("AJAX Error: #{textStatus}")

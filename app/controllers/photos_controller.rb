@@ -208,10 +208,6 @@ class PhotosController < ApplicationController
 
     def load_sections_tracker
         @photo = Photo.find(params[:photo_id])
-        
-        respond_to do |format|
-            format.json { render json: { photo: @photo }, status: :ok}
-        end
     end
 
     def save_sections
