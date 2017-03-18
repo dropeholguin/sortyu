@@ -246,6 +246,10 @@ class PhotosController < ApplicationController
         end
     end
 
+    def destroy_photos
+        
+    end
+
     def suspend
         @photo = Photo.find(params[:id])
         @photo.update_attributes(suspended: true)

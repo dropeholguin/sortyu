@@ -29,7 +29,8 @@ Rails.application.routes.draw do
   get :following, to: "relationships#following"
   patch "photos/suspend_photo/:id", to: 'photos#suspend', as: :suspend
   patch "photos/approve_photo/:id", to: 'photos#approve', as: :approve
-  
+  delete "destroy_photos", to: 'photos#destroy_photos'
+
   resources :photos do
   	member do
       patch :shared_times
