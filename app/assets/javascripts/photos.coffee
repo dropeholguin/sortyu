@@ -220,9 +220,9 @@ saveSections = ->
 					photoToEditSectionsId = importedPhotoIds.splice(0, 1)
 					deleteCookie('photos_queue')
 					createCookie('photos_queue', importedPhotoIds.join("-"), 1)
-					window.location = "/photo/edit_sections?photo_id=#{photoToEditSectionsId}"
+					window.location.replace("/photo/edit_sections?photo_id=#{photoToEditSectionsId}");
 				else
-					windo.location = '/profile/show'
+					window.location.replace('/profile/show')
 
 
 $(document).on 'turbolinks:load', ->
