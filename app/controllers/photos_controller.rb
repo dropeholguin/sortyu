@@ -140,6 +140,7 @@ class PhotosController < ApplicationController
                 first_photo_id = photo_ids_array.shift
                 photo_array_string = photo_ids_array.join("-")
                 cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
+                cookies[:first_imported_photo_id] = { value: first_photo_id, expires: 23.hours.from_now }
 
                 format.html { 
                         redirect_to edit_photo_path(first_photo_id), notice: 'Photo was successfully created.'
@@ -167,6 +168,7 @@ class PhotosController < ApplicationController
                 first_photo_id = photo_ids_array.shift
                 photo_array_string = photo_ids_array.join("-")
                 cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
+                cookies[:first_imported_photo_id] = { value: first_photo_id, expires: 23.hours.from_now }
 
                 format.html { redirect_to edit_photo_path(first_photo_id), notice: 'Photo was successfully created.' }  
             end
@@ -248,7 +250,14 @@ class PhotosController < ApplicationController
         @user = current_user
         respond_to do |format|
             if @photo.update(photo_params)
-                if !cookies[:import_queue].empty?
+                if !cookies[:first_imported_photo_id].nil?
+                    photo_id = cookies[:first_imported_photo_id]
+                    if @photo.first_edit
+                        format.html { redirect_to photo_edit_sections_path(photo_id: photo_id.to_i), notice: 'Photo was successfully updated, now add the sections of your photo.' }
+                    else
+                        format.html { redirect_to edit_photo_path(photo_id.to_i), notice: 'Photo was successfully updated.' }
+                    end
+                elsif !cookies[:import_queue].empty?
                     photo_ids_array = cookies[:import_queue].split("-")
                     photo_id = photo_ids_array.first
                     # photo_array_string = photo_ids_array.join("-")
@@ -258,7 +267,6 @@ class PhotosController < ApplicationController
                     else
                         format.html { redirect_to edit_photo_path(photo_id.to_i), notice: 'Photo was successfully updated.' }
                     end
-
                 elsif @user.photos.size >= 10
                     format.html { redirect_to profile_show_path, alert: 'You have reached the amount of free images' }
                 else
