@@ -44,7 +44,7 @@ loadPhotoToSort = ->
 			complete: (jqXHR, textStatus) ->
 				appendSortingElements()
 				loadSectionsToSort(photoToSortId[0])
-				#setTimeout("window.LocalTracker.performTracking()", 1000)
+
 		else
 			$.ajax 'photos/reaload_photos_queue',
 			type: 'GET',
@@ -220,7 +220,9 @@ saveSections = ->
 					photoToEditSectionsId = importedPhotoIds.splice(0, 1)
 					deleteCookie('photos_queue')
 					createCookie('photos_queue', importedPhotoIds.join("-"), 1)
-					window.location.replace("/photo/edit_sections?photo_id=#{photoToEditSectionsId}");
+					console.log importedPhotoIds
+					console.log readCookie('import_queue')
+					window.location.replace("/photos/#{photoToEditSectionsId}/edit")
 				else
 					window.location.replace('/profile/show')
 
