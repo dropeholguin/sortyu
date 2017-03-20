@@ -1,7 +1,7 @@
 // Place all the styles related to the photos controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-#sorting-principal{
+#sorting-principal, #photo-edit-section, #photo-show{
 	.rect {
 		border: 2px solid #3399ff;
 		position: absolute;
@@ -30,7 +30,11 @@
 	.rect-clicked{
 		border:thin solid #3399ff;
 		border-radius:5px;
-		opacity:0.5;
+		opacity:0.65;
+	}
+
+	.rect-pad{
+		padding:1em;
 	}
 
 	.share-container{
@@ -72,9 +76,46 @@
 	}
 }
 
+#photo-edit-section{
+	.rect{
+		width:50px;
+		height:50px;
+	}
+}
+.rect-draw{
+	border: 2px solid #3399ff;
+	position: absolute;
+}
+
+#photo-editor,#photo-container{
+	#canvas, .sorting-canvas {
+	    display: inline-block;
+	    width: 100%;
+	    #inner-canvas, .inner-sorting-canvas{
+	    	display: inline-block;
+	    	position: relative;
+	    }
+	}
+	.rect {
+		border: 2px solid #3399ff;
+		box-sizing: border-box;
+		-webkit-transform: translate(0px, 0px);
+          transform: translate(0px, 0px);
+	}
+
+	a{
+		margin-right:1em;
+		margin-left:1em;
+	}
+
+	.active{
+		color:blue;
+	}
+}
+
 /* Small only */
 @media screen and (max-width: 39.9375em) {
-	#sorting-principal{
+	#sorting-principal, #photo-edit-section{
 		#follow-container{
 
 			h6{

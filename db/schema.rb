@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170305215529) do
+ActiveRecord::Schema.define(version: 20170318225708) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 20170305215529) do
     t.boolean  "suspended",                          default: false
     t.integer  "count_of_sorts",                     default: 0
     t.string   "dimensions",              limit: 30
+    t.boolean  "first_edit",                         default: true
     t.index ["cached_votes_down"], name: "index_photos_on_cached_votes_down", using: :btree
     t.index ["cached_votes_score"], name: "index_photos_on_cached_votes_score", using: :btree
     t.index ["cached_votes_total"], name: "index_photos_on_cached_votes_total", using: :btree
@@ -154,10 +155,16 @@ ActiveRecord::Schema.define(version: 20170305215529) do
 
   create_table "sections", force: :cascade do |t|
     t.boolean  "rate_first"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
     t.integer  "index"
     t.integer  "photo_id"
+    t.decimal  "top",        precision: 10, scale: 3, default: "0.0"
+    t.decimal  "left",       precision: 10, scale: 3, default: "0.0"
+    t.integer  "width",                               default: 0
+    t.integer  "height",                              default: 0
+    t.decimal  "translateX", precision: 10, scale: 3, default: "0.0"
+    t.decimal  "translateY", precision: 10, scale: 3, default: "0.0"
     t.index ["photo_id"], name: "index_sections_on_photo_id", using: :btree
   end
 

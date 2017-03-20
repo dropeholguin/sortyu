@@ -1,5 +1,15 @@
-<div class="small-12 text-center columns">
-	<%= link_to 'Remove Images', remove_photos_path, class:"button delete" %>
+<div class="small-12 columns">
+	<%= link_to 'Remove Images', remove_photos_path, class:"button tiny delete float-left" %>
+  <ul class="dropdown menu float-right" data-dropdown-menu>
+    <li>
+      <a href="#">Filters</a>
+      <ul class="menu">
+        <li><%= link_to "Sorts", request.query_parameters.merge({sort_by: 1}) %></li>
+        <li><%= link_to "Likes", request.query_parameters.merge({sort_by: 2}) %></li>
+        <li><%= link_to "Paid", request.query_parameters.merge({sort_by: 3}) %></li>
+      </ul>
+    </li>
+  </ul>
 </div>
 <div id="photo-container" class="small-12 columns">
 	<% @photos.each() do |photo| %>
