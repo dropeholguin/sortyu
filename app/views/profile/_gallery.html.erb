@@ -1,20 +1,17 @@
+<div class="small-12 columns">
+	<%= link_to 'Remove Images', remove_photos_path, class:"button tiny delete float-left" %>
+  <ul class="dropdown menu float-right" data-dropdown-menu>
+    <li>
+      <a href="#">Filters</a>
+      <ul class="menu">
+        <li><%= link_to "Sorts", request.query_parameters.merge({sort_by: 1}) %></li>
+        <li><%= link_to "Likes", request.query_parameters.merge({sort_by: 2}) %></li>
+        <li><%= link_to "Paid", request.query_parameters.merge({sort_by: 3}) %></li>
+      </ul>
+    </li>
+  </ul>
+</div>
 <div id="photo-container" class="small-12 columns">
-		<!-- <div class="reveal tiny" id="imagesWarning" data-reveal>
-		  <h3>Limit Reached</h3>
-		  <p class="lead">You can upload up to 10 free images</p>
-		  <h3>Enjoy uploading images?</h3>
-		  <p><b><i>Get benefits for paid images:</i></b></p>
-		  <ul>
-		  	<li>Unlimited uploads</li>
-		  	<li>Be at the top of the sorting queue</li>
-		  </ul>
-		  <button class="close-button" data-close aria-label="Close modal" type="button">
-		    <span aria-hidden="true">&times;</span>
-		  </button>
-		</div>
-		<div class="target hidden">
-			<p><a data-open="imagesWarning" id="openModal">Click me for a modal</a></p>
-		</div> -->
 	<% @photos.each() do |photo| %>
 		<div class="under-space small-6 medium-4 float-left columns">
 			<%= link_to photo do %>
@@ -32,3 +29,19 @@
 		</div>
 	<% end %>
 </div>
+<!-- <div class="reveal tiny" id="imagesWarning" data-reveal>
+  <h3>Limit Reached</h3>
+  <p class="lead">You can upload up to 10 free images</p>
+  <h3>Enjoy uploading images?</h3>
+  <p><b><i>Get benefits for paid images:</i></b></p>
+  <ul>
+  	<li>Unlimited uploads</li>
+  	<li>Be at the top of the sorting queue</li>
+  </ul>
+  <button class="close-button" data-close aria-label="Close modal" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="target hidden">
+	<p><a data-open="imagesWarning" id="openModal">Click me for a modal</a></p>
+</div> -->

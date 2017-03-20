@@ -43,7 +43,7 @@ function appendSortingElements(){
 	$('#sorting-principal #follow-container').append('<%= link_to profile_other_user_show_path(@photo.user_id) do %> <h6><%= @photo.user.username %></h6> <% end %>');
 
 	//Appends the image source-url to be sorted
-	$('#sorting-principal #photo-container').append('<span id="source-url" class="hidden"><%= @photo.file.url(:medium) %></span><img id="trackme">');
+	$('#sorting-principal #photo-container .inner-sorting-canvas').append('<span id="source-url" class="hidden"><%= @photo.file.url(:large) %></span><img id="trackme">');
 	//This adds support for async load from Amazon S3 on production/staging
 	imageToSort = document.getElementById('trackme');
 	$(imageToSort).attr('crossOrigin', 'anonymous');

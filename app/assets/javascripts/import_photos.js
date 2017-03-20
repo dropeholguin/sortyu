@@ -1,5 +1,5 @@
 function importInstagram() {
-  $('#import_instagram').click(function() {  
+  $('.import_instagram').click(function() {  
   	var selected = new Array();
    	$("input:checkbox[name=photo_instagram]:checked").each(function(){
     	selected.push($(this).val())
@@ -16,7 +16,7 @@ function importInstagram() {
 $(document).on('turbolinks:load', importInstagram);
 
 function importFacebook() {
-  $('#import_facebook').click(function() {  
+  $('.import_facebook').click(function() {  
     var selected = new Array();
     $("input:checkbox[name=photo_facebook]:checked").each(function(){
       selected.push($(this).val())

@@ -1,4 +1,4 @@
-<div id="profile-show">
+<div id="profile-show" class="under-space">
 	<div class="row upper-space">
 		<div class="small-4 medium-2 medium-text-center columns">
 			<%= avatar_profile_link current_user, "medium", class: "circle" %>
@@ -9,7 +9,6 @@
 		<div class="upper-space small-4 medium-6 medium-pull-1 end text-center columns">
 			<div class="show-for-medium medium-6 columns">
 				<%= link_to "Edit", edit_user_registration_path , class:"button small" %>
-				<%= link_to "Upload", new_photo_path, class:"button small" %>
 			</div>
 		</div>
 	</div>
@@ -20,11 +19,10 @@
 	</div>
 	<div class="hide-for-medium small-12 text-center columns">
 		<%= link_to "Edit", edit_user_registration_path , class:"button small" %>
-		<%= link_to "Upload", new_photo_path, class:"button small" %>
 	</div>
 	<div class="row">
 		<div class="small-12 columns">
-			<ul class="tabs" data-tabs id="example-tabs">
+			<ul class="tabs" data-tabs id="tabs">
 			  	<li id="photos-count" data-photos-size="<%= @photos.count %>" class="tabs-title is-active">
 			  		<a href="#panel-gallery" aria-selected="true"><b><%= @photos.count() %></b> Images</a>
 			  	</li>
@@ -34,8 +32,11 @@
 			 	<li class="tabs-title">
 			 		<a href="#panel-following"><b><%= current_user.following.count %></b> Following</a>
 			 	</li>
+			 	<li class="tabs-title">
+			 		<a href="#panel-affilliates">Affiliates</a>
+			 	</li>
 			</ul>
-			<div class="tabs-content small-12 columns" data-tabs-content="example-tabs">
+			<div class="tabs-content small-12 columns" data-tabs-content="tabs">
 				<div class="tabs-panel is-active" id="panel-gallery">
 					<%= render partial: 'gallery' %>
 				</div>
@@ -44,6 +45,9 @@
 				</div>
 				<div class="tabs-panel" id="panel-following">
 					<%= render partial: 'following' %>
+				</div>
+				<div class="tabs-panel" id="panel-affilliates">
+					<%= render partial: 'affiliates' %>
 				</div>
 			</div>
 		</div>

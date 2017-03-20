@@ -1,0 +1,20 @@
+<div id="remove-photos" class="upper-pad under-pad row">
+	<div class="row">
+		<div class="small-12 text-center columns">
+			<%= button_tag('Remove Photos', class:"button delete") %>
+		</div>
+	</div>
+	<div class="row">
+		<% @photos.each do |photo| %>
+			<div class="upper-space small-4 text-center end columns">
+				<%= image_tag(photo.file.url(:medium),id: photo.id) %>
+				<%= check_box_tag('foto', photo.id , false) %>
+			</div>
+		<% end %>
+	</div>
+	<div class="upper-space under-space row">
+		<div class="small-12 text-center columns">
+			<%= button_tag('Remove Photos', class:"button delete") %>
+		</div>
+	</div>
+</div>

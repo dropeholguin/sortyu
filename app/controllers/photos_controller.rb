@@ -11,6 +11,10 @@ class PhotosController < ApplicationController
         #@photos = Photo.paginate(page: params[:page], per_page: 1).photos_sorting(@user.id)
     end
 
+    def remove_photos
+        @photos = Photo.photos(current_user).order('created_at desc')
+    end
+
     def load_photo_to_sort
         respond_to do |format|
             @photo = Photo.find(params[:photo_id])
@@ -34,18 +38,7 @@ class PhotosController < ApplicationController
 
 
     def reaload_photos_queue
-        photos = []
-        case params[:sort_by].to_i
-        when 1
-            photos = Photo.photos_sorting(current_user.id).order( 'count_of_sorts DESC' )
-        when 2
-            photos = Photo.photos_sorting(current_user.id).order(cached_votes_up: :desc)
-        when 3
-            photos = Photo.photos_sorting(current_user.id).order( 'state DESC' )
-        else
-          photos = Photo.photos_sorting(current_user.id)
-        end
-        
+        photos = Photo.photos_sorting(current_user.id).order(state: :desc)
         photos_ids = []
         photos.each do |photo|
             if photo.seens.present?
@@ -144,8 +137,11 @@ class PhotosController < ApplicationController
                 first_photo_id = photo_ids_array.shift
                 photo_array_string = photo_ids_array.join("-")
                 cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
+                cookies[:first_imported_photo_id] = { value: first_photo_id, expires: 23.hours.from_now }
 
-                format.html { redirect_to edit_photo_path(first_photo_id), notice: 'Photo was successfully created.' }  
+                format.html { 
+                        redirect_to edit_photo_path(first_photo_id), notice: 'Photo was successfully created.'
+                    }  
             end
         end
     end
@@ -169,6 +165,7 @@ class PhotosController < ApplicationController
                 first_photo_id = photo_ids_array.shift
                 photo_array_string = photo_ids_array.join("-")
                 cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
+                cookies[:first_imported_photo_id] = { value: first_photo_id, expires: 23.hours.from_now }
 
                 format.html { redirect_to edit_photo_path(first_photo_id), notice: 'Photo was successfully created.' }  
             end
@@ -201,6 +198,36 @@ class PhotosController < ApplicationController
     def edit
     end
 
+    def load_sections_to_sort
+        @photo = Photo.find(params[:photo_id])
+
+        respond_to do |format|
+            format.json { render json: { sections: @photo.sections }, status: :ok }
+        end
+    end
+
+    def edit_sections
+        @photo = Photo.find(params[:photo_id])
+    end
+
+    def load_sections_tracker
+        @photo = Photo.find(params[:photo_id])
+    end
+
+    def save_sections
+        @photo = Photo.find(params[:photo_id])
+         if @photo.first_edit == true
+            @photo.first_edit = false
+            @photo.save  
+        end
+        params[:sections].each_with_index do |section, i|
+            @section = Section.new(photo_id: @photo.id, index: i.to_i, top: section[1]["top"], left:section[1]["left"], width:section[1]["width"], height: section[1]["height"],translateX: section[1]["translateX"], translateY: section[1]["translateY"])        
+            @section.save
+            puts @section
+        end
+        head :ok
+    end
+
     # POST /photos
     # POST /photos.json
     def create
@@ -214,7 +241,7 @@ class PhotosController < ApplicationController
 
         respond_to do |format|
             if @photo.save
-                format.html { redirect_to profile_show_path, notice: 'Photo was successfully created.' }
+                format.html { redirect_to photo_edit_sections_path(photo_id: @photo.id), notice: 'Photo was successfully uploaded. Time to set your photo sections.' }
                 format.json { render :show, status: :created, location: @photo }
             else
                 format.html { render :new }
@@ -229,14 +256,24 @@ class PhotosController < ApplicationController
         @user = current_user
         respond_to do |format|
             if @photo.update(photo_params)
-                if !cookies[:import_queue].empty?
+                if !cookies[:first_imported_photo_id].nil?
+                    photo_id = cookies[:first_imported_photo_id]
+                    cookies.delete(:first_imported_photo_id)
+                    if @photo.first_edit
+                        format.html { redirect_to photo_edit_sections_path(photo_id: photo_id.to_i), notice: 'Photo was successfully updated, now add the sections of your photo.' }
+                    else
+                        format.html { redirect_to edit_photo_path(photo_id.to_i), notice: 'Photo was successfully updated.' }
+                    end
+                elsif !cookies[:import_queue].empty?
                     photo_ids_array = cookies[:import_queue].split("-")
                     photo_id = photo_ids_array.shift
                     photo_array_string = photo_ids_array.join("-")
                     cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
-
-                    format.html { redirect_to edit_photo_path(photo_id.to_i), notice: 'Photo was successfully updated.' }
-
+                    if @photo.first_edit
+                        format.html { redirect_to photo_edit_sections_path(photo_id: photo_id.to_i), notice: 'Photo was successfully updated, now add the sections of your photo.' }
+                    else
+                        format.html { redirect_to edit_photo_path(photo_id.to_i), notice: 'Photo was successfully updated.' }
+                    end
                 elsif @user.photos.size >= 10
                     format.html { redirect_to profile_show_path, alert: 'You have reached the amount of free images' }
                 else
@@ -258,6 +295,10 @@ class PhotosController < ApplicationController
             format.html { redirect_to profile_show_path, notice: 'Photo was successfully destroyed.' }
             format.json { head :no_content }
         end
+    end
+
+    def destroy_photos
+        
     end
 
     def suspend

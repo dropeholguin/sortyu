@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-
+  
   devise_for :affiliates, controllers: { registrations: "users/registrations" }
+
   devise_for :admin_reviewers, ActiveAdmin::Devise.config.merge({path: '/reviewer'})
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -8,6 +9,7 @@ Rails.application.routes.draw do
 	get 'profile/show/', to: 'profile#show', as: 'profile_show'
 	get 'profile/other_user_show/:id', to: 'profile#other_user_show', as: 'profile_other_user_show'
   get 'profile/affiliate/:id', to: 'profile#affiliate', as: 'profile_affiliate_show'
+
 	get 'import_facebook/photos/', to: 'import_photos#import_facebook', as: 'import_facebook'
 	get 'import_instagram/photos/', to: 'import_photos#import_instagram', as: 'import_instagram'
 	get 'import_google/photos/', to: 'import_photos#import_google', as: 'import_google'
@@ -17,6 +19,11 @@ Rails.application.routes.draw do
 	post "users/lock/:id", to: 'user_locks#lock_access', as: :lock_access
 	get 'photos/load_photo_to_sort', as: 'load_new_photo_to_sort'
 	get 'photos/reaload_photos_queue'
+  get 'photos/remove_photos', to: 'photos#remove_photos', as: 'remove_photos'
+  get 'photos/load_sections_to_sort'
+  get 'photo/edit_sections', to:'photos#edit_sections'
+  get 'photos/load_sections_tracker'
+  post 'photos/save_sections', to: 'photos#save_sections'
 	patch 'photos/update_photo_to_sorted_state'
   post 'photos/create_sections'
   post 'photos/create_sortings'
@@ -32,7 +39,8 @@ Rails.application.routes.draw do
   get :following, to: "relationships#following"
   patch "photos/suspend_photo/:id", to: 'photos#suspend', as: :suspend
   patch "photos/approve_photo/:id", to: 'photos#approve', as: :approve
-  
+  delete "destroy_photos", to: 'photos#destroy_photos'
+
   resources :photos do
   	member do
       patch :shared_times

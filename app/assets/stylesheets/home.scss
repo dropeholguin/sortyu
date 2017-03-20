@@ -2,11 +2,28 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#sorting-principal{
+#sorting-principal, #photo-edit-section{
 
 	#user-name-container{
 		h6{
 			display:inline-flex;
+		}
+	}
+
+	#filter-container{
+		background-color:#f2f2f2;
+		ul.dropdown.menu{
+			padding:0.7em;
+			.menu.container{
+				li{
+					padding:1em;
+				}
+				li:hover{
+					cursor:pointer;
+					background-color:#4286f4;
+					color:white;
+				}
+			}
 		}
 	}
 
@@ -54,7 +71,7 @@
 
 /* Small only */
 @media screen and (max-width: 39.9375em) {
-	#sorting-principal{
+	#sorting-principal, #photo-edit-section{
 
 		h6{
 			margin-top:1em;
@@ -73,7 +90,7 @@
 
 /* Medium only */
 @media screen and (min-width: 40em) and (max-width: 63.9375em) {
-	#sorting-principal{
+	#sorting-principal, #photo-edit-section{
 		#user-name-container{
 			left:-12%;
 		}
@@ -82,7 +99,7 @@
 
 /* Large and up */
 @media screen and (min-width: 64em) {
-	#sorting-principal{
+	#sorting-principal, #photo-edit-section{
 		#user-name-container{
 			left:-5%;
 			h6{
