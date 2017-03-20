@@ -33,13 +33,10 @@
 			<p>Share: </p> 
 		</div>
 		<div class="small-8 medium-4 medium-push-1 large-2 large-push-4 text-center end columns">
-			<%= facebook_button :turbolinks => true %>
+			<%= facebook_button :static_link => true %>
 			<%= twitter_button :turbolinks => true %>
 		</div>
 	</div>
-	<div class="small-8 medium-4 medium-push-1 large-2 large-push-4 text-center end columns">
-		<%= facebook_button :static_link => true %>
-		<%= twitter_button :turbolinks => true %>
 	<div class="row">
 		<div class="small-12 text-center columns">
 			<%= link_to 'Pay', new_charge_path(photo_id: @photo.id), class: "button" %>
