@@ -15,6 +15,7 @@
 	<div class="row upper-space">
 		<div class="under-space small-12 medium-8 medium-push-2 columns">
 			<p><b><%= @user.username %> </b></p>
+			<p><%= request.protocol + request.host + "?aff_id=#{@user.id}" %></p>
 		</div>
 	</div>
 	<div class="hide-for-medium small-12 text-center columns">
