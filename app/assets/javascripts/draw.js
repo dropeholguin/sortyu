@@ -32,6 +32,9 @@ $(document).on("turbolinks:load", function() {
     //Also calls deleteRect() when #canvas is in "deleting" status
     $("#canvas").on("click", function(event){
         if($('#canvas').hasClass('drawing')){
+            //Avoids Sections repetition when previous one is not resized or moved.
+            $("#canvas").unbind("click", drawRect);
+
             $("#canvas").bind("click", drawRect);
         } else if($('#canvas').hasClass('deleting')){
             $target = $(event.target);
