@@ -7,3 +7,4 @@ showImagesWarning= ->
 
 $(document).on 'turbolinks:load', ->
 	showImagesWarning()
+	

@@ -127,30 +127,6 @@ startedSorting = ->
 	else
 		return false
 
-sortBySorted = ->
-	$.ajax 'photos/reaload_photos_queue',
-	type: 'GET',
-	dataType: 'script',
-	data: {sort_by: 1},
-	success: (data, textStatus, jqXHR) ->
-		finishSorting()
-
-sortByLiked = ->
-	$.ajax 'photos/reaload_photos_queue',
-	type: 'GET',
-	dataType: 'script',
-	data: {sort_by: 2},
-	success: (data, textStatus, jqXHR) ->
-		finishSorting()
-
-sortByPaid = ->
-	$.ajax 'photos/reaload_photos_queue',
-	type: 'GET',
-	dataType: 'script',
-	data: {sort_by: 3},
-	success: (data, textStatus, jqXHR) ->
-		finishSorting()
-
 $(document).on 'turbolinks:load', ->
 	if $('#sorting-principal').length > 0
 		loadPhotoToSort()
@@ -163,15 +139,6 @@ $(document).on 'turbolinks:load', ->
 				createSortings()
 			else
 				console.log "Don't do anything yet, not all sections clicked."
-
-		$('#sort_by_sorted').on 'click', (event) ->
-			sortBySorted()
-
-		$('#sort_by_liked').on 'click', (event) ->
-			sortByLiked()
-
-		$('#sort_by_paid').on 'click', (event) ->
-			sortByPaid()
 
 		$('#next-sort').on 'click', (event) ->
 			finishSorting()

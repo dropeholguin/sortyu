@@ -40,18 +40,7 @@ class PhotosController < ApplicationController
 
 
     def reaload_photos_queue
-        photos = []
-        case params[:sort_by].to_i
-        when 1
-            photos = Photo.photos_sorting(current_user.id).order( 'count_of_sorts DESC' )
-        when 2
-            photos = Photo.photos_sorting(current_user.id).order(cached_votes_up: :desc)
-        when 3
-            photos = Photo.photos_sorting(current_user.id).order( 'state DESC' )
-        else
-          photos = Photo.photos_sorting(current_user.id)
-        end
-        
+        photos = Photo.photos_sorting(current_user.id).order(state: :desc)
         photos_ids = []
         photos.each do |photo|
             if photo.seens.present?
