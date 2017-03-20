@@ -3,7 +3,7 @@ $(document).on("turbolinks:load", function() {
     //Adds a section on click within the canvas (image)
     function drawRect(event){
         if($(event.target).closest('#inner-canvas').length) {
-            $rect = $('<div class="rect resize-drag"></div>');
+            $rect = $('<div class="rect resize-drag rect-pad"></div>');
             $("#inner-canvas").append($rect);
 
             $rect.css( {position:"absolute", width: "44px", top: "300px", left: "250px"});
@@ -110,7 +110,6 @@ $(document).on("turbolinks:load", function() {
 
             target.setAttribute('data-x', x);
             target.setAttribute('data-y', y);
-            target.textContent = Math.round(event.rect.width) + '×' + Math.round(event.rect.height);
 
             //Unbinds the click event on canvas while resizing to avoid double drawing
             $("#canvas").unbind("click", drawRect);

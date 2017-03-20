@@ -137,7 +137,7 @@ class PhotosController < ApplicationController
                 }
             
                 photo_ids_array = photos.pluck(:id)
-                first_photo_id = photo_ids_array.first
+                first_photo_id = photo_ids_array.shift
                 photo_array_string = photo_ids_array.join("-")
                 cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
 
@@ -164,7 +164,7 @@ class PhotosController < ApplicationController
                 }
             
                 photo_ids_array = photos.pluck(:id)
-                first_photo_id = photo_ids_array.first
+                first_photo_id = photo_ids_array.shift
                 photo_array_string = photo_ids_array.join("-")
                 cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
 
