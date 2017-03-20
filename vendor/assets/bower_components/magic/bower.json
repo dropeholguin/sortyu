@@ -9,7 +9,7 @@
         "animations"
     ],
     "main": [
-        "magic.min.css"
+        "magic.css"
     ],
     "license": "MIT"
 }
