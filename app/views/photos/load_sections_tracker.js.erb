@@ -1,0 +1,9 @@
+<% if @photo.first_edit %>
+	setTimeout(function(){
+		window.LocalTracker.performTracking();
+	}, 0);
+<% else %>
+	<% @photo.sections.each do |section| %>
+		window.LocalPloter.plotSectionEdit(<%= section.left %>, <%= section.top %>, <%= section.width %>,<%= section.height %>,<%= section.translateX %>,<%= section.translateY %>)
+	<% end %>
+<% end %>
