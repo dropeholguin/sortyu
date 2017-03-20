@@ -4,6 +4,7 @@ class Affiliate < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :users
+  monetize :balance_cents, as: :balance
   
   def active_for_authentication?
     super and self.is_active?

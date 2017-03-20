@@ -26,8 +26,20 @@ index do
 	column :first_name
 	column :last_name
 	column :email
+  column "Balance" do |affiliate|
+    humanized_money_with_symbol affiliate.balance_cents
+  end
 	column "Create Date", :created_at
   	actions
+end
+
+csv do
+  column :first_name
+  column :last_name
+  column :email
+  column "Balance" do |affiliate|
+    humanized_money_with_symbol affiliate.balance_cents
+  end 
 end
 
 filter :first_name
