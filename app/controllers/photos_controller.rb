@@ -233,7 +233,7 @@ class PhotosController < ApplicationController
 
         respond_to do |format|
             if @photo.save
-                format.html { redirect_to photo_edit_sections_path(photo_id: @photo.id), notice: 'Photo was successfully created, now add the sections of your photo.' }
+                format.html { redirect_to photo_edit_sections_path(photo_id: @photo.id), notice: 'Photo was successfully uploaded. Time to set your photo sections.' }
                 format.json { render :show, status: :created, location: @photo }
             else
                 format.html { render :new }

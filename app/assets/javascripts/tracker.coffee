@@ -12,7 +12,6 @@ window.LocalTracker.performTracking = ->
 		tracker.on 'track', (event) ->
 			for rect in event.data
 				plotRectangle(rect.x, rect.y, rect.width, rect.height)
-			#createSection(event.data.length)
 			resetRect()
 
 		#Draws a rectangle
@@ -26,7 +25,7 @@ window.LocalTracker.performTracking = ->
 			$rect.css("left","#{x}px")
 			$rect.css("top","#{y}px")
 
-			# updateRect($rect)
+			updateRect($rect)
 
 
 		#Adds on click event to each rectangle to reset all rectangles
