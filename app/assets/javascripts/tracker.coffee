@@ -11,7 +11,6 @@ window.LocalTracker.performTracking = ->
 		tracker.on 'track', (event) ->
 			for rect in event.data
 				plotRectangle(rect.x, rect.y, rect.width, rect.height)
-			resetRect()
 
 		#Draws a rectangle
 		plotRectangle = (x, y, w, h) ->
