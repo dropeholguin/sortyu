@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 20170320170618) do
     t.datetime "updated_at",                             null: false
     t.boolean  "is_active",              default: false
     t.text     "about_you"
-    t.integer  "balance_cents"
+    t.integer  "balance_cents",          default: 0
     t.index ["email"], name: "index_affiliates_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_affiliates_on_reset_password_token", unique: true, using: :btree
   end
