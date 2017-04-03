@@ -15,6 +15,12 @@ nav.share iframe {border:0; margin-top:0; padding-top:0;} /* if using medium siz
 	.fb_iframe_widget{
 		margin-bottom:0.5em;
 	}
+
+	#photo-show{
+		.fb_iframe_widget{
+			top:-4px;
+		}
+	}
 }
 
 /* Medium and up */
@@ -24,12 +30,3 @@ nav.share iframe {border:0; margin-top:0; padding-top:0;} /* if using medium siz
 		margin-right:0.5em;
 	}
 }
-
-/* Medium only */
-@media screen and (min-width: 40em) and (max-width: 63.9375em) {}
-
-/* Large and up */
-@media screen and (min-width: 64em) {}
-
-/* Large only */
-@media screen and (min-width: 64em) and (max-width: 74.9375em) {}
