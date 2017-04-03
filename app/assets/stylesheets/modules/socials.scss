@@ -7,3 +7,29 @@ nav.share iframe {border:0; margin-top:0; padding-top:0;} /* if using medium siz
 .fb-like{display:inline-block}
 * html .fb-like{display:inline}/* ie6 inline block fix*/
 *+html .fb-like{display:inline}/* ie7 inline block fix*/
+
+
+
+/* Small only */
+@media screen and (max-width: 39.9375em) {
+	.fb_iframe_widget{
+		margin-bottom:0.5em;
+	}
+}
+
+/* Medium and up */
+@media screen and (min-width: 40em) {
+	.fb_iframe_widget{
+		top:-4px;
+		margin-right:0.5em;
+	}
+}
+
+/* Medium only */
+@media screen and (min-width: 40em) and (max-width: 63.9375em) {}
+
+/* Large and up */
+@media screen and (min-width: 64em) {}
+
+/* Large only */
+@media screen and (min-width: 64em) and (max-width: 74.9375em) {}

@@ -33,8 +33,9 @@
 			<p>Share: </p> 
 		</div>
 		<div class="small-8 medium-4 medium-push-1 large-2 large-push-4 text-center end columns">
-			<%= facebook_button :static_link => true %>
-			<%= twitter_button :turbolinks => true %>
+			<!-- Facebook button had a static value, but it didn't get styling -->
+			<%= facebook_button :turbolinks => true %>
+         	<%= twitter_button :turbolinks => true%>
 		</div>
 	</div>
 	<% if @photo.user == current_user %>
