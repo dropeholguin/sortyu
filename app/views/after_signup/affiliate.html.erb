@@ -1,0 +1,12 @@
+<div class="small-12 text-center">
+  <h4><i>Welcome Affiliate!</i></h4>
+  <%= form_for(@user, url: wizard_path, method: :put) do |f| %>
+    <div class="row">
+      <h4><%= check_box_tag :affiliate %> <%= h "Affiliate?" %></h4> 
+    </div>
+    <div class="field" hidden="true" id="user_url">
+      <%= f.label :url, "URL" %><%= f.text_field :url, value: @url, readonly: true %>
+    </div>
+    <%= f.submit 'Next', class: "button" %>
+  <% end %>
+</div>

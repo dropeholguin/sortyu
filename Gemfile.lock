@@ -248,6 +248,8 @@ GEM
     public_suffix (2.0.5)
     puma (3.6.2)
     rack (2.0.1)
+    rack-affiliates (0.4.0)
+      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.0.1)
@@ -374,6 +376,7 @@ DEPENDENCIES
   pg (~> 0.18)
   picasa
   puma (~> 3.0)
+  rack-affiliates
   rails (~> 5.0.1)
   recaptcha
   rolify
@@ -392,4 +395,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.14.3
+   1.14.6

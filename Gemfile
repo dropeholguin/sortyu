@@ -44,6 +44,7 @@ gem 'active_admin_theme'
 gem 'money-rails'
 gem 'meta-tags'
 gem 'shareable', git: "https://github.com/simon0191/shareable.git"
+gem "rack-affiliates"
 
 
 group :development, :test do
