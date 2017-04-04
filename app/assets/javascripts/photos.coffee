@@ -227,7 +227,7 @@ saveSections = ->
 
 
 hide_results = ->
-	if $('input#hide_results').length > 0
+	$('input#hide_results').on 'change', ->
 		$.ajax '/users/hide_results',
 		type: 'PATCH',
 		dataType: 'script',
