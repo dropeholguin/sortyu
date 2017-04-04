@@ -166,7 +166,7 @@ getParameterByName = (name, url) ->
 		return ''
 	decodeURIComponent results[2].replace(/\+/g, ' ')
 
-#Save sections
+#Save sections at edit sections page
 saveSections = ->
 	if $('#photo-editor #canvas').length > 0
 		parameter = getParameterByName('photo_id', window.location.href)
@@ -226,9 +226,22 @@ saveSections = ->
 					window.location.replace('/profile/show')
 
 
+hide_results = ->
+	if $('input#hide_results').length > 0
+		$.ajax '/users/hide_results',
+		type: 'PATCH',
+		dataType: 'script',
+		data: {},
+		error: (jqXHR, textStatus, errorThrown) ->
+			console.log("AJAX Error: #{textStatus}")
+		success: (data, textStatus, jqXHR) ->
+	
+	
+
 $(document).on 'turbolinks:load', ->
 	changeActiveState()
 	saveSections()
+	hide_results()
 		
 	
 $(document).on 'turbolinks:load', ->

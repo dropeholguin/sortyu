@@ -23,4 +23,18 @@ class UsersController < ApplicationController
     user.update_attributes is_active: true
     redirect_to admin_users_url, notice: "Account Actived."
   end
+
+  def hide_results
+    if current_user.hide_results?
+      puts 'yiooooooooooooooooooooooooooooooooooooooo'
+      current_user.hide_results = false
+      current_user.save
+    else
+      puts 'yaaaaaaaaaaaaaaaaaaaaaaa'
+      current_user.hide_results = true
+      current_user.save
+
+    end
+  end
+
 end

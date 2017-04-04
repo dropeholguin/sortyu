@@ -7,8 +7,12 @@
 			<h6><%= current_user.full_name %></h6>
 		</div>
 		<div class="upper-space small-4 medium-6 medium-pull-1 end text-center columns">
-			<div class="show-for-medium medium-6 columns">
+			<div class="show-for-medium medium-10 columns">
 				<%= link_to "Edit", edit_user_registration_path , class:"button small" %>
+				<div class="float-right">
+					<%= check_box_tag("hide results", value = "1", checked = false) %>
+					<%= label_tag("Hide Results")%>
+				</div>
 			</div>
 		</div>
 	</div>
