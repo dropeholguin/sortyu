@@ -31,6 +31,8 @@ ActiveAdmin.register_page "Dashboard", namespace: :admin do
                 end
             end
         end
+    end
+    columns do
         column do
             panel "Recent Justifications" do
                 ul do
@@ -44,7 +46,24 @@ ActiveAdmin.register_page "Dashboard", namespace: :admin do
                 end
             end
         end
+        
+        column do
+            panel "Recent Affiliates" do
+                ul do
+                    table_for User.where("is_active = ? ", false).order("created_at desc").limit(5) do
+                        column "User" do |user|
+                            if user.has_role? :affiliate
+                                columns user.full_name
+                                columns user.username
+                                columns user.email
+                            end
+                        end    
+                    end
+                end
+            end
+        end
     end
+
     # Here is an example of a simple dashboard with columns and panels.
     #
     # columns do

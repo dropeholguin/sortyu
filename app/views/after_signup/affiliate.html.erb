@@ -7,6 +7,8 @@
     <div class="field" hidden="true" id="user_url">
       <%= f.label :url, "URL" %><%= f.text_field :url, value: @url, readonly: true %>
     </div>
+    <%= f.hidden_field :is_active,  value: false %>
+
     <%= f.submit 'Next', class: "button" %>
   <% end %>
 </div>

@@ -32,6 +32,6 @@ class AfterSignupController < ApplicationController
 	private
 
 		def user_params
-	    params.require(:user).permit(:email, :url)
+	    params.require(:user).permit(:email, :url, :is_active)
   	end
 end
