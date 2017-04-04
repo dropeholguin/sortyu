@@ -233,7 +233,7 @@ class PhotosController < ApplicationController
         @photo.user = @user
 
         respond_to do |format|
-            if @photo.save
+            if verify_recaptcha(model: @photo) && @photo.save
                 format.html { redirect_to photo_edit_sections_path(photo_id: @photo.id), notice: 'Photo was successfully uploaded. Time to set your photo sections.' }
                 format.json { render :show, status: :created, location: @photo }
             else
