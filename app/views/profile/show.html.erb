@@ -10,7 +10,11 @@
 			<div class="show-for-medium medium-10 columns">
 				<%= link_to "Edit", edit_user_registration_path , class:"button small" %>
 				<div class="float-right">
-					<%= check_box_tag("hide results", value = "1", checked = false) %>
+					<% if current_user.hide_results? %>
+						<%= check_box_tag("hide results", value = "1", checked = true) %>
+					<% else %>
+						<%= check_box_tag("hide results", value = "1", checked = false) %>
+					<% end %>
 					<%= label_tag("Hide Results")%>
 				</div>
 			</div>

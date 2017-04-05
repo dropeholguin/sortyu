@@ -102,7 +102,11 @@ createSortings = ->
 		console.log("AJAX Error: #{textStatus}")
 	success: (data, textStatus, jqXHR) ->
 		console.log("Create sorting successfully!")
-		computeSortingStats()
+		# If user doesn't want to see photo results
+		if $('input#hide_results').is(':checked')
+			updatePhotoToSortedState()
+		else
+			computeSortingStats()
 
 computeSortingStats = ->
 	photoId = $('#next-sort').data('photo_id')
@@ -250,10 +254,14 @@ $(document).on 'turbolinks:load', ->
 
 		$(document).on 'click', '.rect', (event) ->
 			if areAllSectionsClicked()
-				console.log 'All sections are clicked -> Proceed!'
-				$('#next-sort').hide()
-				$('#photo-stadistic-container').html('<h3 id="loading_text">Loading...</h3>')
-				createSortings()
+				# If user doesn't want to see photo results
+				if $('input#hide_results').is(':checked')
+					createSortings()
+				else
+					console.log 'All sections are clicked -> Proceed!'
+					$('#next-sort').hide()
+					$('#photo-stadistic-container').html('<h3 id="loading_text">Loading...</h3>')
+					createSortings()
 			else
 				console.log "Don't do anything yet, not all sections clicked."
 
