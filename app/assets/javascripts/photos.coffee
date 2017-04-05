@@ -269,5 +269,9 @@ $(document).on 'turbolinks:load', ->
 			finishSorting()
 			
 		$('#photo-container').on 'click', (event) ->
-			if areAllSectionsClicked() and $('.photo-stadistic').length > 0
+			# If user doesn't want to see photo results
+			if areAllSectionsClicked() and $('input#hide_results').is(':checked')
 				finishSorting()
+			else
+				if areAllSectionsClicked() and $('.photo-stadistic').length > 0
+					finishSorting()
