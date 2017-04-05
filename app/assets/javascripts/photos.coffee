@@ -102,11 +102,7 @@ createSortings = ->
 		console.log("AJAX Error: #{textStatus}")
 	success: (data, textStatus, jqXHR) ->
 		console.log("Create sorting successfully!")
-		# If user doesn't want to see photo results
-		if $('input#hide_results').is(':checked')
-			updatePhotoToSortedState()
-		else
-			computeSortingStats()
+		computeSortingStats()
 
 computeSortingStats = ->
 	photoId = $('#next-sort').data('photo_id')
