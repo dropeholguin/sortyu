@@ -1,5 +1,5 @@
 class ModelMailer < ApplicationMailer
-	default from: 'plentious@gmail.com'
+	default from: 'admin@sortyu.com'
 
 	def remove_photo(photo)
 		@photo = photo
