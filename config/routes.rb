@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 	post "/photos/create_import_instagram", to: 'photos#create_import_instagram', as: :create_import_instagram
 	post "/photos/create_import_facebook", to: 'photos#create_import_facebook', as: :create_import_facebook
 	post "users/lock/:id", to: 'user_locks#lock_access', as: :lock_access
+  patch "users/hide_results"
 	get 'photos/load_photo_to_sort', as: 'load_new_photo_to_sort'
 	get 'photos/reaload_photos_queue'
   get 'photos/remove_photos', to: 'photos#remove_photos', as: 'remove_photos'

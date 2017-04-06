@@ -193,6 +193,11 @@ class PhotosController < ApplicationController
 
     # GET /photos/1/edit
     def edit
+        if !(@photo.user == current_user)
+            respond_to do |format|
+                format.html { redirect_to root_path, notice: "You can't edit other user's photos" }
+            end
+        end
     end
 
     def load_sections_to_sort
@@ -205,6 +210,15 @@ class PhotosController < ApplicationController
 
     def edit_sections
         @photo = Photo.find(params[:photo_id])
+        if @photo.user != current_user
+            respond_to do |format|
+                format.html{ redirect_to root_path, alert: "You can't edit other users sections"}
+            end
+        elsif !@photo.first_edit
+            respond_to do |format|
+                format.html{ redirect_to root_path, alert: "You can't edit a photo's sections more than once"}
+            end
+        end
     end
 
     def load_sections_tracker

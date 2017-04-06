@@ -1,4 +1,15 @@
 <div id="sorting-principal" class="row">
+	<div class="row">
+		<div class="small-3 small-push-9 columns">
+			<% if current_user.hide_results? %>
+				<%= check_box_tag("hide results", value = "1", checked = true) %>
+			<% else %>
+				<%= check_box_tag("hide results", value = "1", checked = false) %>
+			<% end %>
+			<%= label_tag("Hide Results")%>
+
+		</div>
+	</div>
 	
 	<div class="row upper-space under-pad">
 		<div id="user-photo-container" class="small-4 medium-2 medium-push-1 medium-text-center large-push-2 columns">

@@ -166,7 +166,7 @@ getParameterByName = (name, url) ->
 		return ''
 	decodeURIComponent results[2].replace(/\+/g, ' ')
 
-#Save sections
+#Save sections at edit sections page
 saveSections = ->
 	if $('#photo-editor #canvas').length > 0
 		parameter = getParameterByName('photo_id', window.location.href)
@@ -226,9 +226,22 @@ saveSections = ->
 					window.location.replace('/profile/show')
 
 
+hide_results = ->
+	$('input#hide_results').on 'change', ->
+		$.ajax '/users/hide_results',
+		type: 'PATCH',
+		dataType: 'script',
+		data: {},
+		error: (jqXHR, textStatus, errorThrown) ->
+			console.log("AJAX Error: #{textStatus}")
+		success: (data, textStatus, jqXHR) ->
+	
+	
+
 $(document).on 'turbolinks:load', ->
 	changeActiveState()
 	saveSections()
+	hide_results()
 		
 	
 $(document).on 'turbolinks:load', ->
@@ -237,10 +250,14 @@ $(document).on 'turbolinks:load', ->
 
 		$(document).on 'click', '.rect', (event) ->
 			if areAllSectionsClicked()
-				console.log 'All sections are clicked -> Proceed!'
-				$('#next-sort').hide()
-				$('#photo-stadistic-container').html('<h3 id="loading_text">Loading...</h3>')
-				createSortings()
+				# If user doesn't want to see photo results
+				if $('input#hide_results').is(':checked')
+					createSortings()
+				else
+					console.log 'All sections are clicked -> Proceed!'
+					$('#next-sort').hide()
+					$('#photo-stadistic-container').html('<h3 id="loading_text">Loading...</h3>')
+					createSortings()
 			else
 				console.log "Don't do anything yet, not all sections clicked."
 
@@ -248,5 +265,9 @@ $(document).on 'turbolinks:load', ->
 			finishSorting()
 			
 		$('#photo-container').on 'click', (event) ->
-			if areAllSectionsClicked() and $('.photo-stadistic').length > 0
+			# If user doesn't want to see photo results
+			if areAllSectionsClicked() and $('input#hide_results').is(':checked')
 				finishSorting()
+			else
+				if areAllSectionsClicked() and $('.photo-stadistic').length > 0
+					finishSorting()

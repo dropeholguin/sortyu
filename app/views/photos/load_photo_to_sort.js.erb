@@ -47,7 +47,6 @@ function appendSortingElements(){
 	//This adds support for async load from Amazon S3 on production/staging
 	imageToSort = document.getElementById('trackme');
 	$(imageToSort).attr('crossOrigin', 'anonymous');
-	console.log($("#source-url").text());
 	$(imageToSort).attr("src", $("#source-url").text());
 	$(imageToSort).one('load', function() {
 	});
