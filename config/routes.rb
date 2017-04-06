@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 	get 'photos/load_photo_to_sort', as: 'load_new_photo_to_sort'
 	get 'photos/reaload_photos_queue'
   get 'photos/remove_photos', to: 'photos#remove_photos', as: 'remove_photos'
+  get 'photos/pay_photos', to: 'photos#pay_multiple_photos', as: 'pay_multiple_photos'
   get 'photos/load_sections_to_sort'
   get 'photo/edit_sections', to:'photos#edit_sections'
   get 'photos/load_sections_tracker'
@@ -37,6 +38,7 @@ Rails.application.routes.draw do
   patch "photos/approve_photo/:id", to: 'photos#approve', as: :approve
   delete "destroy_photos", to: 'photos#destroy_photos'
   post "edit_photos", to: 'photos#edit_photos'
+  post "pay_photos", to: 'photos#pay_photos'
 
   resources :photos do
   	member do

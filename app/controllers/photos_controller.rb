@@ -17,6 +17,10 @@ class PhotosController < ApplicationController
         @photos = Photo.photos(current_user).order('created_at desc')
     end
 
+    def pay_multiple_photos
+        @photos = Photo.pay_photos(current_user).order('created_at desc')
+    end
+
     def load_photo_to_sort
         respond_to do |format|
             @photo = Photo.find(params[:photo_id])
@@ -254,6 +258,16 @@ class PhotosController < ApplicationController
                 format.html { render :new }
                 format.json { render json: @photo.errors, status: :unprocessable_entity }
             end
+        end
+    end
+
+    def pay_photos
+        respond_to do |format|
+            photo_ids_array = params[:photo_ids]
+            photo_array_string = photo_ids_array.join("-")
+            cookies[:pay_photos] = { value: photo_array_string, expires: 23.hours.from_now }
+
+            format.html { redirect_to new_charge_path }
         end
     end
 

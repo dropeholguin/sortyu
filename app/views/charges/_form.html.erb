@@ -5,22 +5,37 @@
                 <p><%= flash[:error] %></p>
             </div>
         <% end %>
-        <div class="row">
-            <div class="upper-space small-12 columns">
-                <%= image_tag(@photo.file.url(:medium)) %>
+        <% if !@photo.nil? %>
+            <div class="row">
+                <div class="upper-space small-12 columns">
+                    <%= image_tag(@photo.file.url(:medium)) %>
+                    <%= hidden_field_tag :photo_id, @photo.id %>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="upper-space under-space small-12 columns">
-                <span><strong>Amount:</strong> <%= humanized_money_with_symbol Price.last.value %></span>
+            <div class="row">
+                <div class="upper-space under-space small-12 columns">
+                    <span><strong>Amount:</strong> <%= humanized_money_with_symbol Price.last.value %></span>
+                </div>
             </div>
-        </div>
+        <% else %>
+            <div class="row">
+                <% @photos.each do |photo| %>
+                    <%= image_tag(photo.file.url(:medium)) %>
+                <% end %>
+            </div>
+            <div class="row">
+                <div class="upper-space under-space small-12 columns">
+                    <span><strong>Amount:</strong> <%= humanized_money_with_symbol Price.last.value * @count %></span>
+                </div>
+             </div>
+        <% end %>
+        
     </article>
-    <%= hidden_field_tag :photo_id, @photo.id %>
+
     <script
     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
     data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-    data-amount="<%= Price.last.value_cents %>"
+    data-amount="<%= Price.last.value_cents * @count %>"
     data-name="Sortyu"
     data-description="Photo"
     data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
