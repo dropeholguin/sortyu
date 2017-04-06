@@ -15,6 +15,7 @@ class UsersController < ApplicationController
   def suspend_account
     user = User.find(params[:id])
     user.update_attributes is_active: false
+    ModelMailer.suspend_account(user).deliver
     redirect_to admin_users_url, notice: "Account suspended."
   end
 

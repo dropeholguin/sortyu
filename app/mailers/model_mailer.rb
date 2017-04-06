@@ -15,5 +15,10 @@ class ModelMailer < ApplicationMailer
 		@photo = photo
 		mail(to: @photo.user.email, subject: "Your photo was approved")
 	end
+
+	def suspend_account(user)
+		@user = user
+		mail(to: @user.email, subject: "Your account was suspended")
+	end
 	
 end

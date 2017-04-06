@@ -15,13 +15,4 @@ class ApplicationController < ActionController::Base
 			end
 		end
 	end
-
-	def after_sign_in_path_for(resource)
-		if resource.sign_in_count > 1
-			request.env['omniauth.origin'] || stored_location_for(resource) || root_path
-		else
-			after_signup_path(:affiliate)
-		end
-  	end
-
 end
