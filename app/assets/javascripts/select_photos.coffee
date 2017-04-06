@@ -12,6 +12,31 @@ selectPhotos = ->
 			 	$(this).attr('class','highlight')
 			 	$checkbox.prop('checked', true)
 
+destroyPhotos = ->
+  $('#destroy-photos').click ->
+    selected = new Array
+    $('input:checkbox[name=photo]:checked').each ->
+      selected.push $(this).val()
+    
+    $.ajax
+      url: '/destroy_photos'
+      type: 'DELETE'
+      data: photo_ids: selected
+
+editPhotos = ->
+  $('#edit-photos').click ->
+    selected = new Array
+    $('input:checkbox[name=photo]:checked').each ->
+      selected.push $(this).val()
+    
+    $.ajax
+      url: '/destroy_photos'
+      type: 'DELETE'
+      data: photo_ids: selected
 
 $(document).on 'turbolinks:load', ->
 	selectPhotos()
+
+$(document).ready destroyPhotos
+$(document).on 'turbolinks:load', ->
+	destroyPhotos()

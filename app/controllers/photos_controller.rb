@@ -278,7 +278,6 @@ class PhotosController < ApplicationController
             end
         end
     end
-
     # DELETE /photos/1
     # DELETE /photos/1.json
     def destroy
@@ -291,7 +290,12 @@ class PhotosController < ApplicationController
     end
 
     def destroy_photos
-        
+        Photo.where(:id => params[:photo_ids]).destroy_all
+        cookies.delete(:photos_queue)
+        respond_to do |format|
+            format.html { redirect_to profile_show_path, notice: 'Photos was successfully destroyed.' }
+            format.json { head :no_content }
+        end
     end
 
     def suspend
