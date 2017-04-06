@@ -250,14 +250,14 @@ $(document).on 'turbolinks:load', ->
 
 		$(document).on 'click', '.rect', (event) ->
 			if areAllSectionsClicked()
-				# If user doesn't want to see photo results
-				if $('input#hide_results').is(':checked')
-					createSortings()
-				else
-					console.log 'All sections are clicked -> Proceed!'
-					$('#next-sort').hide()
-					$('#photo-stadistic-container').html('<h3 id="loading_text">Loading...</h3>')
-					createSortings()
+				# # If user doesn't want to see photo results
+				# if $('input#hide_results').is(':checked')
+				# 	$('#next-sort').hide()
+				# 	createSortings()
+				console.log 'All sections are clicked -> Proceed!'
+				$('#next-sort').hide()
+				$('#photo-stadistic-container').html('<h3 id="loading_text">Loading...</h3>')
+				createSortings()
 			else
 				console.log "Don't do anything yet, not all sections clicked."
 
@@ -265,9 +265,5 @@ $(document).on 'turbolinks:load', ->
 			finishSorting()
 			
 		$('#photo-container').on 'click', (event) ->
-			# If user doesn't want to see photo results
-			if areAllSectionsClicked() and $('input#hide_results').is(':checked')
+			if areAllSectionsClicked() and $('.photo-stadistic').length > 0
 				finishSorting()
-			else
-				if areAllSectionsClicked() and $('.photo-stadistic').length > 0
-					finishSorting()
