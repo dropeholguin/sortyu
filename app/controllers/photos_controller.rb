@@ -243,6 +243,17 @@ class PhotosController < ApplicationController
         end
     end
 
+    def edit_photos
+        respond_to do |format|
+            photo_ids_array = params[:photo_ids]
+            first_photo_id = photo_ids_array.shift
+            photo_array_string = photo_ids_array.join("-")
+            cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
+
+            format.html { redirect_to edit_photo_path(first_photo_id) }  
+        end
+    end
+
     # PATCH/PUT /photos/1
     # PATCH/PUT /photos/1.json
     def update

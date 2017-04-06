@@ -35,6 +35,7 @@ Rails.application.routes.draw do
   patch "photos/suspend_photo/:id", to: 'photos#suspend', as: :suspend
   patch "photos/approve_photo/:id", to: 'photos#approve', as: :approve
   delete "destroy_photos", to: 'photos#destroy_photos'
+  post "edit_photos", to: 'photos#edit_photos'
 
   resources :photos do
   	member do

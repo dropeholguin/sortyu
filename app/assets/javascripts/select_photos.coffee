@@ -30,13 +30,16 @@ editPhotos = ->
       selected.push $(this).val()
     
     $.ajax
-      url: '/destroy_photos'
-      type: 'DELETE'
+      url: '/edit_photos'
+      type: 'POST'
       data: photo_ids: selected
 
 $(document).on 'turbolinks:load', ->
 	selectPhotos()
 
 $(document).ready destroyPhotos
+$(document).ready editPhotos
+
 $(document).on 'turbolinks:load', ->
 	destroyPhotos()
+	editPhotos()

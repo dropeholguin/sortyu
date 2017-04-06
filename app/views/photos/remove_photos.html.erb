@@ -5,6 +5,11 @@
 		</div>
 	</div>
 	<div class="row">
+		<div class="small-12 text-center columns">
+			<%= button_tag('Edit Photos', class:"button", id: "edit-photos") %>
+		</div>
+	</div>
+	<div class="row">
 		<% @photos.each do |photo| %>
 			<div class="upper-space small-4 text-center end columns">
 				<%= image_tag(photo.file.url(:medium),id: photo.id) %>
