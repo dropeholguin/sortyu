@@ -72,11 +72,13 @@
 		</div>
 	</div>
 	<% if @photo.user == current_user %>
-		<div class="row">
-			<div class="small-12 text-center columns">
-				<%= link_to 'Pay', new_charge_path(photo_id: @photo.id), class: "button" %>
+		<% if @photo.state == 'free' %>
+			<div class="row">
+				<div class="small-12 text-center columns">
+					<%= link_to 'Pay', new_charge_path(photo_id: @photo.id), class: "button pay" %>
+				</div>
 			</div>
-		</div>
+		<% end %>
 	<% end %>
 	<div class="row">
 		<div class="upper-space small-12 text-center columns">
