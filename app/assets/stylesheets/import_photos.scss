@@ -1,3 +1,48 @@
 // Place all the styles related to the import_photos controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+
+/* Small only */
+@media screen and (max-width: 39.9375em) {
+	#gallery-import{
+		img{
+			width:85px;
+			height:85px;
+		}
+	}
+}
+
+/* Medium and up */
+@media screen and (min-width: 40em) {}
+
+/* Medium only */
+@media screen and (min-width: 40em) and (max-width: 63.9375em) {
+	#gallery-import{
+		img{
+			width:225px;
+			height:225px;
+		}
+	}
+}
+
+/* Large and up */
+@media screen and (min-width: 64em) {
+	#gallery-import{
+		img{
+			width:370px;
+			height:370px;
+		}
+	}
+}
+
+/* Large only */
+@media screen and (min-width: 64em) and (max-width: 74.9375em) {
+	#gallery-import{
+		img{
+			width:300px;
+			height:300px;
+		}
+	}
+}
