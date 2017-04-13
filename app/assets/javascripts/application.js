@@ -20,6 +20,7 @@
 //= require tracking.js/build/data/mouth
 //= require interactjs
 //= require sharer.js/sharer
+//= require social-share-button
 //= require_tree .
 
 var createCookie = function(name, value, days) {

@@ -1,16 +1,3 @@
-<% set_meta_tags title: 'Sortyu Image',
-				description: @photo.description, 
-				og: {
-					title:     'Sort images, choose what you like the most of an image',
-					type:      'website',
-					url:       "#{photo_url(@photo)}",
-					site_name: 'Sortyu',
-					image:     [{
-									_: "#{@photo.file.url(:medium)}",
-    								width: @width,
-    								height: @height,
-					}]
-				} %>
 <div id="photo-show">
 	<div class="upper-space row">
 		<div class="small-10 small-push-1 text-center columns">
@@ -34,8 +21,7 @@
 		</div>
 		<div class="small-8 medium-4 medium-push-1 large-2 large-push-4 text-center end columns">
 			<!-- Facebook button had a static value, but it didn't get styling -->
-			<%= facebook_button :turbolinks => true %>
-         	<%= twitter_button :turbolinks => true%>
+			<%= social_share_button_tag("Sortyu Image", url: photo_url(@photo), image: @photo.file.url(:medium), desc: @photo.description) %>
 		</div>
 	</div>
 	<!-- Photo Stadistics -->

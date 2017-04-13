@@ -24,8 +24,8 @@
 						<p>Share: </p> 
 					</div>
 					<div class="small-12 medium-9 large-10 columns">
-						<%= facebook_button :turbolinks => true %>
-						<%= twitter_button :turbolinks => true%>
+						<%= social_share_button_tag("Sortyu Image", url: photo_url(photo), image: photo.file.url(:medium), desc: photo.description) %>
+
 					</div>
 				</div>
 			</div>
