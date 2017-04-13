@@ -12,7 +12,7 @@ class FlagsController < ApplicationController
         if verify_recaptcha(model: @flag)
           if @flag.save
             @photo.update_attributes(count_flags: @photo.count_flags + 1)
-            if @photo.count_flags > 2
+            if @photo.count_flags >= 2
               @photo.update_attributes(suspended: true)
               ModelMailer.suspend_photo(@photo).deliver
             end

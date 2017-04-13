@@ -14,19 +14,21 @@ ActiveAdmin.register_page "Dashboard", namespace: :admin do
                         end
                         column "CREATE DATE", :created_at
                     end
-                    strong { link_to "View All Flags", admin_flags_path }
+                    strong { link_to "View All Flags", admin_flags_path, class: 'button' }
                 end
             end
         end
         column do
             panel "Photos with more than 2 flags" do
                 ul do
-                    table_for Photo.where("count_flags > ? ", 2).each do
+                    table_for Photo.where("count_flags >= ? ", 2).each do
                         column "Photo" do |photo|
                             link_to(image_tag(photo.file.url(:thumb)), admin_photo_path(photo))
                         end
                         column :description
-                        column :user
+                        column "User" do |photo|
+                            link_to photo.user.full_name, admin_user_path(photo.user), class: 'button'
+                        end
                     end
                 end
             end
@@ -36,29 +38,14 @@ ActiveAdmin.register_page "Dashboard", namespace: :admin do
         column do
             panel "Recent Justifications" do
                 ul do
-                    table_for Justification.order("created_at desc") do
+                    table_for Justification.order("created_at desc").limit(5) do
                         column "Photo" do |justification|
                             image_tag justification.photo.file.url(:thumb)
                         end
                         column :body
                         column "Create Date", :created_at
                     end
-                end
-            end
-        end
-        
-        column do
-            panel "Recent Affiliates" do
-                ul do
-                    table_for User.where("is_active = ? ", false).order("created_at desc").limit(5) do
-                        column "User" do |user|
-                            if user.has_role? :affiliate
-                                columns user.full_name
-                                columns user.username
-                                columns user.email
-                            end
-                        end    
-                    end
+                    strong { link_to "View All Justifications", admin_justifications_path, class: 'button' }
                 end
             end
         end

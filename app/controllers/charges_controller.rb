@@ -4,6 +4,7 @@ class ChargesController < ApplicationController
 	def new
 		if params[:photo_id].present?
 			@photo = Photo.find(params[:photo_id])
+			@price = Price.last.value_cents
 		else
 			@photos = []
 			photo_ids_array = cookies[:pay_photos].split("-")
@@ -11,6 +12,7 @@ class ChargesController < ApplicationController
 				@photos << Photo.find(id_photo.to_i)
 			end
 			@count = @photos.count
+			@price = Price.last.value_cents * @count
 		end
 	end
 

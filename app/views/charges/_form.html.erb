@@ -14,7 +14,7 @@
             </div>
             <div class="row">
                 <div class="upper-space under-space small-12 columns">
-                    <span><strong>Amount:</strong> <%= humanized_money_with_symbol Price.last.value %></span>
+                    <span><strong>Amount:</strong> <%= humanized_money_with_symbol @price %></span>
                 </div>
             </div>
         <% else %>
@@ -25,7 +25,7 @@
             </div>
             <div class="row">
                 <div class="upper-space under-space small-12 columns">
-                    <span><strong>Amount:</strong> <%= humanized_money_with_symbol Price.last.value * @count %></span>
+                    <span><strong>Amount:</strong> <%= humanized_money_with_symbol @price %></span>
                 </div>
              </div>
         <% end %>
@@ -35,7 +35,7 @@
     <script
     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
     data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-    data-amount="<%= Price.last.value_cents * @count %>"
+    data-amount="<%= @price %>"
     data-name="Sortyu"
     data-description="Photo"
     data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
