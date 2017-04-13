@@ -16,9 +16,17 @@
 	<% if @photos.count > 0 %>
 		<% @photos.each() do |photo| %>
 			<div class="under-space small-6 medium-4 float-left columns">
-				<%= link_to photo do %>
-					<%= image_tag(photo.file.url(:medium)) %>
-				<% end %>
+				<div class="ribbon-container">
+					<% if photo.state == 'free'%>
+						<div class="ribbon free">Free</div>
+					<% else %>
+						<div class="ribbon paid">&#36;</div>
+					<% end %>
+					<%= link_to photo do %>
+						<%= image_tag(photo.file.url(:medium)) %>
+					<% end %>
+				</div>
+				<!-- Share social buttons container -->
 				<div data-photo="<%= photo.id %>" id="photo-i" class="row collapse under-space">
 					<div class="small-12 medium-3 large-2 columns">
 						<p>Share: </p> 

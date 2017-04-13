@@ -13,9 +13,15 @@
 				} %>
 <div id="photo-show">
 	<div class="upper-space row">
-		<div class="small-10 small-push-1 text-center columns">
-			<%= image_tag(@photo.file.url(:large)) %>
-		</div>
+        <div id="photo-container" class="callout small-12 medium-10 medium-push-1 large-8 large-push-2 text-center columns">
+            <div class="row">
+                <div class="sorting-canvas">
+                    <div class="inner-sorting-canvas">
+                        <%= image_tag(@photo.file.url(:large)) %>
+                    </div>
+                </div>
+            </div>
+        </div>
 		<div class="small-12 text-center columns">
 			<p>
 	  			<b>Description:</b>
