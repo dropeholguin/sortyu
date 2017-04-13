@@ -45,6 +45,31 @@
 				color:gray;
 			}
 		}
+
+		#photo-container{
+			.ribbon-container{
+				div.ribbon.free{
+					position: relative;
+				    background-color: #4286F4;
+				    color: white;
+				    padding: 0.5em;
+				    top: 27px;
+				    left: 13px;
+				    font-size: 0.7em;
+				    display:inline-block;
+				}
+				div.ribbon.paid{
+				    position: relative;
+				    background-color: green;
+				    color: white;
+				    padding: 0em 1.5em;
+				    top: 18px;
+				    left: 13px;
+				    font-size: 0.7em;
+				    display: inline-block;
+				}
+			}
+		}
 	}
 }
 
