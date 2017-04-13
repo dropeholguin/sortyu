@@ -76,6 +76,19 @@
 	}
 }
 
+#photo-show{
+
+	.rect:hover{
+		cursor:default;
+	}
+	.inner-sorting-canvas{
+		span{
+			font-size:0.7em;
+			border-top-right-radius:0px;
+		}
+	}
+}
+
 #photo-edit-section{
 	.rect{
 		width:50px;
