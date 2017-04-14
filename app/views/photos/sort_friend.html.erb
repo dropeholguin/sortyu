@@ -1,1 +1,82 @@
-<h1>Sort Friend</h1>
+<div id="sorting-rincipal" class="row">	
+	<div class="row upper-space under-pad">
+		<div id="user-photo-container" class="small-4 medium-2 medium-push-1 medium-text-center large-push-2 columns">
+		<%= link_to profile_other_user_show_path(@photo.user_id) do %> 
+			<%= avatar_profile_link @photo.user, "medium", class:"circle" %> 
+		<% end %>
+        </div>
+        <div id="user-name-container" class="small-8 small-pull-1 medium-pull-1 columns">
+            <div id="follow-container">
+                <%= link_to profile_other_user_show_path(@photo.user_id) do %>
+                	<h6><%= @photo.user.username %></h6>
+                <% end %>
+                <% if user_signed_in? %>
+					<% if current_user.following?(@photo.user) %>
+						<%= link_to "Unfollow", relationship_path(@photo.user_id), remote: true, class: "button follow", id: "unfollow_user", method: :delete %>
+					<% else %>
+						<%= link_to "Follow", relationships_path(id: @photo.user_id), remote: true, class:"button follow", id: "follow_user", method: :post %>
+					<% end %>
+				<% end %>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div id="photo-container" class="callout small-12 medium-10 medium-push-1 large-8 large-push-2 text-center columns">
+            <div class="row">
+                <div class="sorting-canvas">
+                    <div class="inner-sorting-canvas">
+                		<span id="source-url" class="hidden">
+                			<%= @photo.file.url(:large) %>
+                		</span>
+                		<img id="trackme">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+    <script type="text/javascript">
+    	imageToSort = document.getElementById('trackme');
+		$(imageToSort).attr('crossOrigin', 'anonymous');
+		$(imageToSort).attr("src", $("#source-url").text());
+		$(imageToSort).one('load', function() {
+		});
+    </script>
+    <div class="row">
+        <div id="photo-description" class="small-12 medium-10 medium-push-1 large-8 large-push-2 text-center columns">
+        	<p> <%= @photo.description %> </p>
+		</div>
+	</div>
+	<div class="row">
+		<div id="like-container" class="text-center">
+			<% if current_user.liked? @photo %>
+				<%= link_to unlike_photo_path(@photo), class:"button like", method: :get, remote: true, id: "unlike_photo" do %>
+					<span class="fa fa-thumbs-o-up"></span>
+					<span id="show-unlike-<%= @photo.id %>">
+						<%= @photo.get_upvotes.size %>
+					</span>
+				<% end %>
+			<% else %>
+	 			<%= link_to like_photo_path(@photo), class:"button like hollow", method: :get, remote: true, id: "like_photo" do %>
+	 				<span class="fa fa-thumbs-o-up"></span>
+	 				<span id="show-like-<%= @photo.id %>">
+	 					<%= @photo.get_upvotes.size %>
+ 					</span>
+ 				<% end %>
+			<% end %>
+		</div>
+	</div>
+	<div class="row">
+		<div id="photo-stadistic-container" class="small-12 columns">
+		</div>
+	</div>
+	<div class="row under-space">
+		<div class="small-12 columns text-center">
+			<i data-open="flag-overlay" aria-hidden="true"><%= button_tag("Report", class: "button alert") %></i>
+		</div>
+	</div>
+	<div class="reveal" id="flag-overlay" data-reveal>
+		<button class="close-button" data-close aria-label="Close modal" type="button">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+</div>
