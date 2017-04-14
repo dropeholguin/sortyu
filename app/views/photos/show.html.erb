@@ -31,6 +31,9 @@
 		<div class="small-8 medium-4 medium-push-1 large-2 large-push-4 text-center end columns">
 			<!-- Facebook button had a static value, but it didn't get styling -->
 			<%= social_share_button_tag("Sortyu Image", url: photo_url(@photo), image: @photo.file.url(:medium), desc: @photo.description) %>
+			<% if @photo.user != current_user %>
+				<%= link_to "Sort", sort_friend_path(@photo), class: "button" %>
+			<% end %>
 		</div>
 	</div>
 	<!-- Photo Stadistics -->

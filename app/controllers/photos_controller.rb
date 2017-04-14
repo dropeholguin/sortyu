@@ -21,6 +21,11 @@ class PhotosController < ApplicationController
         @photos = Photo.pay_photos(current_user).order('created_at desc')
     end
 
+    def sort_friend
+        @photo = Photo.find(params[:id])
+        
+    end
+    
     def load_photo_to_sort
         respond_to do |format|
             @photo = Photo.find(params[:photo_id])

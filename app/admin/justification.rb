@@ -28,7 +28,7 @@ index do
   end
   actions defaults: false do |justification|
   if justification.photo.suspended == true
-      link_to 'Approve Photo', approve_path(justification.photo), method: :patch, class: 'button'
+      link_to 'Allow', approve_path(justification.photo), method: :patch, class: 'button'
     end
   end
 	actions defaults: false do |justification|

@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   delete "destroy_photos", to: 'photos#destroy_photos'
   post "edit_photos", to: 'photos#edit_photos'
   post "pay_photos", to: 'photos#pay_photos'
+  get "invite_sort_friend/:id", to: 'photos#sort_friend', as: :sort_friend
 
   resources :photos do
   	member do
