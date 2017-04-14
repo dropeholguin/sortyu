@@ -1,7 +1,7 @@
 // Place all the styles related to the photos controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-#sorting-principal, #photo-edit-section, #photo-show{
+#sorting-principal, #photo-edit-section, #photo-show, #friend-sort{
 	.rect {
 		border: 2px solid #3399ff;
 		position: absolute;
@@ -72,6 +72,18 @@
 			h6:hover{
 				text-decoration:underline;
 			}
+		}
+	}
+}
+
+#friend-sort{
+	.button{
+		margin-bottom:0;
+	}
+
+	#like-container{
+		.button{
+			margin-bottom:1em;
 		}
 	}
 }

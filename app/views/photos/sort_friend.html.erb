@@ -1,4 +1,4 @@
-<div id="sorting-rincipal" class="row">	
+<div id="friend-sort" class="row">	
 	<div class="row upper-space under-pad">
 		<div id="user-photo-container" class="small-4 medium-2 medium-push-1 medium-text-center large-push-2 columns">
 		<%= link_to profile_other_user_show_path(@photo.user_id) do %> 
@@ -25,7 +25,7 @@
             <div class="row">
                 <div class="sorting-canvas">
                     <div class="inner-sorting-canvas">
-                		<span id="source-url" class="hidden">
+                		<span id="source-url" data-id="<%= @photo.id %>" class="hidden">
                 			<%= @photo.file.url(:large) %>
                 		</span>
                 		<img id="trackme">
@@ -43,7 +43,14 @@
     </script>
     <div class="row">
         <div id="photo-description" class="small-12 medium-10 medium-push-1 large-8 large-push-2 text-center columns">
-        	<p> <%= @photo.description %> </p>
+        	<p>
+	  			<b>Description:</b>
+	  			<% if  !@photo.description.nil? and @photo.description.length > 0 %>
+	  				<%= @photo.description %>
+	  			<% else %>
+	  				No Description
+	  			<% end %>
+			</p>
 		</div>
 	</div>
 	<div class="row">
@@ -66,11 +73,13 @@
 		</div>
 	</div>
 	<div class="row">
-		<div id="photo-stadistic-container" class="small-12 columns">
+		<div id="photo-stadistic-container" class="small-12 columns text-center">
+
 		</div>
 	</div>
 	<div class="row under-space">
 		<div class="small-12 columns text-center">
+			<%= link_to 'Back', profile_other_user_show_path(@photo.user), class: "hollow button"%>
 			<i data-open="flag-overlay" aria-hidden="true"><%= button_tag("Report", class: "button alert") %></i>
 		</div>
 	</div>

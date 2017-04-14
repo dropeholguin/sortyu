@@ -23,7 +23,11 @@ class PhotosController < ApplicationController
 
     def sort_friend
         @photo = Photo.find(params[:id])
-        
+        if current_user == @photo.user
+            respond_to do |format|
+                format.html { redirect_to profile_show_path, error: "You can't sort your own image."}
+            end
+        end
     end
     
     def load_photo_to_sort

@@ -13,8 +13,8 @@
             </div>
         </div>
 		<div class="small-12 text-center columns">
-		<% if @photo.user != current_user %>
-				<%= link_to "Sort", sort_friend_path(@photo), class: "button" %>
+			<% if @photo.user != current_user %>
+					<%= link_to "Sort", sort_friend_path(@photo), class: "button" %>
 			<% end %>
 			<p>
 	  			<b>Description:</b>
@@ -60,7 +60,7 @@
 						<div id="average" class="row">
 							<h6><b>Average: </b>
 								<% if !section.sorting_information.nil? %>
-									<%= section.sorting_information.average %>
+									<%= section.sorting_information.average.round(2) %>
 								<% end %>
 							</h6>
 						</div>
