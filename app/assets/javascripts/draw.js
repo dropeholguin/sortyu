@@ -9,10 +9,31 @@ $(document).on("turbolinks:load", function() {
             $rect.css( {position:"absolute", width: "44px", top: "300px", left: "250px"});
 
             var container = document.querySelector("#canvas");
-
-            var xPosition = event.clientX - (111 + container.getBoundingClientRect().left + ($rect.innerWidth() / 2));
-            var yPosition = event.clientY - (container.getBoundingClientRect().top + ($rect.innerWidth() / 2));
-
+            var screenWidth = $(window).width();
+            // If mobile
+            if (screenWidth <= 425 ){
+                console.log('Mobile Device');
+                var xPosition = event.clientX - (0 + container.getBoundingClientRect().left + ($rect.innerWidth() / 2));
+                var yPosition = event.clientY - (5 + container.getBoundingClientRect().top + ($rect.innerWidth() / 2));
+            }
+            // If tablet
+            else if(screenWidth > 425 && screenWidth <= 768){
+                console.log('Tablet Device');
+                var xPosition = event.clientX - (55 + container.getBoundingClientRect().left + ($rect.innerWidth() / 2));
+                var yPosition = event.clientY - (10 + container.getBoundingClientRect().top + ($rect.innerWidth() / 2));
+            }
+            // If small computer
+            else if( screenWidth > 768 && screenWidth <= 1024){
+                console.log('Small Computer Device');
+                var xPosition = event.clientX - (75 + container.getBoundingClientRect().left + ($rect.innerWidth() / 2));
+                var yPosition = event.clientY - (5 + container.getBoundingClientRect().top + ($rect.innerWidth() / 2));
+            }
+            // computer and big screens
+            else{
+                console.log('Computer Device');
+                var xPosition = event.clientX - (135 + container.getBoundingClientRect().left + ($rect.innerWidth() / 2));
+                var yPosition = event.clientY - (5 + container.getBoundingClientRect().top + ($rect.innerWidth() / 2));
+            }
             $rect.css( {position:"absolute", width: "44px", top:yPosition + "px", left: xPosition + "px"});
         }
     }

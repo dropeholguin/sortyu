@@ -17,9 +17,11 @@ Rails.application.routes.draw do
 	post "/photos/create_import_instagram", to: 'photos#create_import_instagram', as: :create_import_instagram
 	post "/photos/create_import_facebook", to: 'photos#create_import_facebook', as: :create_import_facebook
 	post "users/lock/:id", to: 'user_locks#lock_access', as: :lock_access
+  patch "users/hide_results"
 	get 'photos/load_photo_to_sort', as: 'load_new_photo_to_sort'
 	get 'photos/reaload_photos_queue'
   get 'photos/remove_photos', to: 'photos#remove_photos', as: 'remove_photos'
+  get 'photos/pay_photos', to: 'photos#pay_multiple_photos', as: 'pay_multiple_photos'
   get 'photos/load_sections_to_sort'
   get 'photo/edit_sections', to:'photos#edit_sections'
   get 'photos/load_sections_tracker'
@@ -40,6 +42,9 @@ Rails.application.routes.draw do
   patch "photos/suspend_photo/:id", to: 'photos#suspend', as: :suspend
   patch "photos/approve_photo/:id", to: 'photos#approve', as: :approve
   delete "destroy_photos", to: 'photos#destroy_photos'
+  post "edit_photos", to: 'photos#edit_photos'
+  post "pay_photos", to: 'photos#pay_photos'
+  get "invite_sort_friend/:id", to: 'photos#sort_friend', as: :sort_friend
 
   resources :photos do
   	member do

@@ -44,7 +44,7 @@ class User < ApplicationRecord
     user = User.create(
       first_name: auth.extra.raw_info.name.split(" ")[0], 
       last_name: auth.extra.raw_info.name.split(" ")[1],
-      username:  auth.extra.raw_info.username,
+      username:  auth.extra.raw_info.name,
       email: auth.info.email,
       avatar: image,
       password: Devise.friendly_token[0,20])

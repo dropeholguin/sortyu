@@ -6,19 +6,35 @@ window.photoStats ?= {}
 window.sortingEffects ?= {}
 
 window.photoStats.show = ->
-	photoId = $('#next-sort').data('photo_id')
-	$.ajax 'photos/load_sorting_stats',
-	type: 'GET',
-	dataType: 'script',
-	data: {
-		photo_id: photoId
-	},
-	error: (jqXHR, textStatus, errorThrown) ->
-		console.log("AJAX Error: #{textStatus}")
-	success: (data, textStatus, jqXHR) ->
-		console.log("Stadistics shown successfully!")
-		$('#next-sort').show()
-		$('#loading_text').hide()
+	if $('#friend-sort').length > 0
+		photoId = $('#source-url').data('id')
+		$.ajax '/photos/load_sorting_stats',
+		type: 'GET',
+		dataType: 'script',
+		data: {
+			photo_id: photoId
+		},
+		error: (jqXHR, textStatus, errorThrown) ->
+			console.log("AJAX Error: #{textStatus}")
+		success: (data, textStatus, jqXHR) ->
+			console.log("Stadistics shown successfully!")
+			$('.rect').unbind('click')
+			$('#loading_text').html('Done!')
+	else
+		# This is for the principal sorting(AJAX path is different)
+		photoId = $('#next-sort').data('photo_id')
+		$.ajax 'photos/load_sorting_stats',
+		type: 'GET',
+		dataType: 'script',
+		data: {
+			photo_id: photoId
+		},
+		error: (jqXHR, textStatus, errorThrown) ->
+			console.log("AJAX Error: #{textStatus}")
+		success: (data, textStatus, jqXHR) ->
+			console.log("Stadistics shown successfully!")
+			$('#next-sort').show()
+			$('#loading_text').hide()
 
 window.sortingEffects.load = ->
 	loadPhotoToSort()
@@ -58,65 +74,122 @@ loadPhotoToSort = ->
 					loadPhotoToSort()
 
 loadSectionsToSort = (photoId)->
-	$.ajax 'photos/load_sections_to_sort',
-	type: 'GET',
-	dataType: 'json',
-	data: {
-		photo_id: photoId
-	},
-	error: (jqXHR, textStatus, errorThrown) ->
-		console.log("AJAX Error: #{textStatus}")
-	success: (data, textStatus, jqXHR) ->
-		console.log data.sections
-		console.log("Loaded sorting sections")
-		window.LocalPloter.performPlot(data.sections)
-
+	if $('#friend-sort').length > 0
+		$.ajax '/photos/load_sections_to_sort',
+		type: 'GET',
+		dataType: 'json',
+		data: {
+			photo_id: photoId
+		},
+		error: (jqXHR, textStatus, errorThrown) ->
+			console.log("AJAX Error: #{textStatus}")
+		success: (data, textStatus, jqXHR) ->
+			console.log data.sections
+			console.log("Loaded sorting sections")
+			window.LocalPloter.performPlot(data.sections)
+	else
+		# This is for the principal sorting(AJAX path is different)
+		$.ajax 'photos/load_sections_to_sort',
+		type: 'GET',
+		dataType: 'json',
+		data: {
+			photo_id: photoId
+		},
+		error: (jqXHR, textStatus, errorThrown) ->
+			console.log("AJAX Error: #{textStatus}")
+		success: (data, textStatus, jqXHR) ->
+			console.log data.sections
+			console.log("Loaded sorting sections")
+			window.LocalPloter.performPlot(data.sections)
 
 updatePhotoToSortedState = ->
-	photoId = $('#next-sort').data('photo_id')
-	#Here you also need to save sorting data
-	$.ajax 'photos/update_photo_to_sorted_state',
-	type: 'PATCH',
-	dataType: 'script',
-	data: {
-		photo_id: photoId
-	},
-	error: (jqXHR, textStatus, errorThrown) ->
-		console.log("AJAX Error: #{textStatus}")
-	success: (data, textStatus, jqXHR) ->
-		console.log("Photo updated successfully!")
-		setTimeout("window.photoStats.show()", 2000)
+	if $('#friend-sort').length > 0
+		photoId = $('#source-url').data('id')
+		#Here you also need to save sorting data
+		$.ajax '/photos/update_photo_to_sorted_state',
+		type: 'PATCH',
+		dataType: 'script',
+		data: {
+			photo_id: photoId
+		},
+		error: (jqXHR, textStatus, errorThrown) ->
+			console.log("AJAX Error: #{textStatus}")
+		success: (data, textStatus, jqXHR) ->
+			setTimeout("window.photoStats.show()", 2000)
+	else
+		# This is for the principal sorting (AJAX paths are different)
+		photoId = $('#next-sort').data('photo_id')
+		$.ajax 'photos/update_photo_to_sorted_state',
+		type: 'PATCH',
+		dataType: 'script',
+		data: {
+			photo_id: photoId
+		},
+		error: (jqXHR, textStatus, errorThrown) ->
+			console.log("AJAX Error: #{textStatus}")
+		success: (data, textStatus, jqXHR) ->
+			console.log("Photo updated successfully!")
+			setTimeout("window.photoStats.show()", 2000)
 
 createSortings = ->
 	sortings = []
 	$(".rect-clicked").each (index, element) ->
 		sortings.push element.id
-	photoId = $('#next-sort').data('photo_id')
-	$.ajax 'photos/create_sortings',
-	type: 'POST',
-	dataType: 'script',
-	data: {
-		photo_id: photoId, sortings: sortings
-	},
-	error: (jqXHR, textStatus, errorThrown) ->
-		console.log("AJAX Error: #{textStatus}")
-	success: (data, textStatus, jqXHR) ->
-		console.log("Create sorting successfully!")
-		computeSortingStats()
+	if $('#friend-sort').length > 0
+		photoId = $('#source-url').data('id')
+		$.ajax '/photos/create_sortings',
+		type: 'POST',
+		dataType: 'script',
+		data: {
+			photo_id: photoId, sortings: sortings
+		},
+		error: (jqXHR, textStatus, errorThrown) ->
+			console.log("AJAX Error: #{textStatus}")
+		success: (data, textStatus, jqXHR) ->
+			console.log("Create sorting successfully!")
+			computeSortingStats()
+	else
+		# This is for the normal sorting (AJAX path are different)
+		photoId = $('#next-sort').data('photo_id')
+		$.ajax 'photos/create_sortings',
+		type: 'POST',
+		dataType: 'script',
+		data: {
+			photo_id: photoId, sortings: sortings
+		},
+		error: (jqXHR, textStatus, errorThrown) ->
+			console.log("AJAX Error: #{textStatus}")
+		success: (data, textStatus, jqXHR) ->
+			console.log("Create sorting successfully!")
+			computeSortingStats()
 
 computeSortingStats = ->
-	photoId = $('#next-sort').data('photo_id')
-	$.ajax 'photos/info_sorting',
-	type: 'POST',
-	dataType: 'script',
-	data: {
-		photo_id: photoId
-	},
-	error: (jqXHR, textStatus, errorThrown) ->
-		console.log("AJAX Error: #{textStatus}")
-	success: (data, textStatus, jqXHR) ->
-		console.log("Sorting stats computed successfully!")
-		updatePhotoToSortedState()
+	if $('#friend-sort').length > 0
+		photoId = $('#source-url').data('id')
+		$.ajax '/photos/info_sorting',
+		type: 'POST',
+		dataType: 'script',
+		data: {
+			photo_id: photoId
+		},
+		error: (jqXHR, textStatus, errorThrown) ->
+			console.log("AJAX Error: #{textStatus}")
+		success: (data, textStatus, jqXHR) ->
+			console.log("Sorting stats computed successfully!")
+			updatePhotoToSortedState()
+	else
+		photoId = $('#next-sort').data('photo_id')
+		$.ajax 'photos/info_sorting',
+		type: 'POST',
+		dataType: 'script',
+		data: {
+			photo_id: photoId
+		},
+		error: (jqXHR, textStatus, errorThrown) ->
+			console.log("AJAX Error: #{textStatus}")
+		success: (data, textStatus, jqXHR) ->
+			console.log("Sorting stats computed successfully!")
+			updatePhotoToSortedState()
 
 finishSorting = ->
 	if areAllSectionsClicked()
@@ -166,7 +239,7 @@ getParameterByName = (name, url) ->
 		return ''
 	decodeURIComponent results[2].replace(/\+/g, ' ')
 
-#Save sections
+#Save sections at edit sections page
 saveSections = ->
 	if $('#photo-editor #canvas').length > 0
 		parameter = getParameterByName('photo_id', window.location.href)
@@ -226,9 +299,22 @@ saveSections = ->
 					window.location.replace('/profile/show')
 
 
+hide_results = ->
+	$('input#hide_results').on 'change', ->
+		$.ajax '/users/hide_results',
+		type: 'PATCH',
+		dataType: 'script',
+		data: {},
+		error: (jqXHR, textStatus, errorThrown) ->
+			console.log("AJAX Error: #{textStatus}")
+		success: (data, textStatus, jqXHR) ->
+	
+	
+
 $(document).on 'turbolinks:load', ->
 	changeActiveState()
 	saveSections()
+	hide_results()
 		
 	
 $(document).on 'turbolinks:load', ->
@@ -237,6 +323,10 @@ $(document).on 'turbolinks:load', ->
 
 		$(document).on 'click', '.rect', (event) ->
 			if areAllSectionsClicked()
+				# # If user doesn't want to see photo results
+				# if $('input#hide_results').is(':checked')
+				# 	$('#next-sort').hide()
+				# 	createSortings()
 				console.log 'All sections are clicked -> Proceed!'
 				$('#next-sort').hide()
 				$('#photo-stadistic-container').html('<h3 id="loading_text">Loading...</h3>')
@@ -250,3 +340,14 @@ $(document).on 'turbolinks:load', ->
 		$('#photo-container').on 'click', (event) ->
 			if areAllSectionsClicked() and $('.photo-stadistic').length > 0
 				finishSorting()
+
+	else if $('#friend-sort').length > 0
+		loadSectionsToSort($('#source-url').data('id'))
+		$(document).on 'click', '.rect', (event) ->
+			if areAllSectionsClicked() and $('#loading_text').length == 0
+				console.log 'All sections are clicked -> Proceed!'
+				$('#next-sort').hide()
+				$('#photo-stadistic-container').append('<h3 class="under-space upper-space text-center" id="loading_text">Loading...</h3>')
+				createSortings()
+			else
+				console.log "Don't do anything yet, not all sections clicked."

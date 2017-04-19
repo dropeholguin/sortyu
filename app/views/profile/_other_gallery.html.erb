@@ -1,18 +1,24 @@
 <div id="photo-container" class="small-12 columns">
-	<% @photos.each() do |photo| %>
-		<div class="under-space small-4 float-left columns">
-			<%= link_to photo do %>
-				<%= image_tag(photo.file.url(:medium)) %>
-			<% end %>
-		 	<div data-photo="<%= photo.id %>" id="photo-i" class="row collapse under-space">
- 				<div class="small-12 medium-3 large-2 columns">
-      				<p>Share: </p> 
-      			</div>
-				<div class="small-12 medium-9 large-10 columns">
-         			<%= facebook_button :turbolinks => true %>
-         			<%= twitter_button :turbolinks => true%>
-     			</div>
-  			</div>
+	<% if @photos.count > 0 %>
+		<% @photos.each() do |photo| %>
+			<div class="under-space small-4 float-left columns">
+				<%= link_to photo do %>
+					<%= image_tag(photo.file.url(:medium)) %>
+				<% end %>
+			 	<div data-photo="<%= photo.id %>" id="photo-i" class="row collapse under-space">
+	 				<div class="small-12 medium-3 large-2 columns">
+	      				<p>Share: </p> 
+	      			</div>
+					<div class="small-12 medium-9 large-10 columns">
+	         			<%= facebook_button :turbolinks => true %>
+	         			<%= twitter_button :turbolinks => true%>
+	     			</div>
+	  			</div>
+			</div>
+		<% end %>
+	<% else %>
+		<div class="small-12 columns text-center">
+			<h4>There are no images to display</h4>
 		</div>
 	<% end %>
 </div>

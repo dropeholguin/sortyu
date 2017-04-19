@@ -70,3 +70,30 @@ img{
 		margin-bottom:2em;
 	}
 }
+
+.button.pay{
+	background-color:white;
+	border-color:green;
+	color:green;
+}
+
+.button.pay:hover{
+	background-color:green;
+	color:white;
+}
+
+#batch-container{
+	.button{
+		margin-right:1em;
+	}
+}
+/* Small only */
+@media screen and (max-width: 39.9375em) {
+	#remove-photos{
+		#batch-container{
+			.button{
+				font-size:0.8em;
+			}
+		}
+	}
+}

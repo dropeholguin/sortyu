@@ -12,9 +12,9 @@ class ImportPhotosController < ApplicationController
 
 	def import_instagram
 		@user = current_user
-    client = Instagram.client(access_token: @user.instagram(@user).oauth_token)
-    @results = client.recent
-    @max_num = @results["data"].count - 1
+	    client = Instagram.client(access_token: @user.instagram(@user).oauth_token)
+	    @results = client.recent
+	    @max_num = @results["data"].count - 1
 	end
 
 	def import_google

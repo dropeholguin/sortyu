@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
 			end
 		end
 	end
-
+	
 	def after_sign_in_path_for(resource)
 		if request.env['affiliate.tag'] && affiliate = Affiliate.find(request.env['affiliate.tag'])
 			if !affiliate_signed_in?
@@ -27,5 +27,4 @@ class ApplicationController < ActionController::Base
 	    end
     	request.env['omniauth.origin'] || stored_location_for(resource) || root_path
   	end
-
 end

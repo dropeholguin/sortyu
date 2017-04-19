@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#sorting-principal, #photo-edit-section{
+#sorting-principal, #photo-edit-section, #photo-show{
 
 	#user-name-container{
 		h6{
@@ -99,7 +99,7 @@
 
 /* Large and up */
 @media screen and (min-width: 64em) {
-	#sorting-principal, #photo-edit-section{
+	#sorting-principal, #photo-edit-section, #friend-sort{
 		#user-name-container{
 			left:-5%;
 			h6{

@@ -15,6 +15,19 @@ class PhotosController < ApplicationController
         @photos = Photo.photos(current_user).order('created_at desc')
     end
 
+    def pay_multiple_photos
+        @photos = Photo.pay_photos(current_user).order('created_at desc')
+    end
+
+    def sort_friend
+        @photo = Photo.find(params[:id])
+        if current_user == @photo.user
+            respond_to do |format|
+                format.html { redirect_to profile_show_path, error: "You can't sort your own image."}
+            end
+        end
+    end
+    
     def load_photo_to_sort
         respond_to do |format|
             @photo = Photo.find(params[:photo_id])
@@ -196,6 +209,11 @@ class PhotosController < ApplicationController
 
     # GET /photos/1/edit
     def edit
+        if !(@photo.user == current_user)
+            respond_to do |format|
+                format.html { redirect_to root_path, notice: "You can't edit other user's photos" }
+            end
+        end
     end
 
     def load_sections_to_sort
@@ -208,6 +226,15 @@ class PhotosController < ApplicationController
 
     def edit_sections
         @photo = Photo.find(params[:photo_id])
+        if @photo.user != current_user
+            respond_to do |format|
+                format.html{ redirect_to root_path, alert: "You can't edit other users sections"}
+            end
+        elsif !@photo.first_edit
+            respond_to do |format|
+                format.html{ redirect_to root_path, alert: "You can't edit a photo's sections more than once"}
+            end
+        end
     end
 
     def load_sections_tracker
@@ -240,13 +267,34 @@ class PhotosController < ApplicationController
         @photo.user = @user
 
         respond_to do |format|
-            if @photo.save
+            if verify_recaptcha(model: @photo) && @photo.save
                 format.html { redirect_to photo_edit_sections_path(photo_id: @photo.id), notice: 'Photo was successfully uploaded. Time to set your photo sections.' }
                 format.json { render :show, status: :created, location: @photo }
             else
                 format.html { render :new }
                 format.json { render json: @photo.errors, status: :unprocessable_entity }
             end
+        end
+    end
+
+    def pay_photos
+        respond_to do |format|
+            photo_ids_array = params[:photo_ids]
+            photo_array_string = photo_ids_array.join("-")
+            cookies[:pay_photos] = { value: photo_array_string, expires: 23.hours.from_now }
+
+            format.html { redirect_to new_charge_path }
+        end
+    end
+
+    def edit_photos
+        respond_to do |format|
+            photo_ids_array = params[:photo_ids]
+            first_photo_id = photo_ids_array.shift
+            photo_array_string = photo_ids_array.join("-")
+            cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
+
+            format.html { redirect_to edit_photo_path(first_photo_id) }  
         end
     end
 
@@ -285,7 +333,6 @@ class PhotosController < ApplicationController
             end
         end
     end
-
     # DELETE /photos/1
     # DELETE /photos/1.json
     def destroy
@@ -298,7 +345,12 @@ class PhotosController < ApplicationController
     end
 
     def destroy_photos
-        
+        Photo.where(:id => params[:photo_ids]).destroy_all
+        cookies.delete(:photos_queue)
+        respond_to do |format|
+            format.html { redirect_to profile_show_path, notice: 'Photos was successfully destroyed.' }
+            format.json { head :no_content }
+        end
     end
 
     def suspend
@@ -313,7 +365,7 @@ class PhotosController < ApplicationController
 
     def approve
         @photo = Photo.find(params[:id])
-        @photo.update_attributes(suspended: false)
+        @photo.update_attributes(suspended: false, count_flags: 0)
         respond_to do |format|
             ModelMailer.approve_photo(@photo).deliver
             format.html { redirect_to admin_root_path, notice: 'Photo was Approved.' }

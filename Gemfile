@@ -45,7 +45,7 @@ gem 'money-rails'
 gem 'meta-tags'
 gem 'shareable', git: "https://github.com/simon0191/shareable.git"
 gem "rack-affiliates"
-
+gem 'social-share-button'
 
 group :development, :test do
   gem 'byebug', platform: :mri

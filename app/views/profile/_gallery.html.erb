@@ -1,31 +1,44 @@
-<div class="small-12 columns">
-	<%= link_to 'Remove Images', remove_photos_path, class:"button tiny delete float-left" %>
-  <ul class="dropdown menu float-right" data-dropdown-menu>
-    <li>
-      <a href="#">Filters</a>
-      <ul class="menu">
-        <li><%= link_to "Sorts", request.query_parameters.merge({sort_by: 1}) %></li>
-        <li><%= link_to "Likes", request.query_parameters.merge({sort_by: 2}) %></li>
-        <li><%= link_to "Paid", request.query_parameters.merge({sort_by: 3}) %></li>
-      </ul>
-    </li>
-  </ul>
+<div id="batch-container" class="small-12 columns">
+	<%= link_to 'Edit Images', remove_photos_path, class:"button tiny hollow float-left" %>
+	<%= link_to 'Pay Images', pay_multiple_photos_path, class:"button pay tiny float-left" %>
+	<ul class="dropdown menu float-right" data-dropdown-menu>
+		<li>
+			<a href="#">Filters</a>
+			<ul class="menu">
+				<%= render partial: 'filters' %>	
+			</ul>
+		</li>
+	</ul>
 </div>
 <div id="photo-container" class="small-12 columns">
-	<% @photos.each() do |photo| %>
-		<div class="under-space small-6 medium-4 float-left columns">
-			<%= link_to photo do %>
-				<%= image_tag(photo.file.url(:medium)) %>
-			<% end %>
-		 	<div data-photo="<%= photo.id %>" id="photo-i" class="row collapse under-space">
- 				<div class="small-12 medium-3 large-2 columns">
-      				<p>Share: </p> 
-      			</div>
-      			<div class="small-12 medium-9 large-10 columns">
-         			<%= facebook_button :turbolinks => true %>
-         			<%= twitter_button :turbolinks => true%>
-     			</div>
-  			</div>
+	<% if @photos.count > 0 %>
+		<% @photos.each() do |photo| %>
+			<div class="under-space small-6 medium-4 float-left columns">
+				<div class="ribbon-container">
+					<% if photo.state == 'free'%>
+						<div class="ribbon free">Free</div>
+					<% else %>
+						<div class="ribbon paid">&#36;</div>
+					<% end %>
+					<%= link_to photo do %>
+						<%= image_tag(photo.file.url(:medium)) %>
+					<% end %>
+				</div>
+				<!-- Share social buttons container -->
+				<div data-photo="<%= photo.id %>" id="photo-i" class="row collapse under-space">
+					<div class="small-12 medium-3 large-2 columns">
+						<p>Share: </p> 
+					</div>
+					<div class="small-12 medium-9 large-10 columns">
+						<%= social_share_button_tag("Sortyu Image", url: photo_url(photo), image: photo.file.url(:medium), desc: photo.description) %>
+
+					</div>
+				</div>
+			</div>
+		<% end %>
+	<% else %>
+		<div class="small-12 text-center columns">
+			<h4>There are no images to display</h4>
 		</div>
 	<% end %>
 </div>
@@ -35,11 +48,11 @@
   <h3>Enjoy uploading images?</h3>
   <p><b><i>Get benefits for paid images:</i></b></p>
   <ul>
-  	<li>Unlimited uploads</li>
-  	<li>Be at the top of the sorting queue</li>
+	<li>Unlimited uploads</li>
+	<li>Be at the top of the sorting queue</li>
   </ul>
   <button class="close-button" data-close aria-label="Close modal" type="button">
-    <span aria-hidden="true">&times;</span>
+	<span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="target hidden">
