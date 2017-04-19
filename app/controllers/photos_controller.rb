@@ -358,7 +358,7 @@ class PhotosController < ApplicationController
 
     def approve
         @photo = Photo.find(params[:id])
-        @photo.update_attributes(suspended: false)
+        @photo.update_attributes(suspended: false, count_flags: 0)
         respond_to do |format|
             ModelMailer.approve_photo(@photo).deliver
             format.html { redirect_to admin_root_path, notice: 'Photo was Approved.' }
