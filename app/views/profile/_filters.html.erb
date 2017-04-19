@@ -1,0 +1,26 @@
+<% if params[:sort_by].to_i == 1 %>
+	<li><%= link_to request.query_parameters.merge({sort_by: 1}) do %>
+       <i class="fa fa-check-square-o" aria-hidden="true"></i>
+       <span>Sorts</span>
+    <% end %></li>
+    <li><%= link_to "Likes", request.query_parameters.merge({sort_by: 2}) %></li>
+	<li><%= link_to "Paid", request.query_parameters.merge({sort_by: 3}) %></li>
+<% elsif params[:sort_by].to_i == 2 %>
+    <li><%= link_to "Sorts", request.query_parameters.merge({sort_by: 1}) %></li>
+    <li><%= link_to request.query_parameters.merge({sort_by: 2}) do %>
+       <i class="fa fa-check-square-o" aria-hidden="true"></i>
+       <span>Likes</span>
+    <% end %></li>
+	<li><%= link_to "Paid", request.query_parameters.merge({sort_by: 3}) %></li>
+<% elsif params[:sort_by].to_i == 3 %>
+	<li><%= link_to "Sorts", request.query_parameters.merge({sort_by: 1}) %></li>
+	<li><%= link_to "Likes", request.query_parameters.merge({sort_by: 2}) %></li>
+	<li><%= link_to request.query_parameters.merge({sort_by: 3}) do %>
+       <i class="fa fa-check-square-o" aria-hidden="true"></i>
+       <span>Paid</span>
+    <% end %></li>
+<% else %>
+	<li><%= link_to "Sorts", request.query_parameters.merge({sort_by: 1}) %></li>
+	<li><%= link_to "Likes", request.query_parameters.merge({sort_by: 2}) %></li>
+	<li><%= link_to "Paid", request.query_parameters.merge({sort_by: 3}) %></li>
+<% end %>	
