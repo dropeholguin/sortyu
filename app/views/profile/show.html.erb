@@ -40,9 +40,6 @@
 			 	<li class="tabs-title">
 			 		<a href="#panel-following"><b><%= current_user.following.count %></b> Following</a>
 			 	</li>
-			 	<li class="tabs-title">
-			 		<a href="#panel-affilliates">Affiliates</a>
-			 	</li>
 			</ul>
 			<div class="tabs-content small-12 columns" data-tabs-content="tabs">
 				<div class="tabs-panel is-active" id="panel-gallery">
@@ -53,9 +50,6 @@
 				</div>
 				<div class="tabs-panel" id="panel-following">
 					<%= render partial: 'following' %>
-				</div>
-				<div class="tabs-panel" id="panel-affilliates">
-					<%= render partial: 'affiliates' %>
 				</div>
 			</div>
 		</div>
