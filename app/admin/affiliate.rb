@@ -27,7 +27,7 @@ index do
 	column :last_name
 	column :email
   column "Balance" do |affiliate|
-    humanized_money_with_symbol affiliate.balance_cents
+    money_without_cents_and_with_symbol affiliate.balance_cents
   end
 	column "Create Date", :created_at
   	actions
@@ -38,7 +38,7 @@ csv do
   column :last_name
   column :email
   column "Balance" do |affiliate|
-    humanized_money_with_symbol affiliate.balance_cents
+    money_without_cents_and_with_symbol affiliate.balance_cents
   end 
 end
 

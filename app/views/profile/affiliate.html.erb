@@ -15,12 +15,11 @@
 	<div class="row upper-space">
 		<div class="under-space small-12 medium-8 medium-push-2 columns">
 			<p><b><%= @user.username %> </b></p>
-			<p><%= request.protocol + request.host + "?aff_id=#{@user.id}" %></p>
+			<p><%= request.protocol + request.host + "?ref=#{@user.id}" %></p>
 		</div>
 	</div>
 	<div class="hide-for-medium small-12 text-center columns">
 		<%= link_to "Edit", edit_affiliate_registration_path , class:"button small" %>
-		<%= link_to "Upload", new_photo_path, class:"button small" %>
 	</div>
 	<div class="row">
 		<div class="small-12 columns">
