@@ -28,7 +28,7 @@
 			  		<a href="#panel-gallery" aria-selected="true"><b><%= @photos.count() %></b> Images</a>
 			  	</li>
 			  	<li class="tabs-title">
-			 		<a href="#panel-affilliates">Affiliates</a>
+			 		<a href="#panel-affilliates"><b><%= User.referred_users(current_affiliate).count()%> </b>Referrals</a>
 			 	</li>
 			</ul>
 			<div class="tabs-content small-12 columns" data-tabs-content="example-tabs">
