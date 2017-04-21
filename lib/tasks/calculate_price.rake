@@ -17,10 +17,11 @@ namespace :calculate do
     h = (count_photos_paid * 200) - (count_photos_paid) / g
     price = 2 * h
 
-    if price < 2
+    if price < 2 || g < 10000
         price = 2
     end
-    @price = Price.new(value: price)
+    @price = Price.new(value_cents: price)
     @price.save
+
   end
 end
