@@ -21,8 +21,6 @@ class ProfileController < ApplicationController
 
 	def affiliate
 		@user = Affiliate.find(params[:id])
-		@photos = Photo.photos(@user.id).order('created_at desc')
-		
 	end
 	
 end
