@@ -39,7 +39,7 @@ class ChargesController < ApplicationController
 				affiliate = Affiliate.find(@user.affiliate_id)
 				balance = affiliate.balance
 			
-				affiliate.update_attributes(balance: balance + @amount * 0.1)
+				affiliate.update_attributes(balance: @amount * 0.1)
 			end
 		elsif cookies[:pay_photos].present?
 			@count = cookies[:pay_photos].split("-").count
