@@ -19,6 +19,23 @@ ActiveAdmin.register_page "Dashboard", namespace: :admin do
             end
         end
         column do
+            panel "Recent Affiliates" do
+                ul do
+                    table_for Affiliate.order("created_at desc").limit(5) do
+                        column :first_name
+                        column :last_name
+                        column :username
+                        column :email
+                        column "CREATE DATE", :created_at
+                    end
+                    strong { link_to "View All Affiliates", admin_affiliates_path }
+                end
+            end
+        end
+    end
+
+    columns do
+        column do
             panel "Photos with more than 2 flags" do
                 ul do
                     table_for Photo.where("count_flags >= ? ", 2).each do

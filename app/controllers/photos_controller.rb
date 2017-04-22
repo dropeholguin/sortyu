@@ -1,7 +1,5 @@
 class PhotosController < ApplicationController
     before_action :set_photo, only: [:show, :edit, :update, :destroy, :shared_times, :like, :unlike]
-    before_filter :authenticate_user!, except: [:suspend, :approve]
-
     # GET /photos
     # GET /photos.json
     def index
@@ -201,6 +199,11 @@ class PhotosController < ApplicationController
 
     # GET /photos/new
     def new
+        if user_signed_in?
+            @user = current_user
+        else
+            @user = current_affiliate
+        end
         @photo = Photo.new
     end
 
@@ -255,7 +258,11 @@ class PhotosController < ApplicationController
     # POST /photos
     # POST /photos.json
     def create
-        @user = current_user
+        if user_signed_in?
+            @user = current_user
+        else
+            @user = current_affiliate
+        end
         @photo = Photo.new(photo_params)
         @photo.user = @user
 
