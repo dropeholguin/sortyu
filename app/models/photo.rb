@@ -13,14 +13,7 @@ class Photo < ApplicationRecord
     serialize :dimensions
     before_save :extract_dimensions
 
-    MAXIMUM_PHOTOS = 10
     MAXIMUM_FLAGS = 2
-
-    validate on: :create do
-        if user.photos.size >= MAXIMUM_PHOTOS
-            errors.add :photo, "You have reached the amount of free images"
-        end
-    end
 
     scope :photos, -> (user_id) { where(user_id: user_id) }
     scope :pay_photos, -> (user_id) { where("user_id = ? AND state != ? ", user_id, "paid") }

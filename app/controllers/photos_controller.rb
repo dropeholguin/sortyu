@@ -138,7 +138,15 @@ class PhotosController < ApplicationController
         photos = []
         respond_to do |format| 
             if @user.photos.size >= 10
-                format.html { redirect_to profile_show_path, alert: 'You have reached the amount of free images' }
+                params[:photos].each { |image_url|
+                    @photo = Photo.new(file: URI.parse(image_url), user_id: @user.id)
+                    @photo.save
+                    photos << @photo
+                }
+                photo_ids_array = photos.pluck(:id)
+                photo_array_string = photo_ids_array.join("-")
+                cookies[:pay_photos] = { value: photo_array_string, expires: 23.hours.from_now }
+                format.html { redirect_to new_charge_path, alert: 'You have reached the amount of free images' }
             else
                 params[:photos].each { |image_url|
                     if @user.photos.size < 10
