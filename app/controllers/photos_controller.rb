@@ -339,7 +339,7 @@ class PhotosController < ApplicationController
         @photo.destroy
         cookies.delete(:photos_queue)
         respond_to do |format|
-            format.html { redirect_to profile_show_path, notice: 'Photo was successfully destroyed.' }
+            format.html { redirect_to profile_show_path, notice: 'Photo was successfully deleted.' }
             format.json { head :no_content }
         end
     end
@@ -348,7 +348,7 @@ class PhotosController < ApplicationController
         Photo.where(:id => params[:photo_ids]).destroy_all
         cookies.delete(:photos_queue)
         respond_to do |format|
-            format.html { redirect_to profile_show_path, notice: 'Photos was successfully destroyed.' }
+            format.html { redirect_to profile_show_path, notice: 'Photos were successfully deleted.' }
             format.json { head :no_content }
         end
     end
@@ -358,7 +358,7 @@ class PhotosController < ApplicationController
         @photo.update_attributes(suspended: true)
         respond_to do |format|
             ModelMailer.suspend_photo(@photo).deliver
-            format.html { redirect_to admin_root_path, notice: 'Photo was Suspended.' }
+            format.html { redirect_to admin_root_path, notice: 'Photo was suspended.' }
             format.json { head :no_content }
         end
     end
