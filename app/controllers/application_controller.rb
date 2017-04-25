@@ -17,7 +17,11 @@ class ApplicationController < ActionController::Base
 	end
 	
 	def after_sign_in_path_for(resource)
-		if request.env['affiliate.tag'] && affiliate = Affiliate.find(request.env['affiliate.tag'])
+		if affiliate_signed_in? && resource.sign_in_count == 1
+ 			ref = "#{6.times.map { [*'0'..'9', *'A'..'Z'].sample }.join}"
+			resource.update_attributes(ref: ref)
+		end
+		if request.env['affiliate.tag'] && affiliate = Affiliate.find_by_ref(request.env['affiliate.tag'])
 			if !affiliate_signed_in?
 				resource.update_attributes(affiliate_id: affiliate.id)
 	      		puts "Halo, referral! You've been referred here by #{affiliate.full_name}"
