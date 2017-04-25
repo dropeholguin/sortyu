@@ -248,7 +248,7 @@ class PhotosController < ApplicationController
             @photo.save  
         end
         params[:sections].each_with_index do |section, i|
-            @section = Section.new(photo_id: @photo.id, index: i.to_i, top: section[1]["top"], left:section[1]["left"], width:section[1]["width"], height: section[1]["height"],translateX: section[1]["translateX"], translateY: section[1]["translateY"])        
+            @section = Section.new(photo_id: @photo.id, index: (i.to_i+1), top: section[1]["top"], left:section[1]["left"], width:section[1]["width"], height: section[1]["height"],translateX: section[1]["translateX"], translateY: section[1]["translateY"])        
             @section.save
             puts @section
         end
@@ -339,7 +339,7 @@ class PhotosController < ApplicationController
         @photo.destroy
         cookies.delete(:photos_queue)
         respond_to do |format|
-            format.html { redirect_to profile_show_path, notice: 'Photo was successfully destroyed.' }
+            format.html { redirect_to profile_show_path, notice: 'Photo was successfully deleted.' }
             format.json { head :no_content }
         end
     end
@@ -348,7 +348,7 @@ class PhotosController < ApplicationController
         Photo.where(:id => params[:photo_ids]).destroy_all
         cookies.delete(:photos_queue)
         respond_to do |format|
-            format.html { redirect_to profile_show_path, notice: 'Photos was successfully destroyed.' }
+            format.html { redirect_to profile_show_path, notice: 'Photos were successfully deleted.' }
             format.json { head :no_content }
         end
     end
@@ -358,7 +358,7 @@ class PhotosController < ApplicationController
         @photo.update_attributes(suspended: true)
         respond_to do |format|
             ModelMailer.suspend_photo(@photo).deliver
-            format.html { redirect_to admin_root_path, notice: 'Photo was Suspended.' }
+            format.html { redirect_to admin_root_path, notice: 'Photo was suspended.' }
             format.json { head :no_content }
         end
     end
