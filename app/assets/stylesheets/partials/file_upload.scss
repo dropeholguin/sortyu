@@ -2,6 +2,10 @@
 	h4{
 		margin-bottom:1.5em;
 	}
+
+	.captcha-container{
+		position:relative;
+	}
 }
 
 .button.facebook,
@@ -51,6 +55,10 @@
 			.button.instagram{
 				width:45%;
 	}
+
+	.captcha-container{
+		left:-16px;
+	}
 }
 
 /* Medium only */
@@ -60,6 +68,10 @@
 			.button.instagram{
 				width:90%;
 	}
+
+	.captcha-container{
+		left:-75px;
+	}
 }
 
 /* Large and up */
@@ -68,6 +80,17 @@
 		.button.google,
 			.button.instagram{
 				width:70%;
+	}
+
+	.captcha-container{
+		left:214px;
+	}
+}
+
+/* Large only */
+@media screen and (min-width: 64em) and (max-width: 74.9375em) {
+	.captcha-container{
+		left:157px;
 	}
 }
 
