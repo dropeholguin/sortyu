@@ -1,7 +1,9 @@
 class Photo < ApplicationRecord
     include AASM
     acts_as_votable
-
+    acts_as_taggable
+    acts_as_taggable_on :tags
+    
     belongs_to :user
     has_many :sections, dependent: :destroy
     has_many :flags, dependent: :destroy

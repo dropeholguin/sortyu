@@ -19,12 +19,17 @@
 		<%= f.label :description %>
 		<%= f.text_area :description %>
 	</div>
+	<div class="field">
+		<%= f.label :tag_list, "Tags (separated by commas)" %><br />
+		 <%= f.text_field :tag_list, 'data-delimiter' => ', ', multiple: true %>
+	</div>
 	<% if !params[:id].present? %>
 		<div class="row under-space">
 			<div class="captcha-container">
 				<%= recaptcha_tags %>
 			</div>
 		</div>
+
 	<% end %>
 	<div class="row">
 	    <div class="callout soft-warning small-12 medium-8 medium-push-2 text-center columns">
