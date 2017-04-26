@@ -20,7 +20,7 @@
 		<%= f.text_area :description %>
 	</div>
 	<div class="field">
-		<%= f.label :tag_list, "Tags (separated by commas)" %><br />
+		<%= f.label :tag_list, "Tags (separated by commas)" %>
 		 <%= f.text_field :tag_list, 'data-delimiter' => ', ', multiple: true %>
 	</div>
 	<% if !params[:id].present? %>
