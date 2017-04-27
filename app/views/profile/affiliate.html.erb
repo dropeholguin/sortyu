@@ -12,7 +12,7 @@
 	<div class="row upper-space">
 		<div class="under-space small-12 medium-8 columns">
 			<p><b><%= @user.username %> </b><% if !@user.about_you.nil? and @user.about_you.length > 0 %><%= @user.about_you %><% else %>No Description<% end %></p>
-			<p><b>URL: </b><%= request.protocol + request.host + "?ref=#{@user.id}" %></p>
+			<p><b>URL: </b><%= request.protocol + request.host + "?ref=#{@user.ref}" %></p>
 		</div>
 	</div>
 	<div class="hide-for-medium small-12 text-center columns">
