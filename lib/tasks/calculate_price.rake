@@ -22,7 +22,7 @@ namespace :calculate do
     h = (count_photos_paid * 200) - (total_sorts) / g
     price = 200 * h
 
-    if price < 200 || g < 10000
+    if g < 10000 || price < 200
         price = 200
     end
     @price = Price.new(value_cents: price, currency: "USD")
