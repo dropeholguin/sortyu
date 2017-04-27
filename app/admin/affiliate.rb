@@ -27,10 +27,19 @@ index do
 	column :last_name
 	column :email
   column "Balance" do |affiliate|
-    money_without_cents_and_with_symbol affiliate.balance_cents
+    humanized_money_with_symbol affiliate.balance
   end
 	column "Create Date", :created_at
-  	actions
+  column "" do |affiliate|
+    if affiliate.is_active?
+      link_to 'Suspend Account', suspend_account_affiliate_path(affiliate), method: :patch, class: 'button'
+    else
+      link_to 'Active Account', active_account_affiliate_path(affiliate), method: :patch, class: 'button'
+    end
+  end
+  actions defaults: false do |affiliate|
+    link_to 'View', admin_affiliate_path(affiliate), class: 'button'
+  end
 end
 
 csv do
@@ -38,7 +47,7 @@ csv do
   column :last_name
   column :email
   column "Balance" do |affiliate|
-    money_without_cents_and_with_symbol affiliate.balance_cents
+    humanized_money_with_symbol affiliate.balance
   end 
 end
 

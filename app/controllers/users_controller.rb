@@ -27,12 +27,14 @@ class UsersController < ApplicationController
 
   def suspend_account_affiliate
     affiliate = Affiliate.find(params[:id])
+    ModelMailer.suspend_account_affiliate(affiliate).deliver
     affiliate.update_attributes is_active: false
     redirect_to admin_affiliates_url, notice: "Account suspended."
   end
 
   def active_account_affiliate
     affiliate = Affiliate.find(params[:id])
+    ModelMailer.active_account_affiliate(affiliate).deliver
     affiliate.update_attributes is_active: true
     redirect_to admin_affiliates_url, notice: "Account Actived."
   end
