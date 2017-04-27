@@ -1,3 +1,8 @@
+<div class="row">
+	<div class="balance-container under-space small-12 text-center columns">
+		<h6>Current balance: <b><%= @user.balance_cents %></b></h6>
+	</div>
+</div>
 <% if User.referred_users(current_affiliate).length > 0 %>
 	<% User.referred_users(current_affiliate).each do |referral| %>
 		<div class="follow-container">
