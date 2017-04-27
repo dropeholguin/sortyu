@@ -21,18 +21,19 @@
 	<div class="row">
 		<div class="small-12 columns">
 			<ul class="tabs" data-tabs id="example-tabs">
-			  	<li id="photos-count" data-photos-size="" class="tabs-title is-active">
-			  		<a href="#panel-gallery" aria-selected="true"><b></b> Images</a>
-			  	</li>
-			  	<li class="tabs-title">
-			 		<a href="#panel-affilliates"><b><%= User.referred_users(current_affiliate).count()%> </b>Referrals</a>
+			  	<li class="tabs-title is-active">
+			 		<a href="#panel-affilliates" aria-selected="true"><b><%= User.referred_users(current_affiliate).count()%> </b>Referrals</a>
 			 	</li>
+			 	<li id="photos-count" data-photos-size="" class="tabs-title">
+			  		<a href="#panel-gallery"><b></b> Images</a>
+			  	</li>
 			</ul>
 			<div class="tabs-content small-12 columns" data-tabs-content="example-tabs">
-				<div class="tabs-panel is-active" id="panel-gallery">
-				</div>
-				<div class="tabs-panel" id="panel-affilliates">
+				<div class="tabs-panel is-active" id="panel-affilliates">
 					<%= render partial: 'affiliates' %>
+				</div>
+				<div class="tabs-panel" id="panel-gallery">
+
 				</div>
 			</div>
 		</div>
