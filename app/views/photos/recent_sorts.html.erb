@@ -1,0 +1,7 @@
+<div class="row">
+	<div class="small-12 columns">
+		<% Seen.get_photos_last_twenty_four_hours(current_user.id).each do |photo| %>
+			<%= photo.description %>
+		<% end %>
+	</div>
+</div>
