@@ -27,6 +27,5 @@ namespace :calculate do
     end
     @price = Price.new(value_cents: price, currency: "USD")
     @price.save
-
   end
 end
