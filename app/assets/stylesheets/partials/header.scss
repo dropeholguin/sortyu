@@ -23,14 +23,24 @@ header{
 	}
 }
 
+
+
 ///////// MEDIA QUERIES ////////
 
 /* Small only */
 @media screen and (max-width: 39.9375em) {
-	
+	header{
+		.button.affiliate{
+			margin-top:1em;
+		}
+	}
 }
 
 /* Medium and up */
 @media screen and (min-width: 40em) {
-	
+	header{
+		.button{
+			margin-left:1em;
+		}
+	}
 }

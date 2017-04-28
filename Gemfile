@@ -46,8 +46,7 @@ gem 'meta-tags'
 gem 'shareable', git: "https://github.com/simon0191/shareable.git"
 gem "rack-affiliates"
 gem 'social-share-button'
-
-
+gem 'acts-as-taggable-on'
 
 group :development, :test do
   gem 'byebug', platform: :mri

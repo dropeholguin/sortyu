@@ -7,7 +7,7 @@
 				<h5>Import from social media</h5>
 			</div>
 			<div class="small-12 medium-4 columns">
-				<% if Identity.identity_facebook(current_user.id, "facebook").empty? %>
+				<% if Identity.identity_facebook(@user.id, "facebook").empty? %>
 	        <%= link_to "Integrate Facebook", user_facebook_omniauth_authorize_path, class:"button facebook" %>
 	      <%else %>
 	    		<%= link_to "Facebook", import_facebook_path, class:"button facebook" %>

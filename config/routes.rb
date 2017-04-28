@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  
+  devise_for :affiliates, controllers: { registrations: "users/registrations" }
 
   devise_for :admin_reviewers, ActiveAdmin::Devise.config.merge({path: '/reviewer'})
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -6,6 +8,7 @@ Rails.application.routes.draw do
   
 	get 'profile/show/', to: 'profile#show', as: 'profile_show'
 	get 'profile/other_user_show/:id', to: 'profile#other_user_show', as: 'profile_other_user_show'
+  get 'profile/affiliate/:id', to: 'profile#affiliate', as: 'profile_affiliate_show'
 
 	get 'import_facebook/photos/', to: 'import_photos#import_facebook', as: 'import_facebook'
 	get 'import_instagram/photos/', to: 'import_photos#import_instagram', as: 'import_instagram'
@@ -28,10 +31,13 @@ Rails.application.routes.draw do
   post 'photos/create_sortings'
   post 'photos/info_sorting'
   get 'photos/load_sorting_stats'
+  get 'photos/recent_sorts', to: 'photos#recent_sorts', as: 'recent_sorts'
   patch "users/create_role/:id", to: 'users#create_reviewer_role', as: :create_reviewer_role
   patch "users/remove_role/:id", to: 'users#remove_reviewer_role', as: :remove_reviewer_role
   patch "users/suspend_account/:id", to: 'users#suspend_account', as: :suspend_account
   patch "users/active_account/:id", to: 'users#active_account', as: :active_account
+  patch "suspend_account_affiliate/:id", to: 'users#suspend_account_affiliate', as: :suspend_account_affiliate
+  patch "active_account_affiliate/:id", to: 'users#active_account_affiliate', as: :active_account_affiliate
   get :followers, to: "relationships#followers"
   get :following, to: "relationships#following"
   patch "photos/suspend_photo/:id", to: 'photos#suspend', as: :suspend

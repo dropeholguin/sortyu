@@ -9,6 +9,7 @@
 		<div class="upper-space small-4 medium-6 medium-pull-1 end text-center columns">
 			<div class="show-for-medium medium-10 columns">
 				<%= link_to "Edit", edit_user_registration_path , class:"button small" %>
+				<%= link_to "Recent Sorts", recent_sorts_path , class:"button small" %>
 				<div class="float-right">
 					<% if current_user.hide_results? %>
 						<%= check_box_tag("hide results", value = "1", checked = true) %>
@@ -27,6 +28,7 @@
 	</div>
 	<div class="hide-for-medium small-12 text-center columns">
 		<%= link_to "Edit", edit_user_registration_path , class:"button small" %>
+		<%= link_to "Recent Sorts", recent_sorts_path , class:"button small" %>
 	</div>
 	<div class="row">
 		<div class="small-12 columns">
@@ -40,9 +42,6 @@
 			 	<li class="tabs-title">
 			 		<a href="#panel-following"><b><%= current_user.following.count %></b> Following</a>
 			 	</li>
-			 	<li class="tabs-title">
-			 		<a href="#panel-affilliates">Affiliates</a>
-			 	</li>
 			</ul>
 			<div class="tabs-content small-12 columns" data-tabs-content="tabs">
 				<div class="tabs-panel is-active" id="panel-gallery">
@@ -53,9 +52,6 @@
 				</div>
 				<div class="tabs-panel" id="panel-following">
 					<%= render partial: 'following' %>
-				</div>
-				<div class="tabs-panel" id="panel-affilliates">
-					<%= render partial: 'affiliates' %>
 				</div>
 			</div>
 		</div>

@@ -1,18 +1,24 @@
-<% if current_user.followers.count > 0 %>
-	<% current_user.followers.each do |follower| %>
+<div class="row">
+	<div class="balance-container under-space small-12 text-center columns">
+		<h6>Current balance: <b><%= humanized_money_with_symbol @user.balance %></b></h6>
+	</div>
+</div>
+<% if User.referred_users(current_affiliate).length > 0 %>
+	<% User.referred_users(current_affiliate).each do |referral| %>
 		<div class="follow-container">
-			<%= link_to profile_other_user_show_path(follower.id) do %>
+			<%= link_to profile_other_user_show_path(referral.id) do %>
+				<%= avatar_profile_link referral, "medium", class:"circle" %>
 				<h6>
-					<%= follower.username %>
+					<%= referral.username %>
 				</h6>
 				<h6 class="name">
-					<%= follower.first_name %>
+					<%= referral.first_name %>
 				</h6>
 			<% end %>
 		</div>
 	<% end %>
 <% else %>
 	<div class="small-12 text-center columns">
-		<h4>You don't have referrals yet</h4>
+		<h4>You don't have referrals yet.</h4>
 	</div>
 <% end %>

@@ -67,6 +67,8 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    acts-as-taggable-on (4.0.0)
+      activerecord (>= 4.0)
     acts_as_votable (0.10.0)
     addressable (2.5.0)
       public_suffix (~> 2.0, >= 2.0.2)
@@ -352,6 +354,7 @@ DEPENDENCIES
   aasm
   active_admin_theme
   activeadmin!
+  acts-as-taggable-on
   acts_as_votable
   aws-sdk (~> 2.3)
   aws-ses (~> 0.6.0)

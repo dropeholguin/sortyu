@@ -1,14 +1,16 @@
 class Photo < ApplicationRecord
     include AASM
     acts_as_votable
-
+    acts_as_taggable
+    acts_as_taggable_on :tags
+    
     belongs_to :user
     has_many :sections, dependent: :destroy
     has_many :flags, dependent: :destroy
     has_many :seens, dependent: :destroy
     has_one :justification
 
-    has_attached_file :file, styles: {large: "500x500>", medium: "300x300>", thumb: "100x100>" }
+    has_attached_file :file, styles: {large: "500x500>", medium: "300x300", thumb: "100x100>" }
     validates_attachment_content_type :file, content_type: /\Aimage\/.*\z/
     serialize :dimensions
     before_save :extract_dimensions

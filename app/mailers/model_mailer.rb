@@ -20,5 +20,14 @@ class ModelMailer < ApplicationMailer
 		@user = user
 		mail(to: @user.email, subject: "Your account was suspended")
 	end
-	
+
+	def active_account_affiliate(affiliate)
+		@affiliate = affiliate
+		mail(to: @affiliate.email, subject: "Your account was approved")
+	end
+
+	def suspend_account_affiliate(affiliate)
+		@affiliate = affiliate
+		mail(to: @affiliate.email, subject: "Your account was suspended")
+	end
 end
