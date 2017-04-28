@@ -390,7 +390,7 @@ class PhotosController < ApplicationController
     end
 
     def recent_sorts
-        
+        @photos = Photo.photos(current_user).order('created_at desc') 
     end
 
     private

@@ -1,7 +1,73 @@
-<div class="row">
-	<div class="small-12 columns">
-		<% Seen.get_photos_last_twenty_four_hours(current_user.id).each do |photo| %>
-			<%= photo.description %>
+<div id="photo-recent-sort" class="row">
+	<div class="upper-space row">
+		<div class="under-space small-12 text-center columns">
+			<h4>Recent Sorts</h4>
+		</div>
+	</div>
+	<div class="gallery row">
+		<% @photos.each do |photo| %>
+		    <div data-open="image-overlay-<%= photo.id %>" class="small-4 medium-3 large-2 end columns">
+		        <%= image_tag(photo.file.url(:medium)) %>
+		    </div>
+		    <div class="reveal" id="image-overlay-<%= photo.id %>" data-reveal>
+				<div class="row under-space">
+	                <div class="sorting-canvas text-center">
+	                    <div class="inner-sorting-canvas">
+	                        <%= image_tag(photo.file.url(:large)) %>
+	                        <% photo.sections.each() do |section| %>
+	                        	<div class="rect" style="width: <%= section.width %>px; height: <%= section.height %>px; left: <%= section.left %>px; top: <%= section.top %>px; transform: translate(<%= section.translateX %>px,<%= section.translateY %>px);"><span><%= section.index %></span></div>
+	                        <% end %>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="row">
+	            	<div class="small-12 text-center columns">
+						<% if photo.user != current_user %>
+								<%= link_to "Sort", sort_friend_path(photo), class: "button" %>
+						<% end %>
+						<p>
+				  			<b>Description:</b>
+				  			<% if  !photo.description.nil? and photo.description.length > 0 %>
+				  				<%= photo.description %>
+				  			<% else %>
+				  				No Description
+				  			<% end %>
+						</p>
+					</div>
+				</div>
+	            <div class="row">
+					<div id="photo-stadistic-container" class="small-12 columns">
+						<div id="sorted-count-container" class="under-space row">
+							<div class="small-12 text-center columns">
+								<h4>Sorted by <b><%= photo.count_of_sorts %> users</b></h4>
+							</div>
+						</div>
+						<% if !photo.sections.empty? %>
+							<% photo.sections.each do |section| %>
+								<div class="end photo-stadistic callout small-12 medium-4 large-3 columns">
+									<div class="row text-center stadistic-title columns">
+										<h5>Section Number: <%= section.index.to_i %></h5>
+									</div>
+									<div id="frequent" class="row">
+										<h6><b>Most Frequent: </b>
+										<% if !section.sorting_information.nil? %>
+											<%= section.sorting_information.most_frequent %>
+										<% end %>
+										</h6>
+									</div>
+									<div id="average" class="row">
+										<h6><b>Average: </b>
+											<% if !section.sorting_information.nil? %>
+												<%= section.sorting_information.average.round(2) %>
+											<% end %>
+										</h6>
+									</div>
+								</div>
+							<% end %>
+						<% end %>
+					</div>
+				</div>
+		    </div>
 		<% end %>
 	</div>
 </div>
