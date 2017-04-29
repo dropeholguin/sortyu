@@ -19,6 +19,14 @@ class PhotosController < ApplicationController
         @photos = Photo.pay_photos(current_user).order('created_at desc')
     end
 
+    def pay_upload_process
+        @photos = []
+        photo_ids_array = cookies[:pay_photos].split("-")
+        photo_ids_array.each do | id_photo|
+            @photos << Photo.find(id_photo.to_i)
+        end
+    end
+
     def sort_friend
         @photo = Photo.find(params[:id])
         if current_user == @photo.user
@@ -134,6 +142,7 @@ class PhotosController < ApplicationController
     def create_import_instagram
         @user = current_user
         photos = []
+        pay_photos = []
         respond_to do |format| 
             if @user.photos.size >= 10
                 params[:photos].each { |image_url|
@@ -144,15 +153,23 @@ class PhotosController < ApplicationController
                 photo_ids_array = photos.pluck(:id)
                 photo_array_string = photo_ids_array.join("-")
                 cookies[:pay_photos] = { value: photo_array_string, expires: 23.hours.from_now }
-                format.html { redirect_to new_charge_path, alert: 'You have reached the amount of free images' }
+                format.html { redirect_to pay_upload_process_path, alert: 'You have reached the amount of free images' }
             else
                 params[:photos].each { |image_url|
                     if @user.photos.size < 10
                         @photo = Photo.new(file: URI.parse(image_url), user_id: current_user.id)        
                         @photo.save
                         photos << @photo
+                    else
+                        @photo = Photo.new(file: URI.parse(image_url), user_id: current_user.id)        
+                        @photo.save
+                        pay_photos << @photo
                     end
                 }
+
+                pay_photo_ids_array = pay_photos.pluck(:id)
+                pay_photo_array_string = pay_photo_ids_array.join("-")
+                cookies[:pay_photos] = { value: pay_photo_array_string, expires: 23.hours.from_now }
             
                 photo_ids_array = photos.pluck(:id)
                 first_photo_id = photo_ids_array.shift
@@ -161,8 +178,8 @@ class PhotosController < ApplicationController
                 cookies[:first_imported_photo_id] = { value: first_photo_id, expires: 23.hours.from_now }
 
                 format.html { 
-                        redirect_to edit_photo_path(first_photo_id), notice: 'Photo was successfully created.'
-                    }  
+                    redirect_to edit_photo_path(first_photo_id), notice: 'Photo was successfully created.'
+                }  
             end
         end
     end
@@ -172,15 +189,31 @@ class PhotosController < ApplicationController
         photos = []
         respond_to do |format| 
             if @user.photos.size >= 10
-                format.html { redirect_to profile_show_path, alert: 'You have reached the amount of free images' }
+                params[:photos].each { |image_url|
+                    @photo = Photo.new(file: URI.parse(image_url), user_id: @user.id)
+                    @photo.save
+                    photos << @photo
+                }
+                photo_ids_array = photos.pluck(:id)
+                photo_array_string = photo_ids_array.join("-")
+                cookies[:pay_photos] = { value: photo_array_string, expires: 23.hours.from_now }
+                format.html { redirect_to pay_upload_process_path, alert: 'You have reached the amount of free images' }
             else
                 params[:photos].each { |image_url|
                     if @user.photos.size < 10
                         @photo = Photo.new(file: URI.parse(image_url), user_id: current_user.id)        
                         @photo.save
                         photos << @photo
+                    else
+                        @photo = Photo.new(file: URI.parse(image_url), user_id: current_user.id)        
+                        @photo.save
+                        pay_photos << @photo
                     end
                 }
+
+                pay_photo_ids_array = pay_photos.pluck(:id)
+                pay_photo_array_string = pay_photo_ids_array.join("-")
+                cookies[:pay_photos] = { value: pay_photo_array_string, expires: 23.hours.from_now }
             
                 photo_ids_array = photos.pluck(:id)
                 first_photo_id = photo_ids_array.shift
@@ -276,6 +309,11 @@ class PhotosController < ApplicationController
 
         respond_to do |format|
             if verify_recaptcha(model: @photo) && @photo.save
+                if @user.photos.size > 10
+                    pay_photo_ids_array = @photo.id
+                    pay_photo_array_string = pay_photo_ids_array
+                    cookies[:pay_photos] = { value: pay_photo_array_string, expires: 23.hours.from_now }
+                end
                 format.html { redirect_to photo_edit_sections_path(photo_id: @photo.id), notice: 'Photo was successfully uploaded. Time to set your photo sections.' }
                 format.json { render :show, status: :created, location: @photo }
             else
@@ -293,6 +331,10 @@ class PhotosController < ApplicationController
 
             format.html { redirect_to new_charge_path }
         end
+    end
+
+    def method_name
+        
     end
 
     def edit_photos
@@ -325,13 +367,12 @@ class PhotosController < ApplicationController
                     photo_id = photo_ids_array.shift
                     photo_array_string = photo_ids_array.join("-")
                     cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
+                    
                     if @photo.first_edit
                         format.html { redirect_to photo_edit_sections_path(photo_id: photo_id.to_i), notice: 'Photo was successfully updated, now add the sections of your photo.' }
                     else
                         format.html { redirect_to edit_photo_path(photo_id.to_i), notice: 'Photo was successfully updated.' }
                     end
-                elsif @user.photos.size >= 10
-                    format.html { redirect_to profile_show_path, alert: 'You have reached the amount of free images' }
                 else
                     format.html { redirect_to profile_show_path, notice: 'Photo was successfully updated' }
                 end
@@ -339,6 +380,12 @@ class PhotosController < ApplicationController
                 format.html { render :edit }
                 format.json { render json: @photo.errors, status: :unprocessable_entity }
             end
+        end
+    end
+
+    def upload_process
+         respond_to do |format|
+            format.html { redirect_to pay_upload_process_path, alert: 'You have reached the amount of free images' }
         end
     end
     # DELETE /photos/1

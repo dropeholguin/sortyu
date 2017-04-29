@@ -296,7 +296,10 @@ saveSections = ->
 					console.log "dsafdfasdfasdf"
 					window.location.replace("/photos/#{photoToEditSectionsId}/edit")
 				else
-					window.location.replace('/profile/show')
+					$.ajax '/photos/upload_process',
+					type: 'POST',
+					dataType: 'script',
+
 
 
 hide_results = ->

@@ -1,0 +1,17 @@
+<div id="pay-photos" class="upper-pad under-pad row">
+	<div class="row">
+		<div class="small-12 text-center columns">
+			<%= button_tag('Pay for Selected Images', class:"button pay", id: "pay-multiple-photos") %>
+		</div>
+	</div>
+	<div class="row">
+		<% @photos.each do |photo| %>
+			<% if photo.state == 'free' %>
+				<div class="upper-space small-4 text-center end columns">
+					<%= image_tag(photo.file.url(:medium),id: photo.id) %>
+					<%= check_box_tag('pay_photo', photo.id , false) %>
+				</div>
+			<% end %>
+		<% end %>
+	</div>
+</div>

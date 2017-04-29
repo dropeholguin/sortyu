@@ -46,6 +46,8 @@ Rails.application.routes.draw do
   post "edit_photos", to: 'photos#edit_photos'
   post "pay_photos", to: 'photos#pay_photos'
   get "invite_sort_friend/:id", to: 'photos#sort_friend', as: :sort_friend
+  post "photos/upload_process", to: 'photos#upload_process'
+  get 'photos/pay_upload_process',to: 'photos#pay_upload_process', as: 'pay_upload_process'
 
   resources :photos do
   	member do
