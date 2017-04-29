@@ -99,7 +99,7 @@ class PhotosController < ApplicationController
         photo = Photo.find(params[:photo_id])
         if params[:sortings]
             params[:sortings].each_with_index do |sort, index|
-                section = photo.sections.detect {|sect| sect.index == index }
+                section = photo.sections.detect {|sect| sect.index == (index + 1) }
                 @sorting = Sorting.new(order: sort, user_id: current_user.id, section_id: section.id)
                 @sorting.save
             end
