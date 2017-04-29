@@ -1,7 +1,7 @@
 // Place all the styles related to the photos controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-#sorting-principal, #photo-edit-section, #photo-show, #friend-sort{
+#sorting-principal, #photo-edit-section, #photo-show, .reveal-overlay{
 	.rect {
 		border: 2px solid #3399ff;
 		position: absolute;
@@ -76,6 +76,14 @@
 	}
 }
 
+.reveal-overlay{
+	.rect{
+		span:hover{
+			cursor:pointer;
+		}
+	}
+}
+
 #friend-sort{
 	.button{
 		margin-bottom:0;
@@ -112,7 +120,7 @@
 	position: absolute;
 }
 
-#photo-editor,#photo-container{
+#photo-editor,#photo-container, .reveal-overlay{
 	#canvas, .sorting-canvas {
 	    display: inline-block;
 	    width: 100%;

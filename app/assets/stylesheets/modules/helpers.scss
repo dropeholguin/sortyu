@@ -20,6 +20,10 @@
   text-overflow: ellipsis;
 }
 
+.cash{
+	color:green;
+}
+
 .delete{
 	color:red;
 	background-color:white;
@@ -28,6 +32,10 @@
 .delete:hover{
 	background-color:red;
 	color:white;
+}
+
+.reveal{
+	width:100% !important;
 }
 
 .circle{

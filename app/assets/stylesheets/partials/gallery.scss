@@ -1,0 +1,35 @@
+.gallery{
+	img{
+		margin-bottom:1em;
+	}
+}
+
+/* Small only */
+@media screen and (max-width: 39.9375em) {
+	.gallery{
+		img{
+			width:85px;
+			height:85px;
+		}
+	}
+}
+
+/* Medium and up */
+@media screen and (min-width: 40em) {
+	.gallery{
+		img{
+			width:150px;
+			height:150px;
+			margin-bottom:1em;
+		}
+	}
+}
+
+/* Medium only */
+@media screen and (min-width: 40em) and (max-width: 63.9375em) {}
+
+/* Large and up */
+@media screen and (min-width: 64em) {}
+
+/* Large only */
+@media screen and (min-width: 64em) and (max-width: 74.9375em) {}
