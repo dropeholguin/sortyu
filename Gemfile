@@ -36,7 +36,6 @@ gem 'instagram_api'
 gem 'will_paginate', '~> 3.1', '>= 3.1.5'
 gem 'acts_as_votable'
 gem 'picasa'
-gem 'activeadmin', github: 'activeadmin'
 gem "recaptcha", require: "recaptcha/rails"
 gem 'cancancan'
 gem 'rolify'
@@ -47,6 +46,7 @@ gem 'shareable', git: "https://github.com/simon0191/shareable.git"
 gem "rack-affiliates"
 gem 'social-share-button'
 gem 'acts-as-taggable-on'
+gem 'activeadmin', github: 'activeadmin'
 
 group :development, :test do
   gem 'byebug', platform: :mri

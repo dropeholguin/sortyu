@@ -413,7 +413,7 @@ class PhotosController < ApplicationController
         @photo.update_attributes(suspended: true)
         respond_to do |format|
             ModelMailer.suspend_photo(@photo).deliver
-            format.html { redirect_to admin_root_path, notice: 'Photo was suspended.' }
+            format.html { redirect_to admin_photos_path, notice: 'Photo was suspended.' }
             format.json { head :no_content }
         end
     end
@@ -423,7 +423,7 @@ class PhotosController < ApplicationController
         @photo.update_attributes(suspended: false, count_flags: 0)
         respond_to do |format|
             ModelMailer.approve_photo(@photo).deliver
-            format.html { redirect_to admin_root_path, notice: 'Photo was Approved.' }
+            format.html { redirect_to admin_photos_path, notice: 'Photo was Approved.' }
             format.json { head :no_content }
         end
     end

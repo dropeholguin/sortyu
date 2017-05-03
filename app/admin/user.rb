@@ -1,4 +1,5 @@
 ActiveAdmin.register User do
+permit_params :first_name, :last_name, :username, :email
 
 action_item only: :show  do
   if user.is_active?
@@ -24,7 +25,7 @@ show do
 end
 
 index do
-	selectable_column
+  selectable_column
 	id_column
 	column :first_name
 	column :last_name
