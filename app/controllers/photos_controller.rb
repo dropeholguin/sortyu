@@ -445,7 +445,11 @@ class PhotosController < ApplicationController
     end
 
     def recent_sorts
-        @photos = Photo.photos(current_user).order('created_at desc') 
+        @photos = []
+        seens = Seen.get_photos_last_twenty_four_hours(current_user.id)
+        seens.each do |seen|
+            @photos << seen.photo
+        end
     end
 
     private
