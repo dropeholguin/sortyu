@@ -29,6 +29,6 @@ class ApplicationController < ActionController::Base
 	    else
 	    	puts "We're glad you found us on your own!"
 	    end
-    	request.env['omniauth.origin'] || stored_location_for(resource) || root_path
+    	root_path
   	end
 end
