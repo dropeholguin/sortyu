@@ -1,4 +1,4 @@
-<%= form_for(@user, url: wizard_path, method: :put) do |f| %>
+<%= form_for @user, url: wizard_path, method: :put do |f| %>
   <div class="field">
     <%= f.label :email %>
     <%= f.email_field :email, autofocus: true %>
