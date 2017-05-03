@@ -144,7 +144,7 @@ class PhotosController < ApplicationController
         photos = []
         pay_photos = []
         respond_to do |format| 
-            if @user.photos.size >= 10
+            if  Photo.free_photos(@user.id).count >= 10
                 params[:photos].each { |image_url|
                     @photo = Photo.new(file: URI.parse(image_url), user_id: @user.id)
                     @photo.save
@@ -156,7 +156,7 @@ class PhotosController < ApplicationController
                 format.html { redirect_to pay_upload_process_path, alert: 'You have reached the amount of free images' }
             else
                 params[:photos].each { |image_url|
-                    if @user.photos.size < 10
+                    if Photo.free_photos(@user.id).count <= 10
                         @photo = Photo.new(file: URI.parse(image_url), user_id: current_user.id)        
                         @photo.save
                         photos << @photo
@@ -188,7 +188,7 @@ class PhotosController < ApplicationController
         @user = current_user
         photos = []
         respond_to do |format| 
-            if @user.photos.size >= 10
+            if Photo.free_photos(@user.id).count >= 10
                 params[:photos].each { |image_url|
                     @photo = Photo.new(file: URI.parse(image_url), user_id: @user.id)
                     @photo.save
@@ -200,7 +200,7 @@ class PhotosController < ApplicationController
                 format.html { redirect_to pay_upload_process_path, alert: 'You have reached the amount of free images' }
             else
                 params[:photos].each { |image_url|
-                    if @user.photos.size < 10
+                    if Photo.free_photos(@user.id).count <= 10
                         @photo = Photo.new(file: URI.parse(image_url), user_id: current_user.id)        
                         @photo.save
                         photos << @photo
@@ -309,7 +309,7 @@ class PhotosController < ApplicationController
 
         respond_to do |format|
             if verify_recaptcha(model: @photo) && @photo.save
-                if @user.photos.size > 10
+                if Photo.free_photos(@user.id).count > 10
                     pay_photo_ids_array = @photo.id
                     pay_photo_array_string = pay_photo_ids_array
                     cookies[:pay_photos] = { value: pay_photo_array_string, expires: 23.hours.from_now }
