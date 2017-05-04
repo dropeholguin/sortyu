@@ -1,16 +1,5 @@
 <div id="photo-edit-section" class="row">
-    <div class="row upper-space under-pad">
-        <div id="user-photo-container" class="small-4 medium-2 medium-push-1 medium-text-center large-push-2 columns">
-            <%= image_tag("avatar-user-default",size: :medium ,class:"circle") %>
-        </div>
-        <div id="user-name-container" class="small-8 small-pull-1 medium-pull-1 columns">
-            <div id="follow-container">
-                <h6><%= @photo.user.username %></h6>
-                <a href="" class="button follow">Follow</a>
-            </div>
-        </div>
-    </div>
-    <div id="photo-editor" class="callout small-12 medium-10 medium-push-1 large-8 large-push-2 text-center columns">
+    <div id="photo-editor" class="upper-space callout small-12 medium-10 medium-push-1 large-8 large-push-2 text-center columns">
         <div class="row">
             <div id="canvas" class="under-space drawing">
                 <div id="inner-canvas">
@@ -32,30 +21,6 @@
             <p><%= @photo.description %></p>
         </div>
     </div>
-    <div class="row">
-        <div id="like-container" class="text-center">
-            <a href="" class="button like">
-                <span class="fa fa-thumbs-o-up"></span>
-                <span >0</span>
-            </a>
-        </div>
-    </div>
-    <div class="upper-space row">
-        <div class="upper-space small-12 columns text-center">
-            <%= button_tag "Next", class:"button", id:"next-sort" %>
-        </div>
-    </div>
-    <div class="row under-space">
-        <div class="small-12 columns text-center">
-            <i data-open="flag-overlay" aria-hidden="true"><%= button_tag("Report", class: "button alert") %></i>
-        </div>
-    </div>
-    <div class="reveal" id="flag-overlay" data-reveal>
-        <button class="close-button" data-close aria-label="Close modal" type="button">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-</div>
 <script type="text/javascript">
     //This adds support for async load from Amazon S3 on production/staging
     imageToSort = document.getElementById('edit-my-sections');
