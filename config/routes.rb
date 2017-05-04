@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   devise_for :admin_reviewers, ActiveAdmin::Devise.config.merge({path: '/reviewer'})
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+
+  get 'home/affiliate', to: 'affiliate', as: 'affiliate_home'
   
 	get 'profile/show/', to: 'profile#show', as: 'profile_show'
 	get 'profile/other_user_show/:id', to: 'profile#other_user_show', as: 'profile_other_user_show'
