@@ -5,8 +5,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if user_signed_in?
       User.connect_to_facebook(current_user, auth)
-      flash[:notice] = "Facebook Integrate successfully"
-      redirect_to profile_show_url
+      flash[:notice] = "Facebook integrated successfully"
+      redirect_to new_photo_path
     else
       # You need to implement the method below in your model (e.g. app/models/user.rb)
       @user = User.find_for_facebook_oauth(request.env["omniauth.auth"])
@@ -48,8 +48,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if user_signed_in?
       User.connect_to_google(current_user, auth)
-      flash[:notice] = "Google Integrate successfully"
-      redirect_to profile_show_url
+      flash[:notice] = "Google integrated successfully"
+      redirect_to new_photo_path
     else
       # You need to implement the method below in your model (e.g. app/models/user.rb)
       @user = User.find_for_google_oauth(request.env["omniauth.auth"])
