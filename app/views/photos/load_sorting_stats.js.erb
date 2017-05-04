@@ -1,5 +1,38 @@
 <% if !current_user.hide_results? %>
-	$('#sorting-principal #photo-stadistic-container').append('<div id="sorted-count-container" class="under-space row"><div class="small-12 text-center columns"><h4>Sorted by <b><%= @photo.count_of_sorts %> users</b></h4></div></div><% if !@photo.sections.empty? %><% @photo.sections.each do |section| %><div class="end photo-stadistic callout small-12 medium-4 large-3 columns"><div class="row text-center stadistic-title columns"><h5>Selection Number: <%= Sorting.user_sortings(current_user.id, @photo.id).find_by(section_id: section.id).order %></h5></div><div id="frequent" class="row"><h6><b>Most Frequent: </b><% if !section.sorting_information.nil? %><%= section.sorting_information.most_frequent %><% end %></h6></div><div id="average" class="row"><h6><b>Average: </b><% if !section.sorting_information.nil? %><%= section.sorting_information.average %><% end %></h6></div></div><% end %><% end %>');
+	$('#sorting-principal #photo-stadistic-container').append('<div id="sorted-count-container" class="under-space row"><div class="sections-container small-12 text-center columns"><h4>Sorted by <b><%= @photo.count_of_sorts %> users</b></h4></div></div>');
+	// $('#sorting-principal #photo-stadistic-container #sorted-count-container div').append('<% if !@photo.sections.empty? %><% @photo.sections.each do |section| %><div class="end photo-stadistic callout small-12 medium-4 large-3 columns"><div class="row text-center stadistic-title columns"><h5>Selection Number: <%= Sorting.user_sortings(current_user.id, @photo.id).find_by(section_id: section.id).order %></h5></div><div id="frequent" class="row"><h6><b>Most Frequent: </b><% if !section.sorting_information.nil? %><%= section.sorting_information.most_frequent %><% end %></h6></div><div id="average" class="row"><h6><b>Average: </b><% if !section.sorting_information.nil? %><%= section.sorting_information.average %><% end %></h6></div></div><% end %><% end %>');
+
+	// Mientras contador no sea igual a la cantidad de secciones
+	// Entonces itere todas las secciones
+	// Si la seccion es igual al valor del contador
+	// Entonces ponga la seccion y aumente el contador
+
+	// Si el contador es igual a la cantidad de secciones entonces termino el proceso
+
+	// secciones.count = 4, contador = 1
+	// while contador <= secciones.count do
+		// secciones.each do |seccion|
+			// if seccion.index == rect.id
+				// append(section)
+			// else
+			// endIf
+		// endEach
+		// contador = contador + 1
+	// endWhile
+	var counter = 1;
+	while (counter <= $('.rect-clicked').length ) {
+		<% if !@photo.sections.empty? %>
+			<% @photo.sections.each do |section| %>
+				if (<%= Sorting.user_sortings(current_user.id, @photo.id).find_by(section_id: section.id).order %> == counter) {
+					$('#sorting-principal #photo-stadistic-container #sorted-count-container .sections-container').append('<div class="end photo-stadistic callout small-12 medium-4 large-3 columns"><div class="row text-center stadistic-title columns"><h5>Selection Number: <%= Sorting.user_sortings(current_user.id, @photo.id).find_by(section_id: section.id).order %></h5></div><div id="frequent" class="row"><h6><b>Most Frequent: </b><% if !section.sorting_information.nil? %><%= section.sorting_information.most_frequent %><% end %></h6></div><div id="average" class="row"><h6><b>Average: </b><% if !section.sorting_information.nil? %><%= section.sorting_information.average %><% end %></h6></div></div>');
+					console.log('Added selection' + counter);
+				}
+				// Obtener el valor de la seccion (Rails)
+				// Obtener el valor del id del rect (JS)
+			<% end %>
+		<% end %>
+		counter += 1;
+	}
 <% else %>
 	$('#sorting-principal #photo-stadistic-container').append('<div class="photo-stadistic"><h3>Sent sorting results</h3></div>');
 	$('#next-sort').click();
