@@ -43,7 +43,7 @@ class User < ApplicationRecord
 
     return user if user
     image = process_url(auth.info.image + '?type=large')
-    user = User.create(
+    user = User.new(
       first_name: auth.extra.raw_info.name.split(" ")[0], 
       last_name: auth.extra.raw_info.name.split(" ")[1],
       username:  auth.extra.raw_info.name,
@@ -53,6 +53,7 @@ class User < ApplicationRecord
 
     Identity.create_with_omniauth_facebook(auth, user.id)
     user.skip_confirmation!
+    user.save!
     user
   end
 
@@ -66,7 +67,7 @@ class User < ApplicationRecord
     user = User.where(email: auth.extra.raw_info.username + "@instagram.com").first 
 
     return user if user
-    user = User.create(
+    user = User.new(
       first_name: auth.extra.raw_info.full_name.split(" ")[0], 
       last_name: auth.extra.raw_info.full_name.split(" ")[1],
       username:  auth.extra.raw_info.username,
@@ -76,6 +77,7 @@ class User < ApplicationRecord
 
     Identity.create_with_omniauth_instagram(auth, user.id)
     user.skip_confirmation!
+    user.save!
     user
   end
 
@@ -89,7 +91,7 @@ class User < ApplicationRecord
     user = User.where(email: auth.info.email).first 
 
     return user if user
-    user = User.create(
+    user = User.new(
       first_name: auth.info.first_name, 
       last_name: auth.info.last_name,
       username:  auth.info.first_name.gsub(/\s+/, ""),
@@ -98,6 +100,7 @@ class User < ApplicationRecord
 
     Identity.create_with_omniauth_google(auth, user.id)
     user.skip_confirmation!
+    user.save!
     user
   end
 
