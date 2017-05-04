@@ -26,8 +26,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if user_signed_in?
       User.connect_to_instagram(current_user, auth)
-      flash[:notice] = "Instagram Integrate successfully"
-      redirect_to profile_show_url
+      flash[:notice] = "Instagram integrated successfully"
+      redirect_to new_photo_path
     else
       # You need to implement the method below in your model (e.g. app/models/user.rb)
       @user = User.find_for_instagram_oauth(request.env["omniauth.auth"])
