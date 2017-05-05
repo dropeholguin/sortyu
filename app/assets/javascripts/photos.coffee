@@ -19,7 +19,17 @@ window.photoStats.show = ->
 		success: (data, textStatus, jqXHR) ->
 			console.log("Stadistics shown successfully!")
 			$('.rect').unbind('click')
-			$('#loading_text').html('Done!')
+			$('#loading_text').html('Click the back button to check your results')
+			$.ajax 'photos/sort_friend',
+			type: 'GET',
+			dataType: 'script',
+			data: {
+				photo_id: photoId
+			},
+			error: (jqXHR, textStatus, errorThrown) ->
+				console.log("AJAX Error: #{textStatus}")
+			success: (data, textStatus, jqXHR) ->
+
 	else
 		# This is for the principal sorting(AJAX path is different)
 		photoId = $('#next-sort').data('photo_id')
