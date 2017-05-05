@@ -13,6 +13,14 @@ class ChargesController < ApplicationController
 			end
 			@count = @photos.count
 			@price = Price.last.value * @count
+			if !cookies[:remove_photos].empty?
+				photo_ids_array = cookies[:remove_photos].split("-")
+				photo_ids_array.each do | id_photo|
+					photo = Photo.find(id_photo.to_i)
+					photo.destroy
+				end
+	        	cookies.delete(:remove_photos)
+        	end
 		end
 	end
 

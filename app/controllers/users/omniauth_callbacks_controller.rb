@@ -35,7 +35,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       if @user.persisted?
         flash[:notice] = I18n.t "devise.omniauth_callbacks.success", kind: "Instagram"
         sign_in @user, event: :authentication
-        redirect_to after_signup_path(:instagram_email)
+        if @user.sign_in_count == 1
+          redirect_to after_signup_path(:instagram_email)
+        else
+          redirect_to root_path
+        end
+        
       else
         session["devise.instagram_data"] = request.env["omniauth.auth"].except(:extra) #Removing extra as it can overflow some session stores
         redirect_to new_user_registration_url, alert: @user.errors.full_messages.join("\n")
