@@ -47,6 +47,12 @@
 	}
 }
 
+#owl-demo .item img{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
 /* Small only */
 @media screen and (max-width: 39.9375em) {
 	#home-index,#home-affiliate{
