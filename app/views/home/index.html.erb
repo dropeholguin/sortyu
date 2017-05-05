@@ -1,25 +1,19 @@
 <div id="home-index">
-	<!--  Explanatory video "How to sort"-->
-	<div class="row expanded">
-		<div class="small-12">
-			<a href="http://placehold.it"><img src="http://placehold.it/1440x500"></a>
-		</div>
-	</div>
 	<div id="info-what-is" class="upper-pad row text-center">
 		<div class="small-12 columns">
 			<div class="under-space row columns">
 				<h4><i><b>Welcome to Sortyu</b></i></h4>
 			</div>
 			<div class="row columns">
-				<div class="small-6 columns">
+				<div class="box small-12 medium-6 columns">
 					<div class="row">
-						<h5><b>What's Sortyu</b></h5>
+						<h5><b>What's Sortyu?</b></h5>
 					</div>
 					<div class="row text-justify">
 						<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. </p>
 					</div>
 				</div>
-				<div class="small-6 columns">
+				<div class="box small-12 medium-6 columns">
 					<div class="row">
 						<h5><b>What does sorting mean?</b></h5>
 					</div>
@@ -29,12 +23,18 @@
 				</div>
 			</div>
 			<div class="row under-space text-center">
-				<%= link_to "Sort Now", photos_path, class:"button medium hollow"  %>
+				<%= link_to "Start Sorting", photos_path, class:"button medium hollow"  %>
 			</div>
 		</div>
 	</div>
+	<!--  Explanatory video "How to sort"-->
+	<div class="row expanded show-for-large">
+		<div class="small-12">
+			<a href="http://placehold.it"><img src="http://placehold.it/1440x500"></a>
+		</div>
+	</div>
 	<div id="info-can-do" class="row upper-pad expanded">
-		<div class="small-12 medium-4 columns">
+		<div id="upload" class="box small-12 medium-4 columns">
 			<div class="row text-center upper-space">
 				<i class="fa fa-camera-retro" aria-hidden="true"></i>
 			</div>
@@ -44,8 +44,11 @@
 			<div class="row">
 				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
 			</div>
+			<div class="row text-center">
+				<%= link_to "Upload Image",new_photo_path, class:"button small hollow" %>
+			</div>
 		</div>
-		<div class="small-12 medium-4 columns">
+		<div id="pick" class="box small-12 medium-4 columns">
 			<div class="row upper-space text-center">
 				<span class="fa-stack fa-lg">
 					<i class="fa fa-square-o fa-stack-1x" aria-hidden="true"></i>
@@ -58,8 +61,11 @@
 			<div class="row">
 				<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
 			</div>
+			<div class="row text-center">
+				<%= link_to "Start Sorting", photos_path, class:"button small hollow" %>
+			</div>
 		</div>
-		<div class="small-12 medium-4 columns">
+		<div id="free" class="box small-12 medium-4 columns">
 			<div class="row upper-space text-center">
 				<i class="fa fa-child" aria-hidden="true"></i>
 			</div>
