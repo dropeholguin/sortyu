@@ -14,7 +14,11 @@
         </div>
 		<div class="small-12 text-center columns">
 			<% if @photo.user != current_user %>
+				<% if @seen == true %>
+					<%= link_to "Sort More", photos_path, class:"button" %>
+				<% else %>
 					<%= link_to "Sort", sort_friend_path(@photo), class: "button" %>
+				<% end %>
 			<% end %>
 			<p>
 	  			<b>Description:</b>

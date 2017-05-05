@@ -72,6 +72,9 @@ class PhotosController < ApplicationController
 
     def sort_friend
         @photo = Photo.find(params[:id])
+        @seen = @photo.seens.include?(current_user.id)
+        puts '/////////////////////////'
+        puts @seen
         if current_user == @photo.user
             respond_to do |format|
                 format.html { redirect_to profile_show_path, error: "You can't sort your own image."}
@@ -276,6 +279,13 @@ class PhotosController < ApplicationController
     # GET /photos/1.json
     def show
         @width, @height = @photo.dimensions 
+
+        @photo = Photo.find(params[:id])
+        seens = []
+        @photo.seens.each do |seen|
+            seens << seen.user_id
+        end
+        @seen = seens.include?(current_user.id)
     end
 
     # GET /photos/new
