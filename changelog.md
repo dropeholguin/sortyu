@@ -1,4 +1,29 @@
 #sortyu 0.x Changelog
+0.3.0 (4-05-2017)
+------
+### Minor changes
+-Homepage
+-Affiliate Homepage
+-Results page (Shows sorts within the last 24h)
+-Sort results on sorting are ordered by "selection number"
+-Database reset
+-Integrate Stripe Pay into upload process
+-When paying for 2 or more images display a list or a grid of thumbnails
+-Notifications for affiliates
+
+### patch changes
+-Notification mails should be improved and fixed (text)
+-Add Check box of "Accept Terms and conds" on Sign up
+-Remove Affiliates button
+-Remove unnecessary buttons and texts from the sections editor
+-Fix image distribution on profile when applying filters
+-Do not redirect to the Dashboard of ActiveAdmin after allowing images
+-Fix Price format when paying for images
+-Check if the site has at least 10k average sortings before perform price calculation
+
+
+
+#sortyu 0.x Changelog
 0.2.0 (28-04-2017)
 ------
 ### Minor changes
@@ -13,6 +38,8 @@
 -Notification affiliate
 -Changed format to affiliate balance
 -Generate an alpha numeric id for affiliates URL
+
+
 
 0.1.0 (21-04-2017)
 ------
