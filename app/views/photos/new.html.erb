@@ -22,10 +22,10 @@
 			</div> -->
 			<div class="small-12 medium-4 columns end">
 				<% if Identity.identity_instagram(current_user.id, "instagram").empty? %>
-	        <%= link_to "Integrate Instagram", user_instagram_omniauth_authorize_path, class:"button instagram" %>
-	      <%else %>
-	      	<%= link_to "Instagram", import_instagram_path, class:"button instagram" %>
-	      <% end %>		
+			        <%= link_to "Integrate Instagram", user_instagram_omniauth_authorize_path, class:"button instagram" %>
+		      <%else %>
+		      	<%= link_to "Instagram", import_instagram_path, class:"button instagram" %>
+		      <% end %>		
 			</div>
 		</div>
 	</div>

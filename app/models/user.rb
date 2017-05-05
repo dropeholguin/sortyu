@@ -51,9 +51,9 @@ class User < ApplicationRecord
       avatar: image,
       password: Devise.friendly_token[0,20])
 
-    Identity.create_with_omniauth_facebook(auth, user.id)
     user.skip_confirmation!
     user.save!
+    Identity.create_with_omniauth_facebook(auth, user.id)
     user
   end
 
@@ -64,7 +64,7 @@ class User < ApplicationRecord
     # The User was found in our database    
     return user if user    
     # Check if the User is already registered without Facebook      
-    user = User.where(email: auth.extra.raw_info.username + "@instagram.com").first 
+    user = User.where(username: auth.extra.raw_info.username).first 
 
     return user if user
     user = User.new(
@@ -75,9 +75,9 @@ class User < ApplicationRecord
       avatar: auth.extra.raw_info.profile_picture,
       password: Devise.friendly_token[0,20])
 
-    Identity.create_with_omniauth_instagram(auth, user.id)
     user.skip_confirmation!
     user.save!
+    Identity.create_with_omniauth_instagram(auth, user.id)
     user
   end
 
@@ -98,9 +98,9 @@ class User < ApplicationRecord
       email: auth.info.email,
       password: Devise.friendly_token[0,20])
 
-    Identity.create_with_omniauth_google(auth, user.id)
     user.skip_confirmation!
     user.save!
+    Identity.create_with_omniauth_google(auth, user.id)
     user
   end
 
