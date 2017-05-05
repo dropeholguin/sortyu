@@ -25,7 +25,6 @@
 			<% @photo.sections.each do |section| %>
 				if (<%= Sorting.user_sortings(current_user.id, @photo.id).find_by(section_id: section.id).order %> == counter) {
 					$('#sorting-principal #photo-stadistic-container #sorted-count-container .sections-container').append('<div class="end photo-stadistic callout small-12 medium-4 large-3 columns"><div class="row text-center stadistic-title columns"><h5>Selection Number: <%= Sorting.user_sortings(current_user.id, @photo.id).find_by(section_id: section.id).order %></h5></div><div id="frequent" class="row"><h6><b>Most Frequent: </b><% if !section.sorting_information.nil? %><%= section.sorting_information.most_frequent %><% end %></h6></div><div id="average" class="row"><h6><b>Average: </b><% if !section.sorting_information.nil? %><%= section.sorting_information.average %><% end %></h6></div></div>');
-					console.log('Added selection' + counter);
 				}
 				// Obtener el valor de la seccion (Rails)
 				// Obtener el valor del id del rect (JS)
