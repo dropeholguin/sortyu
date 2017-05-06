@@ -20,7 +20,7 @@ window.photoStats.show = ->
 			console.log("Stadistics shown successfully!")
 			$('.rect').unbind('click')
 			$('#loading_text').html('Click the back button to check your results')
-			$.ajax 'photos/sort_friend',
+			$.ajax '/invite_sort_friend/#{photoId}',
 			type: 'GET',
 			dataType: 'script',
 			data: {

@@ -4,6 +4,22 @@
 			<h4>Recent Sorts</h4>
 		</div>
 	</div>
+	<div class="row">
+		<div class="small-12 columns">
+			<ul class="dropdown menu float-right" data-dropdown-menu>
+				<li>
+				<a href="#">Show</a>
+					<ul class="menu">
+					<li><a href="#">Today</a></li>
+					<li><a href="#">This Week</a></li>
+					<li><a href="#">This Month</a></li>
+					<li><a href="#">Last 90 Days</a></li>
+					<!-- ... -->
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
 	<div class="gallery row">
 		<% @photos.each do |photo| %>
 		    <div data-open="image-overlay-<%= photo.id %>" class="small-4 medium-3 large-2 end columns">
