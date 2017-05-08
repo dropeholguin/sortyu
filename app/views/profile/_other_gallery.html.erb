@@ -3,17 +3,16 @@
 		<% @photos.each() do |photo| %>
 			<div class="under-space small-4 float-left columns">
 				<%= link_to photo do %>
-					<%= image_tag(photo.file.url(:medium)) %>
+					<%= image_tag(photo.file.url(:medium), class:"under-space") %>
 				<% end %>
 			 	<div data-photo="<%= photo.id %>" id="photo-i" class="row collapse under-space">
-	 				<div class="small-12 medium-3 large-2 columns">
-	      				<p>Share: </p> 
-	      			</div>
+					<div class="small-12 medium-3 large-2 columns">
+						<p>Share: </p> 
+					</div>
 					<div class="small-12 medium-9 large-10 columns">
-	         			<%= facebook_button :turbolinks => true %>
-	         			<%= twitter_button :turbolinks => true%>
-	     			</div>
-	  			</div>
+						<%= social_share_button_tag("Sortyu Image", url: photo_url(photo), image: photo.file.url(:medium), desc: photo.description) %>
+					</div>
+				</div>
 			</div>
 		<% end %>
 	<% else %>
