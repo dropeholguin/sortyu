@@ -10,7 +10,7 @@
 			<h5>Select images to apply desired action</h5>
 		</div>
 	</div>
-	<div id="photo-container" class="row">
+	<div id="photos-container" class="row">
 		<% @photos.each do |photo| %>
 			<div class="upper-space small-4 text-center end columns">
 				<%= image_tag(photo.file.url(:medium),id: photo.id) %>
