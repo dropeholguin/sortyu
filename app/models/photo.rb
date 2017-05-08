@@ -17,16 +17,17 @@ class Photo < ApplicationRecord
 
     MAXIMUM_FLAGS = 2
 
-    scope :photos, -> (user_id) { where(user_id: user_id) }
-    scope :pay_photos, -> (user_id) { where("user_id = ? AND state != ? ", user_id, "paid") }
-    scope :free_photos, -> (user_id) { where("user_id = ? AND state = ? ", user_id, "free") }
-    scope :photos_sorting, -> (user_id) { where("user_id != ? AND count_flags < ? ", user_id, MAXIMUM_FLAGS) }
-    scope :get_photos_paid, -> { where("state = ? AND count_of_sorts < ? ", "paid", 200) }
+    scope :photos, -> (user_id) { where("user_id = ? AND tmp = ? ", user_id, false) }
+    scope :destroy_photos_tmp, -> { where("tmp = ?", true) }
+    scope :pay_photos, -> (user_id) { where("user_id = ? AND state != ? AND tmp = ?", user_id, "paid", false) }
+    scope :tmp_photos, -> (user_id) { where("user_id = ? AND state = ? AND tmp = ?", user_id, "free", false) }
+    scope :free_photos, -> (user_id) { where("user_id = ? AND state = ?", user_id, "free") }
+    scope :photos_sorting, -> (user_id) { where("user_id != ? AND count_flags < ? AND tmp = ?", user_id, MAXIMUM_FLAGS, false) }
+    scope :get_photos_paid, -> { where("state = ? AND count_of_sorts < ?", "paid", 200,) }
 
     aasm column: "state" do
         state :free, initial: true
         state :paid
-
         event :pay do
             transitions from: :free, to: :paid
         end

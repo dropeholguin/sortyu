@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170427141815) do
+ActiveRecord::Schema.define(version: 20170508140935) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(version: 20170427141815) do
     t.integer  "count_of_sorts",                     default: 0
     t.string   "dimensions",              limit: 30
     t.boolean  "first_edit",                         default: true
+    t.boolean  "tmp",                                default: true
     t.index ["cached_votes_down"], name: "index_photos_on_cached_votes_down", using: :btree
     t.index ["cached_votes_score"], name: "index_photos_on_cached_votes_score", using: :btree
     t.index ["cached_votes_total"], name: "index_photos_on_cached_votes_total", using: :btree
