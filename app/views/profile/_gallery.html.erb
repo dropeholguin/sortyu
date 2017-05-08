@@ -3,18 +3,18 @@
 	<%= link_to 'Pay Images', pay_multiple_photos_path, class:"button pay tiny float-left" %>
 	<ul class="dropdown menu float-right" data-dropdown-menu>
 		<li>
-			<a href="#">Filters</a>
+			<a href="#">Filter by:</a>
 			<ul class="menu">
 				<%= render partial: 'filters' %>	
 			</ul>
 		</li>
 	</ul>
 </div>
-<div id="photo-container" class="small-12 columns">
+<div id="photos-container" class="small-12 columns">
 	<% if @photos.count > 0 %>
 		<% @photos.each() do |photo| %>
 			<div class="under-space small-6 medium-4 float-left columns">
-				<div class="ribbon-container">
+				<div class="under-space ribbon-container">
 					<% if photo.state == 'free'%>
 						<div class="ribbon free">Free</div>
 					<% else %>
@@ -31,7 +31,6 @@
 					</div>
 					<div class="small-12 medium-9 large-10 columns">
 						<%= social_share_button_tag("Sortyu Image", url: photo_url(photo), image: photo.file.url(:medium), desc: photo.description) %>
-
 					</div>
 				</div>
 			</div>
