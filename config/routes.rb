@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   
+  get 'pages/privacy'
+
+  get 'pages/terms_and_conditions'
+
   devise_for :affiliates, controllers: { registrations: "users/registrations" }
 
   devise_for :admin_reviewers, ActiveAdmin::Devise.config.merge({path: '/reviewer'})
