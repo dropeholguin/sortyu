@@ -1,4 +1,15 @@
 #sortyu 0.x Changelog
+0.3.5 (8-05-2017)
+------
+### Minor changes
+Create a footer for the homepage
+
+### patch changes
+Dropdown with filter options for "recent sortings" page
+Fix standarization of image sizes to fix Sections positioning bug
+Notification mails should be improved and fixed (text)Fix the redirection of the "back" button at individual sorting, redirect to image instead of profile
+
+#sortyu 0.x Changelog
 0.3.0 (4-05-2017)
 ------
 ### Minor changes

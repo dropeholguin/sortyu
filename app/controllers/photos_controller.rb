@@ -104,7 +104,7 @@ class PhotosController < ApplicationController
 
         if current_user == @photo.user
             respond_to do |format|
-                format.html { redirect_to profile_show_path, error: "You can't sort your own image."}
+                format.html { redirect_to photo_path(@photo), error: "You can't sort your own image."}
             end
         end
     end
