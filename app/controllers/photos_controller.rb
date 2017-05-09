@@ -260,7 +260,7 @@ class PhotosController < ApplicationController
         photos = []
         pay_photos = []
         respond_to do |format| 
-            if  Photo.free_photos(@user.id).count >= 10
+            if  Photo.tmp_photos(@user.id).count >= 10
                 params[:photos].each { |image_url|
                     @photo = Photo.new(file: URI.parse(image_url), user_id: @user.id)
                     @photo.save
@@ -276,13 +276,9 @@ class PhotosController < ApplicationController
                     @photo.save
                     photos << @photo
                 }
+                number_photos = (10 - Photo.tmp_photos(@user.id).count)
 
-                if Photo.free_photos(@user.id).count > 10
-                    photo_ids_array = photos.pluck(:id)
-                    photo_array_string = photo_ids_array.join("-")
-                    cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
-                    format.html { redirect_to select_photos_path, alert: 'You have reached the amount of free images' }
-                else
+                if  photos.count <= number_photos
                     photo_ids_array = photos.pluck(:id)
                     first_photo_id = photo_ids_array.shift
                     photo_array_string = photo_ids_array.join("-")
@@ -292,6 +288,11 @@ class PhotosController < ApplicationController
                     format.html { 
                         redirect_to edit_photo_path(first_photo_id), notice: 'Photo was successfully created.'
                     }
+                else
+                    photo_ids_array = photos.pluck(:id)
+                    photo_array_string = photo_ids_array.join("-")
+                    cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
+                    format.html { redirect_to select_photos_path, alert: 'You have reached the amount of free images' }
                 end
             end
         end
@@ -387,7 +388,7 @@ class PhotosController < ApplicationController
         @photo.tmp = false
         respond_to do |format|
             if verify_recaptcha(model: @photo) && @photo.save
-                if Photo.free_photos(@user.id).count > 10
+                if Photo.tmp_photos(@user.id).count > 10
                     @photo.update_attributes tmp: true
                     pay_photo_ids_array = @photo.id
                     pay_photo_array_string = pay_photo_ids_array
@@ -450,8 +451,10 @@ class PhotosController < ApplicationController
 
     def upload_process
         @user = current_user
+        number_photos = (10 - Photo.tmp_photos(@user.id).count)
+
         respond_to do |format|
-            if Photo.tmp_photos(@user.id).count >= 10
+            if number_photos == 0
                 format.html { redirect_to pay_upload_process_path, alert: 'You have reached the amount of free images' }
             else
                 format.html { redirect_to profile_show_path, notice: 'Photo was successfully updated' }
@@ -516,9 +519,34 @@ class PhotosController < ApplicationController
 
     def recent_sorts
         @photos = []
-        seens = Seen.get_photos_last_twenty_four_hours(current_user.id)
-        seens.each do |seen|
-            @photos << seen.photo
+        @user = current_user
+
+        case params[:filter_by].to_i
+        when 1
+            seens = Seen.get_sort_today(@user.id)
+            seens.each do |seen|
+                @photos << seen.photo
+            end
+        when 2
+            seens = Seen.get_sort_this_week(@user.id)
+            seens.each do |seen|
+                @photos << seen.photo
+            end
+        when 3
+            seens = Seen.get_sort_this_month(@user.id)
+            seens.each do |seen|
+                @photos << seen.photo
+            end
+        when 4
+            seens = Seen.get_sort_last_ninety_days(@user.id)
+            seens.each do |seen|
+                @photos << seen.photo
+            end
+        else
+            seens = Seen.get_sort_last_twenty_four_hours(@user.id)
+            seens.each do |seen|
+                @photos << seen.photo
+            end        
         end
     end
 
