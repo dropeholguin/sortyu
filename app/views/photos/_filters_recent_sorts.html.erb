@@ -1,0 +1,38 @@
+<% if params[:filter_by].to_i == 1 %>
+	<li><%= link_to request.query_parameters.merge({filter_by: 1}) do %>
+       <i class="fa fa-check-square-o" aria-hidden="true"></i>
+       <span>Today</span>
+    <% end %></li>
+    <li><%= link_to "This Week", request.query_parameters.merge({filter_by: 2}) %></li>
+	<li><%= link_to "This Month", request.query_parameters.merge({filter_by: 3}) %></li>
+	<li><%= link_to "Last 90 Days", request.query_parameters.merge({filter_by: 4}) %></li>
+<% elsif params[:filter_by].to_i == 2 %>
+    <li><%= link_to "Today", request.query_parameters.merge({filter_by: 1}) %></li>
+    <li><%= link_to request.query_parameters.merge({filter_by: 2}) do %>
+       <i class="fa fa-check-square-o" aria-hidden="true"></i>
+       <span>This Week</span>
+    <% end %></li>
+	<li><%= link_to "This Month", request.query_parameters.merge({filter_by: 3}) %></li>
+	<li><%= link_to "Last 90 Days", request.query_parameters.merge({filter_by: 4}) %></li>
+<% elsif params[:filter_by].to_i == 3 %>
+	<li><%= link_to "Today", request.query_parameters.merge({filter_by: 1}) %></li>
+	<li><%= link_to "This Week", request.query_parameters.merge({filter_by: 2}) %></li>
+	<li><%= link_to request.query_parameters.merge({filter_by: 3}) do %>
+       <i class="fa fa-check-square-o" aria-hidden="true"></i>
+       <span>This Month</span>
+    <% end %></li>
+    <li><%= link_to "Last 90 Days", request.query_parameters.merge({filter_by: 4}) %></li>
+<% elsif params[:filter_by].to_i == 4 %>
+	<li><%= link_to "Today", request.query_parameters.merge({filter_by: 1}) %></li>
+	<li><%= link_to "This Week", request.query_parameters.merge({filter_by: 2}) %></li>
+    <li><%= link_to "This Month", request.query_parameters.merge({filter_by: 3}) %></li>
+    <li><%= link_to request.query_parameters.merge({filter_by: 4}) do %>
+       <i class="fa fa-check-square-o" aria-hidden="true"></i>
+       <span>Last 90 Days</span>
+    <% end %></li>
+<% else %>
+	<li><%= link_to "Today", request.query_parameters.merge({filter_by: 1}) %></li>
+	<li><%= link_to "This Week", request.query_parameters.merge({filter_by: 2}) %></li>
+	<li><%= link_to "This Month", request.query_parameters.merge({filter_by: 3}) %></li>
+	<li><%= link_to "Last 90 Days", request.query_parameters.merge({filter_by: 4}) %></li>
+<% end %>

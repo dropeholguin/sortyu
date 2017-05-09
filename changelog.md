@@ -2,14 +2,15 @@
 0.3.5 (8-05-2017)
 ------
 ### Minor changes
-Create a footer for the homepage
+-Create a footer for the homepage
+-Add filters in recent sortings page
 
 ### patch changes
-Dropdown with filter options for "recent sortings" page
-Fix standarization of image sizes to fix Sections positioning bug
-Notification mails should be improved and fixed (text)Fix the redirection of the "back" button at individual sorting, redirect to image instead of profile
+-Dropdown with filter options for "recent sortings" page
+-Fix standarization of image sizes to fix Sections positioning bug
+-Notification mails should be improved and fixed (text)Fix the redirection of the "back" button at individual sorting,redirect to image instead of profile
+-Fix validations of stripe integration in the upload process
 
-#sortyu 0.x Changelog
 0.3.0 (4-05-2017)
 ------
 ### Minor changes
