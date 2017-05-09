@@ -22,6 +22,7 @@
 	<div class="under-space field">
 		<%= f.label :tag_list, "Tags (separated by commas)" %>
 		<%= f.text_field :tag_list, 'data-delimiter' => ', ', multiple: true, multiple: true, value: photo.tag_list.join(", ") %>
+		<%= f.hidden_field :tmp, value: false %>
 	</div>
 	<% if !params[:id].present? %>
 		<div class="row under-space">
