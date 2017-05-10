@@ -17,18 +17,8 @@ window.photoStats.show = ->
 		error: (jqXHR, textStatus, errorThrown) ->
 			console.log("AJAX Error: #{textStatus}")
 		success: (data, textStatus, jqXHR) ->
-			console.log("Stadistics shown successfully!")
-			$('.rect').unbind('click')
-			$('#loading_text').html('Click the back button to check your results')
-			$.ajax '/invite_sort_friend/#{photoId}',
-			type: 'GET',
-			dataType: 'script',
-			data: {
-				photo_id: photoId
-			},
-			error: (jqXHR, textStatus, errorThrown) ->
-				console.log("AJAX Error: #{textStatus}")
-			success: (data, textStatus, jqXHR) ->
+			window.location.replace("/photos/#{photoId}")
+			
 
 	else
 		# This is for the principal sorting(AJAX path is different)
