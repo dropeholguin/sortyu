@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   get 'pages/about_us'
   get 'pages/terms_and_conditions'
   get 'pages/contact_us'
+  get 'pages/api_terms'
+  get 'pages/community_guidelines'
+  get 'pages/brand'
 
   devise_for :affiliates, controllers: { registrations: "users/registrations" }
 

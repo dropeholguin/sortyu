@@ -12,4 +12,16 @@ class PagesController < ApplicationController
   def contact_us
   	
   end
+
+  def api_terms
+    
+  end
+
+  def community_guidelines
+    
+  end
+
+  def brand
+    
+  end
 end
