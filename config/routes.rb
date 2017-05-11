@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   
   get 'pages/privacy'
-
+  get 'pages/about_us'
   get 'pages/terms_and_conditions'
 
   devise_for :affiliates, controllers: { registrations: "users/registrations" }
