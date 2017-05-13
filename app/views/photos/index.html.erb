@@ -1,18 +1,32 @@
 <div id="sorting-principal" class="upper-space row">
 	<div class="row">
-		<div class="small-6 medium-push-1 large-push-5 columns">
+		<div class="small-12 text-center columns">
 			<%= link_to "Recent Sorts", recent_sorts_path , class:"button small hollow" %>
 		</div>
-		<div class="small-6 medium-3 columns">
-			<% if current_user.hide_results? %>
-				<%= check_box_tag("hide results", value = "1", checked = true) %>
-			<% else %>
-				<%= check_box_tag("hide results", value = "1", checked = false) %>
-			<% end %>
-			<%= label_tag("Hide Results")%>
+	</div>
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="float-left">
+				<ul class="dropdown menu" data-dropdown-menu>
+					<li>
+						<a href="#">Sorty by:</a>
+						<ul class="menu">
+							<li><a href="#">Everyone</a></li>
+							<li><a href="#">Followers</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="float-right">
+					<% if current_user.hide_results? %>
+					<%= check_box_tag("hide results", value = "1", checked = true) %>
+				<% else %>
+					<%= check_box_tag("hide results", value = "1", checked = false) %>
+				<% end %>
+				<%= label_tag("Hide Results")%>
+			</div>
 		</div>
 	</div>
-	
 	<div class="row upper-space under-pad">
 		<div id="user-photo-container" class="small-4 medium-2 medium-push-1 medium-text-center large-push-2 columns">
         </div>
