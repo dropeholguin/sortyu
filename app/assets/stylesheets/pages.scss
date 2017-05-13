@@ -3,12 +3,32 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #pages{
+
 	li{
 		margin-bottom:1em;
 	}
 
 	.title-container{
-		margin-bottom:5em;
+		background-color:#80bfff;
+		color:white;
+
+		h4{
+			margin-top:0.5em;
+		}
+	}
+
+	.information-container{
+		padding-top:5em;
+		border:thin solid lightgray;
+
+		p{
+			margin-top:0.5em;
+		}
+
+		.fa-calendar-check-o,.fa-info-circle{
+			color:#0073e6;
+			margin-bottom:0.5em;
+		}
 	}
 }
 
