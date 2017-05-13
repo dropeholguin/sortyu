@@ -35,9 +35,13 @@
 		<div class="small-4 small-push-1 medium-3 medium-push-3 large-1 large-push-4 text-center columns">
 			<p>Share: </p> 
 		</div>
-		<div class="small-8 medium-4 medium-push-1 large-2 large-push-4 text-center end columns">
-			<!-- Facebook button had a static value, but it didn't get styling -->
-			<%= social_share_button_tag("Sortyu Image", url: photo_url(@photo), image: @photo.file.url(:medium), desc: @photo.description) %>
+		<div class="small-8 medium-4 medium-push-2 large-2 large-push-4 text-center end columns">
+			<div class="float-left">
+				<%= social_share_button_tag("Sortyu Image", url: photo_url(@photo), image: @photo.file.url(:medium), desc: @photo.description) %>
+			</div>
+			<div class="small-8 large-push-4 columns">
+				<span><%= @photo.get_upvotes.size %> likes</span>
+			</div>
 		</div>
 	</div>
 	<!-- Photo Stadistics -->

@@ -67,7 +67,15 @@
 			margin-bottom:0;
 		}
 	}
-}	
+}
+
+#photo-show{
+	.share-container{
+		span{
+			color:#4286F4;
+		}
+	}
+}
 
 /* Small only */
 @media screen and (max-width: 39.9375em) {
