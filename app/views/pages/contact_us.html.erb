@@ -1,0 +1,29 @@
+<div id="pages">
+	<div class="row title-container">
+		<div class="upper-space small-12 text-center columns">
+			<h4>Contact Us</h4>
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-12 medium-6 text-center columns">
+			<h6><i>Lorem ipsum dolor sit amet.</i></h6>
+			<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem</p>
+		</div>
+		<div class="small-12 medium-6 columns">
+			<div class="callout">
+				<div class="row text-center">
+					<h4>Form</h4>
+				</div>
+				<%= form_tag do %>
+					<label for="fullName">Name</label>
+		    		<input type="text" id="fullName" name="firstname" placeholder="Full name...">
+		    		<label for="message">Message</label>
+				    <textarea id="message" name="message" placeholder="Type your message" style="height:200px"></textarea>
+				    <div class="row text-center">
+				    	<input type="submit" value="Submit" class="button small hollow">
+				    </div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
