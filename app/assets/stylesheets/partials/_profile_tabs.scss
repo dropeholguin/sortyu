@@ -47,6 +47,13 @@
 		}
 
 		#photos-container{
+
+			.information{
+				span{
+					color:#4286F4;
+				}
+			}
+
 			.ribbon-container{
 				div.ribbon.free{
 					position: relative;
@@ -83,6 +90,15 @@
 		.tabs-panel{
 			padding-left:0;
 			padding-right:0;
+
+			#photos-container{
+				.information{
+					.float-right{
+						// This is to align the text properly for mobile
+						float:left !important;
+					}
+				}
+			}
 
 			.follow-container{
 				width:100%;

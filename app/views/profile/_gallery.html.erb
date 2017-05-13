@@ -25,12 +25,17 @@
 					<% end %>
 				</div>
 				<!-- Share social buttons container -->
-				<div data-photo="<%= photo.id %>" id="photo-i" class="row collapse under-space">
+				<div data-photo="<%= photo.id %>" id="photo-i" class="information row collapse under-space">
 					<div class="small-12 medium-3 large-2 columns">
 						<p>Share: </p> 
 					</div>
 					<div class="small-12 medium-9 large-10 columns">
-						<%= social_share_button_tag("Sortyu Image", url: photo_url(photo), image: photo.file.url(:medium), desc: photo.description) %>
+						<div class="float-left">
+							<%= social_share_button_tag("Sortyu Image", url: photo_url(photo), image: photo.file.url(:medium), desc: photo.description) %>
+						</div>
+						<div class="float-right">
+							<span><%= photo.get_upvotes.size %> likes </span>
+						</div>
 					</div>
 				</div>
 			</div>
