@@ -6,7 +6,7 @@
 	</div>
 	<div class="row">
 		<% @photos.each do |photo| %>
-			<% if photo.state == 'free' %>
+			<% if photo.state == 'free' || photo.state == 'draft' %>
 				<div class="upper-space small-4 text-center end columns">
 					<%= image_tag(photo.file.url(:medium),id: photo.id) %>
 					<%= check_box_tag('pay_photo', photo.id , false) %>

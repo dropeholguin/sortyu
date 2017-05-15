@@ -1,6 +1,8 @@
 <div id="batch-container" class="small-12 columns">
 	<%= link_to 'Edit Images', remove_photos_path, class:"button tiny hollow float-left" %>
 	<%= link_to 'Pay Images', pay_multiple_photos_path, class:"button pay tiny float-left" %>
+	<%= link_to 'Draft Images', photos_draft_path, class:"button tiny hollow float-left" %>
+
 	<ul class="dropdown menu float-right" data-dropdown-menu>
 		<li>
 			<a href="#">Filter by:</a>
@@ -17,7 +19,7 @@
 				<div class="under-space ribbon-container">
 					<% if photo.state == 'free'%>
 						<div class="ribbon free">Free</div>
-					<% else %>
+					<% elsif photo.state == 'paid' %>
 						<div class="ribbon paid">&#36;</div>
 					<% end %>
 					<%= link_to photo do %>

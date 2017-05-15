@@ -34,11 +34,25 @@ editPhotos = ->
       type: 'POST'
       data: photo_ids: selected
 
+draftPhotos = ->
+  $('#photos-draft').click ->
+    selected = new Array
+    $('input:checkbox[name=photo_draft]:checked').each ->
+      selected.push $(this).val()
+    
+    $.ajax
+      url: '/change_draft_photos'
+      type: 'POST'
+      data: photo_ids: selected
+
 $(document).on 'turbolinks:load', ->
 	selectPhotos()
 
 $(document).ready destroyPhotos
 $(document).ready editPhotos
+$(document).ready draftPhotos
+$(document).on 'turbolinks:load', ->
+  draftPhotos()
 
 $(document).on 'turbolinks:load', ->
 	destroyPhotos()

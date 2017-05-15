@@ -12,12 +12,39 @@ class PhotosController < ApplicationController
         #@photos = Photo.paginate(page: params[:page], per_page: 1).photos_sorting(@user.id)
     end
 
+    def photos_draft
+        @photos = Photo.photos_draft(current_user).order("created_at desc")
+    end
+
     def remove_photos
         @photos = Photo.photos(current_user).order('created_at desc')
     end
 
     def pay_multiple_photos
-        @photos = Photo.pay_photos(current_user).order('created_at desc')
+        @photos = Photo.photos(current_user).order('created_at desc')
+    end
+
+    def change_draft_photos
+        @user = current_user
+        @photos = []
+        photo_ids_array = params[:photo_ids]
+        photo_ids_array.each do | id_photo|
+            photo = Photo.find(id_photo.to_i)
+            @photos << photo
+        end
+        respond_to do |format|
+            if Photo.tmp_photos(@user.id).count <= 10
+                @photos.each do | photo|
+                    photo.spend_free!
+                end
+                format.html { redirect_to profile_show_path, notice: "" }  
+            else
+                photo_ids_array = @photos.pluck(:id)
+                photo_array_string = photo_ids_array.join("-")
+                cookies[:pay_photos] = { value: photo_array_string, expires: 23.hours.from_now }
+                format.html { redirect_to pay_upload_process_path, alert: 'You have reached the amount of free images' }
+            end
+        end
     end
 
     def pay_upload_process
@@ -350,7 +377,7 @@ class PhotosController < ApplicationController
             respond_to do |format|
                 format.html{ redirect_to root_path, alert: "You can't edit other users sections"}
             end
-        elsif !@photo.first_edit
+        elsif !@photo.first_edit && @photo.state != "draft"
             respond_to do |format|
                 format.html{ redirect_to root_path, alert: "You can't edit a photo's sections more than once"}
             end
@@ -363,14 +390,19 @@ class PhotosController < ApplicationController
 
     def save_sections
         @photo = Photo.find(params[:photo_id])
-         if @photo.first_edit == true
+        if @photo.first_edit == true
             @photo.first_edit = false
             @photo.save  
         end
+        if @photo.first_edit == false && @photo.state == "draft"
+            @photo.sections.each do |section|
+                section.destroy
+            end
+        end
+        
         params[:sections].each_with_index do |section, i|
             @section = Section.new(photo_id: @photo.id, index: (i.to_i+1), top: section[1]["top"], left:section[1]["left"], width:section[1]["width"], height: section[1]["height"],translateX: section[1]["translateX"], translateY: section[1]["translateY"])        
             @section.save
-            puts @section
         end
         head :ok
     end
@@ -451,10 +483,9 @@ class PhotosController < ApplicationController
 
     def upload_process
         @user = current_user
-        number_photos = (10 - Photo.tmp_photos(@user.id).count)
 
         respond_to do |format|
-            if number_photos == 0
+            if Photo.tmp_photos(@user.id).count > 10
                 format.html { redirect_to pay_upload_process_path, alert: 'You have reached the amount of free images' }
             else
                 format.html { redirect_to profile_show_path, notice: 'Photo was successfully updated' }

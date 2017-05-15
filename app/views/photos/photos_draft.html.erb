@@ -1,0 +1,15 @@
+<div id="remove-photos" class="upper-pad under-pad row">
+	<div class="row">
+		<div class="small-12 text-center columns">
+			<%= button_tag('Select Images', class:"button", id: "photos-draft") %>
+		</div>
+	</div>
+	<div class="gallery row">
+		<% @photos.each do |photo| %>
+			<div class="small-4 medium-3 large-2 end columns">
+				<%= image_tag(photo.file.url(:medium),id: photo.id) %>
+				<%= check_box_tag('photo_draft', photo.id , false) %>
+			</div>
+		<% end %>
+	</div>
+</div>
