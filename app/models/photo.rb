@@ -1,4 +1,6 @@
 class Photo < ApplicationRecord
+    include Tire::Model::Search
+    include Tire::Model::Callbacks
     include AASM
     acts_as_votable
     acts_as_taggable
@@ -36,6 +38,23 @@ class Photo < ApplicationRecord
         event :spend_free do
             transitions from: :draft, to: :free
         end
+    end
+
+    index_name("photos")
+    mapping do
+        indexes :id, index: :not_analyzed
+        indexes :tag_list, type: 'string', analyzer: 'keyword'
+    end
+
+    def self.search(params)
+        tire.search(load: true) do
+            query { string params[:query] } if params[:query].present?
+            filter :terms, tag_list: [params[:the_tag]] if params[:the_tag].present?
+        end
+    end
+
+    def to_indexed_json
+        to_json(methods: [:tag_list])
     end
 
     # Retrieves dimensions for image assets

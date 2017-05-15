@@ -48,6 +48,7 @@ gem 'social-share-button'
 gem 'acts-as-taggable-on'
 gem 'activeadmin', github: 'activeadmin'
 gem 'owlcarousel-rails', '~> 1.1', '>= 1.1.3.3'
+gem 'tire'
 
 group :development, :test do
   gem 'byebug', platform: :mri

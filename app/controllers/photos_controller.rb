@@ -159,7 +159,11 @@ class PhotosController < ApplicationController
 
 
     def reaload_photos_queue
-        photos = Photo.photos_sorting(current_user.id).order(state: :desc)
+        if params[:the_tag].present?
+            photos = Photo.search(params)
+        else
+            photos = Photo.photos_sorting(current_user.id).order(state: :desc)
+        end
         photos_ids = []
         photos.each do |photo|
             if photo.seens.present?
