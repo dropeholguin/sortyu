@@ -9,11 +9,9 @@
       Your photo was suspended
     </p>
     <p>
-      Flag Comments: 
+      Flag Comment: 
         <% @photo.flags.each do |flag| %>
-          <tr>
-            <td>- <%= flag.reason %></td>
-          </tr>
+            <p>- <%= flag.reason %></p>
         <% end %>
     </p>
     <%= link_to 'Create Justification', new_justification_url(photo_id: @photo.id) %>
