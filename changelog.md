@@ -1,4 +1,17 @@
 #sortyu 0.x Changelog
+0.4.0 (16-05-2017)
+
+#Minor changes
+- Photos have a draft state that allows to edit sections
+-Publishing engine for images (Allow save them as drafts)
+-Contact us, About us,404 and 500 error pages, privacy and terms & conditions pages
+-Images show likes
+
+#Patch changes
+- Sorting has filters
+- Sorting works for mobile versions
+
+#sortyu 0.x Changelog
 0.3.5 (8-05-2017)
 ------
 ### Minor changes
