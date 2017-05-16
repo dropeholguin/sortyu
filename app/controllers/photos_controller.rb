@@ -26,24 +26,13 @@ class PhotosController < ApplicationController
 
     def change_draft_photos
         @user = current_user
-        @photos = []
         photo_ids_array = params[:photo_ids]
         photo_ids_array.each do | id_photo|
             photo = Photo.find(id_photo.to_i)
-            @photos << photo
+            photo.update_attributes draft: false
         end
         respond_to do |format|
-            if Photo.tmp_photos(@user.id).count <= 10
-                @photos.each do | photo|
-                    photo.spend_free!
-                end
-                format.html { redirect_to profile_show_path, notice: "" }  
-            else
-                photo_ids_array = @photos.pluck(:id)
-                photo_array_string = photo_ids_array.join("-")
-                cookies[:pay_photos] = { value: photo_array_string, expires: 23.hours.from_now }
-                format.html { redirect_to pay_upload_process_path, alert: 'You have reached the amount of free images' }
-            end
+            format.html { redirect_to profile_show_path, notice: "" }
         end
     end
 
@@ -96,7 +85,7 @@ class PhotosController < ApplicationController
             if number_photos == params[:photo_ids].count
                 photo_ids_array = params[:photo_ids_no_selected]
                 photo_array_string = photo_ids_array.join("-")
-                cookies[:pay_photos] = { value: photo_array_string, expires: 23.hours.from_now }
+                cookies[:tmp_pay_photos] = { value: photo_array_string, expires: 23.hours.from_now }
                 
                 photo_ids_array = params[:photo_ids]
                 first_photo_id = photo_ids_array.shift
@@ -381,7 +370,7 @@ class PhotosController < ApplicationController
             respond_to do |format|
                 format.html{ redirect_to root_path, alert: "You can't edit other users sections"}
             end
-        elsif !@photo.first_edit && @photo.state != "draft"
+        elsif !@photo.first_edit && @photo.draft == false
             respond_to do |format|
                 format.html{ redirect_to root_path, alert: "You can't edit a photo's sections more than once"}
             end
@@ -398,7 +387,7 @@ class PhotosController < ApplicationController
             @photo.first_edit = false
             @photo.save  
         end
-        if @photo.first_edit == false && @photo.state == "draft"
+        if @photo.first_edit == false && @photo.draft == true
             @photo.sections.each do |section|
                 section.destroy
             end
@@ -428,7 +417,7 @@ class PhotosController < ApplicationController
                     @photo.update_attributes tmp: true
                     pay_photo_ids_array = @photo.id
                     pay_photo_array_string = pay_photo_ids_array
-                    cookies[:pay_photos] = { value: pay_photo_array_string, expires: 23.hours.from_now }
+                    cookies[:tmp_pay_photos] = { value: pay_photo_array_string, expires: 23.hours.from_now }
                 end
                 format.html { redirect_to photo_edit_sections_path(photo_id: @photo.id), notice: 'Photo was successfully uploaded. Time to set your photo sections.' }
                 format.json { render :show, status: :created, location: @photo }
@@ -487,10 +476,14 @@ class PhotosController < ApplicationController
 
     def upload_process
         @user = current_user
-
         respond_to do |format|
-            if Photo.tmp_photos(@user.id).count > 10
-                format.html { redirect_to pay_upload_process_path, alert: 'You have reached the amount of free images' }
+            if !cookies[:tmp_pay_photos].empty?
+                photo_ids_array = cookies[:tmp_pay_photos].split("-")
+                photo_array_string = photo_ids_array.join("-")
+                cookies[:pay_photos] = { value: photo_array_string, expires: 23.hours.from_now }
+
+                cookies[:tmp_pay_photos] = ""
+                format.html { redirect_to pay_upload_process_path, alert: 'You have reached the amount of free images' }  
             else
                 format.html { redirect_to profile_show_path, notice: 'Photo was successfully updated' }
             end
