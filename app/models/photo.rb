@@ -23,6 +23,7 @@ class Photo < ApplicationRecord
     scope :destroy_photos_tmp, -> { where("tmp = ?", true) }
     scope :tmp_photos, -> (user_id) { where("user_id = ? AND state = ? AND tmp = ?", user_id, "free", false) }
     scope :free_photos, -> (user_id) { where("user_id = ? AND state = ?", user_id, "free") }
+    scope :follower_photos, -> (user_id) { where("user_id = ? AND count_flags < ? AND tmp = ? AND draft = ?", user_id, MAXIMUM_FLAGS, false, false) }
     scope :photos_sorting, -> (user_id) { where("user_id != ? AND count_flags < ? AND tmp = ? AND draft = ?", user_id, MAXIMUM_FLAGS, false, false) }
     scope :get_photos_paid, -> { where("state = ? AND count_of_sorts < ?", "paid", 200,) }
     scope :photos_draft, -> (user_id) {where("user_id = ? AND tmp = ? AND draft = ?", user_id, false, true)}

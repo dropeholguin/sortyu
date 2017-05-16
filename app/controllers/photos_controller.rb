@@ -12,6 +12,20 @@ class PhotosController < ApplicationController
         #@photos = Photo.paginate(page: params[:page], per_page: 1).photos_sorting(@user.id)
     end
 
+    def followers_photos
+        @user = current_user
+        @photos_ids = []
+        @user.followers.each do |follower|
+            follower_photos = Photo.follower_photos(follower.id).order(state: :desc)
+            follower_photos.each do |photo|
+                @photos_ids << photo.id
+            end
+        end
+        respond_to do |format|
+            format.json  { render json: { photos: @photos_ids } }
+        end
+    end
+
     def photos_draft
         @photos = Photo.photos_draft(current_user).order("created_at desc")
     end
@@ -148,8 +162,14 @@ class PhotosController < ApplicationController
 
 
     def reaload_photos_queue
-        if params[:the_tag].present?
-            photos = Photo.search(params)
+        cookies[:photos_queue] = ""
+        if !params[:photos_ids].nil?
+            followers_photos = []
+            params[:photos_ids][:photos].each do |photo_id|
+                photo = Photo.find photo_id.to_i
+                followers_photos << photo
+            end
+            photos = followers_photos
         else
             photos = Photo.photos_sorting(current_user.id).order(state: :desc)
         end
