@@ -9,7 +9,7 @@
       <%= button_tag "Import Selected Photos", class: "import_instagram button" %>
     </div>
   </div>
-  <div id="photo-container" class="upper-pad under-pad row">
+  <div id="photos-container" class="upper-pad under-pad row">
     <% (0..@max_num).each do |i| %>
       <div class="upper-space small-4 text-center end columns">
         <%= image_tag(@results["data"][i]["images"]["standard_resolution"]["url"]) %>

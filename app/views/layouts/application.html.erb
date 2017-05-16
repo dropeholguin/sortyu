@@ -25,7 +25,10 @@
         <% else%>
           <%= render 'layouts/header_log_out' %>
         <% end %>
-        <%= yield %>
+        <div id="min-height">
+          <%= yield %>
+        </div>
+        <%= render 'layouts/footer' %>
       </div>
     </div>
   </body>

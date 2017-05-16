@@ -14,5 +14,6 @@ module Sortyu
 
     	config.middleware.use Rack::Affiliates, {param: 'ref', ttl: 6.months}
     	config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')
+    	config.exceptions_app = self.routes
 	end
 end

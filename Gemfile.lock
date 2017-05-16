@@ -72,6 +72,7 @@ GEM
     acts_as_votable (0.10.0)
     addressable (2.5.0)
       public_suffix (~> 2.0, >= 2.0.2)
+    ansi (1.5.0)
     arbre (1.1.1)
       activesupport (>= 3.0.0)
     arel (7.1.4)
@@ -142,6 +143,7 @@ GEM
       actionpack (>= 4.1, < 5.2)
       activesupport (>= 4.1, < 5.2)
     hashie (3.4.6)
+    hashr (0.0.22)
     httparty (0.14.0)
       multi_xml (>= 0.5.2)
     i18n (0.7.0)
@@ -327,6 +329,14 @@ GEM
     thor (0.19.4)
     thread_safe (0.3.5)
     tilt (2.0.5)
+    tire (0.6.2)
+      activemodel (>= 3.0)
+      activesupport
+      ansi
+      hashr (~> 0.0.19)
+      multi_json (~> 1.3)
+      rake
+      rest-client (~> 1.6)
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
     turbolinks-source (5.0.0)
@@ -394,6 +404,7 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   stripe
+  tire
   turbolinks (~> 5)
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)

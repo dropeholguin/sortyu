@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
   
+  get 'errors/not_found'
+  get 'errors/internal_server_error'
+  get 'pages/privacy'
+  get 'pages/about_us'
+  get 'pages/terms_and_conditions'
+  get 'pages/contact_us'
+  get 'pages/api_terms'
+  get 'pages/community_guidelines'
+  get 'pages/brand'
+
   devise_for :affiliates, controllers: { registrations: "users/registrations" }
 
   devise_for :admin_reviewers, ActiveAdmin::Devise.config.merge({path: '/reviewer'})
@@ -52,6 +62,10 @@ Rails.application.routes.draw do
   post "photos/upload_photos", to: 'photos#upload_photos'
   get 'photos/pay_upload_process',to: 'photos#pay_upload_process', as: 'pay_upload_process'
   get 'photos/select_photos',to: 'photos#select_photos', as: 'select_photos'
+  get 'photos_draft', to: 'photos#photos_draft'
+  post 'change_draft_photos', to: 'photos#change_draft_photos'
+  match "/404", :to => "errors#not_found", :via => :all
+  match "/500", :to => "errors#internal_server_error", :via => :all
 
 
   resources :photos do

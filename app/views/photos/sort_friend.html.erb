@@ -34,13 +34,6 @@
             </div>
         </div>
     </div> 
-    <script type="text/javascript">
-    	imageToSort = document.getElementById('trackme');
-		$(imageToSort).attr('crossOrigin', 'anonymous');
-		$(imageToSort).attr("src", $("#source-url").text());
-		$(imageToSort).one('load', function() {
-		});
-    </script>
     <div class="row">
         <div id="photo-description" class="small-12 medium-10 medium-push-1 large-8 large-push-2 text-center columns">
         	<p>
@@ -79,7 +72,7 @@
 	</div>
 	<div class="row under-space">
 		<div class="small-12 columns text-center">
-			<%= link_to 'Back', profile_other_user_show_path(@photo.user), class: "hollow button"%>
+			<%= link_to 'Back', photo_path(@photo), class: "hollow button"%>
 			<i data-open="flag-overlay" aria-hidden="true"><%= button_tag("Report", class: "button alert") %></i>
 		</div>
 	</div>
@@ -89,3 +82,10 @@
 		</button>
 	</div>
 </div>
+<script type="text/javascript">
+	imageToSort = document.getElementById('trackme');
+	$(imageToSort).attr('crossOrigin', 'anonymous');
+	$(imageToSort).attr("src", $("#source-url").text());
+	$(imageToSort).one('load', function() {
+	});
+</script>

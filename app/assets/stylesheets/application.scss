@@ -26,6 +26,7 @@
 @import 'modules/mixins';
 @import 'modules/socials';
 @import 'partials/header';
+@import 'partials/footer';
 @import 'partials/shareable';
 @import 'partials/log_in';
 @import 'partials/file_upload';
@@ -33,6 +34,9 @@
 @import 'partials/profile_tabs';
 @import 'partials/gallery';
 @import 'partials/home';
+
+
+
 
 body, .alert, .notice{
 	margin:0;

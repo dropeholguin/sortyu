@@ -1,4 +1,6 @@
 class Photo < ApplicationRecord
+    include Tire::Model::Search
+    include Tire::Model::Callbacks
     include AASM
     acts_as_votable
     acts_as_taggable
@@ -17,19 +19,42 @@ class Photo < ApplicationRecord
 
     MAXIMUM_FLAGS = 2
 
-    scope :photos, -> (user_id) { where(user_id: user_id) }
-    scope :pay_photos, -> (user_id) { where("user_id = ? AND state != ? ", user_id, "paid") }
-    scope :free_photos, -> (user_id) { where("user_id = ? AND state = ? ", user_id, "free") }
-    scope :photos_sorting, -> (user_id) { where("user_id != ? AND count_flags < ? ", user_id, MAXIMUM_FLAGS) }
-    scope :get_photos_paid, -> { where("state = ? AND count_of_sorts < ? ", "paid", 200) }
-
+    scope :photos, -> (user_id) { where("user_id = ? AND tmp = ?", user_id, false ) }
+    scope :destroy_photos_tmp, -> { where("tmp = ?", true) }
+    scope :tmp_photos, -> (user_id) { where("user_id = ? AND state = ? AND tmp = ?", user_id, "free", false) }
+    scope :free_photos, -> (user_id) { where("user_id = ? AND state = ?", user_id, "free") }
+    scope :photos_sorting, -> (user_id) { where("user_id != ? AND count_flags < ? AND tmp = ? AND state != ?", user_id, MAXIMUM_FLAGS, false, "draft") }
+    scope :get_photos_paid, -> { where("state = ? AND count_of_sorts < ?", "paid", 200,) }
+    scope :photos_draft, -> (user_id) {where("user_id = ? AND tmp = ? AND state = ?", user_id, false, "draft")}
+    
     aasm column: "state" do
-        state :free, initial: true
+        state :draft, initial: true
+        state :free
         state :paid
-
         event :pay do
             transitions from: :free, to: :paid
         end
+        
+        event :spend_free do
+            transitions from: :draft, to: :free
+        end
+    end
+
+    index_name("photos")
+    mapping do
+        indexes :id, index: :not_analyzed
+        indexes :tag_list, type: 'string', analyzer: 'keyword'
+    end
+
+    def self.search(params)
+        tire.search(load: true) do
+            query { string params[:query] } if params[:query].present?
+            filter :terms, tag_list: [params[:the_tag]] if params[:the_tag].present?
+        end
+    end
+
+    def to_indexed_json
+        to_json(methods: [:tag_list])
     end
 
     # Retrieves dimensions for image assets

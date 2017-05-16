@@ -12,12 +12,39 @@ class PhotosController < ApplicationController
         #@photos = Photo.paginate(page: params[:page], per_page: 1).photos_sorting(@user.id)
     end
 
+    def photos_draft
+        @photos = Photo.photos_draft(current_user).order("created_at desc")
+    end
+
     def remove_photos
         @photos = Photo.photos(current_user).order('created_at desc')
     end
 
     def pay_multiple_photos
-        @photos = Photo.pay_photos(current_user).order('created_at desc')
+        @photos = Photo.photos(current_user).order('created_at desc')
+    end
+
+    def change_draft_photos
+        @user = current_user
+        @photos = []
+        photo_ids_array = params[:photo_ids]
+        photo_ids_array.each do | id_photo|
+            photo = Photo.find(id_photo.to_i)
+            @photos << photo
+        end
+        respond_to do |format|
+            if Photo.tmp_photos(@user.id).count <= 10
+                @photos.each do | photo|
+                    photo.spend_free!
+                end
+                format.html { redirect_to profile_show_path, notice: "" }  
+            else
+                photo_ids_array = @photos.pluck(:id)
+                photo_array_string = photo_ids_array.join("-")
+                cookies[:pay_photos] = { value: photo_array_string, expires: 23.hours.from_now }
+                format.html { redirect_to pay_upload_process_path, alert: 'You have reached the amount of free images' }
+            end
+        end
     end
 
     def pay_upload_process
@@ -35,12 +62,22 @@ class PhotosController < ApplicationController
         photo_ids_array.each do | id_photo|
             @photos << Photo.find(id_photo.to_i)
         end
-        @number_photos = (Photo.free_photos(@user.id).count - 10)      
+        @number_photos = (10 - Photo.tmp_photos(@user.id).count)      
     end    
 
     def pay_photos
         respond_to do |format|
             photo_ids_array = params[:photo_ids_no_selected]
+            photos = []
+            if !photo_ids_array.nil?
+                photo_ids_array.each do | id_photo|
+                    photo = Photo.find(id_photo.to_i)
+                    if photo.tmp == true
+                       photos << photo 
+                    end         
+                end
+            end
+            photo_ids_array = photos.pluck(:id)
             photo_array_string = photo_ids_array.join("-")
             cookies[:remove_photos] = { value: photo_array_string, expires: 23.hours.from_now }
 
@@ -54,19 +91,27 @@ class PhotosController < ApplicationController
 
     def upload_photos
         respond_to do |format|
-            photo_ids_array = params[:photo_ids_no_selected]
-            photo_array_string = photo_ids_array.join("-")
-            cookies[:pay_photos] = { value: photo_array_string, expires: 23.hours.from_now }
-            
-            photo_ids_array = params[:photo_ids]
-            first_photo_id = photo_ids_array.shift
-            photo_array_string = photo_ids_array.join("-")
-            cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
-            cookies[:first_imported_photo_id] = { value: first_photo_id, expires: 23.hours.from_now }
+            @user = current_user
+            number_photos = (10 - Photo.tmp_photos(@user.id).count)
+            if number_photos == params[:photo_ids].count
+                photo_ids_array = params[:photo_ids_no_selected]
+                photo_array_string = photo_ids_array.join("-")
+                cookies[:pay_photos] = { value: photo_array_string, expires: 23.hours.from_now }
+                
+                photo_ids_array = params[:photo_ids]
+                first_photo_id = photo_ids_array.shift
+                photo_array_string = photo_ids_array.join("-")
+                cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
+                cookies[:first_imported_photo_id] = { value: first_photo_id, expires: 23.hours.from_now }
 
-            format.html { 
-                redirect_to edit_photo_path(first_photo_id), notice: 'Photo was successfully created.'
-            }
+                format.html { 
+                    redirect_to edit_photo_path(first_photo_id), notice: 'Photo was successfully created.'
+                }
+            else
+                format.html { 
+                    redirect_to :back, alert: 'Select only ' + number_photos.to_s
+                }
+            end 
         end
     end
 
@@ -86,7 +131,7 @@ class PhotosController < ApplicationController
 
         if current_user == @photo.user
             respond_to do |format|
-                format.html { redirect_to profile_show_path, error: "You can't sort your own image."}
+                format.html { redirect_to photo_path(@photo), error: "You can't sort your own image."}
             end
         end
     end
@@ -114,7 +159,11 @@ class PhotosController < ApplicationController
 
 
     def reaload_photos_queue
-        photos = Photo.photos_sorting(current_user.id).order(state: :desc)
+        if params[:the_tag].present?
+            photos = Photo.search(params)
+        else
+            photos = Photo.photos_sorting(current_user.id).order(state: :desc)
+        end
         photos_ids = []
         photos.each do |photo|
             if photo.seens.present?
@@ -199,7 +248,7 @@ class PhotosController < ApplicationController
         photos = []
         pay_photos = []
         respond_to do |format| 
-            if  Photo.free_photos(@user.id).count >= 10
+            if  Photo.tmp_photos(@user.id).count >= 10
                 params[:photos].each { |image_url|
                     @photo = Photo.new(file: URI.parse(image_url), user_id: @user.id)
                     @photo.save
@@ -215,13 +264,9 @@ class PhotosController < ApplicationController
                     @photo.save
                     photos << @photo
                 }
+                number_photos = (10 - Photo.tmp_photos(@user.id).count)
 
-                if Photo.free_photos(@user.id).count > 10
-                    photo_ids_array = photos.pluck(:id)
-                    photo_array_string = photo_ids_array.join("-")
-                    cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
-                    format.html { redirect_to select_photos_path, alert: 'You have reached the amount of free images' }
-                else
+                if  photos.count <= number_photos
                     photo_ids_array = photos.pluck(:id)
                     first_photo_id = photo_ids_array.shift
                     photo_array_string = photo_ids_array.join("-")
@@ -231,6 +276,11 @@ class PhotosController < ApplicationController
                     format.html { 
                         redirect_to edit_photo_path(first_photo_id), notice: 'Photo was successfully created.'
                     }
+                else
+                    photo_ids_array = photos.pluck(:id)
+                    photo_array_string = photo_ids_array.join("-")
+                    cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
+                    format.html { redirect_to select_photos_path, alert: 'You have reached the amount of free images' }
                 end
             end
         end
@@ -241,7 +291,7 @@ class PhotosController < ApplicationController
         photos = []
         pay_photos = []
         respond_to do |format| 
-            if  Photo.free_photos(@user.id).count >= 10
+            if  Photo.tmp_photos(@user.id).count >= 10
                 params[:photos].each { |image_url|
                     @photo = Photo.new(file: URI.parse(image_url), user_id: @user.id)
                     @photo.save
@@ -257,13 +307,9 @@ class PhotosController < ApplicationController
                     @photo.save
                     photos << @photo
                 }
+                number_photos = (10 - Photo.tmp_photos(@user.id).count)
 
-                if Photo.free_photos(@user.id).count > 10
-                    photo_ids_array = photos.pluck(:id)
-                    photo_array_string = photo_ids_array.join("-")
-                    cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
-                    format.html { redirect_to select_photos_path, alert: 'You have reached the amount of free images' }
-                else
+                if  photos.count <= number_photos
                     photo_ids_array = photos.pluck(:id)
                     first_photo_id = photo_ids_array.shift
                     photo_array_string = photo_ids_array.join("-")
@@ -273,6 +319,11 @@ class PhotosController < ApplicationController
                     format.html { 
                         redirect_to edit_photo_path(first_photo_id), notice: 'Photo was successfully created.'
                     }
+                else
+                    photo_ids_array = photos.pluck(:id)
+                    photo_array_string = photo_ids_array.join("-")
+                    cookies[:import_queue] = { value: photo_array_string, expires: 23.hours.from_now }
+                    format.html { redirect_to select_photos_path, alert: 'You have reached the amount of free images' }
                 end
             end
         end
@@ -330,7 +381,7 @@ class PhotosController < ApplicationController
             respond_to do |format|
                 format.html{ redirect_to root_path, alert: "You can't edit other users sections"}
             end
-        elsif !@photo.first_edit
+        elsif !@photo.first_edit && @photo.state != "draft"
             respond_to do |format|
                 format.html{ redirect_to root_path, alert: "You can't edit a photo's sections more than once"}
             end
@@ -343,14 +394,19 @@ class PhotosController < ApplicationController
 
     def save_sections
         @photo = Photo.find(params[:photo_id])
-         if @photo.first_edit == true
+        if @photo.first_edit == true
             @photo.first_edit = false
             @photo.save  
         end
+        if @photo.first_edit == false && @photo.state == "draft"
+            @photo.sections.each do |section|
+                section.destroy
+            end
+        end
+        
         params[:sections].each_with_index do |section, i|
             @section = Section.new(photo_id: @photo.id, index: (i.to_i+1), top: section[1]["top"], left:section[1]["left"], width:section[1]["width"], height: section[1]["height"],translateX: section[1]["translateX"], translateY: section[1]["translateY"])        
             @section.save
-            puts @section
         end
         head :ok
     end
@@ -365,10 +421,11 @@ class PhotosController < ApplicationController
         end
         @photo = Photo.new(photo_params)
         @photo.user = @user
-
+        @photo.tmp = false
         respond_to do |format|
             if verify_recaptcha(model: @photo) && @photo.save
-                if Photo.free_photos(@user.id).count > 10
+                if Photo.tmp_photos(@user.id).count > 10
+                    @photo.update_attributes tmp: true
                     pay_photo_ids_array = @photo.id
                     pay_photo_array_string = pay_photo_ids_array
                     cookies[:pay_photos] = { value: pay_photo_array_string, expires: 23.hours.from_now }
@@ -380,10 +437,6 @@ class PhotosController < ApplicationController
                 format.json { render json: @photo.errors, status: :unprocessable_entity }
             end
         end
-    end
-
-    def method_name
-        
     end
 
     def edit_photos
@@ -434,8 +487,9 @@ class PhotosController < ApplicationController
 
     def upload_process
         @user = current_user
+
         respond_to do |format|
-            if Photo.free_photos(@user.id).count > 10
+            if Photo.tmp_photos(@user.id).count > 10
                 format.html { redirect_to pay_upload_process_path, alert: 'You have reached the amount of free images' }
             else
                 format.html { redirect_to profile_show_path, notice: 'Photo was successfully updated' }
@@ -500,9 +554,34 @@ class PhotosController < ApplicationController
 
     def recent_sorts
         @photos = []
-        seens = Seen.get_photos_last_twenty_four_hours(current_user.id)
-        seens.each do |seen|
-            @photos << seen.photo
+        @user = current_user
+
+        case params[:filter_by].to_i
+        when 1
+            seens = Seen.get_sort_today(@user.id)
+            seens.each do |seen|
+                @photos << seen.photo
+            end
+        when 2
+            seens = Seen.get_sort_this_week(@user.id)
+            seens.each do |seen|
+                @photos << seen.photo
+            end
+        when 3
+            seens = Seen.get_sort_this_month(@user.id)
+            seens.each do |seen|
+                @photos << seen.photo
+            end
+        when 4
+            seens = Seen.get_sort_last_ninety_days(@user.id)
+            seens.each do |seen|
+                @photos << seen.photo
+            end
+        else
+            seens = Seen.get_sort_last_twenty_four_hours(@user.id)
+            seens.each do |seen|
+                @photos << seen.photo
+            end        
         end
     end
 
@@ -514,6 +593,6 @@ class PhotosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def photo_params
-        params.require(:photo).permit(:description, :file, { tag_list: [] }, :user_id)
+        params.require(:photo).permit(:description, :file, { tag_list: [] }, :user_id, :tmp)
     end
 end

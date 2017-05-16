@@ -46,7 +46,14 @@
 			}
 		}
 
-		#photo-container{
+		#photos-container{
+
+			.information{
+				span{
+					color:#4286F4;
+				}
+			}
+
 			.ribbon-container{
 				div.ribbon.free{
 					position: relative;
@@ -54,7 +61,7 @@
 				    color: white;
 				    padding: 0.5em;
 				    top: 27px;
-				    left: 13px;
+				    left: 0px;
 				    font-size: 0.7em;
 				    display:inline-block;
 				}
@@ -64,7 +71,7 @@
 				    color: white;
 				    padding: 0em 1.5em;
 				    top: 18px;
-				    left: 13px;
+				    left: 0px;
 				    font-size: 0.7em;
 				    display: inline-block;
 				}
@@ -83,6 +90,15 @@
 		.tabs-panel{
 			padding-left:0;
 			padding-right:0;
+
+			#photos-container{
+				.information{
+					.float-right{
+						// This is to align the text properly for mobile
+						float:left !important;
+					}
+				}
+			}
 
 			.follow-container{
 				width:100%;

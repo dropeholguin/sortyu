@@ -67,7 +67,9 @@ class ChargesController < ApplicationController
 
 			photo_ids_array = cookies[:pay_photos].split("-")
 			photo_ids_array.each do | id_photo|
-				Photo.find(id_photo.to_i).pay!
+				photo = Photo.find(id_photo.to_i)
+				photo.update_attributes tmp: false
+				photo.pay!
 			end
 
 			if @user.affiliate_id.present?
