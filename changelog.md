@@ -1,4 +1,10 @@
 #sortyu 0.x Changelog
+0.4.2 (16-05-2017)
+#Patch changes
+-Tags visibles en el show de photo
+-Improved image width for mobil at profile
+-Copyright in layout
+
 0.4.1 (16-05-2017)
 #Minor changes
 -Create followers scope for sorting
