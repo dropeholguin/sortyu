@@ -25,6 +25,8 @@
 					<!-- Tells if image is in draft state -->
 					<% if photo.draft == true %>
 						<div class="ribbon draft">Draft</div>
+					<% else %>
+						<div class="ribbon published">Published</div>
 					<% end %>
 					<%= link_to photo do %>
 						<%= image_tag(photo.file.url(:medium)) %>
