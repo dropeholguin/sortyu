@@ -55,7 +55,7 @@
 			}
 
 			.ribbon-container{
-				div.ribbon.free{
+				div.ribbon.free, div.ribbon.published{
 					position: relative;
 				    background-color: #4286F4;
 				    color: white;
@@ -104,8 +104,8 @@
 
 			#photos-container{
 				img{
-					width:130px !important;
-					height:100px !important;
+					width:155px !important;
+					height:120px !important;
 				}
 			}
 
