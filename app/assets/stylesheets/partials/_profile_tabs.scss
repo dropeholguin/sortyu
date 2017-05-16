@@ -75,6 +75,17 @@
 				    font-size: 0.7em;
 				    display: inline-block;
 				}
+
+				div.ribbon.draft{
+				    position: relative;
+				    background-color: lightgray;
+				    color: black;
+				    padding: 0.5em;
+				    top: 27px;
+				    left: 0px;
+				    font-size: 0.7em;
+				    display:inline-block;
+				}
 			}
 		}
 	}
@@ -92,11 +103,9 @@
 			padding-right:0;
 
 			#photos-container{
-				.information{
-					.float-right{
-						// This is to align the text properly for mobile
-						float:left !important;
-					}
+				img{
+					width:130px !important;
+					height:100px !important;
 				}
 			}
 
