@@ -13,6 +13,9 @@ class ApplicationController < ActionController::Base
 			if cookies[:import_queue].nil?
 				cookies[:import_queue] = ""
 			end
+			if cookies[:tmp_pay_photos].nil?
+				cookies[:tmp_pay_photos] = ""
+			end
 		end
 	end
 	

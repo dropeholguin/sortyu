@@ -1,7 +1,7 @@
 <div id="batch-container" class="small-12 columns">
 	<%= link_to 'Edit Images', remove_photos_path, class:"button tiny hollow float-left" %>
 	<%= link_to 'Pay Images', pay_multiple_photos_path, class:"button pay tiny float-left" %>
-	<%= link_to 'Draft Images', photos_draft_path, class:"button tiny hollow float-left" %>
+	<%= link_to 'Publish', photos_draft_path, class:"button tiny hollow float-left" %>
 
 	<ul class="dropdown menu float-right" data-dropdown-menu>
 		<li>
@@ -21,6 +21,10 @@
 						<div class="ribbon free">Free</div>
 					<% elsif photo.state == 'paid' %>
 						<div class="ribbon paid">&#36;</div>
+					<% end %>
+					<!-- Tells if image is in draft state -->
+					<% if photo.draft == true %>
+						<div class="ribbon draft">Draft</div>
 					<% end %>
 					<%= link_to photo do %>
 						<%= image_tag(photo.file.url(:medium)) %>
