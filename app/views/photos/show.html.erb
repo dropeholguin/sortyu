@@ -103,7 +103,6 @@
 				<%= link_to 'Edit', edit_photo_path(@photo), class: "hollow button" %>
 				<%= link_to 'Edit Sections', photo_edit_sections_path(photo_id: @photo.id), class: "hollow button" %>
 				<%= link_to 'Delete', @photo, method: :delete, data: { confirm: 'Are you sure?' }, class: "button delete" %>
-
 			<% end %>
 		</div>
 	</div>
