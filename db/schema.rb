@@ -277,8 +277,8 @@ ActiveRecord::Schema.define(version: 20170508140935) do
     t.datetime "avatar_updated_at"
     t.text     "about_you"
     t.boolean  "is_active",              default: true
-    t.integer  "affiliate_id"
     t.boolean  "hide_results",           default: false
+    t.integer  "affiliate_id"
     t.index ["affiliate_id"], name: "index_users_on_affiliate_id", using: :btree
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree

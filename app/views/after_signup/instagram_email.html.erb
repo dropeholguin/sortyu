@@ -1,13 +1,7 @@
-<div class="row">
-	<div class="upper-space small-12 columns">
-		<%= form_for @user, url: wizard_path, method: :put do |f| %>
-		 	<div class="field">
-		    	<%= f.label :email %>
-		    	<%= f.email_field :email, autofocus: true %>
-			</div>
-				<div class="text-center">
-					<%= f.submit 'Next', class: "button" %>
-				</div>
-		<% end %>
+<%= form_for @user, url: wizard_path, method: :put do |f| %>
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.email_field :email, autofocus: true %>
 	</div>
-</div>
+  <%= f.submit 'Next', class: "button" %>
+<% end %>

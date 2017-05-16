@@ -1,10 +1,4 @@
 #sortyu 0.x Changelog
-0.4.1 (16-05-2017)
-
-#Patch changes
-- Added searchbar to header
-
-#sortyu 0.x Changelog
 0.4.0 (16-05-2017)
 
 #Minor changes
