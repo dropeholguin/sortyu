@@ -62,7 +62,8 @@ Rails.application.routes.draw do
   post "photos/upload_photos", to: 'photos#upload_photos'
   get 'photos/pay_upload_process',to: 'photos#pay_upload_process', as: 'pay_upload_process'
   get 'photos/select_photos',to: 'photos#select_photos', as: 'select_photos'
-
+  get 'photos_draft', to: 'photos#photos_draft'
+  post 'change_draft_photos', to: 'photos#change_draft_photos'
   match "/404", :to => "errors#not_found", :via => :all
   match "/500", :to => "errors#internal_server_error", :via => :all
 
