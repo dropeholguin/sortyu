@@ -4,7 +4,7 @@ action_item only: :show  do
   if affiliate.is_active?
     link_to 'Suspend Account', suspend_account_affiliate_path(affiliate), method: :patch, class: 'button'
   else
-    link_to 'Active Account', active_account_affiliate_path(affiliate), method: :patch, class: 'button'
+    link_to 'Activate Account', active_account_affiliate_path(affiliate), method: :patch, class: 'button'
   end
 end
 
@@ -34,7 +34,7 @@ index do
     if affiliate.is_active?
       link_to 'Suspend Account', suspend_account_affiliate_path(affiliate), method: :patch, class: 'button'
     else
-      link_to 'Active Account', active_account_affiliate_path(affiliate), method: :patch, class: 'button'
+      link_to 'Activate Account', active_account_affiliate_path(affiliate), method: :patch, class: 'button'
     end
   end
   actions defaults: false do |affiliate|
