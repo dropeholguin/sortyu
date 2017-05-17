@@ -7,75 +7,77 @@
 			<%= link_to "Recent Sorts", recent_sorts_path , class:"button small hollow" %>
 		</div>
 	</div>
-	<div class="row">
-		<div class="small-12 columns">
+	<div class="row sort-title">
+		<div class="under-pad upper-pad small-12 columns">
 			<div class="float-left">
 				<ul class="dropdown menu" data-dropdown-menu>
 					<li>
-						<a href="#">Sorty by:</a>
+						<a href="#" class="text"><b>Sorty by:</b></a>
 						<ul class="menu">
 							<li id="sorty-followers"><a>Followers</a></li>
 						</ul>
 					</li>
 				</ul>
 			</div>
-			<div class="float-right">
+			<div class="upper-space float-right">
 					<% if current_user.hide_results? %>
 					<%= check_box_tag("hide results", value = "1", checked = true) %>
 				<% else %>
 					<%= check_box_tag("hide results", value = "1", checked = false) %>
 				<% end %>
-				<%= label_tag("Hide Results")%>
+				<span><b>Hide Results</b></span>
 			</div>
 		</div>
 	</div>
-	<div class="row upper-space under-pad">
-		<div id="user-photo-container" class="small-4 medium-2 medium-push-1 medium-text-center large-push-2 columns">
-        </div>
-        <div id="user-name-container" class="small-8 small-pull-1 medium-pull-1 columns">
-            <div id="follow-container">
-                
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div id="photo-container" class="callout small-12 medium-10 medium-push-1 large-8 large-push-2 text-center columns">
-            <div class="row">
-                <div class="sorting-canvas">
-                    <div class="inner-sorting-canvas">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>  
-    <div class="row">
-        <div id="photo-description" class="small-12 medium-10 medium-push-1 large-8 large-push-2 text-center columns">
+	<div class="row sort-container">
+		<div class="row upper-space under-pad">
+			<div id="user-photo-container" class="small-4 medium-2 medium-push-1 medium-text-center large-push-2 columns">
+	        </div>
+	        <div id="user-name-container" class="small-8 small-pull-1 medium-pull-1 columns">
+	            <div id="follow-container">
+	                
+	            </div>
+	        </div>
+	    </div>
+	    <div class="row">
+	        <div id="photo-container" class="small-12 medium-10 medium-push-1 large-8 large-push-2 text-center columns">
+	            <div class="row">
+	                <div class="sorting-canvas">
+	                    <div class="inner-sorting-canvas">
+	                        
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>  
+	    <div class="row">
+	        <div id="photo-description" class="small-12 medium-10 medium-push-1 large-8 large-push-2 text-center columns">
 
+			</div>
 		</div>
-	</div>
-	<div class="row">
-		<div id="like-container" class="text-center">
+		<div class="row">
+			<div id="like-container" class="text-center">
 
+			</div>
 		</div>
-	</div>
-	<div class="row">
-		<div id="photo-stadistic-container" class="small-12 columns">
+		<div class="row">
+			<div id="photo-stadistic-container" class="small-12 columns">
+			</div>
 		</div>
-	</div>
-	<div class="upper-space row">
-		<div class="upper-space small-12 columns text-center">
-			<%= button_tag "Next", class:"button", id:"next-sort" %>
+		<div class="upper-space row">
+			<div class="upper-space small-12 columns text-center">
+				<%= button_tag "Next", class:"button", id:"next-sort" %>
+			</div>
 		</div>
-	</div>
-	<div class="row under-space">
-		<div class="small-12 columns text-center">
-			<i data-open="flag-overlay" aria-hidden="true"><%= button_tag("Report", class: "button alert") %></i>
+		<div class="row under-space">
+			<div class="small-12 columns text-center">
+				<i data-open="flag-overlay" aria-hidden="true"><%= button_tag("Report", class: "button alert") %></i>
+			</div>
 		</div>
-	</div>
-	<div class="reveal" id="flag-overlay" data-reveal>
-		<button class="close-button" data-close aria-label="Close modal" type="button">
-			<span aria-hidden="true">&times;</span>
-		</button>
+		<div class="reveal" id="flag-overlay" data-reveal>
+			<button class="close-button" data-close aria-label="Close modal" type="button">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
 	</div>
 </div>
