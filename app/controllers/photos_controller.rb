@@ -12,6 +12,10 @@ class PhotosController < ApplicationController
         #@photos = Photo.paginate(page: params[:page], per_page: 1).photos_sorting(@user.id)
     end
 
+    def search_photos
+
+    end
+
     def followings_photos
         @user = current_user
         @photos_ids = []
@@ -170,9 +174,12 @@ class PhotosController < ApplicationController
                 followings_photos << photo
             end
             photos = followings_photos
-        else
+        elsif params[:query].present?
+            photos = Photo.search(params)
+        elsif params[:search] != "true"
             photos = Photo.photos_sorting(current_user.id).order(state: :desc)
         end
+
         photos_ids = []
         photos.each do |photo|
             if photo.seens.present?
@@ -190,7 +197,8 @@ class PhotosController < ApplicationController
             end
         end
         photo_ids_array = photos_ids.pluck(:id)
-        if photo_ids_array.empty?
+        
+        if params[:search] != "true" && photo_ids_array.empty?
             render js: "window.location = #{root_path.to_json}"
             flash[:notice] = "You have sorted all images. Please try again later."
         else
