@@ -3,15 +3,18 @@
         <strong><%= link_to "Sortyu", root_path %></strong>
     </div>
     <div class="small-4 hide-for-small-only columns">
-        <div class="input-group">
-            <%= form_tag photos_path, id: 'idForm', method: :get do %>
+        
+        <%= form_tag photos_path, id: 'idForm', method: :get do %>
+            <div class="input-group">
                 <%= text_field_tag :query, "", class: "input-group-field", placeholder: "Search..."%>
-                <%= hidden_field_tag :search, true %>
-                <%= button_tag(type: "submit", name: nil, class: "button input-group-button") do %>
-                  <i class="fa fa-search" aria-hidden="true"></i>
+                <div class="input-group-button">
+                    <%= button_tag(type: "submit", name: nil, class: "button") do %>
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </div>
                 <% end %>
-            <% end %>
-        </div>
+            </div>
+            <%= hidden_field_tag :search, true %>
+        <% end %>
     </div>
     <div class="small-4 float-right columns">
         <ul class="dropdown menu float-right" data-dropdown-menu>
@@ -47,11 +50,16 @@
         </ul>
     </div>
     <div class="search-container small-12 show-for-small-only columns">
-        <div class="input-group">
-            <input class="input-group-field" type="search" placeholder="Search...">
-            <div class="input-group-button">
-                <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+            <%= form_tag photos_path, id: 'idForm', method: :get do %>
+            <div class="input-group">
+                <%= text_field_tag :query, "", class: "input-group-field", placeholder: "Search..."%>
+                <div class="input-group-button">
+                    <%= button_tag(type: "submit", name: nil, class: "button") do %>
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </div>
+                <% end %>
             </div>
-        </div>
+            <%= hidden_field_tag :search, true %>
+        <% end %>
     </div>
 </header>
