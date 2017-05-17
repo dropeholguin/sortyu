@@ -112,7 +112,7 @@ class PhotosController < ApplicationController
                 }
             else
                 format.html { 
-                    redirect_to :back, alert: 'Select only ' + number_photos.to_s
+                    redirect_to :back, alert: 'You can only select ' + number_photos.to_s
                 }
             end 
         end

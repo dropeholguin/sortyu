@@ -1,8 +1,9 @@
 <div id="select-photos" class="upper-pad under-pad row">
 	<div class="row">
-		<h1>Select only <%= @number_photos %></h1>
 		<div class="small-12 text-center columns">
-			<%= button_tag('Upload Selected Images', class:"button pay", id: "select-multiple-photos") %>
+			<h4>You can only select <%= @number_photos %> photos</h4>
+			<p>You chose more than the allowed images, from the images you chose you can only select <%= @number_photos %></p>
+			<%= button_tag('Upload Selected Images', class:"button", id: "select-multiple-photos") %>
 		</div>
 	</div>
 	<div class="row">
