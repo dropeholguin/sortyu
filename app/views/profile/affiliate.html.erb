@@ -1,11 +1,11 @@
 <div id="profile-show">
 	<div class="row upper-space">
 		<div id="user-name-container" class="truncate small-8 medium-4 large-3 columns">
-			<h6><%= @user.full_name %></h6>
+			<h6><%= @user.full_name %> <b>(Affiliate)</b></h6>
 		</div>
 		<div class="upper-space small-4 medium-6 medium-pull-1 end text-center columns">
 			<div class="show-for-medium medium-6 columns">
-				<%= link_to "Edit", edit_affiliate_registration_path , class:"button small" %>
+				<%= link_to "Edit", edit_affiliate_registration_path , class:"button small hollow" %>
 			</div>
 		</div>
 	</div>
@@ -16,7 +16,7 @@
 		</div>
 	</div>
 	<div class="hide-for-medium small-12 text-center columns">
-		<%= link_to "Edit", edit_affiliate_registration_path , class:"button small" %>
+		<%= link_to "Edit", edit_affiliate_registration_path , class:"button small hollow" %>
 	</div>
 	<div class="row">
 		<div class="small-12 columns">
@@ -24,16 +24,10 @@
 			  	<li class="tabs-title is-active">
 			 		<a href="#panel-affilliates" aria-selected="true"><b><%= User.referred_users(current_affiliate).count()%> </b>Referrals</a>
 			 	</li>
-			 	<li id="photos-count" data-photos-size="" class="tabs-title">
-			  		<a href="#panel-gallery"><b></b> Images</a>
-			  	</li>
 			</ul>
-			<div class="tabs-content small-12 columns" data-tabs-content="example-tabs">
+			<div id="affiliates-tab" class="tabs-content small-12 columns" data-tabs-content="example-tabs">
 				<div class="tabs-panel is-active" id="panel-affilliates">
 					<%= render partial: 'affiliates' %>
-				</div>
-				<div class="tabs-panel" id="panel-gallery">
-
 				</div>
 			</div>
 		</div>
