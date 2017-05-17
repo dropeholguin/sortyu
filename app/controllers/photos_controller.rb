@@ -12,12 +12,12 @@ class PhotosController < ApplicationController
         #@photos = Photo.paginate(page: params[:page], per_page: 1).photos_sorting(@user.id)
     end
 
-    def followers_photos
+    def followings_photos
         @user = current_user
         @photos_ids = []
-        @user.followers.each do |follower|
-            follower_photos = Photo.follower_photos(follower.id).order(state: :desc)
-            follower_photos.each do |photo|
+        @user.following.each do |following|
+            following_photos = Photo.following_photos(following.id).order(state: :desc)
+            following_photos.each do |photo|
                 @photos_ids << photo.id
             end
         end
@@ -164,12 +164,12 @@ class PhotosController < ApplicationController
     def reaload_photos_queue
         cookies[:photos_queue] = ""
         if !params[:photos_ids].nil?
-            followers_photos = []
+            followings_photos = []
             params[:photos_ids][:photos].each do |photo_id|
                 photo = Photo.find photo_id.to_i
-                followers_photos << photo
+                followings_photos << photo
             end
-            photos = followers_photos
+            photos = followings_photos
         else
             photos = Photo.photos_sorting(current_user.id).order(state: :desc)
         end
@@ -431,6 +431,7 @@ class PhotosController < ApplicationController
         @photo = Photo.new(photo_params)
         @photo.user = @user
         @photo.tmp = false
+        
         respond_to do |format|
             if verify_recaptcha(model: @photo) && @photo.save
                 if Photo.tmp_photos(@user.id).count > 10
@@ -606,6 +607,6 @@ class PhotosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def photo_params
-        params.require(:photo).permit(:description, :file, { tag_list: [] }, :user_id, :tmp)
+        params.require(:photo).permit(:description, :file, { tag_list: [] }, :user_id, :tmp, :draft)
     end
 end

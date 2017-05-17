@@ -66,7 +66,7 @@ Rails.application.routes.draw do
   post 'change_draft_photos', to: 'photos#change_draft_photos'
   match "/404", :to => "errors#not_found", :via => :all
   match "/500", :to => "errors#internal_server_error", :via => :all
-  post 'followers_photos', to: 'photos#followers_photos'
+  post 'followings_photos', to: 'photos#followings_photos'
 
   resources :photos do
   	member do

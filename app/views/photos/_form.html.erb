@@ -16,6 +16,10 @@
 		</div>
 	<% end %>
 	<div class="field">
+		<%= f.label "Publish" %>
+		<%= f.check_box :draft, {}, false, true %>
+	</div>
+	<div class="field">
 		<%= f.label :description %>
 		<%= f.text_area :description %>
 	</div>

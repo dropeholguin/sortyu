@@ -1,6 +1,6 @@
-followersPhotos = ->
+followingsPhotos = ->
   $('#sorty-followers').click ->  
-    $.ajax '/followers_photos',
+    $.ajax '/followings_photos',
       type: 'POST',
       error: (jqXHR, textStatus, errorThrown) ->
         console.log("AJAX Error: #{textStatus}")
@@ -15,6 +15,6 @@ followersPhotos = ->
           success: (data) ->
             window.location.replace("/photos")
 
-$(document).ready followersPhotos
+$(document).ready followingsPhotos
 $(document).on 'turbolinks:load', ->
-  followersPhotos()
+  followingsPhotos()
