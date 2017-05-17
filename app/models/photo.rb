@@ -39,6 +39,8 @@ class Photo < ApplicationRecord
     index_name("photos")
     mapping do
         indexes :id, index: :not_analyzed
+        indexes :user, index: :not_analyzed
+        indexes :description, analyzer: 'snowball'
         indexes :tag_list, type: 'string', analyzer: 'keyword'
     end
 
@@ -46,6 +48,9 @@ class Photo < ApplicationRecord
         tire.search(load: true) do
             query { string params[:query] } if params[:query].present?
             filter :terms, tag_list: [params[:the_tag]] if params[:the_tag].present?
+            sort do
+                by :state, :desc
+            end
         end
     end
 

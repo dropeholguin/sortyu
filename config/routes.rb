@@ -67,7 +67,8 @@ Rails.application.routes.draw do
   match "/404", :to => "errors#not_found", :via => :all
   match "/500", :to => "errors#internal_server_error", :via => :all
   post 'followings_photos', to: 'photos#followings_photos'
-
+  get 'search_photos', to: 'photos#search_photos'
+  
   resources :photos do
   	member do
       patch :shared_times
