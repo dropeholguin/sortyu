@@ -2,11 +2,11 @@
 	<div class="row">
 		<div class="small-12 text-center columns">
 			<h4>You can only select <%= @number_photos %> photos</h4>
-			<p>You chose more than the allowed images, from the images you chose you can only select <%= @number_photos %></p>
+			<p>These are the images you have chosen but you can only choose <%= @number_photos %><br>Please try again</p>
 			<%= button_tag('Upload Selected Images', class:"button", id: "select-multiple-photos") %>
 		</div>
 	</div>
-	<div class="row">
+	<div id="photos-container" class="row">
 		<% @photos.each do |photo| %>
 			<div class="upper-space small-4 text-center end columns">
 				<%= image_tag(photo.file.url(:medium),id: photo.id) %>
