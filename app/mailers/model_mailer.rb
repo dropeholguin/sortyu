@@ -30,4 +30,11 @@ class ModelMailer < ApplicationMailer
 		@affiliate = affiliate
 		mail(to: @affiliate.email, subject: "Your account was suspended")
 	end
+
+	def send_message(email, subject, message )
+		@email = email
+		@subject = subject
+		@message = message
+		mail(to: 'admin@sortyu.com', subject: subject)
+	end
 end

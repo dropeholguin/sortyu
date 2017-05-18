@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'pages/api_terms'
   get 'pages/community_guidelines'
   get 'pages/brand'
+  get 'pages/send_message'
 
   devise_for :affiliates, controllers: { registrations: "users/registrations" }
 
