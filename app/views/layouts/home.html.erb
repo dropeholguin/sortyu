@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%= display_meta_tags site: 'Sortyu' %>
+    <title><%= content_for?(:title) ? yield(:title) : "Sortyu" %></title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div class="row expanded collapse">
+      <div class="small-12 columns text-center">
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+      </div>
+    </div>
+    <div class="row expanded collapse">
+      <div class="small-12 columns">
+        <% if user_signed_in? %>
+          <%= render 'layouts/header_log_in' %>
+        <% elsif affiliate_signed_in? %>
+          <%= render 'layouts/header_log_in_affiliate' %>
+        <% else%>
+          <%= render 'layouts/header_log_out_affiliate' %>
+        <% end %>
+        <div id="min-height">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

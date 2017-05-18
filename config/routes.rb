@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'pages/api_terms'
   get 'pages/community_guidelines'
   get 'pages/brand'
+  get 'pages/send_message'
 
   devise_for :affiliates, controllers: { registrations: "users/registrations" }
 
@@ -66,8 +67,9 @@ Rails.application.routes.draw do
   post 'change_draft_photos', to: 'photos#change_draft_photos'
   match "/404", :to => "errors#not_found", :via => :all
   match "/500", :to => "errors#internal_server_error", :via => :all
-
-
+  post 'followings_photos', to: 'photos#followings_photos'
+  get 'search_photos', to: 'photos#search_photos'
+  
   resources :photos do
   	member do
       patch :shared_times

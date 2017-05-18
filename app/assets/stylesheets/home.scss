@@ -69,6 +69,24 @@
 	}
 }
 
+#sorting-principal{
+	.sort-title{
+		background-color:#80BFFF;
+
+		span, .menu .text{
+			color:white;
+		}
+
+		span{
+			margin:0;
+		}
+	}
+
+	.sort-container{
+		border:thin solid lightgray;
+	}
+}
+
 #photo-show{
 	.share-container{
 		span{

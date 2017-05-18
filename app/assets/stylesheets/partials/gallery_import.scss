@@ -1,9 +1,7 @@
-#gallery-import{
-	#photos-container{
-		border-top:thin solid;
+#photos-container{
+	border-top:thin solid lightgray;
 
-		input[type=checkbox]{
-			display:none;
-		}
+	input[type=checkbox]{
+		display:none;
 	}
 }

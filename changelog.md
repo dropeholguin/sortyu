@@ -1,8 +1,20 @@
 #sortyu 0.x Changelog
-0.4.0 (16-05-2017)
+0.4.2 (16-05-2017)
+#Patch changes
+-Tags visibles en el show de photo
+-Improved image width for mobil at profile
+-Copyright in layout
 
+0.4.1 (16-05-2017)
 #Minor changes
-- Photos have a draft state that allows to edit sections
+-Create followers scope for sorting
+-Fix sorting
+-Fix draft images
+-Fix upload process
+
+0.4.0 (16-05-2017)
+#Minor changes
+-Photos have a draft state that allows to edit sections
 -Publishing engine for images (Allow save them as drafts)
 -Contact us, About us,404 and 500 error pages, privacy and terms & conditions pages
 -Images show likes

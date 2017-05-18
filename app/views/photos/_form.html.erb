@@ -16,6 +16,11 @@
 		</div>
 	<% end %>
 	<div class="field">
+		<%= f.label "Publish" %>
+		<span>Send photo to sorting list <%= f.check_box :draft, {}, false, true %></span>
+		
+	</div>
+	<div class="field">
 		<%= f.label :description %>
 		<%= f.text_area :description %>
 	</div>

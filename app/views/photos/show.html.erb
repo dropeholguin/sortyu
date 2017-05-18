@@ -12,25 +12,35 @@
                 </div>
             </div>
         </div>
-		<div class="small-12 text-center columns">
-			<% if @photo.user != current_user %>
-				<% if @seen == true %>
-					<%= link_to "Sort More", photos_path, class:"button" %>
-				<% else %>
-					<%= link_to "Sort", sort_friend_path(@photo), class: "button" %>
+        <div class="row">
+			<div class="small-12 text-center columns">
+				<% if @photo.user != current_user %>
+					<% if @seen == true %>
+						<%= link_to "Sort More", photos_path, class:"button" %>
+					<% else %>
+						<%= link_to "Sort", sort_friend_path(@photo), class: "button" %>
+					<% end %>
 				<% end %>
-			<% end %>
-			<p>
-	  			<b>Description:</b>
-	  			<% if  !@photo.description.nil? and @photo.description.length > 0 %>
-	  				<%= @photo.description %>
-	  			<% else %>
-	  				No Description
-	  			<% end %>
-			</p>
+			</div>
+			<div class="description-container small-12 medium-10 medium-push-1 large-8 large-push-2 text-center columns">
+				<p>
+		  			<b>Description:</b>
+		  			<% if  !@photo.description.nil? and @photo.description.length > 0 %>
+		  				<%= @photo.description %>
+		  			<% else %>
+		  				No Description
+		  			<% end %>
+				</p>
+			</div>
+			<div class="tag-container small-12 medium-10 medium-pull-1 large-8 large-pull-2 text-center columns">
+				<ul>
+					<% @photo.tag_list.each do |tag| %>
+						<li><%= tag %></li>
+					<% end %>
+				</ul>
+			</div>
 		</div>
 	</div>
-
 	<div class="share-container row collapse under-space">
 		<div class="small-4 small-push-1 medium-3 medium-push-3 large-1 large-push-4 text-center columns">
 			<p>Share: </p> 
@@ -77,24 +87,20 @@
 			<% end %>
 		</div>
 	</div>
-	<% if @photo.user == current_user %>
-		<% if @photo.state == 'free' %>
-			<div class="row">
-				<div class="small-12 text-center columns">
-					<%= link_to 'Pay', new_charge_path(photo_id: @photo.id), class: "button pay" %>
-				</div>
-			</div>
-		<% end %>
-	<% end %>
+	
 	<div class="row">
-		<div class="upper-space small-12 text-center columns">
-			<%= link_to 'Back', profile_show_path, class: "hollow button" %>
+		<div class="under-space upper-space small-12 text-center columns">
+			<% if @photo.user == current_user %>
+				<% if @photo.state == 'free' %>
+					<%= link_to 'Pay', new_charge_path(photo_id: @photo.id), class: "button pay" %>
+				<% end %>
+			<% end %>
 			<% if @photo.user == current_user %>
 				<%= link_to 'Edit', edit_photo_path(@photo), class: "hollow button" %>
-				<%= link_to 'Edit Section', photo_edit_sections_path(photo_id: @photo.id), class: "hollow button" %>
+				<%= link_to 'Edit Sections', photo_edit_sections_path(photo_id: @photo.id), class: "hollow button" %>
 				<%= link_to 'Delete', @photo, method: :delete, data: { confirm: 'Are you sure?' }, class: "button delete" %>
-
 			<% end %>
+			<%= link_to 'Back', profile_show_path, class: "hollow button" %>
 		</div>
 	</div>
 </div>

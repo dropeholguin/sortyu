@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170508140935) do
+ActiveRecord::Schema.define(version: 20170516131552) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -142,6 +142,7 @@ ActiveRecord::Schema.define(version: 20170508140935) do
     t.string   "dimensions",              limit: 30
     t.boolean  "first_edit",                         default: true
     t.boolean  "tmp",                                default: true
+    t.boolean  "draft",                              default: true
     t.index ["cached_votes_down"], name: "index_photos_on_cached_votes_down", using: :btree
     t.index ["cached_votes_score"], name: "index_photos_on_cached_votes_score", using: :btree
     t.index ["cached_votes_total"], name: "index_photos_on_cached_votes_total", using: :btree
@@ -277,8 +278,8 @@ ActiveRecord::Schema.define(version: 20170508140935) do
     t.datetime "avatar_updated_at"
     t.text     "about_you"
     t.boolean  "is_active",              default: true
-    t.boolean  "hide_results",           default: false
     t.integer  "affiliate_id"
+    t.boolean  "hide_results",           default: false
     t.index ["affiliate_id"], name: "index_users_on_affiliate_id", using: :btree
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree

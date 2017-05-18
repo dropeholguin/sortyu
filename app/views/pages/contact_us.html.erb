@@ -14,9 +14,11 @@
 				<div class="row text-center">
 					<h4>Form</h4>
 				</div>
-				<%= form_tag do %>
-					<label for="fullName">Name</label>
-		    		<input type="text" id="fullName" name="firstname" placeholder="Full name...">
+				<%= form_tag pages_send_message_path, method: :get do %>
+					<label for="email">Email</label>
+		    		<input type="text" id="email" name="email" placeholder="Email where we can contact you">
+		    		<label for="subject">Subject</label>
+		    		<input type="text" name="subject" placeholder="What's this message about?">
 		    		<label for="message">Message</label>
 				    <textarea id="message" name="message" placeholder="Type your message" style="height:200px"></textarea>
 				    <div class="row text-center">

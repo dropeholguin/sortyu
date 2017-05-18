@@ -2,7 +2,21 @@
     <div id="logo-container" class="small-4 columns">
         <strong><%= link_to "Sortyu", root_path %></strong>
     </div>
-    <div class="small-8 columns">
+    <div class="small-4 hide-for-small-only columns">
+        
+        <%= form_tag photos_path, id: 'idForm', method: :get do %>
+            <div class="input-group">
+                <%= text_field_tag :query, "", class: "input-group-field", placeholder: "Search..."%>
+                <div class="input-group-button">
+                    <%= button_tag(type: "submit", name: nil, class: "button") do %>
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </div>
+                <% end %>
+            </div>
+            <%= hidden_field_tag :search, true %>
+        <% end %>
+    </div>
+    <div class="small-4 float-right columns">
         <ul class="dropdown menu float-right" data-dropdown-menu>
           <li>
             <a href="#" class="button">Menu</a>
@@ -34,5 +48,18 @@
             </ul>
           </li>
         </ul>
+    </div>
+    <div class="search-container small-12 show-for-small-only columns">
+            <%= form_tag photos_path, id: 'idForm', method: :get do %>
+            <div class="input-group">
+                <%= text_field_tag :query, "", class: "input-group-field", placeholder: "Search..."%>
+                <div class="input-group-button">
+                    <%= button_tag(type: "submit", name: nil, class: "button") do %>
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </div>
+                <% end %>
+            </div>
+            <%= hidden_field_tag :search, true %>
+        <% end %>
     </div>
 </header>

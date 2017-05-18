@@ -107,6 +107,22 @@
 			border-top-right-radius:0px;
 		}
 	}
+
+	.description-container{
+		p{
+			margin-bottom:0.5em;
+		}
+	}
+
+	.tag-container{
+		li{
+			display:inline-block;
+			border:thin solid #809fff;
+			padding:0.5em;
+			background-color: #80bfff;
+			color:white;
+		}
+	}
 }
 
 #photo-edit-section{

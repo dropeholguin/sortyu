@@ -55,7 +55,7 @@
 			}
 
 			.ribbon-container{
-				div.ribbon.free{
+				div.ribbon.free, div.ribbon.published{
 					position: relative;
 				    background-color: #4286F4;
 				    color: white;
@@ -75,6 +75,17 @@
 				    font-size: 0.7em;
 				    display: inline-block;
 				}
+
+				div.ribbon.draft{
+				    position: relative;
+				    background-color: lightgray;
+				    color: black;
+				    padding: 0.5em;
+				    top: 27px;
+				    left: 0px;
+				    font-size: 0.7em;
+				    display:inline-block;
+				}
 			}
 		}
 	}
@@ -92,11 +103,9 @@
 			padding-right:0;
 
 			#photos-container{
-				.information{
-					.float-right{
-						// This is to align the text properly for mobile
-						float:left !important;
-					}
+				img{
+					width:155px !important;
+					height:120px !important;
 				}
 			}
 
