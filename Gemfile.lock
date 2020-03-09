@@ -253,7 +253,7 @@ GEM
       activerecord (>= 3.0)
     public_suffix (2.0.5)
     puma (3.6.2)
-    rack (2.0.1)
+    rack (2.2.2)
     rack-affiliates (0.4.0)
       rack
     rack-test (0.6.3)
